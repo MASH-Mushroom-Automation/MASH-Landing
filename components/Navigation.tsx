@@ -6,8 +6,23 @@ import { useState } from "react";
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.querySelector(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+      // Announce to screen readers
+      const heading = element.querySelector("h1, h2, h3");
+      if (heading) {
+        heading.setAttribute("tabindex", "-1");
+        (heading as HTMLElement).focus();
+      }
+    }
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm" role="navigation" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -20,29 +35,48 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#features" className="text-gray-700 hover:text-green-600 transition-colors">
+            <a
+              href="#features"
+              onClick={(e) => handleSmoothScroll(e, "#features")}
+              className="text-gray-700 hover:text-green-600 transition-colors"
+            >
               Features
-            </Link>
-            <Link href="#documentation" className="text-gray-700 hover:text-green-600 transition-colors">
+            </a>
+            <a
+              href="#documentation"
+              onClick={(e) => handleSmoothScroll(e, "#documentation")}
+              className="text-gray-700 hover:text-green-600 transition-colors"
+            >
               Documentation
-            </Link>
-            <Link href="#scope" className="text-gray-700 hover:text-green-600 transition-colors">
+            </a>
+            <a
+              href="#scope"
+              onClick={(e) => handleSmoothScroll(e, "#scope")}
+              className="text-gray-700 hover:text-green-600 transition-colors"
+            >
               Scope
-            </Link>
-            <Link href="#support" className="text-gray-700 hover:text-green-600 transition-colors">
+            </a>
+            <a
+              href="#support"
+              onClick={(e) => handleSmoothScroll(e, "#support")}
+              className="text-gray-700 hover:text-green-600 transition-colors"
+            >
               Support
-            </Link>
-            <Link 
-              href="#download" 
+            </a>
+            <a
+              href="#download"
+              onClick={(e) => handleSmoothScroll(e, "#download")}
               className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors"
             >
               Download App
-            </Link>
+            </a>
           </div>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-700 hover:text-green-600"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle mobile menu"
           >
             <svg
               className="h-6 w-6"
@@ -52,6 +86,7 @@ export default function Navigation() {
               strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              aria-hidden="true"
             >
               {isMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
@@ -66,41 +101,41 @@ export default function Navigation() {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
+            <a
               href="#features"
+              onClick={(e) => handleSmoothScroll(e, "#features")}
               className="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
             >
               Features
-            </Link>
-            <Link
+            </a>
+            <a
               href="#documentation"
+              onClick={(e) => handleSmoothScroll(e, "#documentation")}
               className="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
             >
               Documentation
-            </Link>
-            <Link
+            </a>
+            <a
               href="#scope"
+              onClick={(e) => handleSmoothScroll(e, "#scope")}
               className="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
             >
               Scope
-            </Link>
-            <Link
+            </a>
+            <a
               href="#support"
+              onClick={(e) => handleSmoothScroll(e, "#support")}
               className="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-gray-50 rounded-md"
-              onClick={() => setIsMenuOpen(false)}
             >
               Support
-            </Link>
-            <Link
+            </a>
+            <a
               href="#download"
+              onClick={(e) => handleSmoothScroll(e, "#download")}
               className="block mx-3 my-2 bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 text-center"
-              onClick={() => setIsMenuOpen(false)}
             >
               Download App
-            </Link>
+            </a>
           </div>
         </div>
       )}
