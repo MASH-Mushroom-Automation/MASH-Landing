@@ -116,14 +116,6 @@ Place your media files in the appropriate directories under `/public/assets/`:
 - Component-based architecture
 - Responsive design patterns
 
-## Deployment
-
-This Next.js application can be deployed to:
-- Vercel (recommended)
-- Netlify
-- AWS Amplify
-- Any Node.js hosting platform
-
 For static export:
 ```bash
 npm run build
@@ -135,5 +127,5 @@ Copyright 2026 MASH Mushroom Automation. All rights reserved.
 
 ## Support
 
-For questions or issues, please contact support@mash-automation.com
+For questions or issues, please contact mash.mushroom.automation@gmail.com
 

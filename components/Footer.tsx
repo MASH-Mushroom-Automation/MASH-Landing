@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,10 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
-              <span className="text-xl font-bold text-white">MASH</span>
+              <Image src="/assets/images/logo.png" alt="MASH Logo" width={90} height={64} />
             </div>
             <p className="text-sm text-gray-400">
               Professional mushroom cultivation automation platform with advanced monitoring and control.
@@ -78,7 +76,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@mash-automation.com" className="hover:text-green-400 transition-colors">
+                <a href="mailto:mash.mushroom.automation@gmail.com" className="hover:text-green-400 transition-colors">
                   Contact Us
                 </a>
               </li>

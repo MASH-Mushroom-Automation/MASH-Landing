@@ -20,8 +20,8 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2">Email Support</h3>
             <p className="text-gray-600 mb-4">Get help from our expert team</p>
-            <a href="mailto:support@mash-automation.com" className="text-green-600 hover:text-green-700 font-semibold">
-              support@mash-automation.com
+            <a href="mailto:mash.mushroom.automation@gmail.com" className="text-green-600 hover:text-green-700 font-semibold">
+              mash.mushroom.automation@gmail.com
             </a>
           </div>
 

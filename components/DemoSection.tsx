@@ -42,7 +42,7 @@ export default function DemoSection() {
                 key={activeVideo}
                 controls
                 className="w-full h-full"
-                poster="/assets/videos/poster.jpg"
+                poster="/assets/images/poster.png"
               >
                 <source src={`/assets/videos/${activeVideo}.mp4`} type="video/mp4" />
                 <source src={`/assets/videos/${activeVideo}.webm`} type="video/webm" />
