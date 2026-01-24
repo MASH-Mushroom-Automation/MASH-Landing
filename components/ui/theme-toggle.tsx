@@ -18,6 +18,8 @@ export function ThemeToggle() {
       <button
         className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
         aria-label="Toggle theme"
+        aria-hidden="true"
+        disabled
       >
         <Sun className="h-5 w-5" />
       </button>
