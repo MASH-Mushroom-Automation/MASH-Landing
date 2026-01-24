@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function DownloadSection() {
   return (
     <section id="download" className="py-20 bg-gradient-to-br from-green-600 to-green-800 text-white">
@@ -115,16 +117,16 @@ export default function DownloadSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-green-100 mb-4">Need the desktop version?</p>
-          <a
-            href="#"
+          <p className="text-green-100 mb-4">Need the desktop version or direct download?</p>
+          <Link
+            href="/download"
             className="inline-flex items-center bg-white text-green-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
             </svg>
-            Download for Windows, Mac, or Linux
-          </a>
+            View All Downloads
+          </Link>
         </div>
       </div>
     </section>

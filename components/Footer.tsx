@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -19,22 +19,22 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-4">Product</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#features" className="hover:text-green-400 transition-colors">
+                <Link href="/#features" className="hover:text-green-400 transition-colors">
                   Features
                 </Link>
               </li>
               <li>
-                <Link href="#demo" className="hover:text-green-400 transition-colors">
+                <Link href="/#demo" className="hover:text-green-400 transition-colors">
                   Demo
                 </Link>
               </li>
               <li>
-                <Link href="#scope" className="hover:text-green-400 transition-colors">
+                <Link href="/#scope" className="hover:text-green-400 transition-colors">
                   Scope
                 </Link>
               </li>
               <li>
-                <Link href="#download" className="hover:text-green-400 transition-colors">
+                <Link href="/download" className="hover:text-green-400 transition-colors">
                   Download
                 </Link>
               </li>
@@ -45,23 +45,23 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#documentation" className="hover:text-green-400 transition-colors">
+                <Link href="/documentation" className="hover:text-green-400 transition-colors">
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-green-400 transition-colors">
-                  API Reference
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-green-400 transition-colors">
-                  Community Forum
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-green-400 transition-colors">
+                <Link href="/documentation/tutorials" className="hover:text-green-400 transition-colors">
                   Tutorials
+                </Link>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/groups/mashmushrooom" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+                  Community Forum
+                </a>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-green-400 transition-colors">
+                  FAQ
                 </Link>
               </li>
             </ul>
@@ -71,22 +71,17 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#support" className="hover:text-green-400 transition-colors">
+                <Link href="/support" className="hover:text-green-400 transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <a href="mailto:mash.mushroom.automation@gmail.com" className="hover:text-green-400 transition-colors">
+                <Link href="/support#contact" className="hover:text-green-400 transition-colors">
                   Contact Us
-                </a>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-green-400 transition-colors">
-                  FAQ
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-green-400 transition-colors">
+                <Link href="/status" className="hover:text-green-400 transition-colors">
                   Status
                 </Link>
               </li>
@@ -100,13 +95,13 @@ export default function Footer() {
               Copyright 2026 MASH Mushroom Automation. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="#" className="hover:text-green-400 transition-colors">
+              <Link href="/privacy" className="hover:text-green-400 transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-green-400 transition-colors">
+              <Link href="/terms" className="hover:text-green-400 transition-colors">
                 Terms of Service
               </Link>
-              <Link href="#" className="hover:text-green-400 transition-colors">
+              <Link href="/license" className="hover:text-green-400 transition-colors">
                 License
               </Link>
             </div>

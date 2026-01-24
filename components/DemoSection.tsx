@@ -24,13 +24,13 @@ export default function DemoSection() {
   ];
 
   return (
-    <section id="demo" className="py-20 bg-gray-50">
+    <section id="demo" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             See MASH in Action
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Watch our demonstration videos to understand how MASH transforms mushroom cultivation
           </p>
         </div>
@@ -59,11 +59,11 @@ export default function DemoSection() {
                 className={`w-full text-left p-4 rounded-lg transition-all ${
                   activeVideo === video.id
                     ? "bg-green-600 text-white shadow-lg"
-                    : "bg-white text-gray-900 hover:bg-gray-100"
+                    : "bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600"
                 }`}
               >
                 <h3 className="font-bold text-lg mb-1">{video.title}</h3>
-                <p className={activeVideo === video.id ? "text-green-100" : "text-gray-600"}>
+                <p className={activeVideo === video.id ? "text-green-100" : "text-gray-600 dark:text-gray-400"}>
                   {video.description}
                 </p>
               </button>
@@ -72,17 +72,17 @@ export default function DemoSection() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 mb-2">99.9%</div>
-            <div className="text-gray-600">System Uptime</div>
+          <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">99.9%</div>
+            <div className="text-gray-600 dark:text-gray-400">System Uptime</div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 mb-2">30%</div>
-            <div className="text-gray-600">Yield Increase</div>
+          <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">30%</div>
+            <div className="text-gray-600 dark:text-gray-400">Yield Increase</div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 mb-2">24/7</div>
-            <div className="text-gray-600">Monitoring</div>
+          <div className="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md">
+            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">24/7</div>
+            <div className="text-gray-600 dark:text-gray-400">Monitoring</div>
           </div>
         </div>
       </div>

@@ -66,21 +66,21 @@ export default function ScopeSection() {
   ];
 
   return (
-    <section id="scope" className="py-20 bg-gradient-to-br from-green-50 to-green-100">
+    <section id="scope" className="py-20 bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Project Scope & Capabilities
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             A comprehensive overview of what MASH can do for your mushroom cultivation operation
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {scopeItems.map((scope, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                 <span className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-3">
                   {index + 1}
                 </span>
@@ -90,7 +90,7 @@ export default function ScopeSection() {
                 {scope.items.map((item, itemIndex) => (
                   <li key={itemIndex} className="flex items-start">
                     <svg
-                      className="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0"
+                      className="w-5 h-5 text-green-600 dark:text-green-400 mr-3 mt-0.5 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -102,7 +102,7 @@ export default function ScopeSection() {
                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-gray-700 dark:text-gray-300">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -110,26 +110,26 @@ export default function ScopeSection() {
           ))}
         </div>
 
-        <div className="mt-12 bg-white p-8 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+        <div className="mt-12 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 text-center">
             System Architecture
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            <div className="p-4 border-2 border-green-200 rounded-lg">
-              <div className="text-green-600 font-bold text-lg mb-2">Layer 1</div>
-              <div className="text-gray-700">Sensors & Actuators</div>
+            <div className="p-4 border-2 border-green-200 dark:border-green-800 rounded-lg">
+              <div className="text-green-600 dark:text-green-400 font-bold text-lg mb-2">Layer 1</div>
+              <div className="text-gray-700 dark:text-gray-300">Sensors & Actuators</div>
             </div>
-            <div className="p-4 border-2 border-green-300 rounded-lg">
-              <div className="text-green-600 font-bold text-lg mb-2">Layer 2</div>
-              <div className="text-gray-700">Control Hardware</div>
+            <div className="p-4 border-2 border-green-300 dark:border-green-700 rounded-lg">
+              <div className="text-green-600 dark:text-green-400 font-bold text-lg mb-2">Layer 2</div>
+              <div className="text-gray-700 dark:text-gray-300">Control Hardware</div>
             </div>
-            <div className="p-4 border-2 border-green-400 rounded-lg">
-              <div className="text-green-600 font-bold text-lg mb-2">Layer 3</div>
-              <div className="text-gray-700">Software & Cloud</div>
+            <div className="p-4 border-2 border-green-400 dark:border-green-600 rounded-lg">
+              <div className="text-green-600 dark:text-green-400 font-bold text-lg mb-2">Layer 3</div>
+              <div className="text-gray-700 dark:text-gray-300">Software & Cloud</div>
             </div>
             <div className="p-4 border-2 border-green-500 rounded-lg">
-              <div className="text-green-600 font-bold text-lg mb-2">Layer 4</div>
-              <div className="text-gray-700">User Interface</div>
+              <div className="text-green-600 dark:text-green-400 font-bold text-lg mb-2">Layer 4</div>
+              <div className="text-gray-700 dark:text-gray-300">User Interface</div>
             </div>
           </div>
         </div>
