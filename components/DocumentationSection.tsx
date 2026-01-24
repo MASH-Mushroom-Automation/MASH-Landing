@@ -65,13 +65,13 @@ export default function DocumentationSection() {
   ];
 
   return (
-    <section id="documentation" className="py-20 bg-white dark:bg-gray-900">
+    <section id="documentation" className="py-20 bg-documentation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Documentation
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-secondary max-w-3xl mx-auto">
             Comprehensive guides and resources to help you get the most out of MASH
           </p>
         </div>
@@ -80,10 +80,10 @@ export default function DocumentationSection() {
           {docCategories.map((category, index) => (
             <div
               key={index}
-              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-400 transition-colors"
+              className="bg-componentpage p-6 rounded-xl border border-default hover:border-green-500 dark:hover:border-green-400 transition-colors"
             >
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{category.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">{category.description}</p>
+              <h3 className="text-xl font-bold text-primary mb-2">{category.title}</h3>
+              <p className="text-secondary mb-4">{category.description}</p>
               <ul className="space-y-2">
                 {category.links.map((link, linkIndex) => (
                   <li key={linkIndex}>

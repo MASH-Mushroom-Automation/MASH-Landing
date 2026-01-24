@@ -37,7 +37,7 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-sm border-b border-gray-200 dark:border-gray-800" role="navigation" aria-label="Main navigation">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-navigation backdrop-blur-sm shadow-sm border-b border-default" role="navigation" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -52,7 +52,7 @@ export default function Navigation() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => link.href.startsWith("/#") ? handleSmoothScroll(e, link.href.substring(1)) : undefined}
-                className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                className="text-secondary hover:text-green-600 dark:hover:text-green-400 transition-colors"
               >
                 {link.label}
               </Link>
@@ -70,7 +70,7 @@ export default function Navigation() {
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400"
+              className="p-2 rounded-md text-secondary hover:text-green-600 dark:hover:text-green-400"
               aria-expanded={isMenuOpen}
               aria-label="Toggle mobile menu"
             >
@@ -85,7 +85,7 @@ export default function Navigation() {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div className="md:hidden bg-navigation border-t border-default">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
               <Link
@@ -97,7 +97,7 @@ export default function Navigation() {
                   }
                   setIsMenuOpen(false);
                 }}
-                className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                className="block px-3 py-2 text-secondary hover:text-green-600 dark:hover:text-green-400 hover:bg-componentpage rounded-md"
               >
                 {link.label}
               </Link>

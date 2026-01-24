@@ -8,10 +8,22 @@ import { cn } from "@/lib/utils";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [localTheme, setLocalTheme] = React.useState("light");
 
   React.useEffect(() => {
     setMounted(true);
+    console.log("ThemeToggle mounted, current theme:", theme);
   }, []);
+
+  React.useEffect(() => {
+    console.log("Theme changed to:", theme);
+  }, [theme]);
+
+  const handleToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    console.log("Toggling from", theme, "to", newTheme);
+    setTheme(newTheme);
+  };
 
   if (!mounted) {
     return (
@@ -28,7 +40,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={handleToggle}
       className={cn(
         "p-2 rounded-md transition-colors",
         "text-gray-700 dark:text-gray-300",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "MASH - Mushroom Automation System Hub",
@@ -17,8 +17,8 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={true}
           disableTransitionOnChange
         >
           {children}

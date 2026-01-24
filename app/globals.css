@@ -1,51 +1,262 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --border: #e5e5e5;
-  --primary: #16a34a;
-  --primary-foreground: #ffffff;
+@theme {
+  /* Map custom properties to Tailwind classes */
+  --color-background: rgb(var(--color-background));
+  --color-background-alt: rgb(var(--color-background-alt));
+  --color-background-card: rgb(var(--color-background-card));
+  --color-background-section: rgb(var(--color-background-section));
+  --color-surface: rgb(var(--color-surface));
+  --color-surface-hover: rgb(var(--color-surface-hover));
+  
+  --color-text-primary: rgb(var(--color-text-primary));
+  --color-text-secondary: rgb(var(--color-text-secondary));
+  --color-text-tertiary: rgb(var(--color-text-tertiary));
+  
+  --color-primary: rgb(var(--color-primary));
+  --color-primary-hover: rgb(var(--color-primary-hover));
+  --color-primary-light: rgb(var(--color-primary-light));
+  
+  --color-border: rgb(var(--color-border));
+  --color-border-hover: rgb(var(--color-border-hover));
 }
 
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --card: #171717;
-  --card-foreground: #ededed;
-  --border: #262626;
-  --primary: #22c55e;
-  --primary-foreground: #0a0a0a;
+@layer base {
+  :root {
+    /* Primary Brand Colors */
+    --color-primary: 22 163 74;           /* green-600 */
+    --color-primary-hover: 21 128 61;     /* green-700 */
+    --color-primary-light: 220 252 231;   /* green-100 */
+    --color-primary-50: 240 253 244;      /* green-50 */
+    --color-primary-200: 187 247 208;     /* green-200 */
+    --color-primary-400: 74 222 128;      /* green-400 */
+    --color-primary-500: 34 197 94;       /* green-500 */
+    --color-primary-800: 22 101 52;       /* green-800 */
+    --color-primary-900: 20 83 45;        /* green-900 */
+
+    /* Background Colors */
+    --color-background: 255 255 255;      /* white */
+    --color-background-alt: 249 250 251;  /* gray-50 */
+    --color-background-card: 255 255 255; /* white */
+    --color-background-section: 249 250 251; /* gray-50 */
+    --color-background-component: 243 244 246; /* gray-100 */
+    
+    /* Component-specific backgrounds */
+    --color-background-hero-start: 240 253 244;     /* green-50 */
+    --color-background-hero-end: 220 252 231;       /* green-100 */
+    --color-background-features: 255 255 255;       /* white */
+    --color-background-demo: 249 250 251;           /* gray-50 */
+    --color-background-scope-start: 240 253 244;    /* green-50 */
+    --color-background-scope-end: 220 252 231;      /* green-100 */
+    --color-background-documentation: 255 255 255;  /* white */
+    --color-background-download-start: 22 163 74;   /* green-600 */
+    --color-background-download-end: 22 101 52;     /* green-800 */
+    --color-background-support: 255 255 255;        /* white */
+    --color-background-navigation: 255 255 255;     /* white */
+    --color-background-footer: 17 24 39;            /* gray-900 */
+    
+    /* Surface Colors */
+    --color-surface: 255 255 255;         /* white */
+    --color-surface-hover: 249 250 251;   /* gray-50 */
+    --color-surface-elevated: 255 255 255; /* white */
+
+    /* Text Colors */
+    --color-text-primary: 17 24 39;       /* gray-900 */
+    --color-text-secondary: 75 85 99;     /* gray-600 */
+    --color-text-tertiary: 156 163 175;   /* gray-400 */
+    --color-text-inverse: 255 255 255;    /* white */
+    --color-text-green: 22 163 74; /* green-600 */
+
+    /* Border Colors */
+    --color-border: 229 231 235;          /* gray-200 */
+    --color-border-hover: 209 213 219;    /* gray-300 */
+    --color-border-focus: 22 163 74;      /* green-600 */
+
+    /* Accent Colors */
+    --color-accent-blue: 37 99 235;       /* blue-600 */
+    --color-accent-blue-light: 239 246 255; /* blue-50 */
+    --color-accent-purple: 147 51 234;    /* purple-600 */
+    --color-accent-purple-light: 250 245 255; /* purple-50 */
+    
+    /* State Colors */
+    --color-error: 220 38 38;             /* red-600 */
+    --color-success: 22 163 74;           /* green-600 */
+    --color-warning: 234 179 8;           /* yellow-600 */
+
+    /* Shadow & Overlay */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  }
+
+  .dark {
+    /* Primary Brand Colors (slightly adjusted for dark mode) */
+    --color-primary: 34 197 94;           /* green-500 */
+    --color-primary-hover: 74 222 128;    /* green-400 */
+    --color-primary-light: 22 101 52;     /* green-800 */
+    --color-primary-50: 20 83 45;         /* green-900 */
+    --color-primary-200: 22 101 52;       /* green-800 */
+    --color-primary-400: 74 222 128;      /* green-400 */
+    --color-primary-500: 34 197 94;       /* green-500 */
+    --color-primary-800: 187 247 208;     /* green-200 */
+    --color-primary-900: 220 252 231;     /* green-100 */
+
+    /* Background Colors */
+    --color-background: 17 24 39;         /* gray-900 */
+    --color-background-alt: 31 41 55;     /* gray-800 */
+    --color-background-card: 31 41 55;    /* gray-800 */
+    --color-background-section: 31 41 55; /* gray-800 */
+    --color-background-component: 55 65 81; /* gray-700 */
+    
+    /* Component-specific backgrounds */
+    --color-background-hero-start: 17 24 39;        /* gray-900 */
+    --color-background-hero-end: 31 41 55;          /* gray-800 */
+    --color-background-features: 17 24 39;          /* gray-900 */
+    --color-background-demo: 31 41 55;              /* gray-800 */
+    --color-background-scope-start: 31 41 55;       /* gray-800 */
+    --color-background-scope-end: 17 24 39;         /* gray-900 */
+    --color-background-documentation: 17 24 39;     /* gray-900 */
+    --color-background-download-start: 22 163 74;   /* green-600 */
+    --color-background-download-end: 22 101 52;     /* green-800 */
+    --color-background-support: 17 24 39;           /* gray-900 */
+    --color-background-navigation: 17 24 39;        /* gray-900 */
+    --color-background-footer: 3 7 18;              /* gray-950 */
+    
+    /* Surface Colors */
+    --color-surface: 31 41 55;            /* gray-800 */
+    --color-surface-hover: 55 65 81;      /* gray-700 */
+    --color-surface-elevated: 55 65 81;   /* gray-700 */
+
+    /* Text Colors */
+    --color-text-primary: 255 255 255;    /* white */
+    --color-text-secondary: 209 213 219;  /* gray-300 */
+    --color-text-tertiary: 156 163 175;   /* gray-400 */
+    --color-text-inverse: 17 24 39;       /* gray-900 */
+    --color-text-green: 34 197 94; /* green-500 */
+
+    /* Border Colors */
+    --color-border: 55 65 81;             /* gray-700 */
+    --color-border-hover: 75 85 99;       /* gray-600 */
+    --color-border-focus: 34 197 94;      /* green-500 */
+
+    /* Accent Colors */
+    --color-accent-blue: 96 165 250;      /* blue-400 */
+    --color-accent-blue-light: 30 58 138; /* blue-900 */
+    --color-accent-purple: 192 132 252;   /* purple-400 */
+    --color-accent-purple-light: 88 28 135; /* purple-900 */
+    
+    /* State Colors */
+    --color-error: 239 68 68;             /* red-500 */
+    --color-success: 34 197 94;           /* green-500 */
+    --color-warning: 250 204 21;          /* yellow-400 */
+
+    /* Shadow & Overlay (darker for dark mode) */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-text-primary;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+  }
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-border: var(--border);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+@layer utilities {
+
+  /* Background utilities */
+  .bg-default {
+    background-color: rgb(var(--color-background));
+  }
+  
+  .bg-componentpage {
+    background-color: rgb(var(--color-background-section));
+  }
+
+  .bg-card {
+    background-color: rgb(var(--color-background-card));
+  }
+
+  .bg-surface {
+    background-color: rgb(var(--color-surface));
+  }
+
+  /* Component-specific backgrounds */
+  .bg-hero {
+    background: linear-gradient(to bottom right, rgb(var(--color-background-hero-start)), rgb(var(--color-background-hero-end)));
+  }
+
+  .bg-features {
+    background-color: rgb(var(--color-background-features));
+  }
+
+  .bg-demo {
+    background-color: rgb(var(--color-background-demo));
+  }
+
+  .bg-scope {
+    background: linear-gradient(to bottom right, rgb(var(--color-background-scope-start)), rgb(var(--color-background-scope-end)));
+  }
+
+  .bg-documentation {
+    background-color: rgb(var(--color-background-documentation));
+  }
+
+  .bg-download {
+    background: linear-gradient(to bottom right, rgb(var(--color-background-download-start)), rgb(var(--color-background-download-end)));
+  }
+
+  .bg-support {
+    background-color: rgb(var(--color-background-support));
+  }
+
+  .bg-navigation {
+    background-color: rgb(var(--color-background-navigation) / 0.95);
+  }
+
+  .bg-footer {
+    background-color: rgb(var(--color-background-footer));
+  }
+
+  /* Text utilities */
+  .text-primary {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .text-secondary {
+    color: rgb(var(--color-text-secondary));
+  }
+
+  .text-tertiary {
+    color: rgb(var(--color-text-tertiary));
+  }
+
+  .text-inverse {
+    color: rgb(var(--color-text-inverse));
+  }
+
+  .text-green {
+    color: rgb(var(--color-text-green));
+  }
+
+  /* Border utilities */
+  .border-default {
+    border-color: rgb(var(--color-border));
+  }
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
 }
 
 section {
