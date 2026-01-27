@@ -74,14 +74,19 @@
 
     /* Accent Colors */
     --color-accent-blue: 37 99 235;       /* blue-600 */
+    --color-accent-blue-hover: 30 64 175; /* blue-800 */
     --color-accent-blue-light: 239 246 255; /* blue-50 */
     --color-accent-purple: 147 51 234;    /* purple-600 */
+    --color-accent-purple-hover: 126 34 206; /* purple-700 */
     --color-accent-purple-light: 250 245 255; /* purple-50 */
     
     /* State Colors */
     --color-error: 220 38 38;             /* red-600 */
+    --color-error-light: 254 226 226;     /* red-100 */
     --color-success: 22 163 74;           /* green-600 */
+    --color-success-light: 240 253 244;   /* green-50 */
     --color-warning: 234 179 8;           /* yellow-600 */
+    --color-warning-light: 254 249 195;   /* yellow-100 */
 
     /* Shadow & Overlay */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -143,14 +148,19 @@
 
     /* Accent Colors */
     --color-accent-blue: 96 165 250;      /* blue-400 */
+    --color-accent-blue-hover: 59 130 246; /* blue-500 */
     --color-accent-blue-light: 30 58 138; /* blue-900 */
     --color-accent-purple: 192 132 252;   /* purple-400 */
+    --color-accent-purple-hover: 168 85 247; /* purple-500 */
     --color-accent-purple-light: 88 28 135; /* purple-900 */
     
     /* State Colors */
     --color-error: 239 68 68;             /* red-500 */
+    --color-error-light: 127 29 29;       /* red-900 */
     --color-success: 34 197 94;           /* green-500 */
+    --color-success-light: 20 83 45;      /* green-900 */
     --color-warning: 250 204 21;          /* yellow-400 */
+    --color-warning-light: 133 77 14;     /* yellow-800 */
 
     /* Shadow & Overlay (darker for dark mode) */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
@@ -227,6 +237,23 @@
   .bg-footer {
     background-color: rgb(var(--color-background-footer));
   }
+  
+  /* Brand color utilities */
+  .bg-brand {
+    background-color: rgb(var(--color-primary));
+  }
+
+  .bg-brand-hover {
+    background-color: rgb(var(--color-primary-hover));
+  }
+
+  .border-brand {
+    border-color: rgb(var(--color-primary));
+  }
+  
+  .text-brand-light {
+    color: rgb(var(--color-primary-light));
+  }
 
   /* Text utilities */
   .text-primary {
@@ -253,6 +280,25 @@
   .border-default {
     border-color: rgb(var(--color-border));
   }
+
+  /* Accent & State Utilities */
+  .bg-accent-blue { background-color: rgb(var(--color-accent-blue)); }
+  .hover\:bg-accent-blue-hover:hover { background-color: rgb(var(--color-accent-blue-hover)); }
+  .text-accent-blue { color: rgb(var(--color-accent-blue)); }
+  .bg-accent-blue-light { background-color: rgb(var(--color-accent-blue-light)); }
+  
+  .bg-accent-purple { background-color: rgb(var(--color-accent-purple)); }
+  .hover\:bg-accent-purple-hover:hover { background-color: rgb(var(--color-accent-purple-hover)); }
+  .text-accent-purple { color: rgb(var(--color-accent-purple)); }
+  .hover\:text-accent-purple-hover:hover { color: rgb(var(--color-accent-purple-hover)); }
+  .bg-accent-purple-light { background-color: rgb(var(--color-accent-purple-light)); }
+
+  .bg-success-light { background-color: rgb(var(--color-success-light)); }
+  .text-success { color: rgb(var(--color-success)); }
+  .bg-warning-light { background-color: rgb(var(--color-warning-light)); }
+  .text-warning { color: rgb(var(--color-warning)); }
+  .bg-error-light { background-color: rgb(var(--color-error-light)); }
+  .text-error { color: rgb(var(--color-error)); }
 }
 
 html {

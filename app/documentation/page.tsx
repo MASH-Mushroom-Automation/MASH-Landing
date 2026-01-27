@@ -86,34 +86,34 @@ const docCategories = [
 export default function DocumentationPage() {
   return (
     <PageLayout>
-      <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 py-16">
+      <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Documentation
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
               Everything you need to know about setting up, configuring, and using the MASH Mushroom Automation System
             </p>
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-white dark:bg-gray-900">
+      <div className="py-16 bg-default">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Quick Links */}
           <div className="mb-12">
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/documentation/tutorials"
-                className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors"
               >
                 <BookOpen className="w-5 h-5 mr-2" />
                 Browse Tutorials
               </Link>
               <Link
                 href="#api-reference"
-                className="inline-flex items-center px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-componentpage text-primary rounded-full hover:bg-surface-hover transition-colors"
               >
                 <Code className="w-5 h-5 mr-2" />
                 API Reference
@@ -129,17 +129,17 @@ export default function DocumentationPage() {
                 <div
                   key={category.id}
                   id={category.id}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-400 transition-colors"
+                  className="bg-componentpage rounded-xl p-6 border-default hover:border-green transition-colors"
                 >
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mr-4">
-                      <IconComponent className="w-6 h-6 text-green-600 dark:text-green-400" />
+                    <div className="w-12 h-12 bg-success-light rounded-lg flex items-center justify-center mr-4">
+                      <IconComponent className="w-6 h-6 text-green" />
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-xl font-bold text-primary">
                         {category.title}
                       </h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                      <p className="text-sm text-secondary">
                         {category.description}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ export default function DocumentationPage() {
                       <li key={article.slug}>
                         <Link
                           href={`/documentation/${category.id}/${article.slug}`}
-                          className="flex items-center text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors py-1"
+                          className="flex items-center text-secondary hover:text-green transition-colors py-1"
                         >
                           <ChevronRight className="w-4 h-4 mr-2" />
                           {article.title}
@@ -163,15 +163,15 @@ export default function DocumentationPage() {
           </div>
 
           {/* Need Help Section */}
-          <div className="mt-16 bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-center text-white">
+          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
             <h2 className="text-2xl font-bold mb-4">Need More Help?</h2>
-            <p className="mb-6 text-green-100">
+            <p className="mb-6 text-brand-light">
               Can&apos;t find what you&apos;re looking for? Our support team is here to help.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/support"
-                className="inline-flex items-center px-6 py-3 bg-white text-green-600 rounded-full hover:bg-gray-100 transition-colors font-semibold"
+                className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
               >
                 Contact Support
               </Link>
@@ -179,7 +179,7 @@ export default function DocumentationPage() {
                 href="https://www.facebook.com/groups/mashmushrooom"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-full hover:bg-green-400 transition-colors font-semibold"
+                className="inline-flex items-center px-6 py-3 bg-primary text-inverse rounded-full hover:bg-primary-hover transition-colors font-semibold"
               >
                 Join Community
               </a>

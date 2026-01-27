@@ -80,30 +80,30 @@ const categories = ["All", "Getting Started", "Hardware", "Automation", "Mobile"
 export default function TutorialsPage() {
   return (
     <PageLayout>
-      <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 py-16">
+      <div className="bg-accent-gradient py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-4">
-            <Link href="/documentation" className="text-purple-600 dark:text-purple-400 hover:underline">
+            <Link href="/documentation" className="text-accent-purple hover:underline">
               Documentation
             </Link>
-            <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
-            <span className="text-gray-600 dark:text-gray-400">Tutorials</span>
+            <ChevronRight className="w-4 h-4 mx-2 text-tertiary" />
+            <span className="text-secondary">Tutorials</span>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 rounded-full mb-4">
-              <BookOpen className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-purple rounded-full mb-4">
+              <BookOpen className="w-8 h-8 text-inverse" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Tutorials & Guides
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
               Step-by-step tutorials to help you get the most out of your MASH system
             </p>
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-white dark:bg-gray-900">
+      <div className="py-16 bg-default">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filter */}
           <div className="mb-8 flex flex-wrap gap-2 justify-center">
@@ -112,8 +112,8 @@ export default function TutorialsPage() {
                 key={category}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   category === "All"
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    ? "bg-accent-purple text-inverse"
+                    : "bg-componentpage text-secondary hover:bg-surface-hover"
                 }`}
               >
                 {category}
@@ -126,37 +126,37 @@ export default function TutorialsPage() {
             {tutorials.map((tutorial) => (
               <article
                 key={tutorial.id}
-                className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg dark:hover:shadow-gray-800/50 transition-shadow"
+                className="bg-componentpage rounded-xl p-6 border-default hover:shadow-lg dark:hover:shadow-gray-800/50 transition-shadow"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-purple-light text-accent-purple">
                     <Tag className="w-3 h-3 mr-1" />
                     {tutorial.category}
                   </span>
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                     tutorial.difficulty === "Beginner"
-                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                      ? "bg-success-light text-success-strong"
                       : tutorial.difficulty === "Intermediate"
-                      ? "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300"
-                      : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300"
+                      ? "bg-warning-light text-warning-strong"
+                      : "bg-error-light text-error-strong"
                   }`}>
                     {tutorial.difficulty}
                   </span>
                 </div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <h2 className="text-xl font-bold text-primary mb-2">
                   {tutorial.title}
                 </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-secondary mb-4">
                   {tutorial.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center text-sm text-gray-500 dark:text-gray-500">
+                  <span className="flex items-center text-sm text-tertiary">
                     <Clock className="w-4 h-4 mr-1" />
                     {tutorial.readTime}
                   </span>
                   <Link
                     href={`/documentation/tutorials/${tutorial.id}`}
-                    className="inline-flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+                    className="inline-flex items-center text-accent-purple hover:text-accent-purple-hover font-medium"
                   >
                     Read Tutorial
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -168,14 +168,14 @@ export default function TutorialsPage() {
 
           {/* CTA Section */}
           <div className="mt-16 text-center">
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
+            <p className="text-secondary mb-4">
               Want to contribute a tutorial?
             </p>
             <a
               href="https://github.com/MASH-Mushroom-Automation"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-primary text-inverse rounded-full hover:bg-primary-hover transition-colors font-semibold"
             >
               Contribute on GitHub
             </a>

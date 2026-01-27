@@ -71,28 +71,28 @@ function StatusBadge({ status }: { status: string }) {
   switch (status) {
     case "operational":
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success-light text-success-strong">
           <CheckCircle className="w-4 h-4 mr-1" />
           Operational
         </span>
       );
     case "degraded":
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-warning-light text-warning-strong">
           <AlertCircle className="w-4 h-4 mr-1" />
           Degraded
         </span>
       );
     case "outage":
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-error-light text-error-strong">
           <AlertCircle className="w-4 h-4 mr-1" />
           Outage
         </span>
       );
     case "maintenance":
       return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-blue-light text-accent-blue">
           <Clock className="w-4 h-4 mr-1" />
           Maintenance
         </span>
@@ -107,9 +107,9 @@ export default function StatusPage() {
 
   return (
     <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-gradient-to-br from-green-600 to-green-700" : "bg-gradient-to-br from-yellow-500 to-yellow-600"}`}>
+      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-gradient"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-white">
+          <div className="text-center text-inverse">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
               <CheckCircle className="w-8 h-8" />
             </div>
@@ -123,29 +123,29 @@ export default function StatusPage() {
         </div>
       </div>
 
-      <div className="py-16 bg-white dark:bg-gray-900">
+      <div className="py-16 bg-default">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Services Status */}
           <div className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-primary mb-6">
               Service Status
             </h2>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="bg-componentpage rounded-xl divide-y divide-default">
               {services.map((service) => (
                 <div
                   key={service.name}
                   className="p-6 flex items-center justify-between"
                 >
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-semibold text-primary">
                       {service.name}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
+                    <p className="text-secondary text-sm">
                       {service.description}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-gray-500 dark:text-gray-500">
+                    <span className="text-sm text-tertiary">
                       {service.uptime} uptime
                     </span>
                     <StatusBadge status={service.status} />
@@ -157,10 +157,10 @@ export default function StatusPage() {
 
           {/* Uptime Chart Placeholder */}
           <div className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-primary mb-6">
               90-Day Uptime
             </h2>
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+            <div className="bg-componentpage rounded-xl p-6">
               <div className="flex items-end justify-between h-24 gap-1">
                 {Array.from({ length: 90 }).map((_, i) => {
                   // Use deterministic pseudo-random based on index for consistent rendering
@@ -168,14 +168,14 @@ export default function StatusPage() {
                   return (
                     <div
                       key={i}
-                      className="flex-1 bg-green-500 rounded-t"
+                      className="flex-1 bg-green rounded-t"
                       style={{ height: `${height}%` }}
                       title={`Day ${i + 1}: 99.9% uptime`}
                     />
                   );
                 })}
               </div>
-              <div className="flex justify-between mt-4 text-sm text-gray-500">
+              <div className="flex justify-between mt-4 text-sm text-tertiary">
                 <span>90 days ago</span>
                 <span>Today</span>
               </div>
@@ -184,45 +184,45 @@ export default function StatusPage() {
 
           {/* Recent Incidents */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-2xl font-bold text-primary mb-6">
               Recent Incidents
             </h2>
             <div className="space-y-4">
               {recentIncidents.map((incident, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6"
+                  className="bg-componentpage rounded-xl p-6"
                 >
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-semibold text-primary">
                       {incident.title}
                     </h3>
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success-light text-success-strong">
                       Resolved
                     </span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2">
+                  <p className="text-secondary mb-2">
                     {incident.description}
                   </p>
-                  <span className="text-sm text-gray-500">{incident.date}</span>
+                  <span className="text-sm text-tertiary">{incident.date}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Subscribe to Updates */}
-          <div className="mt-16 bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-center text-white">
+          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
             <h2 className="text-2xl font-bold mb-4">Get Status Updates</h2>
-            <p className="mb-6 text-green-100">
+            <p className="mb-6 text-brand-light">
               Subscribe to receive notifications about system status changes.
             </p>
             <div className="flex max-w-md mx-auto gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-green-300"
+                className="flex-1 px-4 py-3 rounded-lg text-primary focus:ring-2 focus:ring-green"
               />
-              <button className="px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold">
+              <button className="px-6 py-3 bg-background text-green rounded-lg hover:bg-surface-hover transition-colors font-semibold">
                 Subscribe
               </button>
             </div>

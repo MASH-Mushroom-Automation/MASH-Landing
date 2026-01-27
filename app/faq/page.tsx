@@ -97,22 +97,22 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700">
+    <div className="border-b border-default">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between py-4 text-left"
       >
-        <span className="text-lg font-medium text-gray-900 dark:text-white pr-4">
+        <span className="text-lg font-medium text-primary pr-4">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-gray-500 transition-transform ${
+          className={`w-5 h-5 text-tertiary transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
       {isOpen && (
-        <div className="pb-4 text-gray-600 dark:text-gray-400">
+        <div className="pb-4 text-secondary">
           {answer}
         </div>
       )}
@@ -134,46 +134,46 @@ export default function FAQPage() {
 
   return (
     <PageLayout>
-      <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 py-16">
+      <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-secondary max-w-3xl mx-auto mb-8">
               Find answers to common questions about MASH
             </p>
             
             {/* Search */}
             <div className="max-w-xl mx-auto relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-tertiary" />
               <input
                 type="text"
                 placeholder="Search FAQs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 rounded-full border-default bg-background text-primary focus:ring-2 focus:ring-green focus:border-transparent"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-white dark:bg-gray-900">
+      <div className="py-16 bg-default">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredCategories.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-secondary text-lg">
                 No FAQs found matching your search.
               </p>
             </div>
           ) : (
             filteredCategories.map((category) => (
               <div key={category.name} className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-2xl font-bold text-primary mb-6">
                   {category.name}
                 </h2>
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
+                <div className="bg-componentpage rounded-xl p-6">
                   {category.faqs.map((faq, index) => (
                     <FAQItem key={index} question={faq.question} answer={faq.answer} />
                   ))}
@@ -183,14 +183,14 @@ export default function FAQPage() {
           )}
 
           {/* CTA */}
-          <div className="mt-12 bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-center text-white">
+          <div className="mt-12 bg-download rounded-xl p-8 text-center text-inverse">
             <h2 className="text-2xl font-bold mb-4">Still Have Questions?</h2>
-            <p className="mb-6 text-green-100">
+            <p className="mb-6 text-brand-light">
               Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
             </p>
             <Link
               href="/support"
-              className="inline-flex items-center px-6 py-3 bg-white text-green-600 rounded-full hover:bg-gray-100 transition-colors font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
             >
               Contact Support
             </Link>
