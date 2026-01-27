@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { getCloudinaryVideoUrl, getVideoThumbnailUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
 
 export default function DemoSection() {
   const [activeVideo, setActiveVideo] = useState("overview");
@@ -42,10 +43,10 @@ export default function DemoSection() {
                 key={activeVideo}
                 controls
                 className="w-full h-full"
-                poster="/assets/images/poster.png"
+                poster={getVideoThumbnailUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos])}
               >
-                <source src={`/assets/videos/${activeVideo}.mp4`} type="video/mp4" />
-                <source src={`/assets/videos/${activeVideo}.webm`} type="video/webm" />
+                <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos], { format: 'mp4' })} type="video/mp4" />
+                <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos], { format: 'webm' })} type="video/webm" />
                 Your browser does not support the video tag.
               </video>
             </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { getCloudinaryImageUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Image src="/assets/images/logo.png" alt="MASH Logo" width={90} height={64} />
+              <Image src={getCloudinaryImageUrl(CLOUDINARY_ASSETS.images.logo, { width: 110, height: 74 })} alt="MASH Logo" width={110} height={74} />
             </div>
             <p className="text-sm text-gray-400">
               Professional mushroom cultivation automation platform with advanced monitoring and control.

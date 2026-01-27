@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { getCloudinaryVideoUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
 
 export default function HeroSection() {
   const [videoError, setVideoError] = useState(false);
@@ -34,8 +35,8 @@ export default function HeroSection() {
             onError={() => setVideoError(true)}
             aria-hidden="true"
           >
-            <source src="/assets/videos/demo.mp4" type="video/mp4" />
-            <source src="/assets/videos/demo.webm" type="video/webm" />
+            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'mp4' })} type="video/mp4" />
+            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'webm' })} type="video/webm" />
           </video>
         ) : (
           <div className="w-full h-full bg-hero" />

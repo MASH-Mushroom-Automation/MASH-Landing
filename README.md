@@ -87,18 +87,40 @@ npm run lint
 
 ## Adding Assets
 
-Place your media files in the appropriate directories under `/public/assets/`:
+**Important**: All media assets are now hosted on Cloudinary CDN to reduce GitHub traffic and improve performance.
 
-- **Videos**: Add demo videos to `/public/assets/videos/`
+### Setup Cloudinary
+
+1. **Environment Variables**: The `.env.local` file has been configured with your Cloudinary credentials
+2. **Upload Assets**: Use one of these methods to upload your assets:
+
+   **Method 1 - Automated Script (Recommended)**:
+   ```bash
+   npm run upload:cloudinary
+   ```
+
+   **Method 2 - Cloudinary Web Dashboard**:
+   - Log in to [Cloudinary Console](https://cloudinary.com/console)
+   - Upload files to the `mash/` folder
+   - See `CLOUDINARY_SETUP.md` for detailed instructions
+
+3. **Verify**: Run `npm run dev` and check that all images and videos load correctly
+
+### Asset Requirements
+
+Upload these files to Cloudinary under the `mash/` folder:
+
+- **Images**:
+  - `logo.png` - MASH logo (58x62px recommended)
+  - `poster.png` or `poster.jpg` - Video thumbnail
+
+- **Videos**:
   - `demo.mp4` / `demo.webm` - Background video for hero section
   - `overview.mp4` / `overview.webm` - System overview
   - `setup.mp4` / `setup.webm` - Installation guide
   - `mobile.mp4` / `mobile.webm` - Mobile app demo
-  - `poster.jpg` - Video thumbnail
 
-- **Images**: Add images to `/public/assets/images/`
-- **Icons**: Add custom icons to `/public/assets/icons/`
-- **Fonts**: Add custom fonts to `/public/assets/fonts/`
+See `CLOUDINARY_SETUP.md` for complete upload instructions.
 
 ## Technologies
 

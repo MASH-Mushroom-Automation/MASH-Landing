@@ -6,6 +6,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
+import { getCloudinaryImageUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/assets/images/logo.png" alt="MASH Logo" width={58} height={62} />
+              <Image src={getCloudinaryImageUrl(CLOUDINARY_ASSETS.images.logo, { width: 58, height: 38 })} alt="MASH Logo" width={58} height={38} />
             </Link>
           </div>
 
