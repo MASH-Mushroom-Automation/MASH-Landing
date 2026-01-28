@@ -84,13 +84,13 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="py-20 bg-white">
+    <section id="features" className="py-20 bg-features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Powerful Features
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-secondary max-w-3xl mx-auto">
             MASH provides everything you need to automate and optimize your mushroom cultivation operation
           </p>
         </div>
@@ -99,13 +99,13 @@ export default function FeaturesSection() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 border border-gray-200 rounded-xl hover:shadow-lg transition-shadow"
+              className="p-6 border border-default rounded-xl hover:shadow-lg transition-shadow bg-card"
             >
-              <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4 text-green-600">
+              <div className="w-16 h-16 bg-features rounded-lg flex items-center justify-center mb-4 text-green">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
+              <p className="text-secondary">{feature.description}</p>
             </div>
           ))}
         </div>
