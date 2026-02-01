@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useId } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getCalLink, type EventTypeKey } from '@/lib/cal-config';
 
 interface CalendarSchedulerProps {
@@ -18,12 +18,29 @@ export default function CalendarScheduler({
 }: CalendarSchedulerProps) {
   const calInlineRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const uniqueId = useId();
-  const namespace = `cal-${eventType}-${uniqueId.replace(/:/g, '')}`;
+  const [currentEventType, setCurrentEventType] = useState(eventType);
+
+  // Reset when eventType prop changes
+  useEffect(() => {
+    if (eventType !== currentEventType) {
+      setCurrentEventType(eventType);
+      setStatus('loading');
+      // Clear the container
+      if (calInlineRef.current) {
+        calInlineRef.current.innerHTML = '';
+      }
+    }
+  }, [eventType, currentEventType]);
 
   useEffect(() => {
-    const calLink = getCalLink(eventType);
+    const calLink = getCalLink(currentEventType);
     let isMounted = true;
+    const namespace = `cal-inline-${currentEventType}-${Date.now()}`;
+
+    // Clear any existing content in the container
+    if (calInlineRef.current) {
+      calInlineRef.current.innerHTML = '';
+    }
 
     // Cal.com recommended async loader
     (function (C: Window, A: string, L: string) {
@@ -62,7 +79,7 @@ export default function CalendarScheduler({
     // Initialize Cal with namespace
     window.Cal!('init', namespace, { origin: 'https://cal.com' });
 
-    // Small delay to ensure DOM element is ready
+    // Delay to ensure DOM element is ready
     const initTimeout = setTimeout(() => {
       if (!isMounted || !calInlineRef.current) {
         if (isMounted) setStatus('error');
@@ -93,13 +110,17 @@ export default function CalendarScheduler({
         console.error('Cal.com initialization error:', err);
         if (isMounted) setStatus('error');
       }
-    }, 100);
+    }, 150);
 
     return () => {
       isMounted = false;
       clearTimeout(initTimeout);
+      // Clean up the container on unmount
+      if (calInlineRef.current) {
+        calInlineRef.current.innerHTML = '';
+      }
     };
-  }, [eventType, theme, hideEventTypeDetails, layout, namespace]);
+  }, [currentEventType, theme, hideEventTypeDetails, layout]);
 
   return (
     <div className="cal-embed-container w-full min-h-[600px] relative">
@@ -116,7 +137,7 @@ export default function CalendarScheduler({
           <div className="text-center">
             <p className="text-red-500 mb-4">Unable to load calendar</p>
             <a 
-              href={`https://cal.com/${getCalLink(eventType)}`}
+              href={`https://cal.com/${getCalLink(currentEventType)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors font-semibold"
