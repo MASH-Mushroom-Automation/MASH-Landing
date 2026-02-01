@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getCalLink, type EventTypeKey } from '@/lib/cal-config';
 
 interface CalendarSchedulerProps {
@@ -16,115 +16,46 @@ export default function CalendarScheduler({
   hideEventTypeDetails = false,
   layout = 'month_view',
 }: CalendarSchedulerProps) {
-  const calInlineRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [currentEventType, setCurrentEventType] = useState(eventType);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
 
-  // Reset when eventType prop changes
+  // Detect theme
   useEffect(() => {
-    if (eventType !== currentEventType) {
-      setCurrentEventType(eventType);
-      setStatus('loading');
-      // Clear the container
-      if (calInlineRef.current) {
-        calInlineRef.current.innerHTML = '';
-      }
-    }
-  }, [eventType, currentEventType]);
-
-  useEffect(() => {
-    const calLink = getCalLink(currentEventType);
-    let isMounted = true;
-    const namespace = `cal-inline-${currentEventType}-${Date.now()}`;
-
-    // Clear any existing content in the container
-    if (calInlineRef.current) {
-      calInlineRef.current.innerHTML = '';
-    }
-
-    // Cal.com recommended async loader
-    (function (C: Window, A: string, L: string) {
-      const p = function (a: { q: unknown[] }, ar: IArguments) {
-        a.q.push(ar);
-      };
-      const d = C.document;
-      C.Cal =
-        C.Cal ||
-        function (...args: unknown[]) {
-          const cal = C.Cal!;
-          if (!cal.loaded) {
-            cal.ns = {};
-            cal.q = cal.q || [];
-            d.head.appendChild(d.createElement('script')).src = A;
-            cal.loaded = true;
+    if (theme === 'auto') {
+      const isDark = document.documentElement.classList.contains('dark');
+      setCurrentTheme(isDark ? 'dark' : 'light');
+      
+      // Watch for theme changes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            const isDark = document.documentElement.classList.contains('dark');
+            setCurrentTheme(isDark ? 'dark' : 'light');
           }
-          if (args[0] === L) {
-            const api = function (...apiArgs: unknown[]) {
-              p(api as unknown as { q: unknown[] }, apiArgs as unknown as IArguments);
-            };
-            const nsName = args[1] as string;
-            (api as unknown as { q: unknown[] }).q = (api as unknown as { q: unknown[] }).q || [];
-            if (typeof nsName === 'string') {
-              cal.ns![nsName] = cal.ns![nsName] || api;
-              p(cal.ns![nsName] as unknown as { q: unknown[] }, args as unknown as IArguments);
-            } else {
-              p(cal as unknown as { q: unknown[] }, args as unknown as IArguments);
-            }
-            return;
-          }
-          p(cal as unknown as { q: unknown[] }, args as unknown as IArguments);
-        };
-    })(window, 'https://app.cal.com/embed/embed.js', 'init');
-
-    // Initialize Cal with namespace
-    window.Cal!('init', namespace, { origin: 'https://cal.com' });
-
-    // Delay to ensure DOM element is ready
-    const initTimeout = setTimeout(() => {
-      if (!isMounted || !calInlineRef.current) {
-        if (isMounted) setStatus('error');
-        return;
-      }
-
-      try {
-        // Create inline embed
-        window.Cal!.ns![namespace]!('inline', {
-          elementOrSelector: calInlineRef.current,
-          calLink: calLink,
-          layout: layout,
-          config: {
-            theme: theme,
-            hideEventTypeDetails: hideEventTypeDetails,
-          },
         });
+      });
+      
+      observer.observe(document.documentElement, { attributes: true });
+      return () => observer.disconnect();
+    } else {
+      setCurrentTheme(theme);
+    }
+  }, [theme]);
 
-        // Style the embed
-        window.Cal!.ns![namespace]!('ui', {
-          theme: theme,
-          styles: { branding: { brandColor: '#16a34a' } },
-          hideEventTypeDetails: hideEventTypeDetails,
-        });
-
-        if (isMounted) setStatus('ready');
-      } catch (err) {
-        console.error('Cal.com initialization error:', err);
-        if (isMounted) setStatus('error');
-      }
-    }, 150);
-
-    return () => {
-      isMounted = false;
-      clearTimeout(initTimeout);
-      // Clean up the container on unmount
-      if (calInlineRef.current) {
-        calInlineRef.current.innerHTML = '';
-      }
-    };
-  }, [currentEventType, theme, hideEventTypeDetails, layout]);
+  const calLink = getCalLink(eventType);
+  
+  // Build Cal.com embed URL with parameters
+  const embedUrl = new URL(`https://cal.com/${calLink}`);
+  embedUrl.searchParams.set('embed', 'true');
+  embedUrl.searchParams.set('theme', currentTheme);
+  embedUrl.searchParams.set('layout', layout);
+  if (hideEventTypeDetails) {
+    embedUrl.searchParams.set('hideEventTypeDetails', 'true');
+  }
 
   return (
     <div className="cal-embed-container w-full min-h-[600px] relative">
-      {status === 'loading' && (
+      {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-componentpage z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto mb-4"></div>
@@ -132,41 +63,18 @@ export default function CalendarScheduler({
           </div>
         </div>
       )}
-      {status === 'error' && (
-        <div className="absolute inset-0 flex items-center justify-center bg-componentpage z-10">
-          <div className="text-center">
-            <p className="text-red-500 mb-4">Unable to load calendar</p>
-            <a 
-              href={`https://cal.com/${getCalLink(currentEventType)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors font-semibold"
-            >
-              Open Calendar in New Tab
-            </a>
-          </div>
-        </div>
-      )}
-      <div 
-        ref={calInlineRef}
-        className="w-full"
+      <iframe
+        src={embedUrl.toString()}
+        frameBorder="0"
+        className="w-full rounded-lg"
         style={{ 
           minHeight: '600px',
-          overflow: 'auto',
+          height: '100%',
+          border: 'none',
         }}
+        onLoad={() => setIsLoading(false)}
+        allow="payment"
       />
     </div>
   );
-}
-
-// Declare Cal on window for TypeScript
-declare global {
-  interface Window {
-    Cal?: {
-      (action: string, ...args: unknown[]): void;
-      ns?: Record<string, ((action: string, config: unknown) => void) | undefined>;
-      q?: unknown[];
-      loaded?: boolean;
-    };
-  }
 }
