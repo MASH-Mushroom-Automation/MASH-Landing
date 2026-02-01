@@ -72,6 +72,11 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/schedule" className="hover:text-green-400 transition-colors">
+                  Schedule a Call
+                </Link>
+              </li>
+              <li>
                 <Link href="/support" className="hover:text-green-400 transition-colors">
                   Help Center
                 </Link>

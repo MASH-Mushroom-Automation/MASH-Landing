@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
-import { Mail, MessageCircle, BookOpen, Clock, MapPin } from "lucide-react";
+import { Mail, MessageCircle, BookOpen, Clock, MapPin, Calendar } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Support - MASH",
@@ -27,7 +27,23 @@ export default function SupportPage() {
       <div className="py-16 bg-default">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Support Options */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="bg-success-light p-8 rounded-xl text-center">
+              <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-inverse" />
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-2">Schedule a Meeting</h3>
+              <p className="text-secondary mb-4">
+                Book a video call with our team
+              </p>
+              <Link
+                href="/schedule"
+                className="inline-flex items-center text-green hover:text-green/80 font-semibold"
+              >
+                Book a Call
+              </Link>
+            </div>
+
             <div className="bg-success-light p-8 rounded-xl text-center">
               <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="w-8 h-8 text-inverse" />
