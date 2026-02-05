@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { calConfig } from "@/lib/cal-config";
 
 export default function SupportSection() {
   return (
@@ -13,7 +14,21 @@ export default function SupportSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Schedule a Call - NEW */}
+          <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 p-8 rounded-xl text-center">
+            <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-primary mb-2">Schedule a Call</h3>
+            <p className="text-secondary mb-4">Book a video consultation</p>
+            <Link href="/schedule" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold">
+              Book Now
+            </Link>
+          </div>
+
           <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 p-8 rounded-xl text-center">
             <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,8 +37,8 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-primary mb-2">Email Support</h3>
             <p className="text-secondary mb-4">Get help from our expert team</p>
-            <a href="mailto:mash.mushroom.automation@gmail.com" className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold">
-              mash.mushroom.automation@gmail.com
+            <a href={`mailto:${calConfig.contactEmail}`} className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold break-all">
+              {calConfig.contactEmail}
             </a>
           </div>
 
@@ -125,12 +140,23 @@ export default function SupportSection() {
 
         <div className="mt-12 text-center">
           <p className="text-secondary mb-4">Still have questions?</p>
-          <Link
-            href="/support"
-            className="inline-flex items-center bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
-          >
-            Contact Support
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/schedule"
+              className="inline-flex items-center bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Schedule a Call
+            </Link>
+            <Link
+              href="/support"
+              className="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Contact Support
+            </Link>
+          </div>
         </div>
       </div>
     </section>
