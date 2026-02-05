@@ -38,7 +38,7 @@ export default function SupportPage() {
               </p>
               <Link
                 href="/schedule"
-                className="inline-flex items-center text-green hover:text-green/80 font-semibold"
+                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
               >
                 Book a Call
               </Link>
@@ -54,7 +54,7 @@ export default function SupportPage() {
               </p>
               <Link
                 href="/documentation"
-                className="inline-flex items-center text-green hover:text-green/80 font-semibold"
+                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
               >
                 View Documentation
               </Link>
@@ -72,7 +72,7 @@ export default function SupportPage() {
                 href="https://www.facebook.com/groups/mashmushrooom"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-accent-blue hover:text-accent-blue/80 font-semibold"
+                className="inline-flex items-center text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200 font-semibold"
               >
                 Join Community
               </a>
@@ -88,7 +88,7 @@ export default function SupportPage() {
               </p>
               <a
                 href="mailto:mash.mushroom.automation@gmail.com"
-                className="inline-flex items-center text-accent-purple hover:text-accent-purple/80 font-semibold"
+                className="inline-flex items-center text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 font-semibold"
               >
                 Send Email
               </a>

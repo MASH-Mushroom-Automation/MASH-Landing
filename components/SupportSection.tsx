@@ -24,7 +24,7 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-primary mb-2">Schedule a Call</h3>
             <p className="text-secondary mb-4">Book a video consultation</p>
-            <Link href="/schedule" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold">
+            <Link href="/schedule" className="text-emerald-800 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-200 font-semibold">
               Book Now
             </Link>
           </div>
@@ -37,7 +37,7 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-primary mb-2">Email Support</h3>
             <p className="text-secondary mb-4">Get help from our expert team</p>
-            <a href={`mailto:${calConfig.contactEmail}`} className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold break-all">
+            <a href={`mailto:${calConfig.contactEmail}`} className="text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold break-all">
               {calConfig.contactEmail}
             </a>
           </div>
@@ -50,7 +50,7 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-primary mb-2">Community Forum</h3>
             <p className="text-secondary mb-4">Connect with other users</p>
-            <a href="https://www.facebook.com/groups/mashmushrooom" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold">
+            <a href="https://www.facebook.com/groups/mashmushrooom" target="_blank" rel="noopener noreferrer" className="text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200 font-semibold">
               Join the Community
             </a>
           </div>
@@ -63,7 +63,7 @@ export default function SupportSection() {
             </div>
             <h3 className="text-xl font-bold text-primary mb-2">Knowledge Base</h3>
             <p className="text-secondary mb-4">Browse tutorials and guides</p>
-            <Link href="/documentation/tutorials" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-semibold">
+            <Link href="/documentation/tutorials" className="text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 font-semibold">
               View Articles
             </Link>
           </div>
