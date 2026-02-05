@@ -34,6 +34,7 @@ export default function Navigation() {
     { href: "/#features", label: "Features" },
     { href: "/documentation", label: "Documentation" },
     { href: "/#scope", label: "Scope" },
+    { href: "/schedule", label: "Schedule" },
     { href: "/support", label: "Support" },
   ];
 
