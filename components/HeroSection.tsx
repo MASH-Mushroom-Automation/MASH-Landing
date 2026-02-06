@@ -45,7 +45,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-6">
-          MASH Mushroom Automation
+          MASH: Mushroom Automation
         </h1>
         <p className="text-xl md:text-2xl text-secondary mb-8 max-w-3xl mx-auto">
           Advanced automation system for professional mushroom cultivation with real-time monitoring, 

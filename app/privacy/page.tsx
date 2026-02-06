@@ -3,7 +3,7 @@ import PageLayout from "@/components/layout/PageLayout";
 
 export const metadata: Metadata = {
   title: "Privacy Policy - MASH",
-  description: "Privacy policy for the MASH Mushroom Automation System",
+  description: "Privacy policy for the MASH: Mushroom Automation System",
 };
 
 export default function PrivacyPage() {
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
               1. Introduction
             </h2>
             <p className="text-secondary mb-6">
-              MASH Mushroom Automation (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
+              MASH: Mushroom Automation (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you use our MASH application and services.
             </p>

@@ -1,6 +1,6 @@
 # MASH Landing Page
 
-Landing Page for MASH Mushroom Automation, includes scopes and details about project as well as a bridge for mobile application download.
+Landing Page for MASH: Mushroom Automation, includes scopes and details about project as well as a bridge for mobile application download.
 
 ## Overview
 
@@ -145,7 +145,7 @@ npm run build
 
 ## License
 
-Copyright 2026 MASH Mushroom Automation. All rights reserved.
+Copyright 2026 MASH: Mushroom Automation. All rights reserved.
 
 ## Support
 

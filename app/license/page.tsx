@@ -5,7 +5,7 @@ import { Scale, FileText, Github } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "License - MASH",
-  description: "License information for the MASH Mushroom Automation System",
+  description: "License information for the MASH: Mushroom Automation System",
 };
 
 export default function LicensePage() {
@@ -35,7 +35,7 @@ export default function LicensePage() {
               MIT License
             </h2>
             <p className="text-secondary mb-6">
-              MASH Mushroom Automation System is released under the MIT License, one of the most 
+              MASH: Mushroom Automation System is released under the MIT License, one of the most 
               permissive open-source licenses. This means you are free to use, modify, and distribute 
               the software for both personal and commercial purposes.
             </p>
@@ -72,7 +72,7 @@ export default function LicensePage() {
             <div className="bg-componentpage p-6 rounded-xl font-mono text-sm text-secondary whitespace-pre-wrap">
 {`MIT License
 
-Copyright (c) 2026 MASH Mushroom Automation
+Copyright (c) 2026 MASH: Mushroom Automation
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

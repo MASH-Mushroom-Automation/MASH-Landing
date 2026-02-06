@@ -5,7 +5,7 @@ import { Mail, MessageCircle, BookOpen, Clock, MapPin, Calendar } from "lucide-r
 
 export const metadata: Metadata = {
   title: "Support - MASH",
-  description: "Get help and support for your MASH Mushroom Automation System",
+  description: "Get help and support for your MASH: Mushroom Automation System",
 };
 
 export default function SupportPage() {

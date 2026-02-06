@@ -5,7 +5,7 @@ import { BookOpen, Code, Smartphone, Settings, AlertCircle, Rocket, ChevronRight
 
 export const metadata: Metadata = {
   title: "Documentation - MASH",
-  description: "Comprehensive documentation for the MASH Mushroom Automation System Hub",
+  description: "Comprehensive documentation for the MASH: Mushroom Automation System Hub",
 };
 
 const docCategories = [
@@ -93,7 +93,7 @@ export default function DocumentationPage() {
               Documentation
             </h1>
             <p className="text-xl text-secondary max-w-3xl mx-auto">
-              Everything you need to know about setting up, configuring, and using the MASH Mushroom Automation System
+              Everything you need to know about setting up, configuring, and using the MASH: Mushroom Automation System
             </p>
           </div>
         </div>

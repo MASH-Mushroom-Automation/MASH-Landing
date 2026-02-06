@@ -5,7 +5,7 @@ import { Clock, Tag, ChevronRight, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Tutorials - MASH Documentation",
-  description: "Step-by-step tutorials for the MASH Mushroom Automation System",
+  description: "Step-by-step tutorials for the MASH: Mushroom Automation System",
 };
 
 const tutorials = [

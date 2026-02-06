@@ -3,7 +3,7 @@ import PageLayout from "@/components/layout/PageLayout";
 
 export const metadata: Metadata = {
   title: "Terms of Service - MASH",
-  description: "Terms of service for the MASH Mushroom Automation System",
+  description: "Terms of service for the MASH: Mushroom Automation System",
 };
 
 export default function TermsPage() {
@@ -29,7 +29,7 @@ export default function TermsPage() {
               1. Agreement to Terms
             </h2>
             <p className="text-secondary mb-6">
-              By accessing or using the MASH Mushroom Automation System (&quot;Service&quot;), you agree to be 
+              By accessing or using the MASH: Mushroom Automation System (&quot;Service&quot;), you agree to be 
               bound by these Terms of Service (&quot;Terms&quot;). If you disagree with any part of these terms, 
               you may not access the Service.
             </p>
@@ -126,7 +126,7 @@ export default function TermsPage() {
               10. Limitation of Liability
             </h2>
             <p className="text-secondary mb-6">
-              IN NO EVENT SHALL MASH MUSHROOM AUTOMATION BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
+              IN NO EVENT SHALL MASH: Mushroom Automation BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
               CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, OR CROPS, ARISING OUT 
               OF YOUR USE OF THE SERVICE. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY YOU 
               FOR THE SERVICE IN THE PAST TWELVE MONTHS.
@@ -136,7 +136,7 @@ export default function TermsPage() {
               11. Indemnification
             </h2>
             <p className="text-secondary mb-6">
-              You agree to defend, indemnify, and hold harmless MASH Mushroom Automation and its affiliates 
+              You agree to defend, indemnify, and hold harmless MASH: Mushroom Automation and its affiliates 
               from any claims, damages, or expenses arising from your use of the Service or violation of 
               these Terms.
             </p>

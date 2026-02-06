@@ -4,7 +4,7 @@ import { Download, Smartphone, Monitor, Apple, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Download - MASH",
-  description: "Download the MASH Mushroom Automation app for your device",
+  description: "Download the MASH: Mushroom Automation app for your device",
 };
 
 const appFeatures = [
