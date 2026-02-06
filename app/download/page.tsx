@@ -125,7 +125,7 @@ export default function DownloadPage() {
                     Coming soon on Play Store
                   </div>
                   <a
-                    href="/downloads/mash-r1-020526-0.apk"
+                    href="/downloads/mash-v1.4.3b5.apk"
                     className="flex items-center justify-center w-full px-6 py-3 border-2 border-default text-secondary rounded-lg hover:bg-surface-hover transition-colors"
                   >
                     <Download className="w-5 h-5 mr-2" />
