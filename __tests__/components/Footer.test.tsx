@@ -2,25 +2,15 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from '@/components/Footer';
 
-// Mock next/image
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: (props: any) => {
-    // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
-    return <img {...props} />;
-  },
-}));
-
 describe('Footer', () => {
   it('renders footer component', () => {
     render(<Footer />);
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
   });
 
-  it('renders MASH logo', () => {
+  it('renders MASH text logo', () => {
     render(<Footer />);
-    const logo = screen.getByAltText(/MASH Logo/i);
-    expect(logo).toBeInTheDocument();
+    expect(screen.getByText('MASH')).toBeInTheDocument();
   });
 
   it('renders company description', () => {

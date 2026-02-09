@@ -2,7 +2,7 @@
  * Sanity CMS client configuration and helper functions
  * 
  * This module provides utilities for fetching landing page content from Sanity CMS.
- * Replaces Cloudinary for media asset management (videos, APK files).
+ * Handles media asset management (videos, images, APK files) via Sanity CDN.
  */
 
 import { createClient } from '@sanity/client';

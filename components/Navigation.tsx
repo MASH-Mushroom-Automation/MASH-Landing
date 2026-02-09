@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
-import { getCloudinaryImageUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,7 +42,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src={getCloudinaryImageUrl(CLOUDINARY_ASSETS.images.logo, { width: 58, height: 38 })} alt="MASH Logo" width={58} height={38} />
+              <span className="text-2xl font-bold text-green-600 dark:text-green-400">MASH</span>
             </Link>
           </div>
 

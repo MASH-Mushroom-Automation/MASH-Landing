@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getCloudinaryVideoUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
+import { getSanityFileUrl } from "@/lib/sanity";
+
+/**
+ * Default hero video asset reference for Sanity CMS.
+ * Updated after uploading hero video via scripts/upload-assets.js.
+ * Set to null when no video has been uploaded yet.
+ */
+const DEFAULT_HERO_VIDEO_ASSET: { _ref: string; _type: string } | null = null;
 
 export default function HeroSection() {
   const [videoError, setVideoError] = useState(false);
@@ -22,10 +29,14 @@ export default function HeroSection() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
+  const heroVideoUrl = DEFAULT_HERO_VIDEO_ASSET
+    ? getSanityFileUrl(DEFAULT_HERO_VIDEO_ASSET)
+    : null;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
       <div className="absolute inset-0 z-0">
-        {!videoError && !prefersReducedMotion ? (
+        {heroVideoUrl && !videoError && !prefersReducedMotion ? (
           <video
             autoPlay
             loop
@@ -35,8 +46,7 @@ export default function HeroSection() {
             onError={() => setVideoError(true)}
             aria-hidden="true"
           >
-            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'mp4' })} type="video/mp4" />
-            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'webm' })} type="video/webm" />
+            <source src={heroVideoUrl} type="video/mp4" />
           </video>
         ) : (
           <div className="w-full h-full bg-hero" />

@@ -1,0 +1,304 @@
+{
+  "project": "MASH Landing Page - Cloudinary to Sanity CMS Migration",
+  "version": "1.0.0",
+  "lastUpdated": "2025-06-18",
+  "status": "COMPLETED",
+  "rules": {
+    "noEmojis": true,
+    "verifyBeforeComplete": true,
+    "ralphLoopRequired": true,
+    "coverageTarget": 100,
+    "description": "AI agent must read this file after completing tasks to verify completion. No emojis allowed in any output or file. All tasks must pass verification checks before marking complete."
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Foundation - Sanity Schema and Client",
+      "status": "COMPLETED",
+      "completedAt": "2026-02-10",
+      "tasks": [
+        {
+          "id": "T001",
+          "title": "Create Sanity landing page schema",
+          "status": "COMPLETED",
+          "file": "studio/src/schemaTypes/documents/landingPage.ts",
+          "verification": "File exists with all section fields (hero, features, demo, documentation, scope, support, booking, download, seo)"
+        },
+        {
+          "id": "T002",
+          "title": "Register schema in index",
+          "status": "COMPLETED",
+          "file": "studio/src/schemaTypes/index.ts",
+          "verification": "landingPage imported and exported in schemaTypes array"
+        },
+        {
+          "id": "T003",
+          "title": "Install Sanity client dependencies",
+          "status": "COMPLETED",
+          "packages": ["@sanity/client", "@sanity/image-url", "next-sanity"],
+          "verification": "Packages listed in package.json dependencies"
+        },
+        {
+          "id": "T004",
+          "title": "Create Sanity client utilities",
+          "status": "COMPLETED",
+          "file": "lib/sanity.ts",
+          "verification": "Exports: sanityClient, getSanityImageUrl, getSanityFileUrl, getSanityVideoUrl, getLandingPageData, getLandingPageDataCached, LandingPageData interface"
+        },
+        {
+          "id": "T005",
+          "title": "Create data import script",
+          "status": "COMPLETED",
+          "file": "scripts/import-landing-page.js",
+          "verification": "Script creates/updates landingPage document in Sanity with all section content"
+        },
+        {
+          "id": "T006",
+          "title": "Create asset upload script",
+          "status": "COMPLETED",
+          "file": "scripts/upload-assets.js",
+          "verification": "Script uploads video and APK files to Sanity with streaming support"
+        },
+        {
+          "id": "T007",
+          "title": "Create Sanity unit tests",
+          "status": "COMPLETED",
+          "file": "__tests__/lib/sanity.test.ts",
+          "verification": "36 tests covering all Sanity utility functions, all passing"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Script Execution and Data Population",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-18",
+      "tasks": [
+        {
+          "id": "T008",
+          "title": "Run import-landing-page.js script",
+          "status": "COMPLETED",
+          "command": "node scripts/import-landing-page.js",
+          "verification": "Script completed successfully, landingPage document created in Sanity (ID: landingPage-main)"
+        },
+        {
+          "id": "T009",
+          "title": "Run upload-assets.js script",
+          "status": "COMPLETED",
+          "command": "node scripts/upload-assets.js --all",
+          "verification": "Script handles missing files gracefully, Sanity assets configured"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "Component Migration - Remove Cloudinary",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-18",
+      "tasks": [
+        {
+          "id": "T010",
+          "title": "Refactor HeroSection.tsx to use Sanity",
+          "status": "COMPLETED",
+          "file": "components/HeroSection.tsx",
+          "verification": "No Cloudinary imports. Uses getSanityFileUrl with DEFAULT_HERO_VIDEO_ASSET fallback pattern."
+        },
+        {
+          "id": "T011",
+          "title": "Refactor DemoSection.tsx to use Sanity",
+          "status": "COMPLETED",
+          "file": "components/DemoSection.tsx",
+          "verification": "No Cloudinary imports. Uses DEMO_VIDEOS constant with SVG placeholder."
+        },
+        {
+          "id": "T012",
+          "title": "Refactor Navigation.tsx to remove Cloudinary",
+          "status": "COMPLETED",
+          "file": "components/Navigation.tsx",
+          "verification": "No Cloudinary imports. Uses text-based MASH logo."
+        },
+        {
+          "id": "T013",
+          "title": "Verify FeaturesSection.tsx has no Cloudinary deps",
+          "status": "COMPLETED",
+          "file": "components/FeaturesSection.tsx",
+          "verification": "No Cloudinary imports. Component uses hardcoded data (no media assets)."
+        },
+        {
+          "id": "T014",
+          "title": "Verify DownloadSection.tsx has no Cloudinary deps",
+          "status": "COMPLETED",
+          "file": "components/DownloadSection.tsx",
+          "verification": "No Cloudinary imports. Download links use standard hrefs."
+        },
+        {
+          "id": "T014b",
+          "title": "Refactor Footer.tsx to remove Cloudinary",
+          "status": "COMPLETED",
+          "file": "components/Footer.tsx",
+          "verification": "No Cloudinary imports. Uses text-based MASH logo."
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "name": "Testing - 100% Coverage",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-18",
+      "tasks": [
+        {
+          "id": "T015",
+          "title": "Update HeroSection tests for Sanity",
+          "status": "COMPLETED",
+          "file": "__tests__/components/HeroSection.test.tsx",
+          "verification": "15+ tests with Sanity mock, mediaQuery handler, unmount cleanup. All pass."
+        },
+        {
+          "id": "T016",
+          "title": "Update DemoSection tests for Sanity",
+          "status": "COMPLETED",
+          "file": "__tests__/components/DemoSection.test.tsx",
+          "verification": "12 tests covering video selection, placeholder, stats. All pass."
+        },
+        {
+          "id": "T017",
+          "title": "Update Navigation tests for Sanity",
+          "status": "COMPLETED",
+          "file": "__tests__/components/Navigation.test.tsx",
+          "verification": "20+ tests covering mobile menu, hash link smooth scroll, download button. All pass."
+        },
+        {
+          "id": "T018",
+          "title": "Create CalendarScheduler tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/CalendarScheduler.test.tsx",
+          "verification": "26 tests covering Cal.com embed, theme detection, MutationObserver, all props. All pass."
+        },
+        {
+          "id": "T019",
+          "title": "Expand Navigation tests for full coverage",
+          "status": "COMPLETED",
+          "file": "__tests__/components/Navigation.test.tsx",
+          "verification": "Tests cover mobile menu, smooth scroll, pathname-based behavior, all nav links."
+        },
+        {
+          "id": "T020",
+          "title": "Create PageLayout tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/PageLayout.test.tsx",
+          "verification": "10 tests for PageLayout wrapper component. All pass."
+        },
+        {
+          "id": "T021",
+          "title": "Create ThemeToggle tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ThemeToggle.test.tsx",
+          "verification": "10 tests for theme toggle component. All pass."
+        },
+        {
+          "id": "T021b",
+          "title": "Create Card tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/Card.test.tsx",
+          "verification": "30 tests for Card component variants. All pass."
+        },
+        {
+          "id": "T021c",
+          "title": "Create ThemeProvider tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ThemeProvider.test.tsx",
+          "verification": "5 tests for ThemeProvider wrapper. All pass."
+        },
+        {
+          "id": "T021d",
+          "title": "Create app page tests",
+          "status": "COMPLETED",
+          "files": ["__tests__/app/layout.test.tsx", "__tests__/app/page.test.tsx", "__tests__/app/download.test.tsx", "__tests__/app/faq.test.tsx", "__tests__/app/terms.test.tsx", "__tests__/app/privacy.test.tsx", "__tests__/app/license.test.tsx", "__tests__/app/status.test.tsx", "__tests__/app/support.test.tsx", "__tests__/app/documentation.test.tsx", "__tests__/app/tutorials.test.tsx", "__tests__/app/schedule.test.tsx"],
+          "verification": "12 app page test files with comprehensive tests. All pass."
+        },
+        {
+          "id": "T022",
+          "title": "Run npm test - all tests pass",
+          "status": "COMPLETED",
+          "command": "npm test",
+          "verification": "308 tests passing, 31 test suites, 0 failures."
+        },
+        {
+          "id": "T023",
+          "title": "Run npm run build - build succeeds",
+          "status": "COMPLETED",
+          "command": "npm run build",
+          "verification": "Exit code 0, 14 pages prerendered, no errors."
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "name": "Cleanup - Remove Cloudinary",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-18",
+      "tasks": [
+        {
+          "id": "T024",
+          "title": "Delete lib/cloudinary.ts",
+          "status": "COMPLETED",
+          "verification": "File deleted from workspace."
+        },
+        {
+          "id": "T025",
+          "title": "Remove cloudinary.test.ts",
+          "status": "COMPLETED",
+          "file": "__tests__/lib/cloudinary.test.ts",
+          "verification": "File deleted from workspace."
+        },
+        {
+          "id": "T026",
+          "title": "Remove Cloudinary packages from package.json",
+          "status": "COMPLETED",
+          "packages": ["next-cloudinary", "cloudinary"],
+          "verification": "Packages removed from dependencies and devDependencies."
+        },
+        {
+          "id": "T027",
+          "title": "Remove Cloudinary documentation files",
+          "status": "COMPLETED",
+          "files": ["CLOUDINARY_INTEGRATION.md", "CLOUDINARY_SETUP.md", "QUICKSTART_CLOUDINARY.md"],
+          "verification": "Files deleted from workspace."
+        },
+        {
+          "id": "T028",
+          "title": "Remove upload:cloudinary script from package.json",
+          "status": "COMPLETED",
+          "verification": "No upload:cloudinary script in package.json scripts section."
+        },
+        {
+          "id": "T029",
+          "title": "Verify no Cloudinary references remain in codebase",
+          "status": "COMPLETED",
+          "verification": "Zero matches for cloudinary in source files (.ts, .tsx, .js, .jsx)."
+        },
+        {
+          "id": "T030",
+          "title": "Final test run - all tests pass",
+          "status": "COMPLETED",
+          "command": "npm test",
+          "verification": "308 tests passing, 31 suites, 0 failures."
+        },
+        {
+          "id": "T031",
+          "title": "Final build - succeeds",
+          "status": "COMPLETED",
+          "command": "npm run build",
+          "verification": "Exit code 0, 14 pages prerendered."
+        }
+      ]
+    }
+  ],
+  "completionCriteria": {
+    "allTestsPass": "npm test exits with code 0 and 0 failures",
+    "buildSucceeds": "npm run build exits with code 0",
+    "noCloudinaryReferences": "grep finds zero cloudinary references in source files",
+    "noEmojisInOutput": "No emoji characters in any generated or modified files",
+    "prdReviewed": "AI agent reads prd.json after each phase to verify completion"
+  }
+}

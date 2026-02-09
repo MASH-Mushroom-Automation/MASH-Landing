@@ -1,28 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { getCloudinaryVideoUrl, getVideoThumbnailUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
+
+/**
+ * Demo video data.
+ * Video URLs will be populated from Sanity CMS once assets are uploaded
+ * via scripts/upload-assets.js. Until then, videos show a placeholder.
+ */
+const DEMO_VIDEOS = [
+  {
+    id: "overview",
+    title: "System Overview",
+    description: "Get a comprehensive tour of the MASH automation system",
+  },
+  {
+    id: "setup",
+    title: "Installation & Setup",
+    description: "Learn how to install and configure your MASH system",
+  },
+  {
+    id: "mobile",
+    title: "Mobile App Demo",
+    description: "Explore the mobile application features and controls",
+  },
+];
 
 export default function DemoSection() {
   const [activeVideo, setActiveVideo] = useState("overview");
-
-  const videos = [
-    {
-      id: "overview",
-      title: "System Overview",
-      description: "Get a comprehensive tour of the MASH automation system",
-    },
-    {
-      id: "setup",
-      title: "Installation & Setup",
-      description: "Learn how to install and configure your MASH system",
-    },
-    {
-      id: "mobile",
-      title: "Mobile App Demo",
-      description: "Explore the mobile application features and controls",
-    },
-  ];
 
   return (
     <section id="demo" className="py-20 bg-demo">
@@ -39,21 +43,21 @@ export default function DemoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <div className="bg-gray-900 rounded-xl overflow-hidden shadow-2xl aspect-video flex items-center justify-center">
-              <video
-                key={activeVideo}
-                controls
-                className="w-full h-full"
-                poster={getVideoThumbnailUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos])}
-              >
-                <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos], { format: 'mp4' })} type="video/mp4" />
-                <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos[activeVideo as keyof typeof CLOUDINARY_ASSETS.videos], { format: 'webm' })} type="video/webm" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="text-center text-gray-400 p-8">
+                <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-lg font-medium">
+                  {DEMO_VIDEOS.find(v => v.id === activeVideo)?.title || "Demo Video"}
+                </p>
+                <p className="text-sm mt-2">Video coming soon</p>
+              </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            {videos.map((video) => (
+            {DEMO_VIDEOS.map((video) => (
               <button
                 key={video.id}
                 onClick={() => setActiveVideo(video.id)}

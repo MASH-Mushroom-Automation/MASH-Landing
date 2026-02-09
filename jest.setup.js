@@ -2,7 +2,6 @@
 import '@testing-library/jest-dom'
 
 // Mock environment variables
-process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = 'test-cloud'
 process.env.NEXT_PUBLIC_CAL_USERNAME = 'test-user'
 process.env.NEXT_PUBLIC_CAL_15MIN_SLUG = '15min'
 process.env.NEXT_PUBLIC_CAL_30MIN_SLUG = '30min'
