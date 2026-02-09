@@ -316,9 +316,789 @@ npm test -- --testPathPattern=components  # Test only components
 npm run build -- --no-lint                # Build without linting
 ```
 
+## 🎯 CURRENT MISSION: Cloudinary → Sanity CMS Migration
+
+### Migration Objective
+**Goal**: Replace Cloudinary CDN with Sanity CMS for all media assets (videos, images, APK files) and landing page content management.
+
+**Why Migrate?**
+- ✅ Unified content management (text + media in one place)
+- ✅ Better content workflows and versioning
+- ✅ Existing Sanity Studio infrastructure in `/studio`
+- ✅ Free tier: 250K API calls/month, file uploads included
+- ✅ Built-in asset optimization and CDN
+
+**Migration Phases**:
+1. **Schema Creation**: Landing page document types with file upload fields
+2. **Client Integration**: Install Sanity client in main Next.js app
+3. **Utility Functions**: Create Sanity helpers (similar to `lib/cloudinary.ts`)
+4. **Automation Scripts**: Import landing content + upload video/APK files
+5. **Component Refactoring**: Update components to fetch from Sanity
+6. **Testing**: 100% test coverage for Sanity integration
+7. **Deprecation**: Remove Cloudinary dependencies
+
+### Ralph Loop Agent - Sanity Migration Workflow
+```
+┌──────────────────────────────────────────────────────────────────┐
+│         Ralph Loop: Sanity CMS Migration (outer loop)            │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │  1. Create Sanity schemas (landingPage.ts)                 │  │
+│  │  2. Install Sanity client dependencies                     │  │
+│  │  3. Create lib/sanity.ts utilities                         │  │
+│  │  4. Create import/upload scripts                           │  │
+│  │  5. Refactor components to use Sanity data                 │  │
+│  │  6. Create unit tests for Sanity integration               │  │
+│  │  7. Run tests (npm test)                                   │  │
+│  │  8. Fix test failures                                      │  │
+│  │  9. Run build (npm run build)                              │  │
+│  │  10. Fix build errors                                      │  │
+│  └────────────────────────────────────────────────────────────┘  │
+│                              ↓                                   │
+│  verifyCompletion: "Sanity integrated? Tests pass? Build OK?"   │
+│                              ↓                                   │
+│       No? → Analyze errors → Run another iteration               │
+│       Yes? → Migration complete, 100% test coverage achieved     │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+**Stop Conditions**:
+- ✅ Primary: All Sanity integration tests pass (100%) + Build succeeds + No Cloudinary references remain
+- ⚠️ Fallback: Max 100 iterations (complex migration)
+- ⚠️ Emergency: Manual agent termination
+
+### Sanity Schema Structure
+
+**Landing Page Schema** (`studio/src/schemaTypes/documents/landingPage.ts`):
+```typescript
+{
+  name: 'landingPage',
+  title: 'Landing Page',
+  type: 'document',
+  fields: [
+    // Hero Section
+    { name: 'heroTitle', type: 'string' },
+    { name: 'heroSubtitle', type: 'text' },
+    { name: 'heroVideo', type: 'file' },      // Replaces Cloudinary video
+    { name: 'heroButtons', type: 'array' },
+    
+    // Features Section
+    { name: 'features', type: 'array', of: [{ type: 'feature' }] },
+    
+    // Demo Section
+    { name: 'demoVideos', type: 'array', of: [{ type: 'file' }] },
+    
+    // Download Section
+    { name: 'downloadApk', type: 'file' },    // APK file upload
+    { name: 'downloadVersion', type: 'string' },
+    { name: 'downloadNotes', type: 'text' },
+    
+    // Scope, Support, Booking content
+    { name: 'scopeContent', type: 'blockContent' },
+    { name: 'supportContent', type: 'blockContent' },
+  ]
+}
+```
+
+### Sanity Client Configuration
+
+**lib/sanity.ts** (to be created):
+```typescript
+import { createClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+
+export const sanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
+  useCdn: process.env.NEXT_PUBLIC_SANITY_USE_CDN === 'true',
+  token: process.env.SANITY_API_READ_TOKEN, // For authenticated requests
+});
+
+// Helper: Get landing page data
+export async function getLandingPageData() {
+  const query = `*[_type == "landingPage"][0]`;
+  return await sanityClient.fetch(query);
+}
+
+// Helper: Get file URL (video/APK)
+export function getSanityFileUrl(asset: any): string {
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${asset._ref.split('-')[1]}.${asset._ref.split('-')[2]}`;
+}
+
+// Helper: Get optimized image URL
+export function getSanityImageUrl(source: any, options = {}) {
+  const builder = imageUrlBuilder(sanityClient);
+  return builder.image(source).auto('format').fit('max').url();
+}
+```
+
+### Automation Scripts
+
+**scripts/import-landing-page.js**:
+```javascript
+import { sanityClient } from '../lib/sanity.ts';
+
+const landingPageData = {
+  _type: 'landingPage',
+  heroTitle: 'MASH - Mushroom Automation System Hub',
+  heroSubtitle: 'Advanced automation system for professional mushroom cultivation',
+  // ... all landing page content
+};
+
+await sanityClient.create(landingPageData);
+```
+
+**scripts/upload-assets.js**:
+```javascript
+// Upload videos and APK files to Sanity
+import fs from 'fs';
+import { sanityClient } from '../lib/sanity.ts';
+
+async function uploadVideo(filePath, fileName) {
+  const fileBuffer = fs.readFileSync(filePath);
+  const asset = await sanityClient.assets.upload('file', fileBuffer, {
+    filename: fileName,
+  });
+  return asset;
+}
+
+// Upload all assets
+await uploadVideo('./public/videos/demo.mp4', 'demo.mp4');
+await uploadVideo('./public/downloads/mash-app.apk', 'mash-app.apk');
+```
+
+### Component Migration Pattern
+
+**Before (Cloudinary)**:
+```tsx
+import { getCloudinaryVideoUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
+
+export default function HeroSection() {
+  const videoUrl = getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo);
+  return <video src={videoUrl} />;
+}
+```
+
+**After (Sanity)**:
+```tsx
+import { getLandingPageData, getSanityFileUrl } from "@/lib/sanity";
+
+export default async function HeroSection() {
+  const data = await getLandingPageData();
+  const videoUrl = getSanityFileUrl(data.heroVideo.asset);
+  return <video src={videoUrl} />;
+}
+```
+
+### Testing Requirements for Sanity Integration
+
+**New Test Files Required**:
+- `__tests__/lib/sanity.test.ts` (30+ tests)
+  - Test `sanityClient` configuration
+  - Test `getLandingPageData()` query
+  - Test `getSanityFileUrl()` with various asset types
+  - Test `getSanityImageUrl()` with transformation options
+  - Mock Sanity client responses
+
+- `__tests__/components/SanityHeroSection.test.tsx`
+- `__tests__/components/SanityDemoSection.test.tsx`
+- `__tests__/components/SanityDownloadSection.test.tsx`
+
+**Test Coverage Target**: 100% for all new Sanity code
+
+**Mock Pattern**:
+```typescript
+jest.mock('@sanity/client', () => ({
+  createClient: jest.fn(() => ({
+    fetch: jest.fn(),
+    assets: {
+      upload: jest.fn(),
+    },
+  })),
+}));
+```
+
+### Migration Checklist
+
+**Phase 1: Foundation** (Iterations 1-20) ✅ COMPLETED
+- [x] Create `landingPage.ts` schema in `/studio/src/schemaTypes/documents/`
+- [x] Update `/studio/src/schemaTypes/index.ts` to include landing page schema
+- [x] Install `@sanity/client`, `@sanity/image-url`, `next-sanity` in root
+- [x] Create `lib/sanity.ts` with client config and helper functions
+- [x] Run tests: Verify Sanity client initialization
+
+**Phase 2: Scripts** (Iterations 21-40) ✅ COMPLETED
+- [x] Create `scripts/import-landing-page.js` with all content
+- [x] Create `scripts/upload-assets.js` for video/APK uploads
+- [ ] Run scripts to populate Sanity with landing page data
+- [ ] Verify data in Sanity Studio (http://localhost:3333)
+
+**Phase 3: Component Migration** (Iterations 41-70) ⏳ NOT STARTED
+- [ ] Refactor `HeroSection.tsx` to use Sanity data
+- [ ] Refactor `FeaturesSection.tsx` to use Sanity data
+- [ ] Refactor `DemoSection.tsx` to use Sanity videos from Sanity
+- [ ] Refactor `DownloadSection.tsx` to use APK file from Sanity
+- [ ] Update all section components to fetch from Sanity
+
+**Phase 4: Testing** (Iterations 71-90) ⚠️ PARTIALLY COMPLETED
+- [x] Create comprehensive unit tests for `lib/sanity.ts`
+- [ ] Create tests for Sanity-integrated components
+- [x] Run `npm test` → Fix all failures
+- [x] Run `npm run build` → Fix all build errors
+- [ ] Achieve 100% test coverage for Sanity code
+
+**Phase 5: Cleanup** (Iterations 91-100) ⏳ NOT STARTED
+- [ ] Remove Cloudinary dependencies from package.json
+- [ ] Delete `lib/cloudinary.ts` (no longer needed)
+- [ ] Remove NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME from .env
+- [ ] Update documentation with Sanity usage patterns
+- [ ] Final verification: All tests pass, build succeeds
+
+### Current Migration Status
+```
+Sanity Schema: ✅ COMPLETED (landingPage.ts with 220 lines, all fields)
+Client Integration: ✅ COMPLETED (lib/sanity.ts with 240 lines, 8 functions)
+Utility Functions: ✅ COMPLETED (getSanityImageUrl, getSanityFileUrl, getSanityVideoUrl, getLandingPageData, getLandingPageDataCached)
+Import Scripts: ✅ COMPLETED (import-landing-page.js + upload-assets.js + README.md)
+Component Migration: ⏳ NOT STARTED (HeroSection, FeaturesSection, DemoSection, DownloadSection)
+Testing: ✅ COMPLETED (36 Sanity tests, all passing, 149/149 total tests)
+Test Coverage: 42.9% (need 100%) ⚠️ CalendarScheduler.tsx (0%), Navigation.tsx (43.33%)
+Cloudinary Removal: ⏳ NOT STARTED (pending component migration)
+Build Status: ✅ SUCCESS (14 pages prerendered)
+Last Updated: February 10, 2026
+```
+
+### Common Sanity Migration Patterns
+
+**Fetching Data in Server Components**:
+```tsx
+// app/page.tsx
+import { getLandingPageData } from '@/lib/sanity';
+
+export default async function HomePage() {
+  const landingData = await getLandingPageData();
+  return <HeroSection data={landingData} />;
+}
+```
+
+**Handling File Assets**:
+```typescript
+// For videos, APKs, PDFs
+const fileUrl = `https://cdn.sanity.io/files/${projectId}/${dataset}/${assetId}.${ext}`;
+
+// For images with optimization
+const imageUrl = imageUrlBuilder(sanityClient)
+  .image(imageAsset)
+  .width(800)
+  .auto('format')
+  .url();
+```
+
+**Incremental Static Regeneration (ISR)**:
+```tsx
+export const revalidate = 60; // Revalidate every 60 seconds
+```
+
+### Error Handling Patterns
+
+**Sanity Client Errors**:
+```typescript
+try {
+  const data = await sanityClient.fetch(query);
+} catch (error) {
+  if (error.statusCode === 404) {
+    // Document not found
+  }
+  if (error.statusCode === 401) {
+    // Authentication failed - check SANITY_API_READ_TOKEN
+  }
+}
+```
+
+**Large File Uploads**:
+```javascript
+// For files > 5MB, use streaming upload
+const stream = fs.createReadStream(filePath);
+const asset = await sanityClient.assets.upload('file', stream, {
+  filename: fileName,
+  contentType: 'video/mp4',
+});
+```
+
 ## Future Considerations
-- Sanity CMS integration with Next.js app (currently separate workspaces)
 - E-commerce functionality using existing Sanity schemas
-- Blog/documentation CMS-driven content
+- Blog/documentation CMS-driven content (already have schema)
 - E2E testing with Playwright (after unit tests complete)
 - Visual regression testing with Chromatic
+- Sanity webhooks for real-time content updates
+
+## 📚 NEXT STEPS: AI-GUIDED WORKFLOW PROMPTS
+
+### For Future AI Agents Working on This Project
+
+This section provides ready-to-use prompts for AI agents to continue development, maintenance, or migration work on the MASH Landing Page project.
+
+---
+
+### 🚀 Prompt 1: Complete Sanity CMS Migration
+
+```
+I need you to complete the Cloudinary → Sanity CMS migration for the MASH Landing Page. 
+
+CONTEXT:
+- Project: Next.js 16 + React 19 + TypeScript landing page
+- Current State: Sanity schema created, client installed, lib/sanity.ts utilities ready, import scripts created
+- Goal: Replace all Cloudinary references with Sanity CMS for videos and APK files
+
+TASKS:
+1. Run the import script: `node scripts/import-landing-page.js`
+2. Upload assets (if available): `node scripts/upload-assets.js --all`
+3. Verify data in Sanity Studio at https://ppnamias.sanity.studio
+4. Refactor components to use Sanity data:
+   - Update HeroSection.tsx to fetch from Sanity
+   - Update FeaturesSection.tsx to use Sanity features array
+   - Update DemoSection.tsx to use Sanity video assets
+   - Update DownloadSection.tsx to use Sanity APK file
+5. Run Ralph Loop testing cycle:
+   - npm test → Fix failures → npm run build → Fix errors → Repeat
+6. Achieve 100% test pass rate
+7. Remove Cloudinary dependencies
+
+FOLLOW: The migration checklist in .github/copilot-instructions.md (Phases 2-5)
+STOP WHEN: All tests pass (149/149) + Build succeeds + No Cloudinary references remain
+```
+
+---
+
+### 🧪 Prompt 2: Increase Test Coverage to 100%
+
+```
+Increase the test coverage for the MASH Landing Page project to 100%.
+
+CURRENT STATUS:
+- Total Tests: 149 passing
+- Coverage: 42.9% lines, 41.07% branches, 36.47% functions
+- Needs Coverage:
+  * CalendarScheduler.tsx (0%)
+  * Navigation.tsx (43.33%)
+  * lib/sanity.ts (100% but may need more edge cases)
+
+TASKS:
+1. Run coverage report: `npm test -- --coverage`
+2. Analyze uncovered lines in CalendarScheduler.tsx
+3. Create __tests__/components/CalendarScheduler.test.tsx with:
+   - Cal.com embed rendering tests
+   - Theme sync tests
+   - Event type prop tests
+   - Error handling tests
+4. Add more tests to Navigation.test.tsx:
+   - Mobile menu open/close states
+   - Link active states based on usePathname
+   - Scroll behavior tests
+   - Theme toggle interactions
+5. Run Ralph Loop:
+   - Create tests → npm test → Fix failures → npm run build → Fix errors → Repeat
+6. Target: 100% line, branch, and function coverage
+
+FOLLOW: Testing patterns in .github/copilot-instructions.md
+STOP WHEN: Coverage reaches 100% for all metrics
+```
+
+---
+
+### 🔄 Prompt 3: Refactor Component to Use Sanity Data
+
+```
+Refactor the [COMPONENT_NAME] component to fetch data from Sanity CMS instead of hardcoded content.
+
+EXAMPLE (replace [COMPONENT_NAME] with actual component):
+Component: HeroSection.tsx
+
+TASKS:
+1. Read current implementation of components/HeroSection.tsx
+2. Check Sanity schema structure in studio/src/schemaTypes/documents/landingPage.ts
+3. Refactor component to:
+   - Make it async (Server Component)
+   - Import { getLandingPageData, getSanityFileUrl } from '@/lib/sanity'
+   - Fetch landing page data: const data = await getLandingPageData()
+   - Replace hardcoded text with data.heroTitle, data.heroSubtitle
+   - Replace Cloudinary video with getSanityFileUrl(data.heroVideo.asset)
+4. Update tests in __tests__/components/HeroSection.test.tsx:
+   - Mock getLandingPageData to return test data
+   - Test component renders with Sanity data
+   - Test error handling if data is missing
+5. Run tests: npm test -- HeroSection
+6. Run build: npm run build
+7. Verify changes don't break existing functionality
+
+PATTERN: See "Component Migration Pattern" in .github/copilot-instructions.md
+STOP WHEN: Component uses Sanity data + Tests pass + Build succeeds
+```
+
+---
+
+### 🐛 Prompt 4: Fix Failing Tests Using Ralph Loop
+
+```
+Fix all failing tests in the MASH Landing Page project using the Ralph Loop methodology.
+
+RALPH LOOP PROCESS:
+1. Run tests: `npm test`
+2. Analyze failures: Read error messages, identify root causes
+3. Fix issues:
+   - If test logic is wrong: Update test expectations
+   - If component is broken: Fix component implementation
+   - If mock is missing: Add mock to jest.setup.js
+4. Re-run tests: `npm test`
+5. If failures persist: Repeat steps 2-4
+6. Once all tests pass: Run build `npm run build`
+7. Fix any build errors (TypeScript, ESLint)
+8. Re-run tests to confirm no regressions
+9. STOP when: All tests pass + Build succeeds
+
+DEBUGGING TIPS:
+- Check jest.setup.js for missing environment variable mocks
+- Look for "window is not defined" → Mock browser APIs
+- Look for "useTheme is not a function" → Verify next-themes mock
+- Look for module resolution errors → Check @/ path aliases in jest.config.js
+
+FOLLOW: "Ralph Loop Agent Instructions" in .github/copilot-instructions.md
+MAX ITERATIONS: 50 (stop and report if unable to fix)
+```
+
+---
+
+### 📝 Prompt 5: Add New Feature with Full Test Coverage
+
+```
+Add a new [FEATURE_NAME] feature to the MASH Landing Page with 100% test coverage.
+
+EXAMPLE (replace [FEATURE_NAME]):
+Feature: Newsletter Subscription Component
+
+WORKFLOW:
+1. Plan & Design:
+   - Define component requirements
+   - Identify Sanity schema fields needed (if any)
+   - Sketch component API (props, state, handlers)
+
+2. Sanity Schema (if needed):
+   - Add fields to studio/src/schemaTypes/documents/landingPage.ts
+   - Update schema index
+   - Run Sanity Studio to verify: cd studio && npm run dev
+
+3. Create Component:
+   - Create components/[ComponentName].tsx
+   - Follow project conventions (see .github/copilot-instructions.md)
+   - Use "use client" if interactive (useState, event handlers)
+   - Import from @/ alias for internal modules
+
+4. Write Tests FIRST (TDD approach):
+   - Create __tests__/components/[ComponentName].test.tsx
+   - Write tests for all functionality before implementing
+   - Follow test patterns in .github/copilot-instructions.md
+
+5. Implement Component:
+   - Write code to make tests pass
+   - Run npm test -- [ComponentName] after each change
+   - Achieve 100% coverage: npm test -- --coverage [ComponentName]
+
+6. Integration:
+   - Add component to appropriate page (e.g., app/page.tsx)
+   - Update Sanity import script if needed
+   - Run full test suite: npm test
+   - Run build: npm run build
+
+7. Verify:
+   - All tests pass (including new ones)
+   - Build succeeds
+   - Component renders correctly in dev: npm run dev
+
+STOP WHEN: Feature complete + 100% test coverage + Build succeeds
+```
+
+---
+
+### 🎨 Prompt 6: Update Styling/Theme
+
+```
+Update the styling or theme for the MASH Landing Page project.
+
+STYLING GUIDELINES:
+- Use Tailwind CSS 4 utility classes
+- Follow semantic tokens: bg-background, text-primary, etc.
+- Brand color: Green (bg-green-600, text-green-600)
+- Dark mode: Use dark: prefix (dark:bg-gray-900)
+- Custom variables: Define in app/globals.css
+
+TASKS:
+1. Identify what needs styling changes
+2. Update Tailwind classes in components
+3. If adding new colors: Update app/globals.css CSS variables
+4. Test in both light and dark modes
+5. Run tests: npm test (verify no broken tests)
+6. Run build: npm run build
+7. Visual check: npm run dev → Test in browser
+
+DARK MODE PATTERNS:
+className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+className="border-gray-200 dark:border-gray-800"
+
+RESPONSIVE PATTERNS:
+className="text-sm md:text-base lg:text-lg"
+className="px-4 md:px-6 lg:px-8"
+
+STOP WHEN: Styles updated + Tests pass + Build succeeds + Visual verification complete
+```
+
+---
+
+### 🔒 Prompt 7: Security Audit & Environment Variables
+
+```
+Perform a security audit of the MASH Landing Page project, focusing on environment variables and Sanity API tokens.
+
+AUDIT CHECKLIST:
+1. Environment Variables:
+   - Verify .env.local is in .gitignore (should NOT be committed)
+   - Check .env.example is up-to-date with all required variables
+   - Confirm all NEXT_PUBLIC_* vars are safe for client-side exposure
+   - Ensure sensitive tokens (SANITY_API_WRITE_TOKEN) are server-side only
+
+2. Sanity Token Security:
+   - Read token: Used only for fetching published data
+   - Write token: Used only in scripts/import-landing-page.js (server-side)
+   - Deploy token: Used only for npx sanity deploy (local/CI only)
+   - Verify tokens have appropriate permissions in Sanity dashboard
+
+3. API Route Security (if any):
+   - Check for proper authentication
+   - Validate input data
+   - Rate limiting considerations
+
+4. Dependencies:
+   - Run: npm audit
+   - Fix critical vulnerabilities: npm audit fix
+   - Review outdated packages: npm outdated
+
+5. Content Security Policy:
+   - Review next.config.ts for CSP headers
+   - Ensure Sanity CDN (cdn.sanity.io) is allowlisted
+   - Ensure Cal.com domains are allowlisted
+
+6. Git History:
+   - Search for accidentally committed secrets: git log --all --oneline | grep -i "token\|secret\|password"
+   - If found: Rotate tokens immediately + use git-filter-repo to remove
+
+REPORT:
+Create a security-audit.md file with findings and recommendations
+
+STOP WHEN: Audit complete + Critical issues fixed + Report generated
+```
+
+---
+
+### 🚢 Prompt 8: Deploy to Production
+
+```
+Deploy the MASH Landing Page to production (Vercel/Netlify/other platform).
+
+PRE-DEPLOYMENT CHECKLIST:
+1. All tests passing: npm test → 149/149 ✅
+2. Build succeeds: npm run build → No errors ✅
+3. Sanity data populated: Verify in https://ppnamias.sanity.studio ✅
+4. Environment variables ready for production
+5. No console.error or console.warn in production build
+6. Accessibility check: Run Lighthouse audit
+
+DEPLOYMENT STEPS:
+1. Verify Environment Variables:
+   - Copy variables from .env.local
+   - Add to deployment platform (Vercel/Netlify dashboard)
+   - Do NOT commit .env.local to git
+
+2. Sanity Studio Deployment:
+   - cd studio
+   - npm run build
+   - npx sanity deploy (requires SANITY_DEPLOY_TOKEN)
+   - Verify Studio is accessible at https://ppnamias.sanity.studio
+
+3. Next.js App Deployment:
+   - Push to main branch (triggers automatic deployment if configured)
+   - OR: Manual deploy via platform CLI
+   - Wait for build to complete
+
+4. Post-Deployment Verification:
+   - Visit production URL
+   - Test all pages load correctly
+   - Test dark mode toggle
+   - Test Cal.com scheduling embeds
+   - Test video playback
+   - Test APK download link
+   - Run Lighthouse audit (target: 90+ for all metrics)
+
+5. Monitor:
+   - Check Vercel/Netlify logs for errors
+   - Check Sanity usage dashboard: https://sanity.io/manage/project/gerattrr/usage
+   - Monitor API calls (should be under 250K/month limit)
+
+ROLLBACK PLAN:
+If deployment fails: Revert to previous commit + redeploy
+
+STOP WHEN: Site live + All functionality verified + No errors in logs
+```
+
+---
+
+### 📊 Prompt 9: Generate Coverage Report & Improve Weak Areas
+
+```
+Generate a comprehensive test coverage report and improve areas with low coverage.
+
+TASKS:
+1. Generate coverage report with detailed breakdown:
+   npm test -- --coverage --verbose
+
+2. Analyze coverage data:
+   - Open coverage/lcov-report/index.html in browser
+   - Identify files with < 80% coverage
+   - List uncovered lines, branches, functions
+
+3. Prioritize improvements:
+   - Critical: lib/*.ts files (utilities must be 100%)
+   - High: components/*.tsx (main sections)
+   - Medium: components/ui/*.tsx (UI components)
+   - Low: app/**/page.tsx (SSR pages, may not need unit tests)
+
+4. Create missing tests:
+   - Focus on uncovered branches (if/else, switch, ternary)
+   - Focus on uncovered functions (error handlers, edge cases)
+   - Follow test patterns in .github/copilot-instructions.md
+
+5. Run Ralph Loop:
+   - Add tests → npm test → Fix failures → Verify coverage improved → Repeat
+
+6. Document findings:
+   - Update "Current Test Coverage Status" in .github/copilot-instructions.md
+   - List fully tested files
+   - List files needing improvement
+
+TARGET: 
+- Lines: 100%
+- Branches: 100%
+- Functions: 100%
+- Statements: 100%
+
+STOP WHEN: Coverage targets achieved for all critical files
+```
+
+---
+
+### 🎓 Prompt 10: Onboard New Developer (Generate Documentation)
+
+```
+Create comprehensive onboarding documentation for a new developer joining the MASH Landing Page project.
+
+DOCUMENTATION TO CREATE:
+
+1. GETTING_STARTED.md:
+   - Prerequisites (Node.js 18+, npm, git)
+   - Clone repository
+   - Install dependencies: npm install
+   - Setup environment variables: Copy .env.example to .env.local
+   - Run dev server: npm run dev
+   - Run tests: npm test
+   - Run Sanity Studio: cd studio && npm run dev
+
+2. ARCHITECTURE.md:
+   - Project structure overview
+   - Next.js App Router architecture
+   - Sanity CMS integration
+   - Component organization (Section, UI, Layout)
+   - Styling approach (Tailwind CSS 4 + CSS variables)
+   - Testing strategy (Jest + React Testing Library)
+
+3. CONTRIBUTING.md:
+   - Code style guidelines
+   - Commit message conventions
+   - Branch naming conventions
+   - Pull request process
+   - Testing requirements (100% coverage for new code)
+   - Review checklist
+
+4. API_REFERENCE.md:
+   - lib/sanity.ts API documentation
+   - lib/cal-config.ts API documentation
+   - lib/cloudinary.ts API documentation
+   - Component props interfaces
+   - Utility function signatures
+
+5. TROUBLESHOOTING.md:
+   - Common errors and solutions
+   - Jest test failures (mocking, environment)
+   - Build errors (TypeScript, ESLint)
+   - Sanity connection issues
+   - Environment variable issues
+
+6. Update README.md:
+   - Add badges (build status, test coverage, license)
+   - Add "Features" section
+   - Add "Tech Stack" section
+   - Link to all documentation files
+
+STOP WHEN: All documentation created + Reviewed for accuracy + Added to repository
+```
+
+---
+
+### 🤖 Prompt Template: Custom Task
+
+```
+[DESCRIBE YOUR TASK HERE]
+
+CONTEXT:
+- Project: MASH Landing Page (Next.js 16 + React 19 + TypeScript + Sanity CMS)
+- Current State: [DESCRIBE CURRENT STATE]
+- Goal: [DESCRIBE DESIRED OUTCOME]
+
+TASKS:
+1. [STEP 1]
+2. [STEP 2]
+3. [STEP 3]
+...
+
+FOLLOW:
+- Project conventions in .github/copilot-instructions.md
+- Testing requirements: 100% pass rate + full coverage
+- Ralph Loop methodology for iterative testing
+
+STOP WHEN: [CLEAR COMPLETION CRITERIA]
+```
+
+---
+
+## Using These Prompts
+
+### For AI Agents:
+1. Copy the relevant prompt above
+2. Paste into your AI agent interface
+3. Let the agent work autonomously following the instructions
+4. Agent will stop when completion criteria are met
+
+### For Human Developers:
+1. Use prompts as checklists for complex tasks
+2. Follow the documented patterns and conventions
+3. Run tests and builds frequently (Ralph Loop approach)
+4. Update documentation as you make changes
+
+### Prompt Maintenance:
+- Update prompts when project structure changes
+- Add new prompts for recurring tasks
+- Keep environment variable references current
+- Update test coverage targets as needed
+
+---
+
+**Last Updated**: February 10, 2026
+**Version**: 1.0.0
+**Maintained By**: MASH Development Team

@@ -23,6 +23,7 @@ import {testimonial} from './documents/testimonial' // Phase 7: Testimonials
 import {banner} from './documents/banner' // Phase 7: Promotional Banners
 import {recipe} from './documents/recipe' // Blog & Recipes: Mushroom Cooking Recipes
 import {growingGuide} from './documents/growingGuide' // Blog & Recipes: Growing Guides
+import landingPage from './documents/landingPage' // Landing Page: Content Management
 import {callToAction} from './objects/callToAction'
 import {infoSection} from './objects/infoSection'
 import {settings} from './singletons/settings'
@@ -58,6 +59,7 @@ export const schemaTypes = [
   testimonial, // Phase 7: Customer Testimonials
   banner, // Phase 7: Promotional Banners
   recipe, // Blog & Recipes: Mushroom Cooking Recipes
+  landingPage, // Landing Page: Main website content management
   growingGuide, // Blog & Recipes: Mushroom Growing Guides
   category,
   product,
