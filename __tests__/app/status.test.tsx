@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import StatusPage from '@/app/status/page';
+import StatusPage, { StatusBadge } from '@/app/status/page';
 
 // Mock layout and icons
 jest.mock('@/components/layout/PageLayout', () => ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>);
@@ -59,5 +59,32 @@ describe('Status Page', () => {
     expect(screen.getByText('Get Status Updates')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Enter your email')).toBeInTheDocument();
     expect(screen.getByText('Subscribe')).toBeInTheDocument();
+  });
+
+  describe('StatusBadge', () => {
+    it('renders operational badge', () => {
+      render(<StatusBadge status="operational" />);
+      expect(screen.getByText('Operational')).toBeInTheDocument();
+    });
+
+    it('renders degraded badge', () => {
+      render(<StatusBadge status="degraded" />);
+      expect(screen.getByText('Degraded')).toBeInTheDocument();
+    });
+
+    it('renders outage badge', () => {
+      render(<StatusBadge status="outage" />);
+      expect(screen.getByText('Outage')).toBeInTheDocument();
+    });
+
+    it('renders maintenance badge', () => {
+      render(<StatusBadge status="maintenance" />);
+      expect(screen.getByText('Maintenance')).toBeInTheDocument();
+    });
+
+    it('renders nothing for unknown status', () => {
+      const { container } = render(<StatusBadge status="unknown" />);
+      expect(container.innerHTML).toBe('');
+    });
   });
 });

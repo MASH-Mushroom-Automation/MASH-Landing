@@ -41,7 +41,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
     .items([
       // ===== E-COMMERCE SECTION =====
       S.listItem()
-        .title('🛒 E-Commerce')
+        .title('E-Commerce')
         .icon(PackageIcon)
         .child(
           S.list()
@@ -82,7 +82,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== HOMEPAGE SECTION =====
       S.listItem()
-        .title('🏠 Homepage')
+        .title('Homepage')
         .icon(ImagesIcon)
         .child(
           S.list()
@@ -104,7 +104,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== FAQ SECTION ===== (Phase 2)
       S.listItem()
-        .title('❓ FAQ')
+        .title('FAQ')
         .icon(HelpCircleIcon)
         .child(
           S.list()
@@ -134,7 +134,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== STORE LOCATIONS SECTION ===== (Phase 6)
       S.listItem()
-        .title('📍 Store Locations')
+        .title('Store Locations')
         .icon(PinIcon)
         .child(
           S.documentTypeList('store')
@@ -145,7 +145,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== BLOG SECTION ===== (Phase 8)
       S.listItem()
-        .title('📝 Blog')
+        .title('Blog')
         .icon(BookIcon)
         .child(
           S.list()
@@ -184,7 +184,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== MARKETING SECTION ===== (Phase 7)
       S.listItem()
-        .title('📣 Marketing')
+        .title('Marketing')
         .icon(CommentIcon)
         .child(
           S.list()
@@ -224,7 +224,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
       // ===== SETTINGS SECTION ===== (Phase 5)
       S.listItem()
-        .title('⚙️ Settings')
+        .title('Settings')
         .icon(CogIcon)
         .child(
           S.list()

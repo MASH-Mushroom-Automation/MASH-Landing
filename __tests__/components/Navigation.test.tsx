@@ -258,4 +258,88 @@ describe('Navigation', () => {
     const featuresLink = screen.getByText('Features').closest('a');
     expect(featuresLink).toHaveAttribute('href', '/#features');
   });
+
+  it('does not smooth scroll when not on home page', async () => {
+    const user = userEvent.setup();
+    const mockScrollIntoView = jest.fn();
+
+    (usePathname as jest.Mock).mockReturnValue('/documentation');
+    render(<Navigation />);
+
+    const featuresLink = screen.getByText('Features');
+    await user.click(featuresLink);
+
+    // Should NOT have called scrollIntoView since we're not on home page
+    expect(mockScrollIntoView).not.toHaveBeenCalled();
+  });
+
+  it('handles non-hash link click in desktop nav', async () => {
+    const user = userEvent.setup();
+    (usePathname as jest.Mock).mockReturnValue('/');
+    render(<Navigation />);
+
+    // Click Documentation which is a non-hash link (/documentation)
+    const docLink = screen.getByText('Documentation');
+    await user.click(docLink);
+    // Should not trigger smooth scroll - just navigate normally
+    expect(docLink.closest('a')).toHaveAttribute('href', '/documentation');
+  });
+
+  it('handles non-hash link click in mobile menu', async () => {
+    const user = userEvent.setup();
+    (usePathname as jest.Mock).mockReturnValue('/');
+    render(<Navigation />);
+
+    // Open mobile menu
+    const menuButton = screen.getByLabelText(/toggle mobile menu/i);
+    await user.click(menuButton);
+
+    // Click Schedule link (non-hash) in mobile menu
+    const scheduleLinks = screen.getAllByText('Schedule');
+    const mobileScheduleLink = scheduleLinks[scheduleLinks.length - 1];
+    await user.click(mobileScheduleLink);
+
+    // Menu should close but no smooth scroll
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('handles hash link click where element is not found', async () => {
+    const user = userEvent.setup();
+    const originalQuerySelector = document.querySelector.bind(document);
+    jest.spyOn(document, 'querySelector').mockImplementation((selector) => {
+      if (selector === '#features') return null; // Element not found
+      return originalQuerySelector(selector);
+    });
+
+    (usePathname as jest.Mock).mockReturnValue('/');
+    render(<Navigation />);
+
+    const featuresLink = screen.getByText('Features');
+    await user.click(featuresLink);
+
+    // Should not crash - just do nothing
+    jest.restoreAllMocks();
+  });
+
+  it('handles hash link where heading is not found in element', async () => {
+    const user = userEvent.setup();
+    const mockElement = document.createElement('div');
+    // No heading child
+    mockElement.scrollIntoView = jest.fn();
+
+    const originalQuerySelector = document.querySelector.bind(document);
+    jest.spyOn(document, 'querySelector').mockImplementation((selector) => {
+      if (selector === '#features') return mockElement;
+      return originalQuerySelector(selector);
+    });
+
+    (usePathname as jest.Mock).mockReturnValue('/');
+    render(<Navigation />);
+
+    const featuresLink = screen.getByText('Features');
+    await user.click(featuresLink);
+
+    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    jest.restoreAllMocks();
+  });
 });

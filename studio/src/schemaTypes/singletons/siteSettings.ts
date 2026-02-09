@@ -24,14 +24,14 @@ export const siteSettings = defineType({
   type: 'document',
   icon: CogIcon,
   groups: [
-    { name: 'company', title: '🏢 Company Info', default: true },
-    { name: 'contact', title: '📞 Contact' },
-    { name: 'social', title: '📱 Social Media' },
-    { name: 'announcement', title: '📢 Announcement Bar' },
-    { name: 'footer', title: '🔗 Footer' },
-    { name: 'seo', title: '🔍 SEO' },
-    { name: 'hours', title: '🕐 Business Hours' },
-    { name: 'features', title: '⚙️ Features' },
+    { name: 'company', title: 'Company Info', default: true },
+    { name: 'contact', title: 'Contact' },
+    { name: 'social', title: 'Social Media' },
+    { name: 'announcement', title: 'Announcement Bar' },
+    { name: 'footer', title: 'Footer' },
+    { name: 'seo', title: 'SEO' },
+    { name: 'hours', title: 'Business Hours' },
+    { name: 'features', title: 'Features' },
   ],
   fields: [
     // ═══════════════════════════════════════════════════════════════════════════
@@ -225,7 +225,7 @@ export const siteSettings = defineType({
           name: 'message',
           title: 'Message',
           type: 'string',
-          description: 'Announcement text (e.g., "🎉 Free Shipping on Orders Over ₱1500!")',
+          description: 'Announcement text (e.g., "Free Shipping on Orders Over ₱1500!")',
           validation: (Rule) => Rule.max(200),
         }),
         defineField({

@@ -1,7 +1,7 @@
 {
-  "project": "MASH Landing Page - Cloudinary to Sanity CMS Migration",
-  "version": "1.0.0",
-  "lastUpdated": "2025-06-18",
+  "project": "MASH Landing Page - Sanity CMS Integration",
+  "version": "2.0.0",
+  "lastUpdated": "2025-06-19",
   "status": "COMPLETED",
   "rules": {
     "noEmojis": true,
@@ -292,6 +292,95 @@
           "verification": "Exit code 0, 14 pages prerendered."
         }
       ]
+    },
+    {
+      "id": "phase-6",
+      "name": "Video Upload, Studio Deployment, and Coverage Improvement",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-19",
+      "tasks": [
+        {
+          "id": "T032",
+          "title": "Upload Logo.mp4 to Sanity CMS",
+          "status": "COMPLETED",
+          "file": "public/assets/videos/Logo.mp4",
+          "verification": "Asset uploaded to Sanity. Asset ref: file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4. CDN URL: https://cdn.sanity.io/files/gerattrr/production/71501ee4a175fe13f42a40a9490a3db191df2db3.mp4"
+        },
+        {
+          "id": "T033",
+          "title": "Update HeroSection with real video asset",
+          "status": "COMPLETED",
+          "file": "components/HeroSection.tsx",
+          "verification": "DEFAULT_HERO_VIDEO_ASSET set to {_ref: 'file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4', _type: 'reference'}"
+        },
+        {
+          "id": "T034",
+          "title": "Patch Sanity landingPage document with heroVideo",
+          "status": "COMPLETED",
+          "verification": "landingPage-main document patched with heroVideo field referencing uploaded Logo.mp4"
+        },
+        {
+          "id": "T035",
+          "title": "Update Sanity Studio config for production",
+          "status": "COMPLETED",
+          "file": "studio/sanity.config.ts",
+          "verification": "Title: 'MASH Landing Page CMS', Preview URL: https://join.mashmarket.app"
+        },
+        {
+          "id": "T036",
+          "title": "Deploy Sanity Studio",
+          "status": "COMPLETED",
+          "verification": "Studio deployed to https://ppnamias.sanity.studio/"
+        },
+        {
+          "id": "T037",
+          "title": "Remove all emojis from codebase",
+          "status": "COMPLETED",
+          "verification": "Emojis removed from .env.local, studio/.env.local, studio/src/structure/index.ts, studio/src/schemaTypes/singletons/siteSettings.ts, studio/src/schemaTypes/singletons/heroCarousel.ts, studio/src/schemaTypes/singletons/contactPage.ts, scripts/README.md"
+        },
+        {
+          "id": "T038",
+          "title": "Fix HeroSection tests for active video",
+          "status": "COMPLETED",
+          "file": "__tests__/components/HeroSection.test.tsx",
+          "verification": "Updated test from 'no video' to 'video renders with correct URL'. Added video error handler test. 16 tests passing."
+        },
+        {
+          "id": "T039",
+          "title": "Improve branch coverage - Navigation.tsx",
+          "status": "COMPLETED",
+          "file": "__tests__/components/Navigation.test.tsx",
+          "verification": "Added 5 tests for non-home-page scroll, non-hash links, element-not-found, heading-not-found. Branch coverage: 66.66% -> 100%"
+        },
+        {
+          "id": "T040",
+          "title": "Improve branch coverage - cal-config.ts",
+          "status": "COMPLETED",
+          "file": "__tests__/lib/cal-config.test.ts",
+          "verification": "Added fallback defaults test with jest.resetModules(). Branch coverage: 57.14% -> 100%"
+        },
+        {
+          "id": "T041",
+          "title": "Improve branch coverage - status/page.tsx",
+          "status": "COMPLETED",
+          "file": "__tests__/app/status.test.tsx",
+          "verification": "Exported StatusBadge, added tests for all switch cases (operational, degraded, outage, maintenance, default). Branch coverage: 40% -> 60%"
+        },
+        {
+          "id": "T042",
+          "title": "Final test run - 323 tests pass",
+          "status": "COMPLETED",
+          "command": "npm test",
+          "verification": "323 tests passing, 31 suites, 0 failures. Coverage: 96.06% stmts, 94.06% branch, 100% funcs, 99.02% lines"
+        },
+        {
+          "id": "T043",
+          "title": "Final build - succeeds",
+          "status": "COMPLETED",
+          "command": "npm run build",
+          "verification": "Exit code 0, 14 pages prerendered, no TypeScript or ESLint errors."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -300,5 +389,36 @@
     "noCloudinaryReferences": "grep finds zero cloudinary references in source files",
     "noEmojisInOutput": "No emoji characters in any generated or modified files",
     "prdReviewed": "AI agent reads prd.json after each phase to verify completion"
+  },
+  "currentMetrics": {
+    "testSuites": 31,
+    "testsTotal": 323,
+    "testsPassed": 323,
+    "testsFailed": 0,
+    "coverageStmts": 96.06,
+    "coverageBranch": 94.06,
+    "coverageFuncs": 100,
+    "coverageLines": 99.02,
+    "buildStatus": "SUCCESS",
+    "pagesPrerendered": 14,
+    "lastTestRun": "2025-06-19"
+  },
+  "sanityDeployment": {
+    "studioUrl": "https://ppnamias.sanity.studio/",
+    "previewUrl": "https://join.mashmarket.app/",
+    "projectId": "gerattrr",
+    "dataset": "production",
+    "heroVideoAssetRef": "file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4",
+    "heroVideoUrl": "https://cdn.sanity.io/files/gerattrr/production/71501ee4a175fe13f42a40a9490a3db191df2db3.mp4"
+  },
+  "remainingBranchGaps": {
+    "note": "These are defensive/unreachable code branches that cannot be tested in jsdom without refactoring",
+    "gaps": [
+      "HeroSection.tsx lines 18-34: typeof window !== undefined (SSR guard, always true in jsdom)",
+      "CalendarScheduler.tsx line 33: MutationObserver attributeName check (jsdom limitation)",
+      "DemoSection.tsx line 52: fallback title for non-existent video ID (unreachable since state initializes to valid ID)",
+      "status/page.tsx lines 110-117: allOperational ternary (hardcoded services data all operational)",
+      "sanity.ts lines 166-248: TypeScript interface definitions (not executable code)"
+    ]
   }
 }

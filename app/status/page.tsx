@@ -67,7 +67,7 @@ const recentIncidents = [
   },
 ];
 
-function StatusBadge({ status }: { status: string }) {
+export function StatusBadge({ status }: { status: string }) {
   switch (status) {
     case "operational":
       return (

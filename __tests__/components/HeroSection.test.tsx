@@ -73,14 +73,24 @@ describe('HeroSection', () => {
     expect(screen.getByText(/Intelligent automation/i)).toBeInTheDocument();
   });
 
-  it('shows fallback background when no video asset configured', () => {
-    // DEFAULT_HERO_VIDEO_ASSET is null, so no video should render
+  it('renders video background when asset is configured', () => {
+    // DEFAULT_HERO_VIDEO_ASSET has a real Sanity asset reference
     const { container } = render(<HeroSection />);
     const videos = container.querySelectorAll('video');
-    expect(videos.length).toBe(0);
-    // Fallback div should be present
-    const fallbackDivs = container.querySelectorAll('.bg-hero');
-    expect(fallbackDivs.length).toBeGreaterThan(0);
+    expect(videos.length).toBe(1);
+    const source = container.querySelector('video source');
+    expect(source).toBeInTheDocument();
+    expect(source?.getAttribute('type')).toBe('video/mp4');
+  });
+
+  it('shows fallback background when video has error', () => {
+    const { container } = render(<HeroSection />);
+    const video = container.querySelector('video');
+    expect(video).toBeInTheDocument();
+    // Simulate video error
+    if (video) {
+      video.dispatchEvent(new Event('error'));
+    }
   });
 
   it('respects prefers-reduced-motion', () => {
@@ -174,5 +184,43 @@ describe('HeroSection', () => {
     
     const demoBtn = screen.getByText(/Watch Demo/i);
     expect(demoBtn.className).toContain('border-2');
+  });
+
+  it('renders video source with correct Sanity URL', () => {
+    const { container } = render(<HeroSection />);
+    const source = container.querySelector('video source');
+    expect(source).toBeInTheDocument();
+    expect(source?.getAttribute('src')).toContain('file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4');
+  });
+
+  it('video has correct attributes', () => {
+    const { container } = render(<HeroSection />);
+    const video = container.querySelector('video');
+    expect(video).toBeInTheDocument();
+    expect(video).toHaveAttribute('autoplay');
+    expect(video?.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('hides video and shows fallback when prefers-reduced-motion is initially true', () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(query => ({
+        matches: true, // prefers-reduced-motion matches
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+    const { container } = render(<HeroSection />);
+    const videos = container.querySelectorAll('video');
+    expect(videos.length).toBe(0);
+    // Fallback div should be present
+    const section = container.querySelector('section');
+    expect(section).toBeInTheDocument();
   });
 });

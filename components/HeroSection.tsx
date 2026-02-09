@@ -5,10 +5,12 @@ import { getSanityFileUrl } from "@/lib/sanity";
 
 /**
  * Default hero video asset reference for Sanity CMS.
- * Updated after uploading hero video via scripts/upload-assets.js.
- * Set to null when no video has been uploaded yet.
+ * This is the animated MASH logo video uploaded to Sanity.
  */
-const DEFAULT_HERO_VIDEO_ASSET: { _ref: string; _type: string } | null = null;
+const DEFAULT_HERO_VIDEO_ASSET: { _ref: string; _type: string } | null = {
+  _ref: 'file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4',
+  _type: 'reference',
+};
 
 export default function HeroSection() {
   const [videoError, setVideoError] = useState(false);

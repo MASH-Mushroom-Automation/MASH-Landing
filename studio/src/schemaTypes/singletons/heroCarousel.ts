@@ -139,7 +139,7 @@ export const heroCarousel = defineType({
             prepare({ title, subtitle, media, order, isActive }) {
               return {
                 title: `${order}. ${title}`,
-                subtitle: isActive ? subtitle : '🚫 Inactive',
+                subtitle: isActive ? subtitle : 'Inactive',
                 media,
               }
             },

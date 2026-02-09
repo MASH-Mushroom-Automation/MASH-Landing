@@ -107,4 +107,33 @@ describe('Cal.com Configuration', () => {
       expect(eventType).toBe(calConfig.eventTypes['30min']);
     });
   });
+
+  describe('fallback defaults', () => {
+    const originalEnv = process.env;
+
+    beforeEach(() => {
+      jest.resetModules();
+      process.env = { ...originalEnv };
+      delete process.env.NEXT_PUBLIC_CAL_USERNAME;
+      delete process.env.NEXT_PUBLIC_CAL_PROFILE_URL;
+      delete process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+      delete process.env.NEXT_PUBLIC_CAL_15MIN_SLUG;
+      delete process.env.NEXT_PUBLIC_CAL_30MIN_SLUG;
+      delete process.env.NEXT_PUBLIC_CAL_1HOUR_SLUG;
+    });
+
+    afterEach(() => {
+      process.env = originalEnv;
+    });
+
+    it('uses default values when env vars are not set', () => {
+      const { calConfig: freshConfig } = require('@/lib/cal-config');
+      expect(freshConfig.username).toBe('mash-mushroom');
+      expect(freshConfig.profileUrl).toBe('https://cal.com/mash-mushroom');
+      expect(freshConfig.contactEmail).toBe('mash.mushroom.automation@gmail.com');
+      expect(freshConfig.eventTypes['15min'].slug).toBe('15min');
+      expect(freshConfig.eventTypes['30min'].slug).toBe('30min');
+      expect(freshConfig.eventTypes['1-hour-meeting'].slug).toBe('1-hour-meeting');
+    });
+  });
 });

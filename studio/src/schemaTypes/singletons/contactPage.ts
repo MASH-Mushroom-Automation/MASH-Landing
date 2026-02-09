@@ -19,12 +19,12 @@ export const contactPage = defineType({
   type: 'document',
   icon: EnvelopeIcon,
   groups: [
-    { name: 'header', title: '📋 Page Header', default: true },
-    { name: 'contact', title: '📞 Contact Info' },
-    { name: 'hours', title: '🕐 Business Hours' },
-    { name: 'social', title: '🔗 Social Media' },
-    { name: 'location', title: '📍 Location' },
-    { name: 'form', title: '📝 Contact Form' },
+    { name: 'header', title: 'Page Header', default: true },
+    { name: 'contact', title: 'Contact Info' },
+    { name: 'hours', title: 'Business Hours' },
+    { name: 'social', title: 'Social Media' },
+    { name: 'location', title: 'Location' },
+    { name: 'form', title: 'Contact Form' },
   ],
   fields: [
     // ═══════════════════════════════════════════════════════════════════════════
@@ -79,13 +79,13 @@ export const contactPage = defineType({
               type: 'string',
               options: {
                 list: [
-                  { title: '📞 Phone', value: 'phone' },
-                  { title: '📧 Email', value: 'email' },
-                  { title: '📍 Address', value: 'address' },
-                  { title: '💬 WhatsApp', value: 'whatsapp' },
-                  { title: '📱 Viber', value: 'viber' },
-                  { title: '✈️ Telegram', value: 'telegram' },
-                  { title: '💬 Messenger', value: 'messenger' },
+                  { title: 'Phone', value: 'phone' },
+                  { title: 'Email', value: 'email' },
+                  { title: 'Address', value: 'address' },
+                  { title: 'WhatsApp', value: 'whatsapp' },
+                  { title: 'Viber', value: 'viber' },
+                  { title: 'Telegram', value: 'telegram' },
+                  { title: 'Messenger', value: 'messenger' },
                 ],
                 layout: 'radio',
               },
@@ -126,18 +126,8 @@ export const contactPage = defineType({
           preview: {
             select: { title: 'label', subtitle: 'value', type: 'type' },
             prepare({ title, subtitle, type }) {
-              const emojiMap: Record<string, string> = {
-                phone: '📞',
-                email: '📧',
-                address: '📍',
-                whatsapp: '💬',
-                viber: '📱',
-                telegram: '✈️',
-                messenger: '💬',
-              }
-              const emoji = emojiMap[type] || '📋'
               return {
-                title: `${emoji} ${title || type}`,
+                title: title || type,
                 subtitle,
               }
             },
@@ -215,7 +205,7 @@ export const contactPage = defineType({
               const dayLabel = day?.charAt(0).toUpperCase() + day?.slice(1) || 'Day'
               return {
                 title: dayLabel,
-                subtitle: isClosed ? '❌ Closed' : `${open} - ${close}`,
+                subtitle: isClosed ? 'Closed' : `${open} - ${close}`,
               }
             },
           },
@@ -264,13 +254,13 @@ export const contactPage = defineType({
               type: 'string',
               options: {
                 list: [
-                  { title: '📘 Facebook', value: 'facebook' },
-                  { title: '📸 Instagram', value: 'instagram' },
-                  { title: '🐦 Twitter / X', value: 'twitter' },
-                  { title: '💼 LinkedIn', value: 'linkedin' },
-                  { title: '📹 YouTube', value: 'youtube' },
-                  { title: '🎵 TikTok', value: 'tiktok' },
-                  { title: '💻 GitHub', value: 'github' },
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'Twitter / X', value: 'twitter' },
+                  { title: 'LinkedIn', value: 'linkedin' },
+                  { title: 'YouTube', value: 'youtube' },
+                  { title: 'TikTok', value: 'tiktok' },
+                  { title: 'GitHub', value: 'github' },
                 ],
                 layout: 'radio',
               },
@@ -298,18 +288,8 @@ export const contactPage = defineType({
           preview: {
             select: { platform: 'platform', handle: 'handle' },
             prepare({ platform, handle }) {
-              const emojiMap: Record<string, string> = {
-                facebook: '📘',
-                instagram: '📸',
-                twitter: '🐦',
-                linkedin: '💼',
-                youtube: '📹',
-                tiktok: '🎵',
-                github: '💻',
-              }
-              const emoji = emojiMap[platform] || '🔗'
               return {
-                title: `${emoji} ${platform?.charAt(0).toUpperCase() + platform?.slice(1)}`,
+                title: platform?.charAt(0).toUpperCase() + platform?.slice(1),
                 subtitle: handle || '',
               }
             },
