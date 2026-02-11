@@ -14,14 +14,14 @@ const DEFAULT_HERO_VIDEO_ASSET: { _ref: string; _type: string } | null = {
 
 export default function HeroSection() {
   const [videoError, setVideoError] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    typeof window !== "undefined" 
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
-      : false
-  );
+  // Initialize as false on both server and client to avoid hydration mismatch.
+  // The actual value is read in useEffect after hydration completes.
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // Set the real value after hydration
+    setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);

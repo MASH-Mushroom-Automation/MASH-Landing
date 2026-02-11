@@ -734,6 +734,42 @@
           "verification": "TypeScript compiled in 12.5s, 14 static pages generated, no errors."
         }
       ]
+    },
+    {
+      "id": "phase-10",
+      "name": "Hydration Error Fix and Code Quality Improvements",
+      "status": "COMPLETED",
+      "completedAt": "2026-02-11",
+      "tasks": [
+        {
+          "id": "T091",
+          "title": "Fix HeroSection hydration mismatch (crossorigin attribute)",
+          "status": "COMPLETED",
+          "file": "components/HeroSection.tsx",
+          "verification": "Removed typeof window !== undefined SSR guard from useState. Now initializes prefersReducedMotion as false on both server and client, reads actual value in useEffect after hydration. Eliminates hydration mismatch on video crossorigin attribute."
+        },
+        {
+          "id": "T092",
+          "title": "Verify 3D model Chamber.glb exists and Sanity integration is intact",
+          "status": "COMPLETED",
+          "file": "public/assets/Chamber.glb",
+          "verification": "Chamber.glb confirmed at public/assets/Chamber.glb. ChamberModel3D accepts Sanity CDN URL via modelUrl prop with local fallback. IoTDeviceSection passes modelUrl from page.tsx. GROQ query includes iotDeviceModelUrl."
+        },
+        {
+          "id": "T093",
+          "title": "All tests pass - 418 tests, 37 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "418 tests passing, 37 test suites, 0 failures."
+        },
+        {
+          "id": "T094",
+          "title": "Build succeeds - 14 pages prerendered",
+          "status": "COMPLETED",
+          "command": "npx next build --webpack",
+          "verification": "TypeScript compiled in 14.4s, 14 static pages generated, no errors."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -776,7 +812,6 @@
   "remainingBranchGaps": {
     "note": "These are defensive/unreachable code branches that cannot be tested in jsdom without refactoring",
     "gaps": [
-      "HeroSection.tsx lines 18-34: typeof window !== undefined (SSR guard, always true in jsdom)",
       "CalendarScheduler.tsx line 33: MutationObserver attributeName check (jsdom limitation)",
       "DemoSection.tsx line 52: fallback title for non-existent video ID (unreachable since state initializes to valid ID)",
       "status/page.tsx lines 110-117: allOperational ternary (hardcoded services data all operational)",
