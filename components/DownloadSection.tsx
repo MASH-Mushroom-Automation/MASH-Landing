@@ -1,15 +1,28 @@
 import Link from "next/link";
+import type { LandingPageData } from "@/lib/sanity";
 
-export default function DownloadSection() {
+const DEFAULT_APP_FEATURES = [
+  { title: "Real-time Monitoring", description: "View live sensor data from anywhere" },
+  { title: "Remote Control", description: "Adjust settings on the go" },
+  { title: "Push Notifications", description: "Get alerts for critical events" },
+  { title: "Historical Data", description: "Access charts and trends" },
+  { title: "Multi-chamber Support", description: "Manage all your chambers" },
+  { title: "Offline Mode", description: "View cached data without connection" },
+];
+
+export default function DownloadSection({ data }: { data?: LandingPageData | null } = {}) {
+  const appFeatures = data?.downloadAppFeatures
+    ? data.downloadAppFeatures.map(f => ({ title: f, description: "" }))
+    : DEFAULT_APP_FEATURES;
   return (
     <section id="download" className="py-20 bg-download text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Get Started with MASH
+            {data?.downloadTitle ?? "Get Started with MASH"}
           </h2>
           <p className="text-xl text-green-100 max-w-3xl mx-auto">
-            Download our mobile app and start monitoring your mushroom cultivation from anywhere
+            {data?.downloadDescription ?? "Download our mobile app and start monitoring your mushroom cultivation from anywhere"}
           </p>
         </div>
 
@@ -48,65 +61,17 @@ export default function DownloadSection() {
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto">
           <h3 className="text-2xl font-bold mb-6 text-center">App Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Real-time Monitoring</h4>
-                <p className="text-green-100">View live sensor data from anywhere</p>
+            {appFeatures.map((feat, index) => (
+              <div key={index} className="flex items-start">
+                <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <h4 className="font-bold mb-1">{feat.title}</h4>
+                  {feat.description && <p className="text-green-100">{feat.description}</p>}
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Remote Control</h4>
-                <p className="text-green-100">Adjust settings on the go</p>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Push Notifications</h4>
-                <p className="text-green-100">Get alerts for critical events</p>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Historical Data</h4>
-                <p className="text-green-100">Access charts and trends</p>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Multi-chamber Support</h4>
-                <p className="text-green-100">Manage all your chambers</p>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <svg className="w-6 h-6 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <h4 className="font-bold mb-1">Offline Mode</h4>
-                <p className="text-green-100">View cached data without connection</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 

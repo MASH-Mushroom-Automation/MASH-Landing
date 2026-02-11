@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import type { LandingPageData } from "@/lib/sanity";
 
 /**
  * Demo video data.
  * Video URLs will be populated from Sanity CMS once assets are uploaded
  * via scripts/upload-assets.js. Until then, videos show a placeholder.
  */
-const DEMO_VIDEOS = [
+const DEFAULT_VIDEOS = [
   {
     id: "overview",
     title: "System Overview",
@@ -25,7 +26,15 @@ const DEMO_VIDEOS = [
   },
 ];
 
-export default function DemoSection() {
+const DEFAULT_STATS = [
+  { value: "99.9%", label: "System Uptime" },
+  { value: "30%", label: "Yield Increase" },
+  { value: "24/7", label: "Monitoring" },
+];
+
+export default function DemoSection({ data }: { data?: LandingPageData | null } = {}) {
+  const videos = data?.demoVideos ?? DEFAULT_VIDEOS;
+  const stats = data?.demoStats ?? DEFAULT_STATS;
   const [activeVideo, setActiveVideo] = useState("overview");
 
   return (
@@ -33,10 +42,10 @@ export default function DemoSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            See MASH in Action
+            {data?.demoTitle ?? "See MASH in Action"}
           </h2>
           <p className="text-xl text-secondary max-w-3xl mx-auto">
-            Watch our demonstration videos to understand how MASH transforms mushroom cultivation
+            {data?.demoSubtitle ?? "Watch our demonstration videos to understand how MASH transforms mushroom cultivation"}
           </p>
         </div>
 
@@ -49,7 +58,7 @@ export default function DemoSection() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p className="text-lg font-medium">
-                  {DEMO_VIDEOS.find(v => v.id === activeVideo)?.title || "Demo Video"}
+                  {videos.find(v => v.id === activeVideo)?.title || "Demo Video"}
                 </p>
                 <p className="text-sm mt-2">Video coming soon</p>
               </div>
@@ -57,7 +66,7 @@ export default function DemoSection() {
           </div>
 
           <div className="space-y-4">
-            {DEMO_VIDEOS.map((video) => (
+            {videos.map((video) => (
               <button
                 key={video.id}
                 onClick={() => setActiveVideo(video.id)}
@@ -77,18 +86,12 @@ export default function DemoSection() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-card p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">99.9%</div>
-            <div className="text-secondary">System Uptime</div>
-          </div>
-          <div className="bg-card p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">30%</div>
-            <div className="text-secondary">Yield Increase</div>
-          </div>
-          <div className="bg-card p-6 rounded-xl shadow-md">
-            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">24/7</div>
-            <div className="text-secondary">Monitoring</div>
-          </div>
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-card p-6 rounded-xl shadow-md">
+              <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">{stat.value}</div>
+              <div className="text-secondary">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

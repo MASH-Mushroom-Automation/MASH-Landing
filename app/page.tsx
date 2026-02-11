@@ -11,35 +11,37 @@ import SupportSection from "@/components/SupportSection";
 import DownloadSection from "@/components/DownloadSection";
 import Footer from "@/components/Footer";
 import { getLandingPageData, getSanityFileUrl } from "@/lib/sanity";
+import type { LandingPageData } from "@/lib/sanity";
 
 export default async function Home() {
+  let landingData: LandingPageData | null = null;
   let modelUrl: string | undefined;
 
   try {
-    const data = await getLandingPageData();
-    if (data?.iotDeviceModel?.asset) {
-      modelUrl = getSanityFileUrl(data.iotDeviceModel.asset);
+    landingData = await getLandingPageData();
+    if (landingData?.iotDeviceModel?.asset) {
+      modelUrl = getSanityFileUrl(landingData.iotDeviceModel.asset);
     }
   } catch {
-    // Sanity fetch failed - IoTDeviceSection will use local fallback
+    // Sanity fetch failed - all components will use hardcoded defaults
   }
 
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation data={landingData} />
       <main>
-        <HeroSection />
-        <FeaturesSection />
-        <MobileAppShowcase />
-        <IoTDeviceSection modelUrl={modelUrl} />
-        <DemoSection />
-        <DocumentationSection />
-        <ScopeSection />
-        <BookingSection />
-        <SupportSection />
-        <DownloadSection />
+        <HeroSection data={landingData} />
+        <FeaturesSection data={landingData} />
+        <MobileAppShowcase data={landingData} />
+        <IoTDeviceSection modelUrl={modelUrl} data={landingData} />
+        <DemoSection data={landingData} />
+        <DocumentationSection data={landingData} />
+        <ScopeSection data={landingData} />
+        <BookingSection data={landingData} />
+        <SupportSection data={landingData} />
+        <DownloadSection data={landingData} />
       </main>
-      <Footer />
+      <Footer data={landingData} />
     </div>
   );
 }

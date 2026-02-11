@@ -5,8 +5,17 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X } from "lucide-react";
+import type { LandingPageData } from "@/lib/sanity";
 
-export default function Navigation() {
+const DEFAULT_LINKS = [
+  { href: "/#features", label: "Features" },
+  { href: "/documentation", label: "Documentation" },
+  { href: "/#scope", label: "Scope" },
+  { href: "/schedule", label: "Schedule" },
+  { href: "/support", label: "Support" },
+];
+
+export default function Navigation({ data }: { data?: LandingPageData | null } = {}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -28,13 +37,7 @@ export default function Navigation() {
     }
   };
 
-  const navLinks = [
-    { href: "/#features", label: "Features" },
-    { href: "/documentation", label: "Documentation" },
-    { href: "/#scope", label: "Scope" },
-    { href: "/schedule", label: "Schedule" },
-    { href: "/support", label: "Support" },
-  ];
+  const navLinks = data?.navigationLinks ?? DEFAULT_LINKS;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-navigation backdrop-blur-sm shadow-sm border-b border-default" role="navigation" aria-label="Main navigation">
@@ -42,7 +45,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-green-600 dark:text-green-400">MASH</span>
+              <span className="text-2xl font-bold text-green-600 dark:text-green-400">{data?.navigationBrand ?? "MASH"}</span>
             </Link>
           </div>
 

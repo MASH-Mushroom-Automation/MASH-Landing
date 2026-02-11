@@ -2,22 +2,42 @@
 
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import type { LandingPageData } from "@/lib/sanity";
+
+const SCREEN_ICON_MAP: Record<string, React.ReactNode> = {
+  dashboard: (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+    </svg>
+  ),
+  controls: (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+    </svg>
+  ),
+  alerts: (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+    </svg>
+  ),
+  analytics: (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
+    </svg>
+  ),
+};
 
 /**
  * App screens data representing the MASH mobile application.
  * Each screen shows a key feature of the mobile app.
  */
-const APP_SCREENS = [
+const DEFAULT_SCREENS = [
   {
     id: "dashboard",
     title: "Dashboard",
     description: "Real-time overview of all your growing chambers with live sensor data",
     color: "from-green-500 to-emerald-700",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-      </svg>
-    ),
+    icon: "dashboard",
     features: ["Live temperature & humidity", "CO2 level monitoring", "Growth stage tracking"],
   },
   {
@@ -25,11 +45,7 @@ const APP_SCREENS = [
     title: "Smart Controls",
     description: "Adjust climate parameters and automation schedules from anywhere",
     color: "from-blue-500 to-indigo-700",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-      </svg>
-    ),
+    icon: "controls",
     features: ["Temperature set points", "Humidity control", "Fan & misting schedules"],
   },
   {
@@ -37,11 +53,7 @@ const APP_SCREENS = [
     title: "Alerts & Notifications",
     description: "Instant push notifications for critical events and threshold breaches",
     color: "from-amber-500 to-orange-700",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-      </svg>
-    ),
+    icon: "alerts",
     features: ["Push notifications", "SMS alerts", "Email reports"],
   },
   {
@@ -49,11 +61,7 @@ const APP_SCREENS = [
     title: "Analytics & Reports",
     description: "Comprehensive data visualization with historical trends and predictions",
     color: "from-purple-500 to-violet-700",
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
-      </svg>
-    ),
+    icon: "analytics",
     features: ["Growth charts", "Yield predictions", "Export to CSV"],
   },
 ];
@@ -62,8 +70,11 @@ const APP_SCREENS = [
  * MobileAppShowcase displays the MASH mobile application in a phone mockup
  * with parallax scrolling and interactive screen switching.
  */
-export default function MobileAppShowcase() {
-  const [activeScreen, setActiveScreen] = useState("dashboard");
+export default function MobileAppShowcase({ data }: { data?: LandingPageData | null } = {}) {
+  const screens = data?.mobileAppScreens
+    ? data.mobileAppScreens.map(s => ({ ...s, description: s.subtitle }))
+    : DEFAULT_SCREENS;
+  const [activeScreen, setActiveScreen] = useState(screens[0]?.id ?? "dashboard");
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -77,7 +88,7 @@ export default function MobileAppShowcase() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
   const featuresX = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [50, 0, 0, -50]);
 
-  const currentScreen = APP_SCREENS.find((s) => s.id === activeScreen) || APP_SCREENS[0];
+  const currentScreen = screens.find((s) => s.id === activeScreen) || screens[0];
 
   return (
     <section
@@ -88,10 +99,10 @@ export default function MobileAppShowcase() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div style={{ opacity: contentOpacity }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Control From Anywhere
+            {data?.mobileAppTitle ?? "Control From Anywhere"}
           </h2>
           <p className="text-xl text-secondary max-w-3xl mx-auto">
-            The MASH mobile application puts your mushroom cultivation operation in the palm of your hand
+            {data?.mobileAppSubtitle ?? "The MASH mobile application puts your mushroom cultivation operation in the palm of your hand"}
           </p>
         </motion.div>
 
@@ -129,7 +140,7 @@ export default function MobileAppShowcase() {
                     {/* App header */}
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
-                        {currentScreen.icon}
+                        {SCREEN_ICON_MAP[currentScreen.icon] ?? SCREEN_ICON_MAP["dashboard"]}
                       </div>
                       <div>
                         <h3 className="text-white font-bold text-lg">
@@ -182,7 +193,7 @@ export default function MobileAppShowcase() {
             <h3 className="text-2xl font-bold text-primary mb-6">
               App Features
             </h3>
-            {APP_SCREENS.map((screen) => (
+            {screens.map((screen) => (
               <button
                 key={screen.id}
                 onClick={() => setActiveScreen(screen.id)}
@@ -200,7 +211,7 @@ export default function MobileAppShowcase() {
                         : "bg-green-600/10 text-green-600 dark:text-green-400"
                     }`}
                   >
-                    {screen.icon}
+                    {SCREEN_ICON_MAP[screen.icon] ?? SCREEN_ICON_MAP["dashboard"]}
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-1">{screen.title}</h4>

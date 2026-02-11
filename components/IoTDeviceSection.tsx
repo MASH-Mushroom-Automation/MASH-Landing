@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, Suspense, lazy } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import type { LandingPageData } from "@/lib/sanity";
 
 // Lazy-load the 3D model component for code-splitting
 const ChamberModel3D = lazy(() => import("@/components/ChamberModel3D"));
@@ -12,12 +13,16 @@ export interface IoTDeviceSectionProps {
    * If provided, takes priority over local /assets/Chamber.glb.
    */
   modelUrl?: string;
+  /**
+   * Landing page data from Sanity CMS.
+   */
+  data?: LandingPageData | null;
 }
 
 /**
  * IoT Device specifications for the MASH system.
  */
-const DEVICE_SPECS = [
+const DEFAULT_SPECS = [
   {
     id: "sensors",
     label: "Environmental Sensors",
@@ -155,9 +160,10 @@ function DeviceModel3D({ rotateX, rotateY }: { rotateX: number; rotateY: number 
  * IoTDeviceSection displays a 3D-rendered IoT device with parallax scrolling
  * and interactive specification panels.
  */
-export default function IoTDeviceSection({ modelUrl }: IoTDeviceSectionProps = {}) {
+export default function IoTDeviceSection({ modelUrl, data }: IoTDeviceSectionProps = {}) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeSpec, setActiveSpec] = useState("sensors");
+  const specs = data?.iotDeviceSpecs ?? DEFAULT_SPECS;
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
@@ -185,7 +191,7 @@ export default function IoTDeviceSection({ modelUrl }: IoTDeviceSectionProps = {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const currentSpec = DEVICE_SPECS.find((s) => s.id === activeSpec) || DEVICE_SPECS[0];
+  const currentSpec = specs.find((s) => s.id === activeSpec) || specs[0];
 
   return (
     <section
@@ -196,10 +202,10 @@ export default function IoTDeviceSection({ modelUrl }: IoTDeviceSectionProps = {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div style={{ opacity: contentOpacity }} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            IoT Hardware
+            {data?.iotDeviceTitle ?? "IoT Hardware"}
           </h2>
           <p className="text-xl text-secondary max-w-3xl mx-auto">
-            Purpose-built IoT device designed for mushroom cultivation environments with professional-grade sensors and controls
+            {data?.iotDeviceDescription ?? "Purpose-built IoT device designed for mushroom cultivation environments with professional-grade sensors and controls"}
           </p>
         </motion.div>
 
@@ -243,7 +249,7 @@ export default function IoTDeviceSection({ modelUrl }: IoTDeviceSectionProps = {
 
             {/* Spec selector grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {DEVICE_SPECS.map((spec) => (
+              {specs.map((spec) => (
                 <button
                   key={spec.id}
                   onClick={() => setActiveSpec(spec.id)}

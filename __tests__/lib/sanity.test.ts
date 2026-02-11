@@ -19,9 +19,32 @@ jest.mock('@sanity/client', () => ({
 }));
 
 // Mock @sanity/image-url
+const mockImageBuilderResult = {
+  image: jest.fn(() => ({
+    width: jest.fn().mockReturnThis(),
+    height: jest.fn().mockReturnThis(),
+    quality: jest.fn().mockReturnThis(),
+    format: jest.fn().mockReturnThis(),
+    fit: jest.fn().mockReturnThis(),
+    auto: jest.fn().mockReturnThis(),
+    url: jest.fn(() => 'https://cdn.sanity.io/images/test-project/production/image-123.jpg'),
+  })),
+};
+const mockCreateImageUrlBuilder = jest.fn(() => mockImageBuilderResult);
 jest.mock('@sanity/image-url', () => ({
   __esModule: true,
   default: jest.fn(() => ({
+    image: jest.fn(() => ({
+      width: jest.fn().mockReturnThis(),
+      height: jest.fn().mockReturnThis(),
+      quality: jest.fn().mockReturnThis(),
+      format: jest.fn().mockReturnThis(),
+      fit: jest.fn().mockReturnThis(),
+      auto: jest.fn().mockReturnThis(),
+      url: jest.fn(() => 'https://cdn.sanity.io/images/test-project/production/image-123.jpg'),
+    })),
+  })),
+  createImageUrlBuilder: jest.fn(() => ({
     image: jest.fn(() => ({
       width: jest.fn().mockReturnThis(),
       height: jest.fn().mockReturnThis(),
