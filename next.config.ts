@@ -3,6 +3,7 @@ import path from "path";
 
 const nextConfig: NextConfig = {
   transpilePackages: ['framer-motion'],
+  turbopack: {},
   images: {
     remotePatterns: [
       {

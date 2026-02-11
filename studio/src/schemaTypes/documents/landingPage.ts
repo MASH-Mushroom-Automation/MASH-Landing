@@ -184,6 +184,17 @@ export default defineType({
       type: 'text',
     }),
 
+    // IoT Device Section
+    defineField({
+      name: 'iotDeviceModel',
+      title: 'IoT Device 3D Model',
+      type: 'file',
+      description: '3D model file of the MASH IoT device (GLB/GLTF format)',
+      options: {
+        accept: '.glb,.gltf',
+      },
+    }),
+
     // Download Section
     defineField({
       name: 'downloadTitle',

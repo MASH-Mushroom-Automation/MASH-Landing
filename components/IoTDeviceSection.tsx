@@ -1,7 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect, Suspense } from "react";
+import { useRef, useState, useEffect, Suspense, lazy } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+
+// Lazy-load the 3D model component for code-splitting
+const ChamberModel3D = lazy(() => import("@/components/ChamberModel3D"));
 
 /**
  * IoT Device specifications for the MASH system.
@@ -195,7 +198,13 @@ export default function IoTDeviceSection() {
             <div className="relative">
               {/* Glow effect behind device */}
               <div className="absolute inset-0 bg-green-500/10 blur-3xl rounded-full scale-150" />
-              <DeviceModel3D rotateX={mousePos.y} rotateY={mousePos.x} />
+              <Suspense fallback={<DeviceModel3D rotateX={mousePos.y} rotateY={mousePos.x} />}>
+                <ChamberModel3D
+                  height="420px"
+                  className="w-[320px] md:w-[400px]"
+                  autoRotate={true}
+                />
+              </Suspense>
             </div>
           </motion.div>
 

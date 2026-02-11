@@ -1,7 +1,7 @@
 {
-  "project": "MASH Landing Page - Enhanced with Parallax and Showcase Sections",
-  "version": "3.0.0",
-  "lastUpdated": "2025-06-20",
+  "project": "MASH Landing Page - Enhanced with 3D Model and Parallax Sections",
+  "version": "4.0.0",
+  "lastUpdated": "2026-02-11",
   "status": "COMPLETED",
   "rules": {
     "noEmojis": true,
@@ -536,6 +536,98 @@
           "verification": "14 pages prerendered, TypeScript check passed, no errors."
         }
       ]
+    },
+    {
+      "id": "phase-8",
+      "name": "3D Model Integration, Dev Server Fix, and Build Improvements",
+      "status": "COMPLETED",
+      "completedAt": "2026-02-11",
+      "tasks": [
+        {
+          "id": "T065",
+          "title": "Fix Next.js 16 Turbopack dev server error",
+          "status": "COMPLETED",
+          "file": "next.config.ts",
+          "verification": "Added turbopack: {} to silence Turbopack/webpack config conflict. Dev server starts without error."
+        },
+        {
+          "id": "T066",
+          "title": "Update build script to use --webpack flag",
+          "status": "COMPLETED",
+          "file": "package.json",
+          "verification": "npm run build now uses 'next build --webpack' for production builds."
+        },
+        {
+          "id": "T067",
+          "title": "Add iotDeviceModel field to Sanity schema",
+          "status": "COMPLETED",
+          "file": "studio/src/schemaTypes/documents/landingPage.ts",
+          "verification": "iotDeviceModel field added accepting .glb/.gltf files."
+        },
+        {
+          "id": "T068",
+          "title": "Create ChamberModel3D Three.js component",
+          "status": "COMPLETED",
+          "file": "components/ChamberModel3D.tsx",
+          "verification": "Component renders GLB model from /public/assets/Chamber.glb using @react-three/fiber and drei. Includes OrbitControls, Environment, ContactShadows, auto-rotation."
+        },
+        {
+          "id": "T069",
+          "title": "Integrate ChamberModel3D into IoTDeviceSection",
+          "status": "COMPLETED",
+          "file": "components/IoTDeviceSection.tsx",
+          "verification": "Lazy-loads ChamberModel3D with CSS DeviceModel3D as Suspense fallback. Code-split for performance."
+        },
+        {
+          "id": "T070",
+          "title": "Add Three.js mocks to jest.setup.js",
+          "status": "COMPLETED",
+          "file": "jest.setup.js",
+          "verification": "Global mocks for @react-three/fiber (Canvas, useFrame, useThree) and @react-three/drei (OrbitControls, useGLTF, Environment, ContactShadows)."
+        },
+        {
+          "id": "T071",
+          "title": "Create ChamberModel3D unit tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ChamberModel3D.test.tsx",
+          "verification": "10 tests covering container, height, className, canvas rendering, orbit controls, environment, contact shadows, autoRotate prop."
+        },
+        {
+          "id": "T072",
+          "title": "Update IoTDeviceSection tests for 3D model",
+          "status": "COMPLETED",
+          "file": "__tests__/components/IoTDeviceSection.test.tsx",
+          "verification": "Tests updated to handle both CSS fallback and Three.js model rendering. 21 tests passing."
+        },
+        {
+          "id": "T073",
+          "title": "Update jest.config.js transformIgnorePatterns",
+          "status": "COMPLETED",
+          "file": "jest.config.js",
+          "verification": "Added three and @react-three to transformIgnorePatterns."
+        },
+        {
+          "id": "T074",
+          "title": "All tests pass - 403 tests, 37 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "403 tests passing, 37 test suites, 0 failures."
+        },
+        {
+          "id": "T075",
+          "title": "Build succeeds - 14 pages prerendered",
+          "status": "COMPLETED",
+          "command": "npx next build --webpack",
+          "verification": "TypeScript compiled, 14 static pages generated, no errors."
+        },
+        {
+          "id": "T076",
+          "title": "Dev server runs without Turbopack error",
+          "status": "COMPLETED",
+          "command": "npm run dev",
+          "verification": "Dev server starts with Turbopack, page renders with 200 status, no config conflict error."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -546,9 +638,9 @@
     "prdReviewed": "AI agent reads prd.json after each phase to verify completion"
   },
   "currentMetrics": {
-    "testSuites": 36,
-    "testsTotal": 394,
-    "testsPassed": 394,
+    "testSuites": 37,
+    "testsTotal": 403,
+    "testsPassed": 403,
     "testsFailed": 0,
     "coverageStmts": "TBD - run npm test -- --coverage for latest",
     "coverageBranch": "TBD",
@@ -556,11 +648,15 @@
     "coverageLines": "TBD",
     "buildStatus": "SUCCESS",
     "buildMode": "webpack (WASM SWC fallback due to Node.js 24)",
+    "devServerMode": "Turbopack (default, with empty turbopack config to silence warning)",
     "pagesPrerendered": 14,
-    "lastTestRun": "2025-06-20",
+    "lastTestRun": "2026-02-11",
     "nodeVersion": "v24.12.0",
     "nextVersion": "16.1.1",
-    "framerMotionVersion": "12.34.0"
+    "framerMotionVersion": "12.34.0",
+    "threeVersion": "0.172.0",
+    "chamberModelPath": "/public/assets/Chamber.glb",
+    "chamberModelSize": "8.2 MB"
   },
   "sanityDeployment": {
     "studioUrl": "https://ppnamias.sanity.studio/",

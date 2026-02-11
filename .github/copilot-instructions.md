@@ -16,7 +16,8 @@ Next.js 16 landing page for MASH (Mushroom Automation System Hub) - a profession
 - `HeroSection.tsx` - Video background with Sanity CMS integration
 - `FeaturesSection.tsx`, `DemoSection.tsx`, `DocumentationSection.tsx`, `ScopeSection.tsx`, `BookingSection.tsx`, `SupportSection.tsx`, `DownloadSection.tsx`
 - `MobileAppShowcase.tsx` - Interactive phone mockup with 4 app screen previews (Dashboard, Growth Analytics, Environmental Control, Alerts)
-- `IoTDeviceSection.tsx` - CSS 3D IoT device model with mouse-driven rotation and interactive spec panels
+- `IoTDeviceSection.tsx` - Three.js 3D IoT device model (Chamber.glb) with CSS fallback, interactive spec panels
+- `ChamberModel3D.tsx` - Three.js GLB model viewer using @react-three/fiber and drei
 - `Navigation.tsx`, `Footer.tsx` - Shared across pages
 
 **UI Components** (`/components/ui`):
@@ -304,18 +305,21 @@ describe('helperFunction', () => {
 ### Current Test Coverage Status
 Track progress here (updated by agent):
 ```
-Component Tests: 13/13 passing (added MobileAppShowcase, IoTDeviceSection)
+Component Tests: 14/14 passing (added ChamberModel3D)
 Utility Tests: 3/3 passing
-UI Component Tests: 7/7 passing (added ParallaxSection, ScrollReveal, StatusBadge)
-Provider Tests: 2/2 passing (added SmoothScrollProvider)
+UI Component Tests: 7/7 passing (ParallaxSection, ScrollReveal, StatusBadge)
+Provider Tests: 2/2 passing (SmoothScrollProvider)
 App Page Tests: 12/12 passing
-Total Tests: 394 passed, 0 failed
-Test Suites: 36 passed
+Total Tests: 403 passed, 0 failed
+Test Suites: 37 passed
 Build Status: SUCCESS (webpack mode with WASM SWC fallback)
-Build Command: npx next build --webpack
-Last Run: June 2025
+Build Command: npx next build --webpack (also in package.json: npm run build)
+Dev Server: Turbopack (with turbopack: {} in next.config.ts)
+Last Run: February 2026
 Node.js: v24.12.0 (ABI 137 - requires @swc/jest for tests, --webpack for builds)
 framer-motion: 12.34.0 (motion component API, not m/LazyMotion)
+three: 0.172.0 (@react-three/fiber + @react-three/drei for GLB models)
+3D Model: /public/assets/Chamber.glb (8.2 MB)
 
 Fully Tested (100% branch coverage):
 - lib/cal-config.ts (100% all metrics)
@@ -1094,72 +1098,92 @@ STOP WHEN: All documentation created + Reviewed for accuracy + Added to reposito
 
 ---
 
-### Prompt 11: Continue Enhanced Landing Page Improvements
+### Prompt 11: Continue Enhanced Landing Page Improvements (COMPLETED)
 
 ```
-Continue improving the MASH Landing Page enhanced sections and resolve known technical issues.
+STATUS: COMPLETED - February 2026
 
-CURRENT STATE (as of June 2025):
-- 394 tests passing, 36 test suites, 0 failures
-- Build succeeds with `npx next build --webpack` (WASM SWC fallback)
-- Node.js v24.12.0 (ABI 137) - incompatible with @next/swc-win32-x64-msvc native binary
-- framer-motion 12.34.0 with motion (full) component API
-- New components: MobileAppShowcase, IoTDeviceSection, ParallaxSection, ScrollReveal, SmoothScrollProvider
-- StatusBadge extracted to components/ui/status-badge.tsx
+Completed Tasks:
+1. Fixed dev server Turbopack error (added turbopack: {} to next.config.ts)
+2. Updated build script to use --webpack flag in package.json
+3. Integrated Chamber.glb 3D model via Three.js (@react-three/fiber + drei)
+4. Created ChamberModel3D component with lazy loading and CSS fallback
+5. Updated IoTDeviceSection to use real 3D model
+6. Added Three.js mocks to jest.setup.js
+7. All 403 tests passing, 37 suites
+8. Build succeeds (14 pages prerendered)
+9. Dev server runs without Turbopack error
+```
+
+---
+
+### Prompt 12: Next Phase - Production Polish and Sanity 3D Model Migration
+
+```
+Continue improving the MASH Landing Page with production polish, Sanity 3D model migration, and performance optimization.
+
+CURRENT STATE (as of February 2026):
+- 403 tests passing, 37 test suites, 0 failures
+- Build succeeds with `npm run build` (uses --webpack flag)
+- Dev server runs with Turbopack (no more config conflict error)
+- Node.js v24.12.0 (ABI 137) with WASM SWC fallback
+- Chamber.glb 3D model loaded from /public/assets/ (8.2 MB)
+- ChamberModel3D component uses @react-three/fiber + @react-three/drei
+- IoTDeviceSection lazy-loads ChamberModel3D with CSS fallback
+- All framer-motion components use `motion` API (not `m`/`LazyMotion`)
 
 KNOWN TECHNICAL ISSUES:
 1. Node.js 24 SWC incompatibility:
-   - @next/swc-win32-x64-msvc binary compiled for Node.js 22/23 ABI
-   - Build uses WASM fallback (--webpack flag required)
+   - Build uses WASM SWC fallback (--webpack flag in package.json)
    - Tests use @swc/jest instead of next/jest
-   - FIX: Downgrade to Node.js 22 LTS, or wait for Next.js to support Node.js 24
+   - FIX: Downgrade to Node.js 22 LTS when possible
 
-2. npm --legacy-peer-deps strips .d.ts files:
-   - Reinstalling packages may lose TypeScript declarations
-   - FIX: After npm install, verify .d.ts files exist:
-     - node_modules/framer-motion/dist/types/index.d.ts
-     - node_modules/motion-dom/dist/index.d.ts
-     - node_modules/motion-utils/dist/index.d.ts
-   - If missing, reinstall individually: npm install framer-motion@12 --legacy-peer-deps
+2. @sanity/image-url deprecation warning:
+   - "The default export of @sanity/image-url has been deprecated"
+   - FIX: Update import to use `createImageUrlBuilder` named export
 
-3. Webpack resolve config required:
-   - next.config.ts has custom webpack resolve.modules and resolve.alias
-   - Required because WASM SWC webpack resolver can't find framer-motion ecosystem packages
-   - DO NOT remove the webpack config in next.config.ts
+3. Chamber.glb served from /public (not Sanity CDN):
+   - Requires a SANITY_API_WRITE_TOKEN to upload to Sanity
+   - Once token available: upload GLB to Sanity, update ChamberModel3D to use Sanity CDN URL
+   - Schema field already exists: iotDeviceModel in landingPage schema
 
-4. Build command:
-   - DO NOT use `npx next build` (defaults to Turbopack which requires native SWC)
-   - USE `npx next build --webpack` instead
-   - Or add to package.json scripts: "build": "next build --webpack"
+4. npm --legacy-peer-deps strips .d.ts files:
+   - After npm install, verify type files exist for framer-motion, motion-dom, motion-utils
 
 IMPROVEMENT TASKS:
-1. Performance Optimization:
-   - Audit framer-motion bundle size (using motion instead of m increases bundle)
-   - Consider code-splitting showcase components with dynamic imports
-   - Add loading skeletons for heavy Suspense-wrapped sections
+1. Migrate Chamber.glb to Sanity CDN:
+   - Get/create SANITY_API_WRITE_TOKEN
+   - Upload Chamber.glb to Sanity using iotDeviceModel field
+   - Update ChamberModel3D to fetch URL from Sanity via getLandingPageData()
+   - Update tests
 
-2. Accessibility Enhancements:
-   - Add ARIA labels to IoT device interactive specs
+2. Fix @sanity/image-url deprecation:
+   - Replace `import imageUrlBuilder from '@sanity/image-url'`
+   - With `import { createImageUrlBuilder } from '@sanity/image-url'`
+   - Update getSanityImageUrl function in lib/sanity.ts
+
+3. Performance Optimization:
+   - Model compression: Convert Chamber.glb to Draco-compressed format
+   - Add loading progress bar for 3D model
+   - Code-split Three.js dependencies with dynamic imports
+
+4. Accessibility Enhancements:
+   - Add ARIA labels to IoT device spec buttons
    - Tab navigation for MobileAppShowcase screen buttons
-   - Keyboard-accessible mouse rotation simulation for 3D device
+   - Keyboard-accessible 3D model rotation
 
-3. Visual Polish:
-   - Add gradient mesh backgrounds to ParallaxSection
-   - Smooth transitions between app screens in MobileAppShowcase
+5. Visual Polish:
+   - Add gradient mesh backgrounds to sections
    - Loading shimmer effects for Sanity-fetched content
+   - Model interaction hints (drag to rotate)
 
-4. Test Coverage:
+6. Test Coverage:
    - Run coverage report: npx jest --coverage
-   - Target 100% for new components (SmoothScrollProvider, ParallaxSection, ScrollReveal)
-   - Edge cases: reduced motion, error states, loading states
-
-5. Documentation:
-   - Update README.md with new component diagrams
-   - Document the Node.js 24 workarounds for other developers
-   - Add framer-motion usage guide
+   - Target 100% for ChamberModel3D edge cases
+   - Test 3D model loading error states
 
 FOLLOW: Project conventions in .github/copilot-instructions.md
-RALPH LOOP: Create/fix tests -> npx jest -> Fix failures -> npx next build --webpack -> Fix errors -> Repeat
+RALPH LOOP: Create/fix tests -> npx jest -> Fix failures -> npm run build -> Fix errors -> Repeat
 STOP WHEN: All improvements implemented + Tests pass + Build succeeds
 ```
 
@@ -1213,6 +1237,6 @@ STOP WHEN: [CLEAR COMPLETION CRITERIA]
 
 ---
 
-**Last Updated**: June 20, 2025
-**Version**: 2.0.0
+**Last Updated**: February 11, 2026
+**Version**: 3.0.0
 **Maintained By**: MASH Development Team

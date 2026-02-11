@@ -114,3 +114,36 @@ global.ResizeObserver = class ResizeObserver {
   observe() {}
   unobserve() {}
 }
+
+// Mock @react-three/fiber
+jest.mock('@react-three/fiber', () => {
+  const React = require('react')
+  return {
+    Canvas: ({ children, ...props }) => React.createElement('div', { 'data-testid': 'r3f-canvas', ...props }, children),
+    useFrame: jest.fn(),
+    useThree: () => ({
+      gl: {},
+      scene: {},
+      camera: {},
+      size: { width: 800, height: 600 },
+    }),
+  }
+})
+
+// Mock @react-three/drei
+jest.mock('@react-three/drei', () => {
+  const React = require('react')
+  return {
+    OrbitControls: (props) => React.createElement('div', { 'data-testid': 'orbit-controls', ...props }),
+    useGLTF: Object.assign(
+      () => ({
+        scene: {},
+        nodes: {},
+        materials: {},
+      }),
+      { preload: jest.fn() }
+    ),
+    Environment: (props) => React.createElement('div', { 'data-testid': 'environment', ...props }),
+    ContactShadows: (props) => React.createElement('div', { 'data-testid': 'contact-shadows', ...props }),
+  }
+})

@@ -30,7 +30,7 @@ module.exports = {
     }],
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!(next|next-themes|lucide-react|@sanity|next-sanity|framer-motion)/)',
+    '/node_modules/(?!(next|next-themes|lucide-react|@sanity|next-sanity|framer-motion|three|@react-three)/)',
   ],
   collectCoverageFrom: [
     'components/**/*.{js,jsx,ts,tsx}',
