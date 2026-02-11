@@ -3,6 +3,7 @@ import {
   getSanityImageUrl,
   getSanityFileUrl,
   getSanityVideoUrl,
+  getSanity3DModelUrl,
   getLandingPageData,
   getLandingPageDataCached,
 } from '@/lib/sanity';
@@ -199,6 +200,39 @@ describe('getSanityVideoUrl', () => {
     };
     const url = getSanityVideoUrl(videoAsset);
     expect(url).toContain('.webm');
+  });
+});
+
+describe('getSanity3DModelUrl', () => {
+  it('returns CDN URL for GLB model asset', () => {
+    const modelAsset = {
+      _ref: 'file-model123abc-glb',
+      _type: 'reference',
+    };
+    const url = getSanity3DModelUrl(modelAsset);
+    expect(url).toBe('https://cdn.sanity.io/files/test-project/production/model123abc.glb');
+  });
+
+  it('returns CDN URL for GLTF model asset', () => {
+    const modelAsset = {
+      _ref: 'file-gltfmodel456-gltf',
+      _type: 'reference',
+    };
+    const url = getSanity3DModelUrl(modelAsset);
+    expect(url).toContain('.gltf');
+  });
+
+  it('throws error for invalid asset reference', () => {
+    expect(() => getSanity3DModelUrl(null)).toThrow('Invalid asset reference');
+  });
+
+  it('throws error for missing _ref', () => {
+    expect(() => getSanity3DModelUrl({ _type: 'reference' })).toThrow('Invalid asset reference');
+  });
+
+  it('produces same URL as getSanityFileUrl for same asset', () => {
+    const asset = { _ref: 'file-chamber3d-glb', _type: 'reference' };
+    expect(getSanity3DModelUrl(asset)).toBe(getSanityFileUrl(asset));
   });
 });
 

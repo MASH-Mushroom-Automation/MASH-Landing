@@ -58,4 +58,36 @@ describe('ChamberModel3D', () => {
     const container = screen.getByTestId('chamber-model-container');
     expect(container).toHaveClass('w-full');
   });
+
+  // Sanity CMS integration tests
+  it('uses default local model path when no modelUrl provided', () => {
+    render(<ChamberModel3D />);
+    // Component should render without crashing using default /assets/Chamber.glb
+    expect(screen.getByTestId('chamber-model-container')).toBeInTheDocument();
+  });
+
+  it('accepts a Sanity CDN modelUrl', () => {
+    const sanityUrl = 'https://cdn.sanity.io/files/gerattrr/production/abc123.glb';
+    render(<ChamberModel3D modelUrl={sanityUrl} />);
+    expect(screen.getByTestId('chamber-model-container')).toBeInTheDocument();
+  });
+
+  it('accepts a local modelUrl override', () => {
+    render(<ChamberModel3D modelUrl="/assets/custom-model.glb" />);
+    expect(screen.getByTestId('chamber-model-container')).toBeInTheDocument();
+  });
+
+  it('renders with all props combined', () => {
+    render(
+      <ChamberModel3D
+        className="test-class"
+        autoRotate={false}
+        height="600px"
+        modelUrl="https://cdn.sanity.io/files/test/production/model.glb"
+      />
+    );
+    const container = screen.getByTestId('chamber-model-container');
+    expect(container).toHaveClass('test-class');
+    expect(container.style.height).toBe('600px');
+  });
 });

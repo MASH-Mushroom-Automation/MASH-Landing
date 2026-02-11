@@ -192,4 +192,25 @@ describe("IoTDeviceSection", () => {
 
     removeEventListenerSpy.mockRestore();
   });
+
+  // Sanity CMS integration tests
+  it("renders with Sanity CDN modelUrl prop", () => {
+    const sanityUrl = "https://cdn.sanity.io/files/gerattrr/production/abc123.glb";
+    render(<IoTDeviceSection modelUrl={sanityUrl} />);
+    expect(screen.getByText("IoT Hardware")).toBeInTheDocument();
+    // The 3D model or CSS fallback should still render
+    const cssModel = screen.queryByTestId("device-3d-model");
+    const threeModel = screen.queryByTestId("chamber-model-container");
+    expect(cssModel || threeModel).toBeTruthy();
+  });
+
+  it("renders without modelUrl (local fallback)", () => {
+    render(<IoTDeviceSection />);
+    expect(screen.getByText("IoT Hardware")).toBeInTheDocument();
+  });
+
+  it("accepts undefined modelUrl gracefully", () => {
+    render(<IoTDeviceSection modelUrl={undefined} />);
+    expect(screen.getByText("IoT Hardware")).toBeInTheDocument();
+  });
 });

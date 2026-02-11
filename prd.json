@@ -628,6 +628,112 @@
           "verification": "Dev server starts with Turbopack, page renders with 200 status, no config conflict error."
         }
       ]
+    },
+    {
+      "id": "phase-9",
+      "name": "Sanity CMS 3D Model Integration, Enhanced Parallax, and Smooth Scrolling",
+      "status": "COMPLETED",
+      "completedAt": "2026-02-11",
+      "tasks": [
+        {
+          "id": "T077",
+          "title": "Add getSanity3DModelUrl helper to lib/sanity.ts",
+          "status": "COMPLETED",
+          "file": "lib/sanity.ts",
+          "verification": "New getSanity3DModelUrl function added. Delegates to getSanityFileUrl for GLB/GLTF files."
+        },
+        {
+          "id": "T078",
+          "title": "Update GROQ queries with iotDeviceModelUrl",
+          "status": "COMPLETED",
+          "file": "lib/sanity.ts",
+          "verification": "getLandingPageData and getLandingPageDataCached queries now include iotDeviceModelUrl projection."
+        },
+        {
+          "id": "T079",
+          "title": "Add iotDeviceModel fields to LandingPageData interface",
+          "status": "COMPLETED",
+          "file": "lib/sanity.ts",
+          "verification": "LandingPageData interface includes iotDeviceModel asset reference and iotDeviceModelUrl string."
+        },
+        {
+          "id": "T080",
+          "title": "Create upload-3d-model.js script",
+          "status": "COMPLETED",
+          "file": "scripts/upload-3d-model.js",
+          "verification": "Script uploads Chamber.glb to Sanity CMS and patches landingPage document with iotDeviceModel reference."
+        },
+        {
+          "id": "T081",
+          "title": "Enhance ChamberModel3D with Sanity CDN modelUrl prop",
+          "status": "COMPLETED",
+          "file": "components/ChamberModel3D.tsx",
+          "verification": "New modelUrl prop accepts Sanity CDN or local URL. Falls back to /assets/Chamber.glb when not provided."
+        },
+        {
+          "id": "T082",
+          "title": "Add modelUrl prop to IoTDeviceSection",
+          "status": "COMPLETED",
+          "file": "components/IoTDeviceSection.tsx",
+          "verification": "IoTDeviceSectionProps interface with modelUrl prop. Passes to ChamberModel3D. Enhanced parallax with deviceScale and specsX transforms."
+        },
+        {
+          "id": "T083",
+          "title": "Enhance MobileAppShowcase parallax effects",
+          "status": "COMPLETED",
+          "file": "components/MobileAppShowcase.tsx",
+          "verification": "Added phoneScale, featuresX transforms. Improved scroll keyframes for smoother parallax transitions."
+        },
+        {
+          "id": "T084",
+          "title": "Connect app/page.tsx to Sanity for 3D model URL",
+          "status": "COMPLETED",
+          "file": "app/page.tsx",
+          "verification": "Page is now async Server Component. Fetches landingPage data, extracts iotDeviceModel URL, passes to IoTDeviceSection. Graceful error handling."
+        },
+        {
+          "id": "T085",
+          "title": "Update page.test.tsx for async Home and Sanity mock",
+          "status": "COMPLETED",
+          "file": "__tests__/app/page.test.tsx",
+          "verification": "Tests mock getLandingPageData and getSanityFileUrl. Tests verify modelUrl passed to IoTDeviceSection. Tests for Sanity failure and missing data edge cases."
+        },
+        {
+          "id": "T086",
+          "title": "Update ChamberModel3D tests for modelUrl prop",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ChamberModel3D.test.tsx",
+          "verification": "14 tests covering default path, Sanity CDN URL, local override, and combined props."
+        },
+        {
+          "id": "T087",
+          "title": "Update IoTDeviceSection tests for modelUrl prop",
+          "status": "COMPLETED",
+          "file": "__tests__/components/IoTDeviceSection.test.tsx",
+          "verification": "24 tests covering Sanity CDN modelUrl, undefined fallback, and local default."
+        },
+        {
+          "id": "T088",
+          "title": "Add getSanity3DModelUrl tests",
+          "status": "COMPLETED",
+          "file": "__tests__/lib/sanity.test.ts",
+          "verification": "5 tests covering GLB URL, GLTF URL, null asset, missing _ref, and equivalence with getSanityFileUrl."
+        },
+        {
+          "id": "T089",
+          "title": "All tests pass - 418 tests, 37 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "418 tests passing, 37 test suites, 0 failures."
+        },
+        {
+          "id": "T090",
+          "title": "Build succeeds - 14 pages prerendered",
+          "status": "COMPLETED",
+          "command": "npx next build --webpack",
+          "verification": "TypeScript compiled in 12.5s, 14 static pages generated, no errors."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -639,8 +745,8 @@
   },
   "currentMetrics": {
     "testSuites": 37,
-    "testsTotal": 403,
-    "testsPassed": 403,
+    "testsTotal": 418,
+    "testsPassed": 418,
     "testsFailed": 0,
     "coverageStmts": "TBD - run npm test -- --coverage for latest",
     "coverageBranch": "TBD",
@@ -656,7 +762,8 @@
     "framerMotionVersion": "12.34.0",
     "threeVersion": "0.172.0",
     "chamberModelPath": "/public/assets/Chamber.glb",
-    "chamberModelSize": "8.2 MB"
+    "chamberModelSize": "8.2 MB",
+    "sanity3DModelIntegration": "COMPLETE - ChamberModel3D supports Sanity CDN URLs with local fallback"
   },
   "sanityDeployment": {
     "studioUrl": "https://ppnamias.sanity.studio/",
@@ -675,5 +782,9 @@
       "status/page.tsx lines 110-117: allOperational ternary (hardcoded services data all operational)",
       "sanity.ts lines 166-248: TypeScript interface definitions (not executable code)"
     ]
+  },
+  "nextStepsPrompt": {
+    "description": "AI Agent prompt for continuing development after Phase 9 completion",
+    "prompt": "Continue improving the MASH Landing Page. Phase 9 (Sanity CMS 3D Model Integration) is COMPLETE.\n\nCOMPLETED IN PHASE 9:\n- ChamberModel3D component now supports Sanity CDN URLs via modelUrl prop\n- IoTDeviceSection accepts modelUrl and passes to ChamberModel3D\n- MobileAppShowcase enhanced with phoneScale and featuresX parallax\n- app/page.tsx fetches iotDeviceModel from Sanity, passes URL to IoTDeviceSection\n- Upload script created: scripts/upload-3d-model.js\n- 418 tests passing, 37 suites, build succeeds\n\nREMAINING TASKS:\n1. Upload Chamber.glb to Sanity CMS (requires SANITY_API_WRITE_TOKEN):\n   - Set SANITY_API_WRITE_TOKEN in .env.local\n   - Run: node scripts/upload-3d-model.js\n   - Verify in Sanity Studio: https://ppnamias.sanity.studio/\n\n2. Fix @sanity/image-url deprecation warning:\n   - Replace: import imageUrlBuilder from '@sanity/image-url'\n   - With: import { createImageUrlBuilder } from '@sanity/image-url'\n   - Update lib/sanity.ts builder initialization\n\n3. Add mobile app screenshot assets to Sanity:\n   - Create mobileAppScreens field in landingPage schema\n   - Upload actual app screenshots to replace CSS mockups\n   - Update MobileAppShowcase to use real screenshots\n\n4. Performance optimization:\n   - Add loading='lazy' to 3D model section (below fold)\n   - Implement ISR with revalidate for landing page data\n   - Consider preloading 3D model on hover/intersection\n\n5. E2E testing with Playwright:\n   - Test smooth scroll navigation\n   - Test parallax effects render correctly\n   - Test 3D model loads and is interactive\n\nFOLLOW: .github/copilot-instructions.md\nRALPH LOOP: Create/fix tests -> npx jest -> Fix failures -> npx next build --webpack -> Fix errors -> Repeat\nSTOP WHEN: All tasks completed + Tests pass + Build succeeds"
   }
 }

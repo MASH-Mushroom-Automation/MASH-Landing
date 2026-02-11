@@ -6,6 +6,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 // Lazy-load the 3D model component for code-splitting
 const ChamberModel3D = lazy(() => import("@/components/ChamberModel3D"));
 
+export interface IoTDeviceSectionProps {
+  /**
+   * URL to the 3D model from Sanity CMS.
+   * If provided, takes priority over local /assets/Chamber.glb.
+   */
+  modelUrl?: string;
+}
+
 /**
  * IoT Device specifications for the MASH system.
  */
@@ -147,7 +155,7 @@ function DeviceModel3D({ rotateX, rotateY }: { rotateX: number; rotateY: number 
  * IoTDeviceSection displays a 3D-rendered IoT device with parallax scrolling
  * and interactive specification panels.
  */
-export default function IoTDeviceSection() {
+export default function IoTDeviceSection({ modelUrl }: IoTDeviceSectionProps = {}) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeSpec, setActiveSpec] = useState("sensors");
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -157,8 +165,11 @@ export default function IoTDeviceSection() {
     offset: ["start end", "end start"],
   });
 
-  const deviceY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // Enhanced parallax transforms for smoother experience
+  const deviceY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
+  const deviceScale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.85]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  const specsX = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [60, 0, 0, -60]);
 
   // Mouse-driven 3D rotation
   useEffect(() => {
@@ -194,7 +205,10 @@ export default function IoTDeviceSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* 3D Device Model */}
-          <motion.div style={{ y: deviceY } as Record<string, unknown>} className="flex justify-center">
+          <motion.div
+            style={{ y: deviceY, scale: deviceScale } as Record<string, unknown>}
+            className="flex justify-center"
+          >
             <div className="relative">
               {/* Glow effect behind device */}
               <div className="absolute inset-0 bg-green-500/10 blur-3xl rounded-full scale-150" />
@@ -203,13 +217,14 @@ export default function IoTDeviceSection() {
                   height="420px"
                   className="w-[320px] md:w-[400px]"
                   autoRotate={true}
+                  modelUrl={modelUrl}
                 />
               </Suspense>
             </div>
           </motion.div>
 
           {/* Specifications */}
-          <motion.div style={{ opacity: contentOpacity }}>
+          <motion.div style={{ opacity: contentOpacity, x: specsX } as Record<string, unknown>}>
             <h3 className="text-2xl font-bold text-primary mb-6">
               Device Specifications
             </h3>

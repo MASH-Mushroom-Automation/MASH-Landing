@@ -71,9 +71,11 @@ export default function MobileAppShowcase() {
     offset: ["start end", "end start"],
   });
 
-  const phoneY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const phoneRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [-5, 0, 5]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const phoneY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [80, 0, 0, -80]);
+  const phoneRotateY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [-8, 0, 0, 8]);
+  const phoneScale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.9, 1, 1, 0.9]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  const featuresX = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [50, 0, 0, -50]);
 
   const currentScreen = APP_SCREENS.find((s) => s.id === activeScreen) || APP_SCREENS[0];
 
@@ -96,7 +98,7 @@ export default function MobileAppShowcase() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Phone Mockup */}
           <motion.div
-            style={{ y: phoneY, rotateY: phoneRotateY } as Record<string, unknown>}
+            style={{ y: phoneY, rotateY: phoneRotateY, scale: phoneScale } as Record<string, unknown>}
             className="flex justify-center perspective-1000"
           >
             <div className="relative w-[280px] h-[560px] rounded-[3rem] border-4 border-gray-700 dark:border-gray-600 bg-gray-900 shadow-2xl overflow-hidden">
@@ -176,7 +178,7 @@ export default function MobileAppShowcase() {
           </motion.div>
 
           {/* Feature selector */}
-          <motion.div style={{ opacity: contentOpacity }} className="space-y-4">
+          <motion.div style={{ opacity: contentOpacity, x: featuresX } as Record<string, unknown>} className="space-y-4">
             <h3 className="text-2xl font-bold text-primary mb-6">
               App Features
             </h3>

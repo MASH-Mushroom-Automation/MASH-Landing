@@ -114,6 +114,15 @@ export function getSanityVideoUrl(asset: any, options: Record<string, any> = {})
 }
 
 /**
+ * Get 3D model URL from Sanity (for GLB/GLTF files)
+ * @param asset - Sanity file asset reference for 3D model
+ * @returns Direct URL to the 3D model file on Sanity CDN
+ */
+export function getSanity3DModelUrl(asset: any): string {
+  return getSanityFileUrl(asset);
+}
+
+/**
  * Fetch landing page data from Sanity
  * @returns Landing page document
  */
@@ -127,7 +136,8 @@ export async function getLandingPageData() {
       "thumbnailUrl": thumbnail.asset->url
     },
     "downloadApkUrl": downloadApk.asset->url,
-    "seoImageUrl": seoImage.asset->url
+    "seoImageUrl": seoImage.asset->url,
+    "iotDeviceModelUrl": iotDeviceModel.asset->url
   }`;
 
   try {
@@ -154,7 +164,8 @@ export async function getLandingPageDataCached(revalidate: number = 60) {
       "thumbnailUrl": thumbnail.asset->url
     },
     "downloadApkUrl": downloadApk.asset->url,
-    "seoImageUrl": seoImage.asset->url
+    "seoImageUrl": seoImage.asset->url,
+    "iotDeviceModelUrl": iotDeviceModel.asset->url
   }`;
 
   try {
@@ -242,6 +253,13 @@ export interface LandingPageData {
   seoDescription?: string;
   seoImage?: any;
   seoImageUrl?: string;
+  iotDeviceModel?: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
+  iotDeviceModelUrl?: string;
 }
 
 // Re-export client for advanced usage

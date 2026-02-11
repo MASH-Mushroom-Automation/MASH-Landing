@@ -10,8 +10,20 @@ import BookingSection from "@/components/BookingSection";
 import SupportSection from "@/components/SupportSection";
 import DownloadSection from "@/components/DownloadSection";
 import Footer from "@/components/Footer";
+import { getLandingPageData, getSanityFileUrl } from "@/lib/sanity";
 
-export default function Home() {
+export default async function Home() {
+  let modelUrl: string | undefined;
+
+  try {
+    const data = await getLandingPageData();
+    if (data?.iotDeviceModel?.asset) {
+      modelUrl = getSanityFileUrl(data.iotDeviceModel.asset);
+    }
+  } catch {
+    // Sanity fetch failed - IoTDeviceSection will use local fallback
+  }
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -19,7 +31,7 @@ export default function Home() {
         <HeroSection />
         <FeaturesSection />
         <MobileAppShowcase />
-        <IoTDeviceSection />
+        <IoTDeviceSection modelUrl={modelUrl} />
         <DemoSection />
         <DocumentationSection />
         <ScopeSection />

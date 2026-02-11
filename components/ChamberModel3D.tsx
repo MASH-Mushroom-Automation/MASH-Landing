@@ -6,18 +6,18 @@ import { OrbitControls, useGLTF, Environment, ContactShadows } from "@react-thre
 import type { Group } from "three";
 
 /**
- * Path to the Chamber GLB model served from the public folder.
- * When a Sanity write token is available, this can be migrated to Sanity CDN.
+ * Default path to the Chamber GLB model served from the public folder.
+ * Used as fallback when no Sanity CDN URL is provided.
  */
-const CHAMBER_MODEL_PATH = "/assets/Chamber.glb";
+const DEFAULT_MODEL_PATH = "/assets/Chamber.glb";
 
 /**
  * Inner component that loads and renders the GLB model within the Canvas context.
  * Applies a slow rotation animation and centers the model in the scene.
  */
-function ChamberScene({ autoRotate = true }: { autoRotate?: boolean }) {
+function ChamberScene({ modelUrl, autoRotate = true }: { modelUrl: string; autoRotate?: boolean }) {
   const groupRef = useRef<Group>(null);
-  const { scene } = useGLTF(CHAMBER_MODEL_PATH);
+  const { scene } = useGLTF(modelUrl);
 
   useFrame((_, delta) => {
     if (autoRotate && groupRef.current) {
@@ -57,22 +57,40 @@ export interface ChamberModel3DProps {
   autoRotate?: boolean;
   /** Height of the canvas container. Default: "400px" */
   height?: string;
+  /**
+   * URL to the 3D model file. Can be:
+   * - A Sanity CDN URL (e.g., https://cdn.sanity.io/files/...)
+   * - A local path (e.g., /assets/Chamber.glb)
+   * - If not provided, defaults to /assets/Chamber.glb
+   */
+  modelUrl?: string;
 }
 
 /**
  * ChamberModel3D renders the MASH IoT chamber as an interactive 3D model.
+ * Supports loading models from Sanity CMS CDN or local public folder.
+ *
  * Uses @react-three/fiber + @react-three/drei for GLB rendering with:
  * - OrbitControls for mouse/touch interaction
  * - Environment lighting for realistic materials
  * - Contact shadows for grounding
  * - Auto-rotation animation
  * - Loading fallback spinner
+ *
+ * Sanity CMS Integration:
+ * - The 3D model can be managed through Sanity Studio
+ * - Upload via scripts/upload-3d-model.js
+ * - Model URL fetched from iotDeviceModel field in landingPage document
+ * - Falls back to local /assets/Chamber.glb if no Sanity URL provided
  */
 export default function ChamberModel3D({
   className = "",
   autoRotate = true,
   height = "400px",
+  modelUrl,
 }: ChamberModel3DProps) {
+  const resolvedUrl = modelUrl || DEFAULT_MODEL_PATH;
+
   return (
     <div
       className={`relative w-full ${className}`}
@@ -89,7 +107,7 @@ export default function ChamberModel3D({
           <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
           <pointLight position={[-5, 3, -5]} intensity={0.4} color="#22c55e" />
 
-          <ChamberScene autoRotate={autoRotate} />
+          <ChamberScene autoRotate={autoRotate} modelUrl={resolvedUrl} />
 
           <ContactShadows
             position={[0, -1.5, 0]}
@@ -115,5 +133,5 @@ export default function ChamberModel3D({
   );
 }
 
-// Preload the model for faster initial rendering
-useGLTF.preload(CHAMBER_MODEL_PATH);
+// Preload the default model for faster initial rendering
+useGLTF.preload(DEFAULT_MODEL_PATH);
