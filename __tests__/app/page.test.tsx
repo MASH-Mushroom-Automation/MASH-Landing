@@ -6,6 +6,8 @@ import Home from '@/app/page';
 jest.mock('@/components/Navigation', () => () => <nav data-testid="navigation">Navigation</nav>);
 jest.mock('@/components/HeroSection', () => () => <section data-testid="hero">Hero</section>);
 jest.mock('@/components/FeaturesSection', () => () => <section data-testid="features">Features</section>);
+jest.mock('@/components/MobileAppShowcase', () => () => <section data-testid="mobile-app">MobileApp</section>);
+jest.mock('@/components/IoTDeviceSection', () => () => <section data-testid="iot-device">IoTDevice</section>);
 jest.mock('@/components/DemoSection', () => () => <section data-testid="demo">Demo</section>);
 jest.mock('@/components/DocumentationSection', () => () => <section data-testid="documentation">Documentation</section>);
 jest.mock('@/components/ScopeSection', () => () => <section data-testid="scope">Scope</section>);
@@ -24,6 +26,8 @@ describe('Home Page', () => {
     render(<Home />);
     expect(screen.getByTestId('hero')).toBeInTheDocument();
     expect(screen.getByTestId('features')).toBeInTheDocument();
+    expect(screen.getByTestId('mobile-app')).toBeInTheDocument();
+    expect(screen.getByTestId('iot-device')).toBeInTheDocument();
     expect(screen.getByTestId('demo')).toBeInTheDocument();
     expect(screen.getByTestId('documentation')).toBeInTheDocument();
     expect(screen.getByTestId('scope')).toBeInTheDocument();

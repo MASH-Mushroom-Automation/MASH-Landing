@@ -308,3 +308,20 @@ html {
 section {
   scroll-margin-top: 4rem;
 }
+
+/* 3D perspective for parallax containers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* GPU-accelerated transforms for smooth parallax */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Smooth scroll snap sections (optional, for mobile) */
+@media (prefers-reduced-motion: no-preference) {
+  .parallax-container {
+    will-change: transform, opacity;
+  }
+}

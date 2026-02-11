@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
-import { CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "System Status - MASH",
@@ -66,41 +67,6 @@ const recentIncidents = [
     status: "resolved",
   },
 ];
-
-export function StatusBadge({ status }: { status: string }) {
-  switch (status) {
-    case "operational":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success-light text-success-strong">
-          <CheckCircle className="w-4 h-4 mr-1" />
-          Operational
-        </span>
-      );
-    case "degraded":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-warning-light text-warning-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Degraded
-        </span>
-      );
-    case "outage":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-error-light text-error-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Outage
-        </span>
-      );
-    case "maintenance":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-blue-light text-accent-blue">
-          <Clock className="w-4 h-4 mr-1" />
-          Maintenance
-        </span>
-      );
-    default:
-      return null;
-  }
-}
 
 export default function StatusPage() {
   const allOperational = services.every((s) => s.status === "operational");

@@ -26,6 +26,61 @@ jest.mock('next-themes', () => ({
   }),
 }))
 
+// Mock framer-motion
+jest.mock('framer-motion', () => {
+  const React = require('react')
+  const forwardRef = React.forwardRef
+
+  // Create a motion component factory
+  const createMotionComponent = (tag) => {
+    const Component = forwardRef((props, ref) => {
+      const { initial, animate, exit, whileHover, whileInView, whileTap, variants, transition, viewport, style, ...rest } = props
+      return React.createElement(tag, { ...rest, ref, style })
+    })
+    Component.displayName = `motion.${tag}`
+    return Component
+  }
+
+  const motion = new Proxy({}, {
+    get: (_, tag) => createMotionComponent(tag),
+  })
+
+  // m is an alias for motion
+  const m = new Proxy({}, {
+    get: (_, tag) => createMotionComponent(tag),
+  })
+
+  return {
+    __esModule: true,
+    motion,
+    m,
+    AnimatePresence: ({ children }) => children,
+    LazyMotion: ({ children }) => children,
+    domAnimation: {},
+    useScroll: () => ({
+      scrollYProgress: { get: () => 0.5, onChange: jest.fn() },
+      scrollXProgress: { get: () => 0 },
+    }),
+    useTransform: (value, inputRange, outputRange) => {
+      if (Array.isArray(outputRange) && outputRange.length > 0) {
+        return { get: () => outputRange[Math.floor(outputRange.length / 2)] }
+      }
+      return { get: () => 0 }
+    },
+    useMotionValue: (initial) => ({
+      get: () => initial,
+      set: jest.fn(),
+      onChange: jest.fn(),
+    }),
+    useSpring: (value) => value,
+    useInView: () => true,
+    useAnimation: () => ({
+      start: jest.fn(),
+      stop: jest.fn(),
+    }),
+  }
+})
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -49,5 +104,13 @@ global.IntersectionObserver = class IntersectionObserver {
   takeRecords() {
     return []
   }
+  unobserve() {}
+}
+
+// Mock ResizeObserver (needed for Three.js canvas)
+global.ResizeObserver = class ResizeObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
   unobserve() {}
 }

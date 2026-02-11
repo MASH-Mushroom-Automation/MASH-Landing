@@ -15,12 +15,21 @@ Next.js 16 landing page for MASH (Mushroom Automation System Hub) - a profession
 **Section Components** (main landing page sections):
 - `HeroSection.tsx` - Video background with Sanity CMS integration
 - `FeaturesSection.tsx`, `DemoSection.tsx`, `DocumentationSection.tsx`, `ScopeSection.tsx`, `BookingSection.tsx`, `SupportSection.tsx`, `DownloadSection.tsx`
+- `MobileAppShowcase.tsx` - Interactive phone mockup with 4 app screen previews (Dashboard, Growth Analytics, Environmental Control, Alerts)
+- `IoTDeviceSection.tsx` - CSS 3D IoT device model with mouse-driven rotation and interactive spec panels
 - `Navigation.tsx`, `Footer.tsx` - Shared across pages
 
 **UI Components** (`/components/ui`):
 - shadcn/ui pattern: Individual component files like `button.tsx`, `card.tsx`, `theme-toggle.tsx`
+- `parallax-section.tsx` - Scroll-driven parallax wrapper using framer-motion
+- `scroll-reveal.tsx` - Scroll-triggered entrance animations
+- `status-badge.tsx` - Status indicator badges (operational, degraded, outage, maintenance)
 - Variants defined using `class-variance-authority` (CVA)
 - All use `cn()` utility from `@/lib/utils` for className merging
+
+**Provider Components** (`/components/providers`):
+- `theme-provider.tsx` - next-themes ThemeProvider wrapper
+- `smooth-scroll-provider.tsx` - CSS smooth scroll with prefers-reduced-motion support
 
 **Layout Components** (`/components/layout`):
 - `PageLayout.tsx` - Wrapper for standalone pages
@@ -295,15 +304,18 @@ describe('helperFunction', () => {
 ### Current Test Coverage Status
 Track progress here (updated by agent):
 ```
-Component Tests: 11/11 passing
+Component Tests: 13/13 passing (added MobileAppShowcase, IoTDeviceSection)
 Utility Tests: 3/3 passing
-UI Component Tests: 4/4 passing
+UI Component Tests: 7/7 passing (added ParallaxSection, ScrollReveal, StatusBadge)
+Provider Tests: 2/2 passing (added SmoothScrollProvider)
 App Page Tests: 12/12 passing
-Total Tests: 323 passed, 0 failed
-Test Suites: 31 passed
-Build Status: SUCCESS
+Total Tests: 394 passed, 0 failed
+Test Suites: 36 passed
+Build Status: SUCCESS (webpack mode with WASM SWC fallback)
+Build Command: npx next build --webpack
 Last Run: June 2025
-Coverage: 96.06% stmts, 94.06% branches, 100% functions, 99.02% lines
+Node.js: v24.12.0 (ABI 137 - requires @swc/jest for tests, --webpack for builds)
+framer-motion: 12.34.0 (motion component API, not m/LazyMotion)
 
 Fully Tested (100% branch coverage):
 - lib/cal-config.ts (100% all metrics)
@@ -1082,6 +1094,77 @@ STOP WHEN: All documentation created + Reviewed for accuracy + Added to reposito
 
 ---
 
+### Prompt 11: Continue Enhanced Landing Page Improvements
+
+```
+Continue improving the MASH Landing Page enhanced sections and resolve known technical issues.
+
+CURRENT STATE (as of June 2025):
+- 394 tests passing, 36 test suites, 0 failures
+- Build succeeds with `npx next build --webpack` (WASM SWC fallback)
+- Node.js v24.12.0 (ABI 137) - incompatible with @next/swc-win32-x64-msvc native binary
+- framer-motion 12.34.0 with motion (full) component API
+- New components: MobileAppShowcase, IoTDeviceSection, ParallaxSection, ScrollReveal, SmoothScrollProvider
+- StatusBadge extracted to components/ui/status-badge.tsx
+
+KNOWN TECHNICAL ISSUES:
+1. Node.js 24 SWC incompatibility:
+   - @next/swc-win32-x64-msvc binary compiled for Node.js 22/23 ABI
+   - Build uses WASM fallback (--webpack flag required)
+   - Tests use @swc/jest instead of next/jest
+   - FIX: Downgrade to Node.js 22 LTS, or wait for Next.js to support Node.js 24
+
+2. npm --legacy-peer-deps strips .d.ts files:
+   - Reinstalling packages may lose TypeScript declarations
+   - FIX: After npm install, verify .d.ts files exist:
+     - node_modules/framer-motion/dist/types/index.d.ts
+     - node_modules/motion-dom/dist/index.d.ts
+     - node_modules/motion-utils/dist/index.d.ts
+   - If missing, reinstall individually: npm install framer-motion@12 --legacy-peer-deps
+
+3. Webpack resolve config required:
+   - next.config.ts has custom webpack resolve.modules and resolve.alias
+   - Required because WASM SWC webpack resolver can't find framer-motion ecosystem packages
+   - DO NOT remove the webpack config in next.config.ts
+
+4. Build command:
+   - DO NOT use `npx next build` (defaults to Turbopack which requires native SWC)
+   - USE `npx next build --webpack` instead
+   - Or add to package.json scripts: "build": "next build --webpack"
+
+IMPROVEMENT TASKS:
+1. Performance Optimization:
+   - Audit framer-motion bundle size (using motion instead of m increases bundle)
+   - Consider code-splitting showcase components with dynamic imports
+   - Add loading skeletons for heavy Suspense-wrapped sections
+
+2. Accessibility Enhancements:
+   - Add ARIA labels to IoT device interactive specs
+   - Tab navigation for MobileAppShowcase screen buttons
+   - Keyboard-accessible mouse rotation simulation for 3D device
+
+3. Visual Polish:
+   - Add gradient mesh backgrounds to ParallaxSection
+   - Smooth transitions between app screens in MobileAppShowcase
+   - Loading shimmer effects for Sanity-fetched content
+
+4. Test Coverage:
+   - Run coverage report: npx jest --coverage
+   - Target 100% for new components (SmoothScrollProvider, ParallaxSection, ScrollReveal)
+   - Edge cases: reduced motion, error states, loading states
+
+5. Documentation:
+   - Update README.md with new component diagrams
+   - Document the Node.js 24 workarounds for other developers
+   - Add framer-motion usage guide
+
+FOLLOW: Project conventions in .github/copilot-instructions.md
+RALPH LOOP: Create/fix tests -> npx jest -> Fix failures -> npx next build --webpack -> Fix errors -> Repeat
+STOP WHEN: All improvements implemented + Tests pass + Build succeeds
+```
+
+---
+
 ### Prompt Template: Custom Task
 
 ```
@@ -1130,6 +1213,6 @@ STOP WHEN: [CLEAR COMPLETION CRITERIA]
 
 ---
 
-**Last Updated**: February 10, 2026
-**Version**: 1.0.0
+**Last Updated**: June 20, 2025
+**Version**: 2.0.0
 **Maintained By**: MASH Development Team

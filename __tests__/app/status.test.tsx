@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import StatusPage, { StatusBadge } from '@/app/status/page';
+import StatusPage from '@/app/status/page';
+import { StatusBadge } from '@/components/ui/status-badge';
 
 // Mock layout and icons
 jest.mock('@/components/layout/PageLayout', () => ({ children }: { children: React.ReactNode }) => <div data-testid="page-layout">{children}</div>);

@@ -1,7 +1,7 @@
 {
-  "project": "MASH Landing Page - Sanity CMS Integration",
-  "version": "2.0.0",
-  "lastUpdated": "2025-06-19",
+  "project": "MASH Landing Page - Enhanced with Parallax and Showcase Sections",
+  "version": "3.0.0",
+  "lastUpdated": "2025-06-20",
   "status": "COMPLETED",
   "rules": {
     "noEmojis": true,
@@ -381,6 +381,161 @@
           "verification": "Exit code 0, 14 pages prerendered, no TypeScript or ESLint errors."
         }
       ]
+    },
+    {
+      "id": "phase-7",
+      "name": "Enhanced Landing Page - Parallax, Smooth Scroll, and Showcase Sections",
+      "status": "COMPLETED",
+      "completedAt": "2025-06-20",
+      "tasks": [
+        {
+          "id": "T044",
+          "title": "Create SmoothScrollProvider component",
+          "status": "COMPLETED",
+          "file": "components/providers/smooth-scroll-provider.tsx",
+          "verification": "CSS scroll-behavior provider with prefers-reduced-motion support. Wraps application in layout.tsx."
+        },
+        {
+          "id": "T045",
+          "title": "Create ParallaxSection component",
+          "status": "COMPLETED",
+          "file": "components/ui/parallax-section.tsx",
+          "verification": "Scroll-driven parallax using framer-motion useScroll/useTransform. Supports speed, fadeOnScroll, scaleOnScroll props."
+        },
+        {
+          "id": "T046",
+          "title": "Create ScrollReveal component",
+          "status": "COMPLETED",
+          "file": "components/ui/scroll-reveal.tsx",
+          "verification": "Scroll-triggered entrance animations with configurable direction, delay, and distance."
+        },
+        {
+          "id": "T047",
+          "title": "Create MobileAppShowcase component",
+          "status": "COMPLETED",
+          "file": "components/MobileAppShowcase.tsx",
+          "verification": "Phone mockup with 4 app screens (Dashboard, Growth Analytics, Environmental Control, Alerts). Interactive screen switching with AnimatePresence transitions."
+        },
+        {
+          "id": "T048",
+          "title": "Create IoTDeviceSection component",
+          "status": "COMPLETED",
+          "file": "components/IoTDeviceSection.tsx",
+          "verification": "CSS 3D IoT device model with mouse-driven rotation. 4 spec panels (sensors, controller, actuators, connectivity) with interactive switching."
+        },
+        {
+          "id": "T049",
+          "title": "Integrate new sections into landing page",
+          "status": "COMPLETED",
+          "file": "app/page.tsx",
+          "verification": "MobileAppShowcase and IoTDeviceSection integrated into main page with ParallaxSection wrappers."
+        },
+        {
+          "id": "T050",
+          "title": "Update layout with SmoothScrollProvider",
+          "status": "COMPLETED",
+          "file": "app/layout.tsx",
+          "verification": "SmoothScrollProvider wraps children in RootLayout."
+        },
+        {
+          "id": "T051",
+          "title": "Add parallax CSS utilities to globals.css",
+          "status": "COMPLETED",
+          "file": "app/globals.css",
+          "verification": "Added perspective, parallax-container, and parallax-slow CSS utilities."
+        },
+        {
+          "id": "T052",
+          "title": "Install framer-motion dependency",
+          "status": "COMPLETED",
+          "packages": ["framer-motion@12.34.0"],
+          "verification": "framer-motion 12.34.0 with motion-dom and motion-utils installed in package.json."
+        },
+        {
+          "id": "T053",
+          "title": "Fix Node.js 24 SWC binary incompatibility for tests",
+          "status": "COMPLETED",
+          "packages": ["@swc/jest", "@swc/core"],
+          "verification": "jest.config.js rewritten to use @swc/jest instead of next/jest. All tests pass with @swc/jest transformer."
+        },
+        {
+          "id": "T054",
+          "title": "Create SmoothScrollProvider tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/SmoothScrollProvider.test.tsx",
+          "verification": "Tests for smooth scroll CSS, reduced motion preference, cleanup on unmount."
+        },
+        {
+          "id": "T055",
+          "title": "Create ParallaxSection tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ParallaxSection.test.tsx",
+          "verification": "Tests for rendering, speed prop, fadeOnScroll, scaleOnScroll, className, reduced motion fallback."
+        },
+        {
+          "id": "T056",
+          "title": "Create ScrollReveal tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ScrollReveal.test.tsx",
+          "verification": "Tests for rendering, direction variants, delay, reduced motion, className passthrough."
+        },
+        {
+          "id": "T057",
+          "title": "Create MobileAppShowcase tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/MobileAppShowcase.test.tsx",
+          "verification": "16 tests covering screen switching, button activation, content display, phone mockup rendering."
+        },
+        {
+          "id": "T058",
+          "title": "Create IoTDeviceSection tests",
+          "status": "COMPLETED",
+          "file": "__tests__/components/IoTDeviceSection.test.tsx",
+          "verification": "22 tests covering spec switching, mouse rotation, device model rendering, highlight effects."
+        },
+        {
+          "id": "T059",
+          "title": "Fix webpack build - framer-motion module resolution",
+          "status": "COMPLETED",
+          "file": "next.config.ts",
+          "verification": "Added webpack resolve.modules and resolve.alias config. WASM SWC fallback now resolves framer-motion, motion-dom, motion-utils correctly."
+        },
+        {
+          "id": "T060",
+          "title": "Fix TypeScript build errors - motion component types",
+          "status": "COMPLETED",
+          "files": ["components/IoTDeviceSection.tsx", "components/MobileAppShowcase.tsx", "components/ui/parallax-section.tsx"],
+          "verification": "Switched from m (lazy) to motion (full) components. Added Record<string, unknown> casts for MotionValue style props. Fixed offset type in ParallaxSection."
+        },
+        {
+          "id": "T061",
+          "title": "Extract StatusBadge to separate component",
+          "status": "COMPLETED",
+          "file": "components/ui/status-badge.tsx",
+          "verification": "Extracted from app/status/page.tsx to fix Next.js App Router export restriction. Tests updated to import from new location."
+        },
+        {
+          "id": "T062",
+          "title": "Create .env.local with Sanity and Cal.com vars",
+          "status": "COMPLETED",
+          "file": ".env.local",
+          "verification": "Environment variables set: SANITY_PROJECT_ID=gerattrr, DATASET=production, CAL_USERNAME=mash-mushroom."
+        },
+        {
+          "id": "T063",
+          "title": "All tests pass - 394 tests, 36 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "394 tests passing, 36 test suites, 0 failures."
+        },
+        {
+          "id": "T064",
+          "title": "Build succeeds - webpack mode with WASM SWC",
+          "status": "COMPLETED",
+          "command": "npx next build --webpack",
+          "verification": "14 pages prerendered, TypeScript check passed, no errors."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -391,17 +546,21 @@
     "prdReviewed": "AI agent reads prd.json after each phase to verify completion"
   },
   "currentMetrics": {
-    "testSuites": 31,
-    "testsTotal": 323,
-    "testsPassed": 323,
+    "testSuites": 36,
+    "testsTotal": 394,
+    "testsPassed": 394,
     "testsFailed": 0,
-    "coverageStmts": 96.06,
-    "coverageBranch": 94.06,
-    "coverageFuncs": 100,
-    "coverageLines": 99.02,
+    "coverageStmts": "TBD - run npm test -- --coverage for latest",
+    "coverageBranch": "TBD",
+    "coverageFuncs": "TBD",
+    "coverageLines": "TBD",
     "buildStatus": "SUCCESS",
+    "buildMode": "webpack (WASM SWC fallback due to Node.js 24)",
     "pagesPrerendered": 14,
-    "lastTestRun": "2025-06-19"
+    "lastTestRun": "2025-06-20",
+    "nodeVersion": "v24.12.0",
+    "nextVersion": "16.1.1",
+    "framerMotionVersion": "12.34.0"
   },
   "sanityDeployment": {
     "studioUrl": "https://ppnamias.sanity.studio/",

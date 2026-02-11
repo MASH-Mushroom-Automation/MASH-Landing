@@ -9,6 +9,13 @@ jest.mock('next-themes', () => ({
   ),
 }));
 
+// Mock SmoothScrollProvider
+jest.mock('@/components/providers/smooth-scroll-provider', () => ({
+  SmoothScrollProvider: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="smooth-scroll-provider">{children}</div>
+  ),
+}));
+
 describe('RootLayout', () => {
   it('renders children', () => {
     const { container } = render(
@@ -26,6 +33,15 @@ describe('RootLayout', () => {
       </RootLayout>
     );
     expect(screen.getByTestId('theme-provider')).toBeInTheDocument();
+  });
+
+  it('wraps children in SmoothScrollProvider', () => {
+    render(
+      <RootLayout>
+        <div>Content</div>
+      </RootLayout>
+    );
+    expect(screen.getByTestId('smooth-scroll-provider')).toBeInTheDocument();
   });
 
   it('renders html element with lang attribute', () => {

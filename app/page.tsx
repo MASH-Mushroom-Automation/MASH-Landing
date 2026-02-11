@@ -1,6 +1,8 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import MobileAppShowcase from "@/components/MobileAppShowcase";
+import IoTDeviceSection from "@/components/IoTDeviceSection";
 import DemoSection from "@/components/DemoSection";
 import DocumentationSection from "@/components/DocumentationSection";
 import ScopeSection from "@/components/ScopeSection";
@@ -16,6 +18,8 @@ export default function Home() {
       <main>
         <HeroSection />
         <FeaturesSection />
+        <MobileAppShowcase />
+        <IoTDeviceSection />
         <DemoSection />
         <DocumentationSection />
         <ScopeSection />
