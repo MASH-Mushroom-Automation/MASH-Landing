@@ -240,6 +240,7 @@ export interface LandingPageData {
     icon: string;
     color: string;
     features: string[];
+    screenshot?: { asset: SanityAssetRef };
   }>;
 
   // IoT Device Section

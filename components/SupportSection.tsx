@@ -25,11 +25,11 @@ const CHANNEL_ICON_MAP: Record<string, React.ReactNode> = {
   ),
 };
 
-const CHANNEL_STYLE_MAP: Record<string, { gradient: string; iconBg: string; textColor: string }> = {
-  calendar: { gradient: "from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30", iconBg: "bg-emerald-600", textColor: "text-emerald-800 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-200" },
-  email: { gradient: "from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30", iconBg: "bg-green-600", textColor: "text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200" },
-  community: { gradient: "from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30", iconBg: "bg-blue-600", textColor: "text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200" },
-  knowledge: { gradient: "from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30", iconBg: "bg-purple-600", textColor: "text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200" },
+const CHANNEL_STYLE_MAP: Record<string, { bg: string; iconBg: string; textColor: string }> = {
+  calendar: { bg: "bg-emerald-50 dark:bg-emerald-900/30", iconBg: "bg-emerald-600", textColor: "text-emerald-800 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-200" },
+  email: { bg: "bg-green-50 dark:bg-green-900/30", iconBg: "bg-green-600", textColor: "text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200" },
+  community: { bg: "bg-blue-50 dark:bg-blue-900/30", iconBg: "bg-blue-600", textColor: "text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200" },
+  knowledge: { bg: "bg-purple-50 dark:bg-purple-900/30", iconBg: "bg-purple-600", textColor: "text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200" },
 };
 
 const DEFAULT_CHANNELS = [
@@ -83,7 +83,7 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
             const isExternal = channel.link.startsWith("http");
             const isMailto = channel.link.startsWith("mailto:");
             return (
-              <div key={index} className={`bg-gradient-to-br ${style.gradient} p-8 rounded-xl text-center`}>
+              <div key={index} className={`${style.bg} p-8 rounded-xl text-center`}>
                 <div className={`w-16 h-16 ${style.iconBg} rounded-full flex items-center justify-center mx-auto mb-4`}>
                   {CHANNEL_ICON_MAP[channel.icon] ?? CHANNEL_ICON_MAP["calendar"]}
                 </div>

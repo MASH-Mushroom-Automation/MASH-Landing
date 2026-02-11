@@ -74,6 +74,7 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
             loop
             muted
             playsInline
+            crossOrigin="anonymous"
             className="w-full h-full object-cover opacity-20 dark:opacity-10"
             onError={() => setVideoError(true)}
             aria-hidden="true"

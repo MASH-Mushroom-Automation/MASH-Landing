@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import type { LandingPageData } from "@/lib/sanity";
+import { getSanityImageUrl } from "@/lib/sanity";
 
 const SCREEN_ICON_MAP: Record<string, React.ReactNode> = {
   dashboard: (
@@ -27,16 +29,26 @@ const SCREEN_ICON_MAP: Record<string, React.ReactNode> = {
   ),
 };
 
+interface AppScreen {
+  id: string;
+  title: string;
+  description: string;
+  color: string;
+  icon: string;
+  features: string[];
+  screenshotUrl?: string;
+}
+
 /**
  * App screens data representing the MASH mobile application.
  * Each screen shows a key feature of the mobile app.
  */
-const DEFAULT_SCREENS = [
+const DEFAULT_SCREENS: AppScreen[] = [
   {
     id: "dashboard",
     title: "Dashboard",
     description: "Real-time overview of all your growing chambers with live sensor data",
-    color: "from-green-500 to-emerald-700",
+    color: "bg-green-600",
     icon: "dashboard",
     features: ["Live temperature & humidity", "CO2 level monitoring", "Growth stage tracking"],
   },
@@ -44,7 +56,7 @@ const DEFAULT_SCREENS = [
     id: "controls",
     title: "Smart Controls",
     description: "Adjust climate parameters and automation schedules from anywhere",
-    color: "from-blue-500 to-indigo-700",
+    color: "bg-blue-600",
     icon: "controls",
     features: ["Temperature set points", "Humidity control", "Fan & misting schedules"],
   },
@@ -52,7 +64,7 @@ const DEFAULT_SCREENS = [
     id: "alerts",
     title: "Alerts & Notifications",
     description: "Instant push notifications for critical events and threshold breaches",
-    color: "from-amber-500 to-orange-700",
+    color: "bg-amber-600",
     icon: "alerts",
     features: ["Push notifications", "SMS alerts", "Email reports"],
   },
@@ -60,7 +72,7 @@ const DEFAULT_SCREENS = [
     id: "analytics",
     title: "Analytics & Reports",
     description: "Comprehensive data visualization with historical trends and predictions",
-    color: "from-purple-500 to-violet-700",
+    color: "bg-purple-600",
     icon: "analytics",
     features: ["Growth charts", "Yield predictions", "Export to CSV"],
   },
@@ -72,7 +84,11 @@ const DEFAULT_SCREENS = [
  */
 export default function MobileAppShowcase({ data }: { data?: LandingPageData | null } = {}) {
   const screens = data?.mobileAppScreens
-    ? data.mobileAppScreens.map(s => ({ ...s, description: s.subtitle }))
+    ? data.mobileAppScreens.map(s => ({
+        ...s,
+        description: s.subtitle,
+        screenshotUrl: s.screenshot?.asset ? getSanityImageUrl(s.screenshot, { width: 560, height: 1120 }) : undefined,
+      }))
     : DEFAULT_SCREENS;
   const [activeScreen, setActiveScreen] = useState(screens[0]?.id ?? "dashboard");
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -125,60 +141,72 @@ export default function MobileAppShowcase({ data }: { data?: LandingPageData | n
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.3 }}
-                    className={`h-full bg-gradient-to-b ${currentScreen.color} p-6 flex flex-col`}
+                    className="h-full"
                   >
-                    {/* Status bar */}
-                    <div className="flex justify-between items-center mb-6 mt-6">
-                      <span className="text-white text-xs font-medium">9:41</span>
-                      <div className="flex gap-1.5">
-                        <div className="w-4 h-2.5 border border-white/60 rounded-sm">
-                          <div className="w-3/4 h-full bg-white/80 rounded-sm" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* App header */}
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
-                        {SCREEN_ICON_MAP[currentScreen.icon] ?? SCREEN_ICON_MAP["dashboard"]}
-                      </div>
-                      <div>
-                        <h3 className="text-white font-bold text-lg">
-                          {currentScreen.title}
-                        </h3>
-                        <p className="text-white/70 text-xs">MASH App</p>
-                      </div>
-                    </div>
-
-                    {/* Feature cards */}
-                    <div className="flex-1 space-y-3">
-                      {currentScreen.features.map((feature, i) => (
-                        <motion.div
-                          key={feature}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          className="bg-white/15 backdrop-blur-sm rounded-xl p-3"
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-white rounded-full" />
-                            <span className="text-white text-sm font-medium">
-                              {feature}
-                            </span>
+                    {currentScreen.screenshotUrl ? (
+                      <Image
+                        src={currentScreen.screenshotUrl}
+                        alt={`${currentScreen.title} screen`}
+                        fill
+                        className="object-cover"
+                        sizes="280px"
+                      />
+                    ) : (
+                      <div className={`h-full ${currentScreen.color} p-6 flex flex-col`}>
+                        {/* Status bar */}
+                        <div className="flex justify-between items-center mb-6 mt-6">
+                          <span className="text-white text-xs font-medium">9:41</span>
+                          <div className="flex gap-1.5">
+                            <div className="w-4 h-2.5 border border-white/60 rounded-sm">
+                              <div className="w-3/4 h-full bg-white/80 rounded-sm" />
+                            </div>
                           </div>
-                        </motion.div>
-                      ))}
-                    </div>
-
-                    {/* Bottom nav mockup */}
-                    <div className="flex justify-around mt-4 pt-3 border-t border-white/20">
-                      {["Home", "Data", "Settings"].map((tab) => (
-                        <div key={tab} className="text-center">
-                          <div className="w-5 h-5 mx-auto bg-white/30 rounded-md mb-1" />
-                          <span className="text-white/60 text-[10px]">{tab}</span>
                         </div>
-                      ))}
-                    </div>
+
+                        {/* App header */}
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
+                            {SCREEN_ICON_MAP[currentScreen.icon] ?? SCREEN_ICON_MAP["dashboard"]}
+                          </div>
+                          <div>
+                            <h3 className="text-white font-bold text-lg">
+                              {currentScreen.title}
+                            </h3>
+                            <p className="text-white/70 text-xs">MASH App</p>
+                          </div>
+                        </div>
+
+                        {/* Feature cards */}
+                        <div className="flex-1 space-y-3">
+                          {currentScreen.features.map((feature, i) => (
+                            <motion.div
+                              key={feature}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: i * 0.1 }}
+                              className="bg-white/15 backdrop-blur-sm rounded-xl p-3"
+                            >
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-white rounded-full" />
+                                <span className="text-white text-sm font-medium">
+                                  {feature}
+                                </span>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        {/* Bottom nav mockup */}
+                        <div className="flex justify-around mt-4 pt-3 border-t border-white/20">
+                          {["Home", "Data", "Settings"].map((tab) => (
+                            <div key={tab} className="text-center">
+                              <div className="w-5 h-5 mx-auto bg-white/30 rounded-md mb-1" />
+                              <span className="text-white/60 text-[10px]">{tab}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>

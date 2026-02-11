@@ -133,7 +133,7 @@ SOFTWARE.`}
           </div>
 
           {/* Source Code */}
-          <div className="bg-gradient-dark rounded-xl p-8 text-center text-inverse">
+          <div className="bg-gray-900 dark:bg-gray-800 rounded-xl p-8 text-center text-inverse">
             <Github className="w-12 h-12 mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">View Source Code</h2>
             <p className="mb-6 text-secondary">

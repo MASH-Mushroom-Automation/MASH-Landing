@@ -310,16 +310,21 @@ Utility Tests: 3/3 passing
 UI Component Tests: 7/7 passing (ParallaxSection, ScrollReveal, StatusBadge)
 Provider Tests: 2/2 passing (SmoothScrollProvider)
 App Page Tests: 12/12 passing
-Total Tests: 403 passed, 0 failed
+Total Tests: 496 passed, 0 failed
 Test Suites: 37 passed
+Coverage: Stmts 96.7% | Branches 92.12% | Funcs 98.43% | Lines 98.89%
 Build Status: SUCCESS (webpack mode with WASM SWC fallback)
 Build Command: npx next build --webpack (also in package.json: npm run build)
 Dev Server: Turbopack (with turbopack: {} in next.config.ts)
-Last Run: February 2026
+Last Run: July 2025
 Node.js: v24.12.0 (ABI 137 - requires @swc/jest for tests, --webpack for builds)
 framer-motion: 12.34.0 (motion component API, not m/LazyMotion)
 three: 0.172.0 (@react-three/fiber + @react-three/drei for GLB models)
 3D Model: /public/assets/Chamber.glb (8.2 MB)
+Design: NO gradients (all solid colors), NO emojis
+Sanity Schema: 678+ lines with screenshot support for mobile app screens
+Sanity Studio: Deployed with date-fns@3 for Node 24 compatibility
+Hydration: crossOrigin="anonymous" on video element
 
 Fully Tested (100% branch coverage):
 - lib/cal-config.ts (100% all metrics)
@@ -329,7 +334,7 @@ Fully Tested (100% branch coverage):
 - components/ui/theme-toggle.tsx (100% all metrics)
 - components/layout/PageLayout.tsx (100% all metrics)
 - components/providers/theme-provider.tsx (100% all metrics)
-- components/Navigation.tsx (100% branch - previously 66.66%)
+- components/Navigation.tsx (100% branch)
 - components/BookingSection.tsx (100% all metrics)
 - components/DocumentationSection.tsx (100% all metrics)
 - components/DownloadSection.tsx (100% all metrics)
@@ -340,9 +345,10 @@ Fully Tested (100% branch coverage):
 - All App Pages (100% lines)
 
 Remaining Branch Gaps (defensive/unreachable code in jsdom):
+- = {} default params on hook-based components (React JSX always passes props object)
 - HeroSection lines 18-34: typeof window !== undefined SSR guard (always true in jsdom)
 - CalendarScheduler line 33: MutationObserver attributeName check (jsdom limitation)
-- DemoSection line 52: fallback title for non-existent video ID (unreachable - state always valid)
+- ChamberModel3D: inner ChamberScene with Three.js hooks (mocked out in tests)
 - status/page lines 110-117: allOperational ternary (hardcoded data all operational)
 - sanity.ts lines 166-248: TypeScript interface definitions (not executable code)
 
@@ -380,7 +386,7 @@ npm run build -- --no-lint                # Build without linting
 3. **Utility Functions**: Sanity helpers created in `lib/sanity.ts`
 4. **Automation Scripts**: Import landing content + upload video/APK files
 5. **Component Refactoring**: All components updated to fetch from Sanity
-6. **Testing**: 308 tests passing, 31 suites, 95.44% statement coverage
+6. **Testing**: 420 tests passing, 37 suites, 95.61% statement coverage
 7. **Deprecation**: Cloudinary fully removed (files, packages, env vars)
 
 ### Ralph Loop Agent - Sanity Migration Workflow

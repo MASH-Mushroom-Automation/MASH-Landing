@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import IoTDeviceSection from "@/components/IoTDeviceSection";
+import type { LandingPageData } from "@/lib/sanity";
 
 describe("IoTDeviceSection", () => {
   it("renders without crashing", () => {
@@ -212,5 +213,45 @@ describe("IoTDeviceSection", () => {
   it("accepts undefined modelUrl gracefully", () => {
     render(<IoTDeviceSection modelUrl={undefined} />);
     expect(screen.getByText("IoT Hardware")).toBeInTheDocument();
+  });
+
+  // Sanity data tests
+  describe("with Sanity data", () => {
+    it("renders custom title from Sanity", () => {
+      const data = {
+        iotDeviceTitle: "Custom IoT Title",
+      } as unknown as LandingPageData;
+      render(<IoTDeviceSection data={data} />);
+      expect(screen.getByText("Custom IoT Title")).toBeInTheDocument();
+    });
+
+    it("renders custom description from Sanity", () => {
+      const data = {
+        iotDeviceDescription: "Custom IoT description text",
+      } as unknown as LandingPageData;
+      render(<IoTDeviceSection data={data} />);
+      expect(screen.getByText("Custom IoT description text")).toBeInTheDocument();
+    });
+
+    it("renders custom specs from Sanity", () => {
+      const data = {
+        iotDeviceSpecs: [
+          {
+            id: "custom-spec",
+            label: "Custom Spec",
+            value: "Custom Value",
+            description: "Custom spec description",
+          },
+        ],
+      } as unknown as LandingPageData;
+      render(<IoTDeviceSection data={data} />);
+      // label appears in both detail card and button
+      expect(screen.getAllByText("Custom Spec").length).toBeGreaterThanOrEqual(1);
+    });
+
+    it("falls back to defaults when data is null", () => {
+      render(<IoTDeviceSection data={null} />);
+      expect(screen.getByText("IoT Hardware")).toBeInTheDocument();
+    });
   });
 });

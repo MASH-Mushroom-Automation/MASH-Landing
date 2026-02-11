@@ -86,7 +86,7 @@ function DeviceModel3D({ rotateX, rotateY }: { rotateX: number; rotateY: number 
       >
         {/* Front face - main board */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-green-500/30 shadow-2xl"
+          className="absolute inset-0 bg-gray-900 rounded-2xl border border-green-500/30 shadow-2xl"
           style={{ transform: "translateZ(20px)" }}
         >
           {/* PCB texture lines */}
@@ -136,7 +136,7 @@ function DeviceModel3D({ rotateX, rotateY }: { rotateX: number; rotateY: number 
 
         {/* Side face */}
         <div
-          className="absolute top-0 right-0 w-10 h-full bg-gradient-to-b from-gray-700 to-gray-800 rounded-r-lg border-l border-green-500/10"
+          className="absolute top-0 right-0 w-10 h-full bg-gray-800 rounded-r-lg border-l border-green-500/10"
           style={{
             transform: "rotateY(90deg) translateZ(117px)",
             transformOrigin: "right",
@@ -145,7 +145,7 @@ function DeviceModel3D({ rotateX, rotateY }: { rotateX: number; rotateY: number 
 
         {/* Top face */}
         <div
-          className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-r from-gray-700 to-gray-800 rounded-t-lg"
+          className="absolute top-0 left-0 right-0 h-10 bg-gray-800 rounded-t-lg"
           style={{
             transform: "rotateX(90deg) translateZ(-10px)",
             transformOrigin: "top",

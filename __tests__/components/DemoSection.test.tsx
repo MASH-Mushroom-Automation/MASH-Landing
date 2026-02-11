@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import DemoSection from '@/components/DemoSection';
+import type { LandingPageData } from '@/lib/sanity';
 
 describe('DemoSection', () => {
   it('renders demo section heading', () => {
@@ -102,5 +103,52 @@ describe('DemoSection', () => {
       await user.click(mobileButton);
       expect(mobileButton.className).toContain('bg-green-600');
     }
+  });
+
+  // Sanity data tests
+  describe('with Sanity data', () => {
+    it('renders custom title from Sanity', () => {
+      const data = {
+        demoTitle: 'Custom Demo Title',
+      } as unknown as LandingPageData;
+      render(<DemoSection data={data} />);
+      expect(screen.getByText('Custom Demo Title')).toBeInTheDocument();
+    });
+
+    it('renders custom subtitle from Sanity', () => {
+      const data = {
+        demoSubtitle: 'Custom demo subtitle',
+      } as unknown as LandingPageData;
+      render(<DemoSection data={data} />);
+      expect(screen.getByText('Custom demo subtitle')).toBeInTheDocument();
+    });
+
+    it('renders custom videos from Sanity', () => {
+      const data = {
+        demoVideos: [
+          { id: 'custom1', title: 'Custom Video 1', description: 'Custom desc 1' },
+          { id: 'custom2', title: 'Custom Video 2', description: 'Custom desc 2' },
+        ],
+      } as unknown as LandingPageData;
+      render(<DemoSection data={data} />);
+      expect(screen.getAllByText('Custom Video 1').length).toBeGreaterThanOrEqual(1);
+      expect(screen.getByText('Custom Video 2')).toBeInTheDocument();
+    });
+
+    it('renders custom stats from Sanity', () => {
+      const data = {
+        demoStats: [
+          { value: '100%', label: 'Custom Stat' },
+        ],
+      } as unknown as LandingPageData;
+      render(<DemoSection data={data} />);
+      expect(screen.getByText('100%')).toBeInTheDocument();
+      expect(screen.getByText('Custom Stat')).toBeInTheDocument();
+    });
+
+    it('falls back to defaults when data is null', () => {
+      render(<DemoSection data={null} />);
+      expect(screen.getByText(/See MASH in Action/i)).toBeInTheDocument();
+    });
   });
 });

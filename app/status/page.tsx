@@ -73,7 +73,7 @@ export default function StatusPage() {
 
   return (
     <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-gradient"}`}>
+      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-light"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-inverse">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">

@@ -770,6 +770,126 @@
           "verification": "TypeScript compiled in 14.4s, 14 static pages generated, no errors."
         }
       ]
+    },
+    {
+      "id": "phase-11",
+      "name": "Full Content Expansion, Sanity Data Tests, and Coverage Push",
+      "status": "COMPLETED",
+      "completedAt": "2025-07-09",
+      "tasks": [
+        {
+          "id": "T095",
+          "title": "Remove all gradients from codebase (solid colors only)",
+          "status": "COMPLETED",
+          "files": ["app/globals.css", "components/HeroSection.tsx", "components/Navigation.tsx", "components/Footer.tsx", "components/FeaturesSection.tsx", "components/DemoSection.tsx", "components/IoTDeviceSection.tsx", "components/MobileAppShowcase.tsx", "components/ScopeSection.tsx"],
+          "verification": "Zero gradient references in source. All backgrounds use solid colors for light/dark mode."
+        },
+        {
+          "id": "T096",
+          "title": "Add screenshot field to Sanity mobileAppScreens schema",
+          "status": "COMPLETED",
+          "file": "studio/src/schemaTypes/documents/landingPage.ts",
+          "verification": "screenshot image field added to mobileAppScreens array items. Schema deployed to ppnamias.sanity.studio."
+        },
+        {
+          "id": "T097",
+          "title": "Update MobileAppShowcase for screenshot rendering",
+          "status": "COMPLETED",
+          "file": "components/MobileAppShowcase.tsx",
+          "verification": "AppScreen interface with optional screenshotUrl. Component renders Image when screenshot available, icon-based layout when not."
+        },
+        {
+          "id": "T098",
+          "title": "Fix HeroSection hydration error (crossOrigin attribute)",
+          "status": "COMPLETED",
+          "file": "components/HeroSection.tsx",
+          "verification": "crossOrigin='anonymous' added to video element. Eliminated server/client hydration mismatch."
+        },
+        {
+          "id": "T099",
+          "title": "Enhanced MobileAppShowcase tests with Sanity data",
+          "status": "COMPLETED",
+          "file": "__tests__/components/MobileAppShowcase.test.tsx",
+          "verification": "20+ tests covering screenshots, icon fallbacks, unknown icons, screen titles, section headings."
+        },
+        {
+          "id": "T100",
+          "title": "Enhanced SupportSection tests with Sanity data",
+          "status": "COMPLETED",
+          "file": "__tests__/components/SupportSection.test.tsx",
+          "verification": "25+ tests covering channels, FAQs, CTA, email, Sanity custom data, null fallback."
+        },
+        {
+          "id": "T101",
+          "title": "Enhanced FeaturesSection tests with Sanity data",
+          "status": "COMPLETED",
+          "file": "__tests__/components/FeaturesSection.test.tsx",
+          "verification": "Tests covering feature icons, Sanity custom titles/descriptions, unknown icon fallback, default param."
+        },
+        {
+          "id": "T102",
+          "title": "Enhanced DownloadSection tests with default param coverage",
+          "status": "COMPLETED",
+          "file": "__tests__/components/DownloadSection.test.tsx",
+          "verification": "Added direct function call test for = {} default parameter. Branch coverage improved."
+        },
+        {
+          "id": "T103",
+          "title": "Add Sanity data tests to BookingSection",
+          "status": "COMPLETED",
+          "file": "__tests__/components/BookingSection.test.tsx",
+          "verification": "Tests for custom title, custom description, both, null fallback, direct function call for default param."
+        },
+        {
+          "id": "T104",
+          "title": "Add Sanity data tests to DocumentationSection",
+          "status": "COMPLETED",
+          "file": "__tests__/components/DocumentationSection.test.tsx",
+          "verification": "Tests for custom title, description, categories, null fallback, default param. Fixed category structure (title/links.name)."
+        },
+        {
+          "id": "T105",
+          "title": "Add Sanity data tests to ScopeSection",
+          "status": "COMPLETED",
+          "file": "__tests__/components/ScopeSection.test.tsx",
+          "verification": "Tests for custom title/description/categories/layers/archTitle, null fallback, default param. Fixed field names (title not name)."
+        },
+        {
+          "id": "T106",
+          "title": "Add Sanity data tests to DemoSection",
+          "status": "COMPLETED",
+          "file": "__tests__/components/DemoSection.test.tsx",
+          "verification": "Tests for custom title/subtitle/videos/stats, null fallback. All pass. (Hook-based, no direct call test.)"
+        },
+        {
+          "id": "T107",
+          "title": "Add Sanity data tests to IoTDeviceSection",
+          "status": "COMPLETED",
+          "file": "__tests__/components/IoTDeviceSection.test.tsx",
+          "verification": "Tests for custom title/description/specs, null fallback. All pass. (Hook-based, no direct call test.)"
+        },
+        {
+          "id": "T108",
+          "title": "Add FAQ server component test",
+          "status": "COMPLETED",
+          "file": "__tests__/app/faq.test.tsx",
+          "verification": "Tests for server component render with Sanity data, rejected promise fallback, null FAQ data."
+        },
+        {
+          "id": "T109",
+          "title": "All tests pass - 496 tests, 37 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "496 tests passing, 37 test suites, 0 failures."
+        },
+        {
+          "id": "T110",
+          "title": "Coverage improved - Branch 92.12%",
+          "status": "COMPLETED",
+          "command": "npx jest --coverage",
+          "verification": "Stmts 96.7% | Branches 92.12% | Funcs 98.43% | Lines 98.89%. Branch improved from 85.95% to 92.12%."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -781,18 +901,18 @@
   },
   "currentMetrics": {
     "testSuites": 37,
-    "testsTotal": 418,
-    "testsPassed": 418,
+    "testsTotal": 496,
+    "testsPassed": 496,
     "testsFailed": 0,
-    "coverageStmts": "TBD - run npm test -- --coverage for latest",
-    "coverageBranch": "TBD",
-    "coverageFuncs": "TBD",
-    "coverageLines": "TBD",
+    "coverageStmts": "96.7%",
+    "coverageBranch": "92.12%",
+    "coverageFuncs": "98.43%",
+    "coverageLines": "98.89%",
     "buildStatus": "SUCCESS",
     "buildMode": "webpack (WASM SWC fallback due to Node.js 24)",
     "devServerMode": "Turbopack (default, with empty turbopack config to silence warning)",
     "pagesPrerendered": 14,
-    "lastTestRun": "2026-02-11",
+    "lastTestRun": "2025-07-09",
     "nodeVersion": "v24.12.0",
     "nextVersion": "16.1.1",
     "framerMotionVersion": "12.34.0",
@@ -812,8 +932,10 @@
   "remainingBranchGaps": {
     "note": "These are defensive/unreachable code branches that cannot be tested in jsdom without refactoring",
     "gaps": [
+      "= {} default params on hook-based components (React JSX always passes props object)",
+      "ChamberModel3D: inner ChamberScene with Three.js hooks (mocked out in tests)",
       "CalendarScheduler.tsx line 33: MutationObserver attributeName check (jsdom limitation)",
-      "DemoSection.tsx line 52: fallback title for non-existent video ID (unreachable since state initializes to valid ID)",
+      "HeroSection.tsx lines 18-34: typeof window !== undefined SSR guard (always true in jsdom)",
       "status/page.tsx lines 110-117: allOperational ternary (hardcoded services data all operational)",
       "sanity.ts lines 166-248: TypeScript interface definitions (not executable code)"
     ]

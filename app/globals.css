@@ -42,15 +42,12 @@
     --color-background-component: 243 244 246; /* gray-100 */
     
     /* Component-specific backgrounds */
-    --color-background-hero-start: 240 253 244;     /* green-50 */
-    --color-background-hero-end: 220 252 231;       /* green-100 */
+    --color-background-hero: 240 253 244;           /* green-50 */
     --color-background-features: 255 255 255;       /* white */
     --color-background-demo: 249 250 251;           /* gray-50 */
-    --color-background-scope-start: 240 253 244;    /* green-50 */
-    --color-background-scope-end: 220 252 231;      /* green-100 */
+    --color-background-scope: 240 253 244;          /* green-50 */
     --color-background-documentation: 255 255 255;  /* white */
-    --color-background-download-start: 22 163 74;   /* green-600 */
-    --color-background-download-end: 22 101 52;     /* green-800 */
+    --color-background-download: 22 163 74;         /* green-600 */
     --color-background-support: 255 255 255;        /* white */
     --color-background-navigation: 255 255 255;     /* white */
     --color-background-footer: 17 24 39;            /* gray-900 */
@@ -116,15 +113,12 @@
     --color-background-component: 55 65 81; /* gray-700 */
     
     /* Component-specific backgrounds */
-    --color-background-hero-start: 17 24 39;        /* gray-900 */
-    --color-background-hero-end: 31 41 55;          /* gray-800 */
+    --color-background-hero: 17 24 39;              /* gray-900 */
     --color-background-features: 17 24 39;          /* gray-900 */
     --color-background-demo: 31 41 55;              /* gray-800 */
-    --color-background-scope-start: 31 41 55;       /* gray-800 */
-    --color-background-scope-end: 17 24 39;         /* gray-900 */
+    --color-background-scope: 31 41 55;             /* gray-800 */
     --color-background-documentation: 17 24 39;     /* gray-900 */
-    --color-background-download-start: 22 163 74;   /* green-600 */
-    --color-background-download-end: 22 101 52;     /* green-800 */
+    --color-background-download: 22 163 74;         /* green-600 */
     --color-background-support: 17 24 39;           /* gray-900 */
     --color-background-navigation: 17 24 39;        /* gray-900 */
     --color-background-footer: 3 7 18;              /* gray-950 */
@@ -203,7 +197,7 @@
 
   /* Component-specific backgrounds */
   .bg-hero {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-hero-start)), rgb(var(--color-background-hero-end)));
+    background-color: rgb(var(--color-background-hero));
   }
 
   .bg-features {
@@ -215,7 +209,7 @@
   }
 
   .bg-scope {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-scope-start)), rgb(var(--color-background-scope-end)));
+    background-color: rgb(var(--color-background-scope));
   }
 
   .bg-documentation {
@@ -223,7 +217,7 @@
   }
 
   .bg-download {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-download-start)), rgb(var(--color-background-download-end)));
+    background-color: rgb(var(--color-background-download));
   }
 
   .bg-support {
