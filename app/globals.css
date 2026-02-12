@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Design policy: Solid colors only. NO GRADIENTS anywhere in styles. */
+
 @theme {
   /* Map custom properties to Tailwind classes */
   --color-background: rgb(var(--color-background));

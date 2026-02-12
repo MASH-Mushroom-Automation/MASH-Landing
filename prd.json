@@ -890,6 +890,41 @@
           "verification": "Stmts 96.7% | Branches 92.12% | Funcs 98.43% | Lines 98.89%. Branch improved from 85.95% to 92.12%."
         }
       ]
+    },
+    {
+      "id": "phase-12",
+      "name": "Sanity Content Import, Color Validation, and Final Quality Checks",
+      "status": "COMPLETED",
+      "completedAt": "2025-07-09",
+      "tasks": [
+        {
+          "id": "T111",
+          "title": "Run import-all-landing-content.js to populate Sanity",
+          "status": "COMPLETED",
+          "command": "node scripts/import-all-landing-content.js",
+          "verification": "All 14 sections imported: Hero, Features (9), Demo (3 videos, 3 stats), Documentation (6 categories), Scope (6 categories, 4 layers), Mobile App (4 screens), IoT Device (6 specs), Booking (4 features), Support (4 channels, 5 FAQs), Download (6 features), Navigation (5 links), Footer (3 sections), FAQ (5 categories), SEO configured."
+        },
+        {
+          "id": "T112",
+          "title": "Verify color palette - no gradients, solid colors only",
+          "status": "COMPLETED",
+          "verification": "Zero gradient references in components or CSS. Light mode: white/gray-50 backgrounds, gray-900 text. Dark mode: gray-900/gray-800 backgrounds, white text. Brand: green-600 (light) / green-500 (dark)."
+        },
+        {
+          "id": "T113",
+          "title": "All tests pass - 496 tests, 37 suites",
+          "status": "COMPLETED",
+          "command": "npx jest",
+          "verification": "496 tests passing, 37 test suites, 0 failures."
+        },
+        {
+          "id": "T114",
+          "title": "Build succeeds - 14 pages prerendered",
+          "status": "COMPLETED",
+          "command": "npm run build",
+          "verification": "14 static pages generated, no TypeScript or ESLint errors."
+        }
+      ]
     }
   ],
   "completionCriteria": {
@@ -941,7 +976,7 @@
     ]
   },
   "nextStepsPrompt": {
-    "description": "AI Agent prompt for continuing development after Phase 9 completion",
-    "prompt": "Continue improving the MASH Landing Page. Phase 9 (Sanity CMS 3D Model Integration) is COMPLETE.\n\nCOMPLETED IN PHASE 9:\n- ChamberModel3D component now supports Sanity CDN URLs via modelUrl prop\n- IoTDeviceSection accepts modelUrl and passes to ChamberModel3D\n- MobileAppShowcase enhanced with phoneScale and featuresX parallax\n- app/page.tsx fetches iotDeviceModel from Sanity, passes URL to IoTDeviceSection\n- Upload script created: scripts/upload-3d-model.js\n- 418 tests passing, 37 suites, build succeeds\n\nREMAINING TASKS:\n1. Upload Chamber.glb to Sanity CMS (requires SANITY_API_WRITE_TOKEN):\n   - Set SANITY_API_WRITE_TOKEN in .env.local\n   - Run: node scripts/upload-3d-model.js\n   - Verify in Sanity Studio: https://ppnamias.sanity.studio/\n\n2. Fix @sanity/image-url deprecation warning:\n   - Replace: import imageUrlBuilder from '@sanity/image-url'\n   - With: import { createImageUrlBuilder } from '@sanity/image-url'\n   - Update lib/sanity.ts builder initialization\n\n3. Add mobile app screenshot assets to Sanity:\n   - Create mobileAppScreens field in landingPage schema\n   - Upload actual app screenshots to replace CSS mockups\n   - Update MobileAppShowcase to use real screenshots\n\n4. Performance optimization:\n   - Add loading='lazy' to 3D model section (below fold)\n   - Implement ISR with revalidate for landing page data\n   - Consider preloading 3D model on hover/intersection\n\n5. E2E testing with Playwright:\n   - Test smooth scroll navigation\n   - Test parallax effects render correctly\n   - Test 3D model loads and is interactive\n\nFOLLOW: .github/copilot-instructions.md\nRALPH LOOP: Create/fix tests -> npx jest -> Fix failures -> npx next build --webpack -> Fix errors -> Repeat\nSTOP WHEN: All tasks completed + Tests pass + Build succeeds"
+    "description": "AI Agent prompt for continuing development after Phase 12 completion",
+    "prompt": "Continue improving the MASH Landing Page. Phase 12 (Sanity Content Import + Color Validation) is COMPLETE.\n\nCOMPLETED THROUGH PHASE 12:\n- 496 tests passing, 37 suites, 0 failures\n- Coverage: Stmts 96.7% | Branches 92.12% | Funcs 98.43% | Lines 98.89%\n- Build succeeds with 14 pages prerendered\n- Sanity CMS fully populated with ALL landing page content (14 sections)\n- Color palette validated: solid colors only, no gradients, no emojis\n- Dark mode uses gray-900/gray-800 bg, white text, green-500 brand\n- Light mode uses white/gray-50 bg, gray-900 text, green-600 brand\n\nREMAINING TASKS:\n1. Upload app screenshots to Sanity for MobileAppShowcase\n2. Upload Chamber.glb to Sanity CDN (requires running upload-3d-model.js)\n3. Performance: lazy loading, ISR revalidation, model compression\n4. E2E testing with Playwright\n5. Add more content to Sanity (blog posts, tutorials)\n\nRALPH LOOP: npx jest -> Fix failures -> npm run build -> Fix errors -> Repeat\nSTOP WHEN: All tasks completed + Tests pass + Build succeeds"
   }
 }

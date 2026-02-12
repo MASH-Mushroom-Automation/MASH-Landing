@@ -297,6 +297,25 @@ export interface LandingPageData {
     href: string;
   }>;
 
+  // Floating Nav
+  floatingNav?: {
+    enabled: boolean;
+    transparentUntilScroll: boolean;
+    backdrop: boolean;
+    logoText: string;
+    logoHref: string;
+    ctaButtons?: Array<{
+      text: string;
+      href: string;
+      variant: 'default' | 'outline' | 'ghost';
+    }>;
+  };
+
+  // Brand Palette
+  brandPalette?: {
+    brandName: string;
+  };
+
   // Footer
   footerBrand?: string;
   footerTagline?: string;
