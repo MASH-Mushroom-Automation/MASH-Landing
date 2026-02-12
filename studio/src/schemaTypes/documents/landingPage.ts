@@ -252,6 +252,8 @@ export default defineType({
         { name: 'backdrop', type: 'boolean', title: 'Use Backdrop Blur', initialValue: true },
         { name: 'logoText', type: 'string', title: 'Logo Text', initialValue: 'MASH' },
         { name: 'logoHref', type: 'string', title: 'Logo Link', initialValue: '/' },
+        { name: 'showScrollProgress', type: 'boolean', title: 'Show Scroll Progress Bar', initialValue: true },
+        { name: 'showThemeToggle', type: 'boolean', title: 'Show Theme Toggle', initialValue: true },
         {
           name: 'ctaButtons',
           title: 'CTA Buttons',

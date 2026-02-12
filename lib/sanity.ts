@@ -304,6 +304,8 @@ export interface LandingPageData {
     backdrop: boolean;
     logoText: string;
     logoHref: string;
+    showScrollProgress: boolean;
+    showThemeToggle: boolean;
     ctaButtons?: Array<{
       text: string;
       href: string;
