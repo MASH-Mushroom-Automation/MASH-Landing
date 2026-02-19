@@ -76,6 +76,18 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - Created missing stub files: lib/sanity.ts, components/providers/smooth-scroll-provider.tsx, components/ui/scroll-reveal.tsx, components/StepsSection.tsx, components/TestimonialsSection.tsx
 - Build: 14/14 routes, 0 errors
 
+### LAND-003: Hero Section Redesign [COMPLETED]
+- Two-column layout: text left, dashboard preview card right (desktop)
+- Animated gradient background with 3 floating blur orbs (green/emerald/teal)
+- Dot grid pattern overlay for visual depth
+- IoT badge with pulsing status dot
+- Gradient text brand name utility
+- Dashboard preview card with 4 sensor metrics (temp, humidity, CO2, light)
+- Mini bar chart placeholder for data visualization feel
+- Gradient CTA button (green-500 to emerald-400) + outline secondary
+- Fixed all Tailwind v4 gradient classes (bg-gradient-to-* to bg-linear-to-*) across all components
+- Build: 14/14 routes, 0 errors
+
 ### LAND-002: Navigation Redesign [COMPLETED]
 - Floating glassmorphism navbar with glass-nav utility (backdrop-blur + semi-transparent bg)
 - Smart hide: hides on scroll down, shows on scroll up (requestAnimationFrame)

@@ -45,14 +45,14 @@ export default function StepsSection({
 
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {/* Connecting line (desktop only) */}
-          <div className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5 bg-gradient-to-r from-green-500/20 via-green-500/40 to-green-500/20" />
+          <div className="hidden md:block absolute top-16 left-[16.67%] right-[16.67%] h-0.5 bg-linear-to-r from-green-500/20 via-green-500/40 to-green-500/20" />
 
           {steps.map((step) => {
             const Icon = step.icon;
             return (
               <div key={step.step} className="relative text-center">
                 {/* Step number badge */}
-                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 text-white text-xl font-bold mb-6 shadow-lg">
+                <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-green-500 to-emerald-400 text-white text-xl font-bold mb-6 shadow-lg">
                   {step.step}
                   <div className="absolute -inset-1 rounded-full bg-green-500/20 animate-pulse" />
                 </div>

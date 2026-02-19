@@ -73,7 +73,8 @@
       "id": "LAND-003",
       "title": "Hero Section Redesign — Animated Gradient Background with Floating Elements",
       "priority": 3,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2026-02-20T01:30:00Z",
       "description": "Completely redesign the Hero section with an animated gradient background (similar to Nuxt UI HeroBackground), floating particle/dot effects, large bold typography, and prominent dual CTAs. Add a hero illustration or dashboard preview card with glassmorphism styling.",
       "acceptanceCriteria": [
         "Animated gradient background with green/emerald/teal color stops",
@@ -324,7 +325,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 3,
+  "completedStories": 4,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

@@ -55,7 +55,7 @@ export default function TestimonialsSection({
 
               <div className="flex items-center gap-3">
                 {/* Avatar placeholder */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-semibold text-sm">
+                <div className="w-10 h-10 rounded-full bg-linear-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-semibold text-sm">
                   {testimonial.name
                     .split(" ")
                     .map((n) => n[0])

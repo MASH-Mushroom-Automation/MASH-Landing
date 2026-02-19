@@ -112,7 +112,7 @@ export default function Navigation({ data }: { data?: LandingPageData | null } =
         <div className="flex justify-between items-center h-16">
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 dark:from-green-400 dark:to-emerald-300 bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-linear-to-r from-green-600 to-emerald-500 dark:from-green-400 dark:to-emerald-300 bg-clip-text text-transparent">
               {data?.navigationBrand ?? "MASH"}
             </span>
           </Link>
@@ -145,7 +145,7 @@ export default function Navigation({ data }: { data?: LandingPageData | null } =
               <ThemeToggle />
               <Link
                 href="/download"
-                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
+                className="inline-flex items-center gap-1.5 bg-linear-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 <Download className="w-3.5 h-3.5" />
                 Download
@@ -203,7 +203,7 @@ export default function Navigation({ data }: { data?: LandingPageData | null } =
           <Link
             href="/download"
             onClick={() => setIsMenuOpen(false)}
-            className="flex items-center justify-center gap-1.5 mx-3 my-2 bg-gradient-to-r from-green-500 to-emerald-400 text-white px-4 py-2.5 rounded-lg text-sm font-semibold shadow-md"
+            className="flex items-center justify-center gap-1.5 mx-3 my-2 bg-linear-to-r from-green-500 to-emerald-400 text-white px-4 py-2.5 rounded-lg text-sm font-semibold shadow-md"
           >
             <Download className="w-3.5 h-3.5" />
             Download

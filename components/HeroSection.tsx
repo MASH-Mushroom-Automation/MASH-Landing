@@ -1,100 +1,117 @@
-"use client";
+import type { LandingPageData } from "@/lib/sanity";
+import { Thermometer, Droplets, Wind, Sun } from "lucide-react";
 
-import { useState, useEffect } from "react";
-import { getCloudinaryVideoUrl, CLOUDINARY_ASSETS } from "@/lib/cloudinary";
+const DEFAULT_HERO_BUTTONS = [
+  { text: "Get Started", href: "#features", variant: "default" as const },
+  { text: "Learn More", href: "#how-it-works", variant: "outline" as const },
+];
 
-export default function HeroSection() {
-  const [videoError, setVideoError] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
-    typeof window !== "undefined" 
-      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches 
-      : false
-  );
+const DASHBOARD_METRICS = [
+  { label: "Temperature", value: "24.5°C", icon: Thermometer, color: "text-orange-400" },
+  { label: "Humidity", value: "85%", icon: Droplets, color: "text-blue-400" },
+  { label: "CO2 Level", value: "800 ppm", icon: Wind, color: "text-emerald-400" },
+  { label: "Light", value: "450 lux", icon: Sun, color: "text-yellow-400" },
+];
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
+export default function HeroSection({ data }: { data?: LandingPageData | null } = {}) {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
-      <div className="absolute inset-0 z-0">
-        {!videoError && !prefersReducedMotion ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-20 dark:opacity-10"
-            onError={() => setVideoError(true)}
-            aria-hidden="true"
-          >
-            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'mp4' })} type="video/mp4" />
-            <source src={getCloudinaryVideoUrl(CLOUDINARY_ASSETS.videos.demo, { format: 'webm' })} type="video/webm" />
-          </video>
-        ) : (
-          <div className="w-full h-full bg-hero" />
-        )}
+    <section className="relative pt-28 pb-20 lg:pt-40 lg:pb-32 overflow-hidden gradient-hero">
+      {/* Animated gradient background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-green-500/10 blur-3xl animate-pulse" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 rounded-full bg-emerald-500/8 blur-3xl animate-pulse [animation-delay:2s]" />
+        <div className="absolute -bottom-20 right-1/4 w-72 h-72 rounded-full bg-teal-500/10 blur-3xl animate-pulse [animation-delay:4s]" />
+
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+          style={{
+            backgroundImage: `radial-gradient(circle, rgb(34 197 94) 1px, transparent 1px)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-6">
-          MASH: Mushroom Automation
-        </h1>
-        <p className="text-xl md:text-2xl text-secondary mb-8 max-w-3xl mx-auto">
-          Advanced automation system for professional mushroom cultivation with real-time monitoring, 
-          climate control, and intelligent growing environment management
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="#features"
-            className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
-          >
-            Explore Features
-          </a>
-          <a
-            href="#demo"
-            className="bg-surface text-green-600 dark:text-green-400 px-8 py-4 rounded-full text-lg font-semibold hover:bg-surface-hover transition-colors shadow-lg border-2 border-green-600 dark:border-green-500"
-          >
-            Watch Demo
-          </a>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          <div className="bg-card/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left: Text content */}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm font-medium mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              IoT-Powered Cultivation
             </div>
-            <h3 className="text-xl font-bold text-primary mb-2">Real-time Monitoring</h3>
-            <p className="text-secondary">Track temperature, humidity, CO2 levels, and more with precision sensors</p>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-primary mb-6 leading-[1.08]">
+              {data?.heroTitle ?? (
+                <>
+                  <span className="gradient-text-brand">Smart</span> Mushroom
+                  <br className="hidden sm:block" /> Cultivation Platform
+                </>
+              )}
+            </h1>
+
+            <p className="text-lg md:text-xl text-secondary mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              {data?.heroSubtitle ??
+                "Advanced IoT automation for professional mushroom cultivation with real-time monitoring, climate control, and intelligent growing environment management."}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              {(data?.heroButtons ?? DEFAULT_HERO_BUTTONS).map((button: { text: string; href: string; variant: "default" | "outline" }, index: number) => (
+                <a
+                  key={index}
+                  href={button.href}
+                  className={
+                    button.variant === "outline"
+                      ? "px-7 py-3 rounded-lg text-base font-semibold border border-green-500/40 text-green-600 dark:text-green-400 hover:bg-green-500/10 transition-all duration-300"
+                      : "px-7 py-3 rounded-lg text-base font-semibold bg-linear-to-r from-green-500 to-emerald-400 hover:from-green-600 hover:to-emerald-500 text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                  }
+                >
+                  {button.text}
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="bg-card/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-primary mb-2">Mobile Control</h3>
-            <p className="text-secondary">Control your mushroom farm from anywhere with our mobile application</p>
-          </div>
+          {/* Right: Dashboard preview card */}
+          <div className="hidden lg:block">
+            <div className="glass-card p-6 rounded-2xl">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-sm font-medium text-primary">Live Dashboard</span>
+                </div>
+                <span className="text-xs text-tertiary">Chamber A</span>
+              </div>
 
-          <div className="bg-card/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+              <div className="grid grid-cols-2 gap-3">
+                {DASHBOARD_METRICS.map((metric) => {
+                  const Icon = metric.icon;
+                  return (
+                    <div
+                      key={metric.label}
+                      className="bg-white/5 dark:bg-white/5 rounded-xl p-4 border border-white/5"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Icon className={`w-4 h-4 ${metric.color}`} />
+                        <span className="text-xs text-tertiary">{metric.label}</span>
+                      </div>
+                      <div className="text-xl font-bold text-primary">{metric.value}</div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Mini chart placeholder */}
+              <div className="mt-4 h-16 rounded-lg bg-white/5 dark:bg-white/5 border border-white/5 flex items-end justify-between px-3 pb-2 gap-1">
+                {[40, 65, 45, 80, 55, 70, 60, 85, 50, 75, 65, 90].map((h, i) => (
+                  <div
+                    key={i}
+                    className="w-full rounded-sm bg-linear-to-t from-green-500/40 to-green-500/80"
+                    style={{ height: `${h}%` }}
+                  />
+                ))}
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-primary mb-2">Automated Control</h3>
-            <p className="text-secondary">Intelligent automation maintains optimal growing conditions 24/7</p>
           </div>
         </div>
       </div>
