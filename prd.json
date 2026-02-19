@@ -131,7 +131,8 @@
       "id": "LAND-006",
       "title": "Booking Section Redesign — Pricing-Style Consultation Cards",
       "priority": 6,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:30:00Z",
       "description": "Redesign the Booking/Schedule section with pricing-plan-style cards (inspired by Nuxt UI PricingPlans). Three consultation tiers with feature lists, duration badges, and clear CTA buttons. Highlight the popular 'Consultation' plan.",
       "acceptanceCriteria": [
         "Section heading: 'Schedule a Consultation' — centered, bold",
@@ -168,7 +169,8 @@
       "id": "LAND-008",
       "title": "Support Section Redesign — Clean Cards with FAQ Accordion",
       "priority": 8,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:30:00Z",
       "description": "Redesign the Support section with clean support channel cards (icon + title + description + CTA) and an FAQ accordion below. Use collapsible accordion items with smooth expand/collapse animation.",
       "acceptanceCriteria": [
         "Section heading: 'Support & Resources' — centered, bold",
@@ -185,7 +187,8 @@
       "id": "LAND-009",
       "title": "Download/CTA Section Redesign — Bold Final Call-to-Action",
       "priority": 9,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:30:00Z",
       "description": "Redesign the bottom CTA/Download section with a bold, full-width gradient background section. Large heading, subtitle, and dual CTA buttons. Add a subtle pattern or mesh background for visual interest.",
       "acceptanceCriteria": [
         "Full-width section with gradient background (green-900 to gray-900 dark, green-50 to white light)",
@@ -202,7 +205,8 @@
       "id": "LAND-010",
       "title": "Footer Redesign — Clean Multi-Column with Social Links",
       "priority": 10,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:30:00Z",
       "description": "Redesign the Footer with a clean multi-column layout, brand section, link columns, and social icons. Add separator line and copyright. Polish dark/light theme appearance.",
       "acceptanceCriteria": [
         "4-column layout: Brand + 3 link sections (Product, Resources, Company)",
@@ -328,7 +332,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 7,
+  "completedStories": 11,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

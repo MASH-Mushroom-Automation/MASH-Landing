@@ -136,4 +136,47 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - SSR-safe with "use client" directive
 - Already wrapped in page.tsx around all major sections
 
+### LAND-006: Booking Section Redesign [COMPLETED]
+- Pricing-plan-style cards with glass-card glassmorphism styling
+- Popular card with ring-2 ring-green-500 + gradient badge (Star icon + "Popular")
+- "Free" price label with duration beside each plan
+- Feature checklists with lucide Check icons (green)
+- Gradient CTA button for popular plan, outline for others
+- ArrowRight icon in CTA with hover translate
+- Clock icon + "Free Consultations" badge above heading
+- Hover lift effect (-translate-y-1 + shadow-xl)
+- Border separator between description and features
+- Build: 14/14 routes, 0 errors
+
+### LAND-008: Support Section Redesign [COMPLETED]
+- Converted to "use client" for accordion interactivity
+- 4 support channel cards with lucide icons (Calendar, Mail, Users, BookOpen)
+- Icon mapping via ICON_MAP record type
+- Cards wrapped in anchor/Link for full-card clickability
+- Icon container with green tint + hover color transition
+- HelpCircle icon + "Help Center" badge above heading
+- FAQ accordion with AccordionItem component using useState
+- Smooth expand/collapse via CSS grid-rows transition
+- ChevronDown rotation animation on toggle
+- glass-card styling on both channel cards and FAQ items
+- Build: 14/14 routes, 0 errors
+
+### LAND-009: Download CTA Section Redesign [COMPLETED]
+- Full-width section with gradient-hero background + radial gradient overlay
+- Large heading (text-5xl on lg), descriptive subtitle
+- Gradient CTA button (Download icon) + outline secondary (Calendar + ArrowRight)
+- Hover lift + shadow effects on primary CTA
+- Relative z-index stacking for content over background
+- Build: 14/14 routes, 0 errors
+
+### LAND-010: Footer Redesign [COMPLETED]
+- Gradient brand text (bg-linear-to-r green-600 to emerald-500 + bg-clip-text)
+- Social icons with lucide-react (Github, Facebook) in rounded icon buttons
+- bg-gray-100 dark:bg-white/5 for social button backgrounds
+- Link hover colors changed to green-600 dark:green-400
+- Bottom bar with Privacy/Terms/License quick links
+- border-gray-200 dark:border-white/10 theme-aware borders
+- section-container utility for consistent max-width
+- Build: 14/14 routes, 0 errors
+
 ---

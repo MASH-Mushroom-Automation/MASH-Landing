@@ -28,7 +28,7 @@ export interface LandingPageData {
   // Support
   supportTitle?: string;
   supportDescription?: string;
-  supportChannels?: Array<{ title: string; description: string; icon: string; href: string }>;
+  supportChannels?: Array<{ name: string; description: string; icon: string; link: string; linkText?: string }>;
   supportFaqs?: Array<{ question: string; answer: string }>;
 
   // Download
