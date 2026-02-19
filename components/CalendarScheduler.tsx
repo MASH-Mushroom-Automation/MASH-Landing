@@ -17,30 +17,31 @@ export default function CalendarScheduler({
   layout = 'month_view',
 }: CalendarSchedulerProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
-
-  // Detect theme
-  useEffect(() => {
-    if (theme === 'auto') {
-      const isDark = document.documentElement.classList.contains('dark');
-      setCurrentTheme(isDark ? 'dark' : 'light');
-      
-      // Watch for theme changes
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.attributeName === 'class') {
-            const isDark = document.documentElement.classList.contains('dark');
-            setCurrentTheme(isDark ? 'dark' : 'light');
-          }
-        });
-      });
-      
-      observer.observe(document.documentElement, { attributes: true });
-      return () => observer.disconnect();
-    } else {
-      setCurrentTheme(theme);
+  const [detectedTheme, setDetectedTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof document !== 'undefined') {
+      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     }
+    return 'dark';
+  });
+
+  // Subscribe to theme changes via MutationObserver
+  useEffect(() => {
+    if (theme !== 'auto') return;
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isDark = document.documentElement.classList.contains('dark');
+          setDetectedTheme(isDark ? 'dark' : 'light');
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
   }, [theme]);
+
+  const currentTheme = theme !== 'auto' ? theme : detectedTheme;
 
   const calLink = getCalLink(eventType);
   
@@ -54,7 +55,7 @@ export default function CalendarScheduler({
   }
 
   return (
-    <div className="cal-embed-container w-full min-h-[600px] relative">
+    <div className="cal-embed-container w-full min-h-150 relative">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-componentpage z-10">
           <div className="text-center">

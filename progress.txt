@@ -212,3 +212,14 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - status/page.tsx: service items changed to flex-col sm:flex-row with responsive padding (p-4 sm:p-6)
 - status/page.tsx: 90-day uptime chart wrapped in overflow-x-auto with min-w-125 inner container
 - Build: 14/14 routes, 0 errors
+
+### LAND-016: Performance and SEO Final Check [COMPLETED]
+- Verified metadata, Open Graph, Twitter Cards in app/layout.tsx
+- Verified schema.org JSON-LD, robots, keywords in app/page.tsx
+- Unused imports audit: zero unused imports across all 21 source files
+- Dead code identified: DemoSection.tsx, ScopeSection.tsx, DocumentationSection.tsx (not imported anywhere, kept for reference)
+- CalendarScheduler.tsx: fixed react-hooks/set-state-in-effect lint error — refactored to lazy useState initializer + MutationObserver-only effect
+- CalendarScheduler.tsx: fixed Tailwind v4 lint — min-h-[600px] → min-h-150
+- npm run lint: exit code 0 (zero errors, zero warnings)
+- npm run build: 14/14 routes, 0 errors
+- All 16 PRD stories COMPLETE
