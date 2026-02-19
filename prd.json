@@ -1,0 +1,327 @@
+{
+  "projectName": "MASH Landing Page UI/UX Redesign",
+  "description": "Migrate the MASH Mushroom Automation landing page to a premium, modern UI/UX design inspired by the Nuxt UI Landing Template. Rebuild all sections in Next.js with improved visual hierarchy, animations, dark/light theme polish, responsive design, and content-driven architecture. Production domain: https://join.mashmarket.app",
+  "branchName": "main",
+  "techStack": {
+    "framework": "Next.js 16.1.1",
+    "runtime": "React 19.2.3",
+    "css": "Tailwind CSS v4",
+    "language": "TypeScript 5",
+    "ui": "shadcn/ui + Radix primitives + lucide-react",
+    "theme": "next-themes (dark default, system enabled)",
+    "media": "next-cloudinary (cloud: drkcpvmfc)",
+    "scheduler": "Cal.com embed (username: mash-mushroom)",
+    "fonts": "Inter (Google Fonts via next/font)"
+  },
+  "productionDomains": {
+    "landing": "https://join.mashmarket.app",
+    "ecommerce": "https://www.mashmarket.app",
+    "ecommerceDev": "https://beta.mashmarket.app",
+    "admin": "https://zen.mashmarket.app",
+    "api": "https://api.mashmarket.app"
+  },
+  "designPrinciples": [
+    "Clean, spacious layout with generous whitespace",
+    "Smooth scroll animations and reveal effects",
+    "Glass-morphism cards with subtle blur and borders",
+    "Gradient accents (green-to-emerald primary brand)",
+    "Dark-first design with polished light mode",
+    "Mobile-first responsive breakpoints",
+    "Content-driven sections with clear visual hierarchy",
+    "Accessible contrast ratios and focus states",
+    "Micro-interactions on buttons, cards, and icons",
+    "Professional typography scale with Inter font"
+  ],
+  "stories": [
+    {
+      "id": "LAND-001",
+      "title": "Design System Foundation — CSS Variables, Typography, and Spacing Tokens",
+      "priority": 1,
+      "passes": false,
+      "description": "Rebuild globals.css with a comprehensive design token system inspired by the Nuxt UI template. Create CSS custom properties for colors, spacing, radii, shadows, and typography. Establish light/dark theme token pairs. Implement utility classes (.bg-default, .bg-card, .text-primary, etc.) mapped to Tailwind v4.",
+      "acceptanceCriteria": [
+        "CSS custom properties for brand colors (green-500/600 primary, gray-900/800 dark bg, white/gray-50 light bg)",
+        "Typography scale tokens (hero: 4xl-6xl, section: 3xl-4xl, card: xl-2xl, body: base-lg)",
+        "Spacing scale (section padding: py-20 lg:py-32, card gaps: gap-6 lg:gap-8)",
+        "Shadow tokens (card-shadow, card-shadow-hover with transition)",
+        "Border-radius tokens (rounded-xl for cards, rounded-2xl for sections)",
+        "Glass-morphism utility (backdrop-blur-xl + semi-transparent bg + border)",
+        "Smooth transition defaults (300ms ease for all interactive elements)",
+        "Dark/light mode tokens all functional via next-themes class strategy"
+      ]
+    },
+    {
+      "id": "LAND-002",
+      "title": "Navigation Redesign — Floating Glassmorphism Navbar with Smooth Scroll",
+      "priority": 2,
+      "passes": false,
+      "description": "Redesign the Navigation component with a floating glassmorphism style (backdrop-blur, semi-transparent background, subtle border). Add smooth scroll behavior to anchor links. Improve mobile hamburger menu with slide-in animation. Add active section indicator. Brand logo polish.",
+      "acceptanceCriteria": [
+        "Floating nav with backdrop-blur-xl, bg-white/80 dark:bg-gray-900/80, border-b border-white/10",
+        "Smooth scroll to anchor sections (#features, #how-it-works, #schedule, #download)",
+        "Active section indicator (highlight current section link based on scroll position)",
+        "Mobile menu with smooth slide-in/out animation (not abrupt toggle)",
+        "MASH logo with green accent styling",
+        "Download CTA button with gradient background (green-500 to emerald-400)",
+        "Nav hides on scroll down, shows on scroll up (smart hide behavior)",
+        "Responsive: desktop horizontal links, mobile hamburger with full-screen overlay"
+      ]
+    },
+    {
+      "id": "LAND-003",
+      "title": "Hero Section Redesign — Animated Gradient Background with Floating Elements",
+      "priority": 3,
+      "passes": false,
+      "description": "Completely redesign the Hero section with an animated gradient background (similar to Nuxt UI HeroBackground), floating particle/dot effects, large bold typography, and prominent dual CTAs. Add a hero illustration or dashboard preview card with glassmorphism styling.",
+      "acceptanceCriteria": [
+        "Animated gradient background with green/emerald/teal color stops",
+        "Floating decorative elements (dots, circles, or grid pattern) with CSS animation",
+        "H1: 'Smart Mushroom Cultivation Platform' — text-5xl md:text-6xl lg:text-7xl font-bold",
+        "Subtitle text-lg md:text-xl with max-w-2xl, muted color",
+        "Two CTA buttons: 'Get Started' (solid green gradient) and 'Learn More' (outline/ghost)",
+        "Hero dashboard preview card floating with glassmorphism (temp, humidity, CO2, light readings)",
+        "Fade-in and slide-up entrance animation on load",
+        "Responsive: stacked layout on mobile, side-by-side on desktop",
+        "schema.org Organization JSON-LD structured data preserved"
+      ]
+    },
+    {
+      "id": "LAND-004",
+      "title": "Features Section Redesign — Showcase Panel + Icon Feature Grid",
+      "priority": 4,
+      "passes": false,
+      "description": "Redesign the Features section in two parts: (1) A large showcase panel with left text + right dashboard mockup (inspired by Nuxt UI 'section' component), (2) A 6-card feature grid with icon + title + description. Use glassmorphism cards with hover effects.",
+      "acceptanceCriteria": [
+        "Section heading: 'Take Control of Your Cultivation' — text-3xl md:text-4xl font-bold, centered",
+        "Section subtitle: muted, max-w-3xl mx-auto, centered",
+        "Showcase panel: 2-column layout (text left, dashboard card right) on desktop, stacked mobile",
+        "Showcase features list with green checkmark icons and descriptions",
+        "Dashboard mockup card with live-looking sensor readings (temp, humidity, CO2, light)",
+        "6 feature cards in 2x3 grid (md) or 3x2 grid (lg) with hover scale + shadow transition",
+        "Each card: icon (lucide-react), title (font-semibold), description (text-muted)",
+        "Cards use glassmorphism style (bg-white/5 dark, bg-white light, border, shadow)",
+        "Scroll-reveal animation (fade-up) on section entry"
+      ]
+    },
+    {
+      "id": "LAND-005",
+      "title": "Steps Section — How It Works with Numbered Cards and Light/Dark Illustrations",
+      "priority": 5,
+      "passes": false,
+      "description": "Create a new StepsSection component (currently missing) showing the 3-step process: Connect Hardware → Monitor & Analyze → Automate & Optimize. Use numbered step cards with illustrations that swap between light/dark mode (inspired by Nuxt UI steps section).",
+      "acceptanceCriteria": [
+        "Component file: components/StepsSection.tsx",
+        "Section heading: 'Start Growing Smarter in 3 Steps' — centered, bold",
+        "3 step cards with step number badge (1, 2, 3) in green circle",
+        "Step 1: 'Connect Your Hardware' — IoT sensor setup description",
+        "Step 2: 'Monitor & Analyze' — Real-time dashboard and analytics",
+        "Step 3: 'Automate & Optimize' — AI-driven automation rules",
+        "Each step has an SVG or illustration placeholder that changes for dark/light mode",
+        "Horizontal layout on desktop (3 columns), vertical stacked on mobile",
+        "Connecting line/dots between steps on desktop (visual flow indicator)",
+        "Scroll-reveal animation with staggered delay per step"
+      ]
+    },
+    {
+      "id": "LAND-006",
+      "title": "Booking Section Redesign — Pricing-Style Consultation Cards",
+      "priority": 6,
+      "passes": false,
+      "description": "Redesign the Booking/Schedule section with pricing-plan-style cards (inspired by Nuxt UI PricingPlans). Three consultation tiers with feature lists, duration badges, and clear CTA buttons. Highlight the popular 'Consultation' plan.",
+      "acceptanceCriteria": [
+        "Section heading: 'Schedule a Consultation' — centered, bold",
+        "3 consultation cards side-by-side on desktop, stacked on mobile",
+        "Quick Call (15min): basic features list, subtle card",
+        "Consultation (30min): POPULAR badge, highlighted border (green), elevated shadow",
+        "Deep Dive (60min): comprehensive features list, premium card",
+        "Each card: duration badge, description, feature checklist with green checkmarks, CTA button",
+        "Popular card has green gradient border or ring effect",
+        "CTA buttons link to /schedule?type={quick-call|consultation|deep-dive}",
+        "Card hover: subtle lift (translateY -2px) + shadow increase"
+      ]
+    },
+    {
+      "id": "LAND-007",
+      "title": "Testimonials Section — Avatar Cards with Quote Styling",
+      "priority": 7,
+      "passes": false,
+      "description": "Create a new TestimonialsSection component (currently missing) with 3 testimonial cards featuring user avatars, quotes, names, and roles. Use a card-based layout with quote marks and subtle styling.",
+      "acceptanceCriteria": [
+        "Component file: components/TestimonialsSection.tsx",
+        "Section heading: 'What Growers Are Saying' — centered, bold",
+        "3 testimonial cards with glassmorphism styling",
+        "Each card: large quote text, user avatar (placeholder), user name, user role/title",
+        "Quote mark decorative element (large, green-tinted, semi-transparent)",
+        "Testimonial data: 3 fictional mushroom growers with realistic quotes about MASH",
+        "Card layout: horizontal scroll on mobile, 3-column grid on desktop",
+        "Subtle hover effect on cards",
+        "Scroll-reveal animation"
+      ]
+    },
+    {
+      "id": "LAND-008",
+      "title": "Support Section Redesign — Clean Cards with FAQ Accordion",
+      "priority": 8,
+      "passes": false,
+      "description": "Redesign the Support section with clean support channel cards (icon + title + description + CTA) and an FAQ accordion below. Use collapsible accordion items with smooth expand/collapse animation.",
+      "acceptanceCriteria": [
+        "Section heading: 'Support & Resources' — centered, bold",
+        "4 support channel cards in 2x2 grid: Schedule Call, Email, Community, Knowledge Base",
+        "Each card: lucide icon, title, description, action link/button",
+        "FAQ subsection heading: 'Frequently Asked Questions'",
+        "5 FAQ items in accordion/collapsible format with smooth height animation",
+        "FAQ data preserved from current page (hardware, mobile app, multi-chamber, support, security)",
+        "'View All FAQs' link to /faq page",
+        "Cards and accordion use consistent glassmorphism styling"
+      ]
+    },
+    {
+      "id": "LAND-009",
+      "title": "Download/CTA Section Redesign — Bold Final Call-to-Action",
+      "priority": 9,
+      "passes": false,
+      "description": "Redesign the bottom CTA/Download section with a bold, full-width gradient background section. Large heading, subtitle, and dual CTA buttons. Add a subtle pattern or mesh background for visual interest.",
+      "acceptanceCriteria": [
+        "Full-width section with gradient background (green-900 to gray-900 dark, green-50 to white light)",
+        "Heading: 'Ready to Automate Your Cultivation?' — text-3xl md:text-4xl font-bold, white/dark text",
+        "Subtitle: app download + scheduling description, muted on dark bg",
+        "Two CTA buttons: 'Download App' (solid white on dark bg) and 'Schedule a Demo' (outline white)",
+        "Buttons link to /download and /schedule respectively",
+        "Subtle mesh/grid pattern overlay on gradient background",
+        "Centered content with max-w-3xl",
+        "Scroll-reveal fade-in animation"
+      ]
+    },
+    {
+      "id": "LAND-010",
+      "title": "Footer Redesign — Clean Multi-Column with Social Links",
+      "priority": 10,
+      "passes": false,
+      "description": "Redesign the Footer with a clean multi-column layout, brand section, link columns, and social icons. Add separator line and copyright. Polish dark/light theme appearance.",
+      "acceptanceCriteria": [
+        "4-column layout: Brand + 3 link sections (Product, Resources, Company)",
+        "Brand column: MASH logo, tagline ('Smart mushroom cultivation automation'), social icons (GitHub, Facebook)",
+        "Product links: Features, How It Works, Download",
+        "Resources links: Documentation, FAQ, Support",
+        "Company links: Schedule a Call, Privacy Policy, Terms of Service",
+        "Social icons using lucide-react (Github, Facebook via external link icon)",
+        "Horizontal separator line above copyright",
+        "Copyright: 'Copyright 2026 MASH. All rights reserved.'",
+        "Responsive: stacked on mobile, 4-column grid on desktop",
+        "Muted color scheme with hover:text-primary on links"
+      ]
+    },
+    {
+      "id": "LAND-011",
+      "title": "ScrollReveal Animation System",
+      "priority": 11,
+      "passes": false,
+      "description": "Create a reusable ScrollReveal wrapper component that triggers fade-in/slide-up animations when elements enter the viewport. Use Intersection Observer API for performance. Support staggered delays for lists.",
+      "acceptanceCriteria": [
+        "Component file: components/ui/scroll-reveal.tsx",
+        "Uses Intersection Observer API (not scroll event listeners)",
+        "Supports animation variants: fade-up, fade-in, fade-left, fade-right, scale-up",
+        "Configurable delay prop for staggered animations in lists",
+        "Configurable threshold (default 0.1) for trigger point",
+        "once prop (default true): only animate once, not on scroll back",
+        "CSS-based animations (transform + opacity) for GPU acceleration",
+        "Wrap all major homepage sections in ScrollReveal",
+        "SSR-safe: no hydration mismatch"
+      ]
+    },
+    {
+      "id": "LAND-012",
+      "title": "Main Page Assembly — Section Ordering and Smooth Scroll Provider",
+      "priority": 12,
+      "passes": false,
+      "description": "Reassemble the main page.tsx with all redesigned sections in correct order, wrapped in ScrollReveal animations. Ensure smooth scrolling, proper section spacing, and all imports resolve correctly.",
+      "acceptanceCriteria": [
+        "Section order: Hero → Features (Showcase + Grid) → Steps → Booking → Testimonials → Support/FAQ → Download/CTA → Footer",
+        "All section components properly imported and rendering",
+        "Smooth scroll behavior via CSS scroll-behavior: smooth on html",
+        "Consistent section spacing (py-20 lg:py-32)",
+        "Each section wrapped in ScrollReveal with appropriate animation",
+        "No TypeScript errors",
+        "No missing imports or components",
+        "Page builds successfully (npm run build)",
+        "SEO metadata (title, description) preserved in layout.tsx"
+      ]
+    },
+    {
+      "id": "LAND-013",
+      "title": "Subpages UI Polish — Download, Documentation, Schedule, FAQ, Support",
+      "priority": 13,
+      "passes": false,
+      "description": "Apply the new design system to all subpages. Update cards, typography, spacing, and theme tokens to match the redesigned homepage. Ensure consistent glassmorphism card styling across all pages.",
+      "acceptanceCriteria": [
+        "/download page: glassmorphism cards for iOS/Android/Desktop, consistent button styling",
+        "/documentation page: card grid with hover effects, consistent section headings",
+        "/documentation/tutorials page: tutorial cards with difficulty badges, time estimates",
+        "/schedule page: clean layout with Cal.com embed, 'What to Expect' cards",
+        "/faq page: accordion/collapsible items, search bar styling, category headers",
+        "/support page: support channel cards, contact form with consistent input styling",
+        "All subpages use PageLayout wrapper with updated Navigation and Footer",
+        "Consistent spacing (pt-24 for content after fixed nav)",
+        "Dark/light mode works correctly on all subpages"
+      ]
+    },
+    {
+      "id": "LAND-014",
+      "title": "Legal Pages UI Polish — License, Privacy, Terms, Status",
+      "priority": 14,
+      "passes": false,
+      "description": "Apply the new design system to legal/informational pages. Clean typography for long-form content, consistent heading styles, proper prose formatting.",
+      "acceptanceCriteria": [
+        "/license page: clean prose formatting, MIT license text readable",
+        "/privacy page: structured sections with clear headings, anchor links for TOC",
+        "/terms page: structured sections with clear headings, anchor links for TOC",
+        "/status page: status cards with green/red indicators, uptime percentages, incident timeline",
+        "All pages use consistent typography (prose styling for long-form content)",
+        "Dark/light mode works correctly",
+        "PageLayout wrapper with Navigation and Footer",
+        "No TypeScript errors, pages build successfully"
+      ]
+    },
+    {
+      "id": "LAND-015",
+      "title": "Responsive Design Audit and Mobile Polish",
+      "priority": 15,
+      "passes": false,
+      "description": "Comprehensive responsive design audit across all breakpoints (mobile 375px, tablet 768px, desktop 1024px+, wide 1440px+). Fix any layout issues, overflow, text truncation, or spacing problems.",
+      "acceptanceCriteria": [
+        "All sections render correctly at 375px width (iPhone SE)",
+        "All sections render correctly at 768px width (iPad)",
+        "All sections render correctly at 1024px+ width (desktop)",
+        "No horizontal overflow on any page at any breakpoint",
+        "Text is readable at all sizes (min font-size 14px on mobile)",
+        "Touch targets are at least 44x44px on mobile",
+        "Images and cards don't overflow their containers",
+        "Navigation mobile menu works correctly with no overflow",
+        "Footer stacks cleanly on mobile"
+      ]
+    },
+    {
+      "id": "LAND-016",
+      "title": "Performance and SEO Final Check",
+      "priority": 16,
+      "passes": false,
+      "description": "Final performance optimization and SEO check. Ensure no unused imports, proper image optimization, meta tags, and build success.",
+      "acceptanceCriteria": [
+        "npm run build succeeds with zero errors",
+        "npm run lint succeeds with zero warnings",
+        "No unused imports or dead code in any modified file",
+        "All pages have proper title and meta description",
+        "schema.org structured data on homepage (Organization)",
+        "Open Graph and Twitter Card meta tags on layout.tsx",
+        "No console errors or warnings in development mode",
+        "All anchor links (#features, #how-it-works, etc.) work correctly",
+        "Dark/light toggle works on all pages without flash",
+        "Favicon and app icons preserved (android-chrome, apple-touch-icon)"
+      ]
+    }
+  ],
+  "totalStories": 16,
+  "completedStories": 0,
+  "createdAt": "2026-02-20T00:00:00Z",
+  "lastUpdated": "2026-02-20T00:00:00Z"
+}

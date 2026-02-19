@@ -1,0 +1,70 @@
+# MASH Landing Page Redesign — Progress Log
+
+## Project Overview
+Redesign the MASH (Mushroom Automation System Hub) landing page with premium UI/UX inspired by the Nuxt UI Landing Template. Stay in Next.js 16 + React 19 + Tailwind v4 stack. Deploy to https://join.mashmarket.app.
+
+## Template Reference
+The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts only). Key design patterns to replicate in Next.js:
+- Glassmorphism cards with backdrop-blur and semi-transparent backgrounds
+- Content-driven sections with clean visual hierarchy
+- Animated gradient hero background with floating decorative elements
+- Numbered step cards with light/dark illustration swaps
+- Pricing-plan-style cards for service tiers
+- Testimonial cards with avatar and quote styling
+- Smart sticky navbar that hides on scroll down, shows on scroll up
+- Scroll-reveal animations on section entry (Intersection Observer)
+- Full dark/light theme with polished token system
+
+## Codebase Patterns
+
+### File Structure
+- Pages: app/{route}/page.tsx (Next.js App Router)
+- Components: components/{SectionName}.tsx (top-level sections)
+- UI primitives: components/ui/{component}.tsx (shadcn-style)
+- Layout wrapper: components/layout/PageLayout.tsx (Navigation + main + Footer)
+- Providers: components/providers/theme-provider.tsx (next-themes)
+- Utilities: lib/utils.ts (cn() class merger)
+- Styles: app/globals.css (Tailwind v4 + CSS custom properties)
+- Config: next.config.ts, tsconfig.json, postcss.config.mjs
+
+### Styling Approach
+- Tailwind CSS v4 with @theme directive for custom properties
+- CSS custom properties for light/dark theme tokens
+- next-themes with class strategy (attribute="class", defaultTheme="dark")
+- cn() utility from lib/utils.ts for conditional class merging
+- lucide-react for all icons
+
+### Brand Identity
+- Name: MASH — Mushroom Automation System Hub
+- Tagline: Smart Mushroom Cultivation Platform
+- Primary color: green-500/600 (rgb 34,197,94 / 22,163,74)
+- Email: mash.mushroom.automation@gmail.com
+- GitHub: MASH-Mushroom-Automation
+- Facebook: groups/mashmushrooom
+- License: MIT, Copyright 2026
+
+### Integration Services
+- Cal.com: username "mash-mushroom", event types: quick-call(15m), consultation(30m), deep-dive(60m)
+- Cloudinary: cloud "drkcpvmfc", preset "Mash-Automation"
+- Next.js: v16.1.1 + React 19.2.3
+- Tailwind: v4 (PostCSS plugin)
+
+### Missing Components (to be created)
+- components/StepsSection.tsx — How It Works (3 steps)
+- components/TestimonialsSection.tsx — User quotes
+- components/ui/scroll-reveal.tsx — Intersection Observer wrapper
+
+### Dependencies Available
+- lucide-react (icons)
+- next-themes (dark/light)
+- next-cloudinary (media CDN)
+- class-variance-authority (variant styling)
+- clsx + tailwind-merge (via cn() in lib/utils.ts)
+
+---
+
+## Implementation Log
+
+(Entries will be appended here as stories are completed)
+
+---
