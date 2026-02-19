@@ -111,7 +111,8 @@
       "id": "LAND-005",
       "title": "Steps Section — How It Works with Numbered Cards and Light/Dark Illustrations",
       "priority": 5,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:00:00Z",
       "description": "Create a new StepsSection component (currently missing) showing the 3-step process: Connect Hardware → Monitor & Analyze → Automate & Optimize. Use numbered step cards with illustrations that swap between light/dark mode (inspired by Nuxt UI steps section).",
       "acceptanceCriteria": [
         "Component file: components/StepsSection.tsx",
@@ -148,7 +149,8 @@
       "id": "LAND-007",
       "title": "Testimonials Section — Avatar Cards with Quote Styling",
       "priority": 7,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:00:00Z",
       "description": "Create a new TestimonialsSection component (currently missing) with 3 testimonial cards featuring user avatars, quotes, names, and roles. Use a card-based layout with quote marks and subtle styling.",
       "acceptanceCriteria": [
         "Component file: components/TestimonialsSection.tsx",
@@ -326,7 +328,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 5,
+  "completedStories": 7,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

@@ -44,29 +44,34 @@ export default function TestimonialsSection({
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="relative bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 dark:border-white/10 rounded-xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="relative glass-card p-6 lg:p-8 rounded-xl"
             >
-              {/* Decorative quote mark */}
-              <Quote className="w-8 h-8 text-green-500/30 mb-4" />
+              {/* Decorative large quote mark */}
+              <div className="absolute top-4 right-4">
+                <Quote className="w-10 h-10 text-green-500/10" />
+              </div>
 
-              <blockquote className="text-primary leading-relaxed mb-6">
-                &ldquo;{testimonial.quote}&rdquo;
-              </blockquote>
+              <div className="relative">
+                <Quote className="w-5 h-5 text-green-500/40 mb-4" />
 
-              <div className="flex items-center gap-3">
-                {/* Avatar placeholder */}
-                <div className="w-10 h-10 rounded-full bg-linear-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-semibold text-sm">
-                  {testimonial.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </div>
-                <div>
-                  <div className="font-semibold text-primary text-sm">
-                    {testimonial.name}
+                <blockquote className="text-primary leading-relaxed mb-6 text-sm lg:text-base">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </blockquote>
+
+                <div className="flex items-center gap-3 pt-4 border-t border-white/10 dark:border-white/5">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-semibold text-sm shadow-md">
+                    {testimonial.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </div>
-                  <div className="text-secondary text-xs">
-                    {testimonial.role}
+                  <div>
+                    <div className="font-semibold text-primary text-sm">
+                      {testimonial.name}
+                    </div>
+                    <div className="text-tertiary text-xs">
+                      {testimonial.role}
+                    </div>
                   </div>
                 </div>
               </div>
