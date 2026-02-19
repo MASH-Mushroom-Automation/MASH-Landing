@@ -1,115 +1,216 @@
-export default function FeaturesSection() {
-  const features = [
-    {
-      title: "Climate Control",
-      description: "Automated temperature and humidity regulation with precision control systems",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Real-time Analytics",
-      description: "Comprehensive data visualization and historical trend analysis",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Multi-chamber Support",
-      description: "Manage multiple growing chambers with independent climate zones",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      ),
-    },
-    {
-      title: "Alert System",
-      description: "Instant notifications for critical events and threshold breaches",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-        </svg>
-      ),
-    },
-    {
-      title: "Energy Efficiency",
-      description: "Smart power management to reduce operational costs",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Data Logging",
-      description: "Comprehensive data recording for compliance and optimization",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Remote Access",
-      description: "Secure cloud connectivity for monitoring from anywhere",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Recipe Management",
-      description: "Store and apply proven growing recipes for different mushroom species",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-        </svg>
-      ),
-    },
-    {
-      title: "Irrigation Control",
-      description: "Automated watering and misting schedules for optimal moisture",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-        </svg>
-      ),
-    },
-  ];
+import type { LandingPageData } from "@/lib/sanity";
+import {
+  Cloud,
+  BarChart3,
+  LayoutGrid,
+  Bell,
+  Globe,
+  BookOpen,
+  Check,
+  Thermometer,
+  Droplets,
+  Wind,
+  Sun,
+} from "lucide-react";
+
+const DEFAULT_SHOWCASE_FEATURES = [
+  {
+    title: "Optimize your growing environment",
+    description:
+      "Let IoT sensors continuously monitor temperature, humidity, CO2, and light levels. Focus on what matters most — growing quality mushrooms, while MASH optimizes conditions automatically.",
+  },
+  {
+    title: "Track your cultivation metrics",
+    description:
+      "Monitor growth cycles with real-time analytics. Get actionable insights to maximize yields during peak growing periods.",
+  },
+  {
+    title: "Automate your daily operations",
+    description:
+      "Automate climate control, irrigation, and ventilation schedules. Reduce manual work and produce consistently better harvests.",
+  },
+];
+
+const FEATURE_ICONS: Record<string, React.ReactNode> = {
+  "climate-control": <Cloud className="w-5 h-5" />,
+  analytics: <BarChart3 className="w-5 h-5" />,
+  "multi-chamber": <LayoutGrid className="w-5 h-5" />,
+  alerts: <Bell className="w-5 h-5" />,
+  "remote-access": <Globe className="w-5 h-5" />,
+  recipes: <BookOpen className="w-5 h-5" />,
+};
+
+const DEFAULT_FEATURES = [
+  {
+    title: "Climate Control",
+    description:
+      "Automated temperature and humidity regulation with precision control systems",
+    icon: "climate-control",
+  },
+  {
+    title: "Real-time Analytics",
+    description:
+      "Comprehensive data visualization and historical trend analysis",
+    icon: "analytics",
+  },
+  {
+    title: "Multi-chamber Support",
+    description:
+      "Manage multiple growing chambers with independent climate zones",
+    icon: "multi-chamber",
+  },
+  {
+    title: "Alert System",
+    description:
+      "Instant notifications for critical events and threshold breaches",
+    icon: "alerts",
+  },
+  {
+    title: "Remote Access",
+    description: "Secure cloud connectivity for monitoring from anywhere",
+    icon: "remote-access",
+  },
+  {
+    title: "Recipe Management",
+    description:
+      "Store and apply proven growing recipes for different mushroom species",
+    icon: "recipes",
+  },
+];
+
+const DASHBOARD_READINGS = [
+  { label: "Temperature", value: "24.5°C", icon: Thermometer, color: "text-orange-400", bar: 72 },
+  { label: "Humidity", value: "85%", icon: Droplets, color: "text-blue-400", bar: 85 },
+  { label: "CO2 Level", value: "800 ppm", icon: Wind, color: "text-emerald-400", bar: 53 },
+  { label: "Light", value: "450 lux", icon: Sun, color: "text-yellow-400", bar: 45 },
+];
+
+export default function FeaturesSection({
+  data,
+}: { data?: LandingPageData | null } = {}) {
+  const features = data?.features?.slice(0, 6) ?? DEFAULT_FEATURES;
+  const showcaseFeatures = data?.showcaseFeatures ?? DEFAULT_SHOWCASE_FEATURES;
 
   return (
-    <section id="features" className="py-20 bg-features">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Powerful Features
-          </h2>
-          <p className="text-xl text-secondary max-w-3xl mx-auto">
-            MASH provides everything you need to automate and optimize your mushroom cultivation operation
-          </p>
-        </div>
+    <>
+      {/* Feature Showcase — Split layout */}
+      <section id="features" className="py-20 lg:py-32 bg-default">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+              {data?.featuresTitle ??
+                "Revolutionize your mushroom cultivation"}
+            </h2>
+            <p className="text-lg text-secondary max-w-3xl mx-auto">
+              {data?.featuresSubtitle ??
+                "Transform your growing operation with IoT-powered monitoring and automated environmental control."}
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="p-6 border border-default rounded-xl hover:shadow-lg transition-shadow bg-card"
-            >
-              <div className="w-16 h-16 bg-features rounded-lg flex items-center justify-center mb-4 text-green">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
-              <p className="text-secondary">{feature.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Feature list with checkmarks */}
+            <div className="space-y-8">
+              {showcaseFeatures.map((feature, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-green-500" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-primary mb-1.5">
+                      {feature.title}
+                    </h3>
+                    <p className="text-secondary leading-relaxed text-sm">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+
+            {/* Right: Dashboard mockup card */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-md glass-card p-6 rounded-2xl">
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+                  </div>
+                  <span className="ml-2 text-xs text-tertiary font-mono">
+                    MASH Dashboard
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {DASHBOARD_READINGS.map((reading) => {
+                    const Icon = reading.icon;
+                    return (
+                      <div
+                        key={reading.label}
+                        className="flex items-center gap-3 p-3 bg-white/5 dark:bg-white/5 rounded-lg border border-white/5"
+                      >
+                        <Icon className={`w-4 h-4 ${reading.color} shrink-0`} />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs text-tertiary">
+                              {reading.label}
+                            </span>
+                            <span className="text-sm font-mono font-medium text-green-500">
+                              {reading.value}
+                            </span>
+                          </div>
+                          <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                            <div
+                              className="h-full rounded-full bg-linear-to-r from-green-500 to-emerald-400"
+                              style={{ width: `${reading.bar}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 lg:py-32 gradient-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+              Take control of your cultivation
+            </h2>
+            <p className="text-lg text-secondary max-w-3xl mx-auto">
+              Everything you need to automate and optimize your mushroom growing
+              operation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="group glass-card p-6 rounded-xl"
+              >
+                <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-4 text-green-600 dark:text-green-400 group-hover:bg-green-500/20 transition-colors duration-300">
+                  {FEATURE_ICONS[feature.icon] ?? FEATURE_ICONS["climate-control"]}
+                </div>
+                <h3 className="text-lg font-semibold text-primary mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-secondary leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

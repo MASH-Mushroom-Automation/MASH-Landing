@@ -92,7 +92,8 @@
       "id": "LAND-004",
       "title": "Features Section Redesign — Showcase Panel + Icon Feature Grid",
       "priority": 4,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2026-02-20T01:45:00Z",
       "description": "Redesign the Features section in two parts: (1) A large showcase panel with left text + right dashboard mockup (inspired by Nuxt UI 'section' component), (2) A 6-card feature grid with icon + title + description. Use glassmorphism cards with hover effects.",
       "acceptanceCriteria": [
         "Section heading: 'Take Control of Your Cultivation' — text-3xl md:text-4xl font-bold, centered",
@@ -325,7 +326,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 4,
+  "completedStories": 5,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

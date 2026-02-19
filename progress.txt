@@ -76,6 +76,15 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - Created missing stub files: lib/sanity.ts, components/providers/smooth-scroll-provider.tsx, components/ui/scroll-reveal.tsx, components/StepsSection.tsx, components/TestimonialsSection.tsx
 - Build: 14/14 routes, 0 errors
 
+### LAND-004: Features Section Redesign [COMPLETED]
+- Replaced inline SVG icons with lucide-react components (Cloud, BarChart3, LayoutGrid, Bell, Globe, BookOpen)
+- Showcase panel: checkmark-prefixed feature list (left) + glassmorphism dashboard card (right)
+- Dashboard card with sensor readings + progress bars (Thermometer, Droplets, Wind, Sun icons)
+- 6-card feature grid with glass-card styling and hover effects
+- gradient-section background for feature grid
+- Fixed Tailwind v4: flex-shrink-0 to shrink-0
+- Build: 14/14 routes, 0 errors
+
 ### LAND-003: Hero Section Redesign [COMPLETED]
 - Two-column layout: text left, dashboard preview card right (desktop)
 - Animated gradient background with 3 floating blur orbs (green/emerald/teal)
