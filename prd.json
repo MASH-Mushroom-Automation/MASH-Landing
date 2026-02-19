@@ -299,7 +299,8 @@
       "id": "LAND-015",
       "title": "Responsive Design Audit and Mobile Polish",
       "priority": 15,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T12:00:00Z",
       "description": "Comprehensive responsive design audit across all breakpoints (mobile 375px, tablet 768px, desktop 1024px+, wide 1440px+). Fix any layout issues, overflow, text truncation, or spacing problems.",
       "acceptanceCriteria": [
         "All sections render correctly at 375px width (iPhone SE)",
@@ -334,7 +335,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 14,
+  "completedStories": 15,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

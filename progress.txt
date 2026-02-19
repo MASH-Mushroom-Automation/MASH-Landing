@@ -201,3 +201,14 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - Terms page: gradient-hero with FileText icon, glass-card Table of Contents (3-column grid), 15 sections with id anchors + scroll-mt-24, glass-card contact info, updated website URL to join.mashmarket.app
 - Status page: removed missing StatusBadge import, inlined StatusIndicator component with green/yellow dot + badge, gradient-hero header with dynamic icon (CheckCircle/Activity), glass-card service list + incidents + uptime chart, gradient Subscribe CTA button, proper email input styling
 - Build: 14/14 routes, 0 errors
+
+### LAND-015: Responsive Design Audit [COMPLETED]
+- Navigation.tsx: hamburger button touch target increased from 36px to 44px (p-2 → p-2.5 + min-h/min-w-[44px])
+- Footer.tsx: social icon buttons increased from w-9/h-9 (36px) to w-11/h-11 (44px)
+- Footer.tsx: bottom bar links (Privacy/Terms/License) added py-2 for touch target height
+- BookingSection.tsx: grid changed from md:grid-cols-3 to md:grid-cols-2 lg:grid-cols-3 (prevents cramping at 768px)
+- TestimonialsSection.tsx: grid changed from md:grid-cols-3 to md:grid-cols-2 lg:grid-cols-3
+- status/page.tsx: email subscribe form changed flex to flex-col sm:flex-row (stacks on mobile)
+- status/page.tsx: service items changed to flex-col sm:flex-row with responsive padding (p-4 sm:p-6)
+- status/page.tsx: 90-day uptime chart wrapped in overflow-x-auto with min-w-125 inner container
+- Build: 14/14 routes, 0 errors

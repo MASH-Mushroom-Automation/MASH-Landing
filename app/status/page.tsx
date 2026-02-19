@@ -116,7 +116,7 @@ export default function StatusPage() {
               {services.map((service) => (
                 <div
                   key={service.name}
-                  className="p-6 flex items-center justify-between"
+                  className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6"
                 >
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -143,22 +143,24 @@ export default function StatusPage() {
               90-Day Uptime
             </h2>
             <div className="glass-card p-6">
-              <div className="flex items-end justify-between h-24 gap-0.5">
-                {Array.from({ length: 90 }).map((_, i) => {
-                  const height = 90 + ((i * 7) % 10);
-                  return (
-                    <div
-                      key={i}
-                      className="flex-1 bg-green-500 dark:bg-green-400 rounded-t"
-                      style={{ height: `${height}%` }}
-                      title={`Day ${i + 1}: 99.9% uptime`}
-                    />
-                  );
-                })}
-              </div>
-              <div className="flex justify-between mt-4 text-sm text-gray-500">
-                <span>90 days ago</span>
-                <span>Today</span>
+              <div className="overflow-x-auto">
+                <div className="flex items-end justify-between h-24 gap-0.5 min-w-125">
+                  {Array.from({ length: 90 }).map((_, i) => {
+                    const height = 90 + ((i * 7) % 10);
+                    return (
+                      <div
+                        key={i}
+                        className="flex-1 bg-green-500 dark:bg-green-400 rounded-t"
+                        style={{ height: `${height}%` }}
+                        title={`Day ${i + 1}: 99.9% uptime`}
+                      />
+                    );
+                  })}
+                </div>
+                <div className="flex justify-between mt-4 text-sm text-gray-500 min-w-125">
+                  <span>90 days ago</span>
+                  <span>Today</span>
+                </div>
               </div>
             </div>
           </div>
@@ -198,7 +200,7 @@ export default function StatusPage() {
             <p className="mb-6 text-gray-600 dark:text-gray-400">
               Subscribe to receive notifications about system status changes.
             </p>
-            <div className="flex max-w-md mx-auto gap-3">
+            <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"

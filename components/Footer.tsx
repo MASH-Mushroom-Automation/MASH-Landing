@@ -49,7 +49,7 @@ export default function Footer({ data }: { data?: LandingPageData | null } = {})
                 href="https://github.com/MASH-Mushroom-Automation"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gray-100 dark:bg-white/5 text-tertiary hover:text-primary hover:bg-green-500/10 transition-all duration-300"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-gray-100 dark:bg-white/5 text-tertiary hover:text-primary hover:bg-green-500/10 transition-all duration-300"
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
@@ -58,7 +58,7 @@ export default function Footer({ data }: { data?: LandingPageData | null } = {})
                 href="https://www.facebook.com/groups/mashmushrooom"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gray-100 dark:bg-white/5 text-tertiary hover:text-primary hover:bg-green-500/10 transition-all duration-300"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-lg bg-gray-100 dark:bg-white/5 text-tertiary hover:text-primary hover:bg-green-500/10 transition-all duration-300"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
@@ -98,13 +98,13 @@ export default function Footer({ data }: { data?: LandingPageData | null } = {})
             {data?.footerCopyright ?? "Copyright 2026 MASH. All rights reserved."}
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors">
+            <Link href="/privacy" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors py-2">
               Privacy
             </Link>
-            <Link href="/terms" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors">
+            <Link href="/terms" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors py-2">
               Terms
             </Link>
-            <Link href="/license" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors">
+            <Link href="/license" className="text-sm text-tertiary hover:text-green-600 dark:hover:text-green-400 transition-colors py-2">
               License
             </Link>
           </div>

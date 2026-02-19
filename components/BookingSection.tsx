@@ -64,7 +64,7 @@ export default function BookingSection({ data }: { data?: LandingPageData | null
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-stretch">
           {plans.map((plan, index) => (
             <div
               key={index}

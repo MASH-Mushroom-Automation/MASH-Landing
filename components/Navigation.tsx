@@ -158,7 +158,7 @@ export default function Navigation({ data }: { data?: LandingPageData | null } =
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-white/10 transition-colors"
+              className="p-2.5 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg text-secondary hover:text-primary hover:bg-white/10 transition-colors"
               aria-expanded={isMenuOpen}
               aria-label="Toggle mobile menu"
             >
