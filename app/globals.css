@@ -301,10 +301,192 @@
   .text-error { color: rgb(var(--color-error)); }
 }
 
+/* ========================================
+   Glassmorphism Utilities
+   ======================================== */
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform: translateY(-2px);
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  :is(.dark) .glass {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  :is(.dark) .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  }
+
+  :is(.dark) .glass-card:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+  }
+
+  :is(.dark) .glass-nav {
+    background: rgba(17, 24, 39, 0.8);
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ========================================
+   Animation & Transition Utilities
+   ======================================== */
+@layer utilities {
+  .transition-default {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgb(34 197 94 / 0.15);
+  }
+
+  :is(.dark) .hover-glow:hover {
+    box-shadow: 0 0 20px rgb(34 197 94 / 0.25);
+  }
+}
+
+/* ========================================
+   Gradient Utilities
+   ======================================== */
+@layer utilities {
+  .gradient-brand {
+    background: linear-gradient(to right, rgb(34 197 94), rgb(52 211 153));
+  }
+
+  .gradient-brand-hover {
+    background: linear-gradient(to right, rgb(22 163 74), rgb(16 185 129));
+  }
+
+  .gradient-text-brand {
+    background: linear-gradient(to right, rgb(34 197 94), rgb(52 211 153));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--color-background)) 0%,
+      rgb(var(--color-background-hero-start)) 50%,
+      rgb(var(--color-background-hero-end)) 100%
+    );
+  }
+
+  .gradient-section {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--color-background)) 0%,
+      rgb(var(--color-background-alt)) 100%
+    );
+  }
+}
+
+/* ========================================
+   Section Spacing System
+   ======================================== */
+@layer utilities {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+
+  .section-container {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}
+
+/* ========================================
+   Base Element Styles
+   ======================================== */
 html {
   scroll-behavior: smooth;
 }
 
 section {
   scroll-margin-top: 4rem;
+}
+
+/* Focus ring for accessibility */
+:focus-visible {
+  outline: 2px solid rgb(34 197 94);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth transitions on interactive elements */
+a, button, input, select, textarea {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgb(34 197 94 / 0.2);
+  color: inherit;
 }

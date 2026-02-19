@@ -37,7 +37,8 @@
       "id": "LAND-001",
       "title": "Design System Foundation — CSS Variables, Typography, and Spacing Tokens",
       "priority": 1,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2026-02-20T01:00:00Z",
       "description": "Rebuild globals.css with a comprehensive design token system inspired by the Nuxt UI template. Create CSS custom properties for colors, spacing, radii, shadows, and typography. Establish light/dark theme token pairs. Implement utility classes (.bg-default, .bg-card, .text-primary, etc.) mapped to Tailwind v4.",
       "acceptanceCriteria": [
         "CSS custom properties for brand colors (green-500/600 primary, gray-900/800 dark bg, white/gray-50 light bg)",
@@ -321,7 +322,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 0,
+  "completedStories": 1,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 /.history
 /scripts
+/studio
+/landing/node_modules
+/landing/node_modules

@@ -65,6 +65,15 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 
 ## Implementation Log
 
-(Entries will be appended here as stories are completed)
+### LAND-001: Design System Foundation [COMPLETED]
+- Enhanced globals.css with glassmorphism utility classes (.glass, .glass-card, .glass-nav) with dark mode variants
+- Added animation/transition utilities (.transition-default, .hover-lift, .hover-glow)
+- Added gradient utilities (.gradient-brand, .gradient-text-brand, .gradient-hero, .gradient-section)
+- Added section spacing system (.section-padding, .section-container) with responsive breakpoints
+- Added :focus-visible accessibility styles with green brand ring
+- Added smooth transition defaults for all interactive elements
+- Added ::selection color matching brand
+- Created missing stub files: lib/sanity.ts, components/providers/smooth-scroll-provider.tsx, components/ui/scroll-reveal.tsx, components/StepsSection.tsx, components/TestimonialsSection.tsx
+- Build: 14/14 routes, 0 errors
 
 ---
