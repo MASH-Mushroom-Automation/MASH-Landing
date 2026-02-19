@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
-import { CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { CheckCircle, Activity, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "System Status - MASH",
@@ -67,39 +67,18 @@ const recentIncidents = [
   },
 ];
 
-function StatusBadge({ status }: { status: string }) {
-  switch (status) {
-    case "operational":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success-light text-success-strong">
-          <CheckCircle className="w-4 h-4 mr-1" />
-          Operational
-        </span>
-      );
-    case "degraded":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-warning-light text-warning-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Degraded
-        </span>
-      );
-    case "outage":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-error-light text-error-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Outage
-        </span>
-      );
-    case "maintenance":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-blue-light text-accent-blue">
-          <Clock className="w-4 h-4 mr-1" />
-          Maintenance
-        </span>
-      );
-    default:
-      return null;
-  }
+function StatusIndicator({ status }: { status: string }) {
+  const isOperational = status === "operational";
+  return (
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+      isOperational 
+        ? "bg-green-500/10 text-green-600 dark:text-green-400" 
+        : "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400"
+    }`}>
+      <span className={`w-2 h-2 rounded-full ${isOperational ? "bg-green-500" : "bg-yellow-500"}`} />
+      {isOperational ? "Operational" : "Degraded"}
+    </span>
+  );
 }
 
 export default function StatusPage() {
@@ -107,48 +86,51 @@ export default function StatusPage() {
 
   return (
     <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-gradient"}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-inverse">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
-              <CheckCircle className="w-8 h-8" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              {allOperational ? "All Systems Operational" : "Some Systems Affected"}
-            </h1>
-            <p className="text-xl opacity-90">
-              Last updated: {new Date().toLocaleString()}
-            </p>
+      <div className="gradient-hero section-padding">
+        <div className="section-container text-center">
+          <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
+            allOperational ? "bg-green-500/10" : "bg-yellow-500/10"
+          }`}>
+            {allOperational 
+              ? <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+              : <Activity className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
+            }
           </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {allOperational ? "All Systems Operational" : "Some Systems Affected"}
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
+            Last updated: {new Date().toLocaleString()}
+          </p>
         </div>
       </div>
 
-      <div className="py-16 bg-default">
+      <div className="section-padding">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Services Status */}
           <div className="mb-16">
-            <h2 className="text-2xl font-bold text-primary mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Service Status
             </h2>
-            <div className="bg-componentpage rounded-xl divide-y divide-default">
+            <div className="glass-card divide-y divide-gray-200 dark:divide-white/10">
               {services.map((service) => (
                 <div
                   key={service.name}
                   className="p-6 flex items-center justify-between"
                 >
                   <div>
-                    <h3 className="text-lg font-semibold text-primary">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {service.name}
                     </h3>
-                    <p className="text-secondary text-sm">
+                    <p className="text-gray-500 text-sm">
                       {service.description}
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-tertiary">
+                    <span className="text-sm text-gray-500 hidden sm:inline">
                       {service.uptime} uptime
                     </span>
-                    <StatusBadge status={service.status} />
+                    <StatusIndicator status={service.status} />
                   </div>
                 </div>
               ))}
@@ -157,25 +139,24 @@ export default function StatusPage() {
 
           {/* Uptime Chart Placeholder */}
           <div className="mb-16">
-            <h2 className="text-2xl font-bold text-primary mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               90-Day Uptime
             </h2>
-            <div className="bg-componentpage rounded-xl p-6">
-              <div className="flex items-end justify-between h-24 gap-1">
+            <div className="glass-card p-6">
+              <div className="flex items-end justify-between h-24 gap-0.5">
                 {Array.from({ length: 90 }).map((_, i) => {
-                  // Use deterministic pseudo-random based on index for consistent rendering
                   const height = 90 + ((i * 7) % 10);
                   return (
                     <div
                       key={i}
-                      className="flex-1 bg-green rounded-t"
+                      className="flex-1 bg-green-500 dark:bg-green-400 rounded-t"
                       style={{ height: `${height}%` }}
                       title={`Day ${i + 1}: 99.9% uptime`}
                     />
                   );
                 })}
               </div>
-              <div className="flex justify-between mt-4 text-sm text-tertiary">
+              <div className="flex justify-between mt-4 text-sm text-gray-500">
                 <span>90 days ago</span>
                 <span>Today</span>
               </div>
@@ -184,45 +165,46 @@ export default function StatusPage() {
 
           {/* Recent Incidents */}
           <div>
-            <h2 className="text-2xl font-bold text-primary mb-6">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               Recent Incidents
             </h2>
             <div className="space-y-4">
               {recentIncidents.map((incident, index) => (
                 <div
                   key={index}
-                  className="bg-componentpage rounded-xl p-6"
+                  className="glass-card p-6"
                 >
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-primary">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {incident.title}
                     </h3>
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success-light text-success-strong">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400">
                       Resolved
                     </span>
                   </div>
-                  <p className="text-secondary mb-2">
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">
                     {incident.description}
                   </p>
-                  <span className="text-sm text-tertiary">{incident.date}</span>
+                  <span className="text-sm text-gray-500">{incident.date}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Subscribe to Updates */}
-          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">Get Status Updates</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-16 glass-card p-8 text-center">
+            <Mail className="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Get Status Updates</h2>
+            <p className="mb-6 text-gray-600 dark:text-gray-400">
               Subscribe to receive notifications about system status changes.
             </p>
             <div className="flex max-w-md mx-auto gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-primary focus:ring-2 focus:ring-green"
+                className="flex-1 px-4 py-3 rounded-lg bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none"
               />
-              <button className="px-6 py-3 bg-background text-green rounded-lg hover:bg-surface-hover transition-colors font-semibold">
+              <button className="px-6 py-3 bg-linear-to-r from-green-500 to-emerald-400 text-white rounded-lg hover:from-green-600 hover:to-emerald-500 transition-all duration-300 font-semibold">
                 Subscribe
               </button>
             </div>

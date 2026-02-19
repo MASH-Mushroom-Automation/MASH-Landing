@@ -194,3 +194,10 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - FAQ page: gradient-hero, search input dark/light styling, AccordionItem with glass-card + grid-rows animation, CTA glass-card with gradient button
 - Support page: gradient-hero + section-container, glass-card support option cards with hover lift, glass-card contact form + contact info circles
 - Build: 14/14 routes, 0 errors
+
+### LAND-014: Legal Pages UI Polish [COMPLETED]
+- License page: gradient-hero header, Scale icon, glass-card for Permitted/Conditions cards with Check/AlertTriangle icons, glass-card license text + third-party libs, gradient GitHub CTA button, green hover link colors
+- Privacy page: gradient-hero with Shield icon, glass-card Table of Contents with anchor links (scroll-mt-24), all section headings with id attributes for TOC navigation, glass-card contact info
+- Terms page: gradient-hero with FileText icon, glass-card Table of Contents (3-column grid), 15 sections with id anchors + scroll-mt-24, glass-card contact info, updated website URL to join.mashmarket.app
+- Status page: removed missing StatusBadge import, inlined StatusIndicator component with green/yellow dot + badge, gradient-hero header with dynamic icon (CheckCircle/Activity), glass-card service list + incidents + uptime chart, gradient Subscribe CTA button, proper email input styling
+- Build: 14/14 routes, 0 errors
