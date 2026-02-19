@@ -76,4 +76,23 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - Created missing stub files: lib/sanity.ts, components/providers/smooth-scroll-provider.tsx, components/ui/scroll-reveal.tsx, components/StepsSection.tsx, components/TestimonialsSection.tsx
 - Build: 14/14 routes, 0 errors
 
+### LAND-002: Navigation Redesign [COMPLETED]
+- Floating glassmorphism navbar with glass-nav utility (backdrop-blur + semi-transparent bg)
+- Smart hide: hides on scroll down, shows on scroll up (requestAnimationFrame)
+- Active section indicator via Intersection Observer (green underline dot)
+- Smooth scroll for anchor links with useCallback optimization
+- Mobile menu with slide animation (max-h transition)
+- Gradient brand logo (green-600 to emerald-500)
+- Gradient CTA button with Download icon
+- Cleaned ThemeToggle: removed console.log debug statements, removed unused localTheme state
+- Build: 14/14 routes, 0 errors
+
+### LAND-011: ScrollReveal Animation System [COMPLETED]
+- Created components/ui/scroll-reveal.tsx with Intersection Observer API
+- 5 animation variants: fade-up, fade-in, fade-left, fade-right, scale-up
+- Configurable delay, threshold (0.1 default), once (true default) props
+- CSS transform + opacity for GPU-accelerated animation (duration-700 ease-out)
+- SSR-safe with "use client" directive
+- Already wrapped in page.tsx around all major sections
+
 ---

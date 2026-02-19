@@ -55,7 +55,8 @@
       "id": "LAND-002",
       "title": "Navigation Redesign — Floating Glassmorphism Navbar with Smooth Scroll",
       "priority": 2,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2026-02-20T01:15:00Z",
       "description": "Redesign the Navigation component with a floating glassmorphism style (backdrop-blur, semi-transparent background, subtle border). Add smooth scroll behavior to anchor links. Improve mobile hamburger menu with slide-in animation. Add active section indicator. Brand logo polish.",
       "acceptanceCriteria": [
         "Floating nav with backdrop-blur-xl, bg-white/80 dark:bg-gray-900/80, border-b border-white/10",
@@ -216,7 +217,8 @@
       "id": "LAND-011",
       "title": "ScrollReveal Animation System",
       "priority": 11,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2026-02-20T01:00:00Z",
       "description": "Create a reusable ScrollReveal wrapper component that triggers fade-in/slide-up animations when elements enter the viewport. Use Intersection Observer API for performance. Support staggered delays for lists.",
       "acceptanceCriteria": [
         "Component file: components/ui/scroll-reveal.tsx",
@@ -322,7 +324,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 1,
+  "completedStories": 3,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

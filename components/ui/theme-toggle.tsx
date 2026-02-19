@@ -8,32 +8,24 @@ import { cn } from "@/lib/utils";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
-  const [localTheme, setLocalTheme] = React.useState("light");
 
   React.useEffect(() => {
     setMounted(true);
-    console.log("ThemeToggle mounted, current theme:", theme);
   }, []);
 
-  React.useEffect(() => {
-    console.log("Theme changed to:", theme);
-  }, [theme]);
-
   const handleToggle = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    console.log("Toggling from", theme, "to", newTheme);
-    setTheme(newTheme);
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="p-2 rounded-lg text-secondary hover:bg-white/10 transition-colors"
         aria-label="Toggle theme"
         aria-hidden="true"
         disabled
       >
-        <Sun className="h-5 w-5" />
+        <Sun className="h-4.5 w-4.5" />
       </button>
     );
   }
@@ -42,16 +34,16 @@ export function ThemeToggle() {
     <button
       onClick={handleToggle}
       className={cn(
-        "p-2 rounded-md transition-colors",
-        "text-gray-700 dark:text-gray-300",
-        "hover:bg-gray-100 dark:hover:bg-gray-800"
+        "p-2 rounded-lg transition-colors",
+        "text-secondary hover:text-primary",
+        "hover:bg-white/10"
       )}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5" />
+        <Sun className="h-4.5 w-4.5" />
       ) : (
-        <Moon className="h-5 w-5" />
+        <Moon className="h-4.5 w-4.5" />
       )}
     </button>
   );
