@@ -86,8 +86,8 @@ const docCategories = [
 export default function DocumentationPage() {
   return (
     <PageLayout>
-      <div className="bg-hero py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="gradient-hero py-20">
+        <div className="section-container">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Documentation
@@ -99,14 +99,14 @@ export default function DocumentationPage() {
         </div>
       </div>
 
-      <div className="py-16 bg-default">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-padding bg-default">
+        <div className="section-container">
           {/* Quick Links */}
           <div className="mb-12">
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/documentation/tutorials"
-                className="inline-flex items-center px-6 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-linear-to-r from-green-500 to-emerald-400 text-white rounded-full hover:from-green-600 hover:to-emerald-500 transition-all duration-300 shadow-lg"
               >
                 <BookOpen className="w-5 h-5 mr-2" />
                 Browse Tutorials
@@ -129,7 +129,7 @@ export default function DocumentationPage() {
                 <div
                   key={category.id}
                   id={category.id}
-                  className="bg-componentpage rounded-xl p-6 border-default hover:border-green transition-colors"
+                  className="glass-card rounded-xl p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
                 >
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 bg-success-light rounded-lg flex items-center justify-center mr-4">
@@ -163,15 +163,15 @@ export default function DocumentationPage() {
           </div>
 
           {/* Need Help Section */}
-          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">Need More Help?</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-16 glass-card rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-primary mb-4">Need More Help?</h2>
+            <p className="mb-6 text-secondary">
               Can&apos;t find what you&apos;re looking for? Our support team is here to help.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/support"
-                className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
+                className="inline-flex items-center px-6 py-3 bg-linear-to-r from-green-500 to-emerald-400 text-white rounded-full hover:from-green-600 hover:to-emerald-500 transition-all duration-300 font-semibold shadow-lg"
               >
                 Contact Support
               </Link>
@@ -179,7 +179,7 @@ export default function DocumentationPage() {
                 href="https://www.facebook.com/groups/mashmushrooom"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-primary text-inverse rounded-full hover:bg-primary-hover transition-colors font-semibold"
+                className="inline-flex items-center px-6 py-3 border border-green-500/30 text-green-600 dark:text-green-400 rounded-full hover:bg-green-500/10 transition-all duration-300 font-semibold"
               >
                 Join Community
               </a>

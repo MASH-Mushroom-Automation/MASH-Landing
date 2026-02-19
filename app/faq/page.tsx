@@ -97,25 +97,30 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-default">
+    <div className="glass-card rounded-xl overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-4 text-left"
+        className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
+        aria-expanded={isOpen}
       >
-        <span className="text-lg font-medium text-primary pr-4">
+        <span className="text-base font-semibold text-primary pr-4">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-tertiary transition-transform ${
+          className={`w-5 h-5 text-secondary shrink-0 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
       </button>
-      {isOpen && (
-        <div className="pb-4 text-secondary">
-          {answer}
+      <div
+        className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="px-5 pb-5 text-sm text-secondary leading-relaxed">
+            {answer}
+          </p>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -134,8 +139,8 @@ export default function FAQPage() {
 
   return (
     <PageLayout>
-      <div className="bg-hero py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="gradient-hero py-20">
+        <div className="section-container">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Frequently Asked Questions
@@ -146,20 +151,20 @@ export default function FAQPage() {
             
             {/* Search */}
             <div className="max-w-xl mx-auto relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-tertiary" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-tertiary" />
               <input
                 type="text"
                 placeholder="Search FAQs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-full border-default bg-background text-primary focus:ring-2 focus:ring-green focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 text-primary focus:ring-2 focus:ring-green-500 focus:border-transparent backdrop-blur-sm"
               />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-default">
+      <div className="section-padding bg-default">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredCategories.length === 0 ? (
             <div className="text-center py-12">
@@ -173,7 +178,7 @@ export default function FAQPage() {
                 <h2 className="text-2xl font-bold text-primary mb-6">
                   {category.name}
                 </h2>
-                <div className="bg-componentpage rounded-xl p-6">
+                <div className="space-y-3">
                   {category.faqs.map((faq, index) => (
                     <FAQItem key={index} question={faq.question} answer={faq.answer} />
                   ))}
@@ -183,14 +188,14 @@ export default function FAQPage() {
           )}
 
           {/* CTA */}
-          <div className="mt-12 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">Still Have Questions?</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-12 glass-card rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-primary mb-4">Still Have Questions?</h2>
+            <p className="mb-6 text-secondary">
               Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
             </p>
             <Link
               href="/support"
-              className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-linear-to-r from-green-500 to-emerald-400 text-white rounded-full hover:from-green-600 hover:to-emerald-500 transition-all duration-300 font-semibold shadow-lg"
             >
               Contact Support
             </Link>

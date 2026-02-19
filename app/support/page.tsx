@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export default function SupportPage() {
   return (
     <PageLayout>
-      <div className="bg-hero py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="gradient-hero py-20">
+        <div className="section-container">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               How Can We Help?
@@ -24,13 +24,13 @@ export default function SupportPage() {
         </div>
       </div>
 
-      <div className="py-16 bg-default">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-padding bg-default">
+        <div className="section-container">
           {/* Support Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-success-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-inverse" />
+            <div className="glass-card p-8 rounded-xl text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-green-600/10 dark:bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Schedule a Meeting</h3>
               <p className="text-secondary mb-4">
@@ -38,15 +38,15 @@ export default function SupportPage() {
               </p>
               <Link
                 href="/schedule"
-                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
+                className="inline-flex items-center text-green font-semibold hover:underline"
               >
                 Book a Call
               </Link>
             </div>
 
-            <div className="bg-success-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-inverse" />
+            <div className="glass-card p-8 rounded-xl text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-green-600/10 dark:bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Documentation</h3>
               <p className="text-secondary mb-4">
@@ -54,15 +54,15 @@ export default function SupportPage() {
               </p>
               <Link
                 href="/documentation"
-                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
+                className="inline-flex items-center text-green font-semibold hover:underline"
               >
                 View Documentation
               </Link>
             </div>
 
-            <div className="bg-accent-blue-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="w-8 h-8 text-inverse" />
+            <div className="glass-card p-8 rounded-xl text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-accent-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MessageCircle className="w-8 h-8 text-accent-blue" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Community Forum</h3>
               <p className="text-secondary mb-4">
@@ -72,15 +72,15 @@ export default function SupportPage() {
                 href="https://www.facebook.com/groups/mashmushrooom"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200 font-semibold"
+                className="inline-flex items-center text-accent-blue font-semibold hover:underline"
               >
                 Join Community
               </a>
             </div>
 
-            <div className="bg-accent-purple-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-accent-purple rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-inverse" />
+            <div className="glass-card p-8 rounded-xl text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-accent-purple" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Email Support</h3>
               <p className="text-secondary mb-4">
@@ -88,7 +88,7 @@ export default function SupportPage() {
               </p>
               <a
                 href="mailto:mash.mushroom.automation@gmail.com"
-                className="inline-flex items-center text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 font-semibold"
+                className="inline-flex items-center text-accent-purple font-semibold hover:underline"
               >
                 Send Email
               </a>
@@ -97,7 +97,7 @@ export default function SupportPage() {
 
           {/* Contact Form Section */}
           <div id="contact" className="max-w-3xl mx-auto">
-            <div className="bg-componentpage rounded-xl p-8">
+            <div className="glass-card rounded-xl p-8">
               <h2 className="text-2xl font-bold text-primary mb-6 text-center">
                 Contact Support
               </h2>
@@ -174,7 +174,7 @@ export default function SupportPage() {
           {/* Contact Info */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 glass-card rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Email</h3>
@@ -183,7 +183,7 @@ export default function SupportPage() {
               </a>
             </div>
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 glass-card rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Response Time</h3>
@@ -192,7 +192,7 @@ export default function SupportPage() {
               </p>
             </div>
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 glass-card rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-6 h-6 text-secondary" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Location</h3>

@@ -26,8 +26,8 @@ function ScheduleContent() {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <div className="bg-hero py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="gradient-hero py-20">
+        <div className="section-container">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Schedule a Meeting
@@ -39,8 +39,8 @@ function ScheduleContent() {
         </div>
       </div>
 
-      <div className="py-16 bg-default">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-padding bg-default">
+        <div className="section-container">
           {/* Meeting Type Selection */}
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-primary mb-6 text-center">
@@ -53,19 +53,19 @@ function ScheduleContent() {
                   <button
                     key={key}
                     onClick={() => setMeetingType(key)}
-                    className={`p-6 rounded-xl text-center transition-all ${
+                    className={`p-6 rounded-xl text-center transition-all duration-300 border cursor-pointer ${
                       meetingType === key
-                        ? 'bg-brand text-inverse shadow-lg scale-105'
-                        : 'bg-componentpage hover:shadow-md'
+                        ? 'bg-linear-to-r from-green-500 to-emerald-400 text-white shadow-lg scale-105 border-transparent'
+                        : 'glass-card hover:-translate-y-1 hover:shadow-xl'
                     }`}
                   >
                     <div className={`text-3xl font-bold mb-2 ${
-                      meetingType === key ? 'text-inverse' : 'text-primary'
+                      meetingType === key ? 'text-white' : 'text-primary'
                     }`}>
                       {event.duration}
                     </div>
                     <div className={`text-sm font-semibold ${
-                      meetingType === key ? 'text-inverse/90' : 'text-secondary'
+                      meetingType === key ? 'text-white/90' : 'text-secondary'
                     }`}>
                       {event.name}
                     </div>
@@ -82,7 +82,7 @@ function ScheduleContent() {
 
           {/* Calendar Embed */}
           <div className="max-w-5xl mx-auto">
-            <div className="bg-componentpage rounded-xl p-8 shadow-lg">
+              <div className="glass-card rounded-xl p-8 shadow-lg">
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-primary mb-2">
                   {selectedEvent.name}
@@ -122,7 +122,7 @@ function ScheduleContent() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex gap-4">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <CheckCircle className="w-6 h-6 text-green" />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ function ScheduleContent() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <CheckCircle className="w-6 h-6 text-green" />
                 </div>
                 <div>
@@ -144,7 +144,7 @@ function ScheduleContent() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <CheckCircle className="w-6 h-6 text-green" />
                 </div>
                 <div>
@@ -155,7 +155,7 @@ function ScheduleContent() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <CheckCircle className="w-6 h-6 text-green" />
                 </div>
                 <div>
@@ -192,7 +192,7 @@ export default function SchedulePage() {
       <PageLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
             <p className="text-secondary">Loading calendar...</p>
           </div>
         </div>

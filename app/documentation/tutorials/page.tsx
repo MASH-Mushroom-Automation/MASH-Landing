@@ -80,18 +80,18 @@ const categories = ["All", "Getting Started", "Hardware", "Automation", "Mobile"
 export default function TutorialsPage() {
   return (
     <PageLayout>
-      <div className="bg-accent-gradient py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="gradient-hero py-20">
+        <div className="section-container">
           <div className="flex items-center mb-4">
-            <Link href="/documentation" className="text-accent-purple hover:underline">
+            <Link href="/documentation" className="text-green-600 dark:text-green-400 hover:underline">
               Documentation
             </Link>
             <ChevronRight className="w-4 h-4 mx-2 text-tertiary" />
             <span className="text-secondary">Tutorials</span>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-purple rounded-full mb-4">
-              <BookOpen className="w-8 h-8 text-inverse" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 mb-4">
+              <BookOpen className="w-8 h-8 text-green-500" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               Tutorials & Guides
@@ -103,8 +103,8 @@ export default function TutorialsPage() {
         </div>
       </div>
 
-      <div className="py-16 bg-default">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-padding bg-default">
+        <div className="section-container">
           {/* Category Filter */}
           <div className="mb-8 flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
@@ -112,8 +112,8 @@ export default function TutorialsPage() {
                 key={category}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   category === "All"
-                    ? "bg-accent-purple text-inverse"
-                    : "bg-componentpage text-secondary hover:bg-surface-hover"
+                    ? "bg-green-500 text-white"
+                    : "bg-gray-100 dark:bg-white/5 text-secondary hover:bg-green-500/10"
                 }`}
               >
                 {category}
@@ -126,10 +126,10 @@ export default function TutorialsPage() {
             {tutorials.map((tutorial) => (
               <article
                 key={tutorial.id}
-                className="bg-componentpage rounded-xl p-6 border-default hover:shadow-lg dark:hover:shadow-gray-800/50 transition-shadow"
+                className="glass-card rounded-xl p-6 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-purple-light text-accent-purple">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400">
                     <Tag className="w-3 h-3 mr-1" />
                     {tutorial.category}
                   </span>

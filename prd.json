@@ -244,7 +244,8 @@
       "id": "LAND-012",
       "title": "Main Page Assembly — Section Ordering and Smooth Scroll Provider",
       "priority": 12,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T10:45:00Z",
       "description": "Reassemble the main page.tsx with all redesigned sections in correct order, wrapped in ScrollReveal animations. Ensure smooth scrolling, proper section spacing, and all imports resolve correctly.",
       "acceptanceCriteria": [
         "Section order: Hero → Features (Showcase + Grid) → Steps → Booking → Testimonials → Support/FAQ → Download/CTA → Footer",
@@ -262,7 +263,8 @@
       "id": "LAND-013",
       "title": "Subpages UI Polish — Download, Documentation, Schedule, FAQ, Support",
       "priority": 13,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T11:00:00Z",
       "description": "Apply the new design system to all subpages. Update cards, typography, spacing, and theme tokens to match the redesigned homepage. Ensure consistent glassmorphism card styling across all pages.",
       "acceptanceCriteria": [
         "/download page: glassmorphism cards for iOS/Android/Desktop, consistent button styling",
@@ -332,7 +334,7 @@
     }
   ],
   "totalStories": 16,
-  "completedStories": 11,
+  "completedStories": 13,
   "createdAt": "2026-02-20T00:00:00Z",
   "lastUpdated": "2026-02-20T00:00:00Z"
 }

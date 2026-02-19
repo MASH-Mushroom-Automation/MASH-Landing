@@ -179,4 +179,18 @@ The `landing/` folder contains the Nuxt UI v4 Landing Template (build artifacts 
 - section-container utility for consistent max-width
 - Build: 14/14 routes, 0 errors
 
----
+### LAND-012: Page Assembly [COMPLETED]
+- Verified page.tsx section order: Hero → Features → Steps → Booking → Testimonials → Support → Download → Footer
+- All section imports resolve correctly
+- ScrollReveal wrapping all major sections with staggered delays
+- Smooth scroll via scroll-behavior: smooth in globals.css
+- No code changes needed — assembly criteria fully met from section implementations
+
+### LAND-013: Subpages UI Polish [COMPLETED]
+- Download page: gradient-hero header, glass-card platform/requirement cards, Check icons, hover lift, Coming Soon buttons (opacity-60 cursor-not-allowed)
+- Documentation page: gradient-hero + section-container header, glass-card doc category cards, gradient CTA + Browse Tutorials button, "Need More Help" CTA with glass-card
+- Tutorials page: gradient-hero header, green brand colors (replacing accent-purple), glass-card tutorial cards, green category filter buttons, section-padding + section-container
+- Schedule page: gradient-hero + section-container, meeting type buttons (gradient selected, glass-card unselected), glass-card calendar embed, shrink-0 (Tailwind v4 fix)
+- FAQ page: gradient-hero, search input dark/light styling, AccordionItem with glass-card + grid-rows animation, CTA glass-card with gradient button
+- Support page: gradient-hero + section-container, glass-card support option cards with hover lift, glass-card contact form + contact info circles
+- Build: 14/14 routes, 0 errors
