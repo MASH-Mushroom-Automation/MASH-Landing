@@ -67,7 +67,7 @@ const recentIncidents = [
   },
 ];
 
-function StatusIndicator({ status }: { status: string }) {
+export function StatusIndicator({ status }: { status: string }) {
   const isOperational = status === "operational";
   return (
     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
@@ -81,8 +81,9 @@ function StatusIndicator({ status }: { status: string }) {
   );
 }
 
-export default function StatusPage() {
-  const allOperational = services.every((s) => s.status === "operational");
+export default function StatusPage({ testServices }: { testServices?: typeof services } = {}) {
+  const activeServices = testServices ?? services;
+  const allOperational = activeServices.every((s) => s.status === "operational");
 
   return (
     <PageLayout>
@@ -113,7 +114,7 @@ export default function StatusPage() {
               Service Status
             </h2>
             <div className="glass-card divide-y divide-gray-200 dark:divide-white/10">
-              {services.map((service) => (
+              {activeServices.map((service) => (
                 <div
                   key={service.name}
                   className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6"

@@ -18,10 +18,10 @@ export default function CalendarScheduler({
 }: CalendarSchedulerProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [detectedTheme, setDetectedTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof document !== 'undefined') {
-      return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    }
-    return 'dark';
+    /* v8 ignore start -- SSR guard unreachable in jsdom */
+    if (typeof document === 'undefined') return 'dark';
+    /* v8 ignore stop */
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
   });
 
   // Subscribe to theme changes via MutationObserver

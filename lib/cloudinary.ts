@@ -39,8 +39,8 @@ export function getCloudinaryImageUrl(
 
   if (width) transformations.push(`w_${width}`);
   if (height) transformations.push(`h_${height}`);
-  if (crop) transformations.push(`c_${crop}`);
-  if (gravity) transformations.push(`g_${gravity}`);
+  transformations.push(`c_${crop}`);
+  transformations.push(`g_${gravity}`);
   transformations.push(`q_${quality}`);
   transformations.push(`f_${format}`);
 

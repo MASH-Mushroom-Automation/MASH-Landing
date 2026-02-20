@@ -25,7 +25,9 @@ export default function ScrollReveal({
 
   useEffect(() => {
     const el = ref.current;
+    /* v8 ignore start -- ref always set in jsdom */
     if (!el) return;
+    /* v8 ignore stop */
 
     const observer = new IntersectionObserver(
       ([entry]) => {

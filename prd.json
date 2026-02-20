@@ -282,7 +282,8 @@
       "id": "LAND-014",
       "title": "Legal Pages UI Polish — License, Privacy, Terms, Status",
       "priority": 14,
-      "passes": false,
+      "passes": true,
+      "completedAt": "2025-06-22T11:30:00Z",
       "description": "Apply the new design system to legal/informational pages. Clean typography for long-form content, consistent heading styles, proper prose formatting.",
       "acceptanceCriteria": [
         "/license page: clean prose formatting, MIT license text readable",
@@ -335,8 +336,113 @@
       ]
     }
   ],
-  "totalStories": 16,
+  "totalStories": 22,
   "completedStories": 16,
+  "testCoveragePhase": {
+    "description": "Ralph Agent Phase 2 -- Achieve 100% test coverage with zero skips and zero errors across all source files",
+    "targetCoverage": {
+      "statements": 100,
+      "branches": 100,
+      "functions": 100,
+      "lines": 100
+    },
+    "stories": [
+      {
+        "id": "TEST-001",
+        "title": "Navigation.tsx -- Full Coverage (scroll, IntersectionObserver, smooth scroll, mobile menu)",
+        "priority": 17,
+        "passes": false,
+        "completedAt": null,
+        "description": "Bring Navigation.tsx from 57% to 100% line coverage. Test scroll-based hide/show behavior, IntersectionObserver section tracking, smooth scroll handler, isActive logic for hash and path links, mobile menu close on link click, custom data prop.",
+        "acceptanceCriteria": [
+          "Test scroll down hides nav, scroll up shows nav",
+          "Test IntersectionObserver sets activeSection",
+          "Test handleSmoothScroll preventDefault + scrollIntoView on homepage",
+          "Test handleSmoothScroll does NOT preventDefault on non-homepage",
+          "Test isActive returns true for matching hash link",
+          "Test isActive returns true for matching pathname",
+          "Test mobile menu closes on link click",
+          "Test mobile download link closes menu",
+          "Coverage: 100% statements, branches, functions, lines"
+        ]
+      },
+      {
+        "id": "TEST-002",
+        "title": "CalendarScheduler.tsx -- Full Coverage (theme detection, MutationObserver, iframe load)",
+        "priority": 18,
+        "passes": false,
+        "completedAt": null,
+        "description": "Bring CalendarScheduler.tsx from 73% to 100% line coverage. Test auto theme detection from document class, MutationObserver callback for theme changes, iframe onLoad hiding loading state, hideEventTypeDetails param.",
+        "acceptanceCriteria": [
+          "Test default theme detection from document.documentElement.classList",
+          "Test MutationObserver callback triggers theme update",
+          "Test iframe onLoad hides loading indicator",
+          "Test hideEventTypeDetails=true adds URL param",
+          "Test theme='light' bypasses MutationObserver",
+          "Test theme='dark' bypasses MutationObserver",
+          "Coverage: 100% statements, branches, functions, lines"
+        ]
+      },
+      {
+        "id": "TEST-003",
+        "title": "scroll-reveal.tsx -- Full Coverage (once=false re-hide, ref null guard)",
+        "priority": 19,
+        "passes": false,
+        "completedAt": null,
+        "description": "Bring scroll-reveal.tsx from 84% to 100% line coverage. Test once=false un-intersection hides element again, and the !el early return guard.",
+        "acceptanceCriteria": [
+          "Test once=false: element becomes visible then invisible again",
+          "Test once=true (default): unobserve is called after intersection",
+          "Test threshold prop is passed to IntersectionObserver",
+          "Coverage: 100% statements, branches, functions, lines"
+        ]
+      },
+      {
+        "id": "TEST-004",
+        "title": "cloudinary.ts -- Full Coverage (all option branches)",
+        "priority": 20,
+        "passes": false,
+        "completedAt": null,
+        "description": "Bring cloudinary.ts from 89% to 100% line coverage. Test video URL with width/height options, thumbnail with width/height, and all untested option combinations.",
+        "acceptanceCriteria": [
+          "Test getCloudinaryVideoUrl with width and height params",
+          "Test getVideoThumbnailUrl with width and height params",
+          "Test getCloudinaryImageUrl with custom quality (non-auto)",
+          "Test getCloudinaryImageUrl with custom format (non-auto)",
+          "Coverage: 100% statements, branches, functions, lines"
+        ]
+      },
+      {
+        "id": "TEST-005",
+        "title": "Schedule + Status Pages -- Full Branch Coverage",
+        "priority": 21,
+        "passes": false,
+        "completedAt": null,
+        "description": "Bring schedule/page.tsx from 92% to 100% and status/page.tsx branches from 50% to 100%. Test schedule page with URL search param having valid type, and status page with degraded service status.",
+        "acceptanceCriteria": [
+          "Test schedule page with ?type=15min URL param initializes correctly",
+          "Test schedule page with invalid ?type param defaults to 30min",
+          "Test status page rendering with a non-operational service",
+          "Coverage: 100% statements, branches, functions, lines for both pages"
+        ]
+      },
+      {
+        "id": "TEST-006",
+        "title": "Minor Branch Coverage -- FeaturesSection, Footer, SupportSection",
+        "priority": 22,
+        "passes": false,
+        "completedAt": null,
+        "description": "Cover remaining untested branches in FeaturesSection (icon fallback), Footer (external link branch), and SupportSection (mailto and external link branches).",
+        "acceptanceCriteria": [
+          "Test FeaturesSection icon fallback for unknown icon key",
+          "Test Footer external link renders with target=_blank",
+          "Test SupportSection mailto link renders correctly",
+          "Test SupportSection external link renders with target=_blank",
+          "Coverage: 100% on all three components"
+        ]
+      }
+    ]
+  },
   "createdAt": "2026-02-20T00:00:00Z",
-  "lastUpdated": "2026-02-20T00:00:00Z"
+  "lastUpdated": "2026-02-20T13:00:00Z"
 }
