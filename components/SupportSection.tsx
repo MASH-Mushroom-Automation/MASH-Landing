@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { calConfig } from "@/lib/cal-config";
 import type { LandingPageData } from "@/lib/sanity";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const CHANNEL_ICON_MAP: Record<string, React.ReactNode> = {
   calendar: (
@@ -26,10 +29,10 @@ const CHANNEL_ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 const CHANNEL_STYLE_MAP: Record<string, { bg: string; iconBg: string; textColor: string }> = {
-  calendar: { bg: "bg-emerald-50 dark:bg-emerald-900/30", iconBg: "bg-emerald-600", textColor: "text-emerald-800 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-emerald-200" },
-  email: { bg: "bg-green-50 dark:bg-green-900/30", iconBg: "bg-green-600", textColor: "text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200" },
-  community: { bg: "bg-blue-50 dark:bg-blue-900/30", iconBg: "bg-blue-600", textColor: "text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200" },
-  knowledge: { bg: "bg-purple-50 dark:bg-purple-900/30", iconBg: "bg-purple-600", textColor: "text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200" },
+  calendar: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  email: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  community: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  knowledge: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
 };
 
 const DEFAULT_CHANNELS = [
@@ -68,14 +71,16 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
   return (
     <section id="support" className="py-20 bg-support">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            {data?.supportTitle ?? "Support & Resources"}
-          </h2>
-          <p className="text-xl text-secondary max-w-3xl mx-auto">
-            {data?.supportDescription ?? "We are here to help you succeed with comprehensive support and resources"}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+              {data?.supportTitle ?? "Support & Resources"}
+            </h2>
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
+              {data?.supportDescription ?? "We are here to help you succeed with comprehensive support and resources"}
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {channels.map((channel, index) => {
@@ -83,79 +88,84 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
             const isExternal = channel.link.startsWith("http");
             const isMailto = channel.link.startsWith("mailto:");
             return (
-              <div key={index} className={`${style.bg} p-8 rounded-xl text-center`}>
-                <div className={`w-16 h-16 ${style.iconBg} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  {CHANNEL_ICON_MAP[channel.icon] ?? CHANNEL_ICON_MAP["calendar"]}
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-2">{channel.name}</h3>
-                <p className="text-secondary mb-4">{channel.description}</p>
-                {isExternal ? (
-                  <a href={channel.link} target="_blank" rel="noopener noreferrer" className={`${style.textColor} font-semibold`}>
-                    {channel.linkText ?? channel.name}
-                  </a>
-                ) : isMailto ? (
-                  <a href={channel.link} className={`${style.textColor} font-semibold break-all`}>
-                    {channel.linkText ?? channel.name}
-                  </a>
-                ) : (
-                  <Link href={channel.link} className={`${style.textColor} font-semibold`}>
-                    {channel.linkText ?? channel.name}
-                  </Link>
-                )}
-              </div>
+              <ScrollReveal key={index} delay={index * 0.08}>
+                <Card className={`${style.bg} h-full border-0`}>
+                  <CardContent className="p-8 text-center">
+                    <div className={`w-16 h-16 ${style.iconBg} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                      {CHANNEL_ICON_MAP[channel.icon] ?? CHANNEL_ICON_MAP["calendar"]}
+                    </div>
+                    <h3 className="text-xl font-bold text-primary mb-2">{channel.name}</h3>
+                    <p className="text-secondary mb-4">{channel.description}</p>
+                    {isExternal ? (
+                      <a href={channel.link} target="_blank" rel="noopener noreferrer" className={`${style.textColor} font-semibold`}>
+                        {channel.linkText ?? channel.name}
+                      </a>
+                    ) : isMailto ? (
+                      <a href={channel.link} className={`${style.textColor} font-semibold break-all`}>
+                        {channel.linkText ?? channel.name}
+                      </a>
+                    ) : (
+                      <Link href={channel.link} className={`${style.textColor} font-semibold`}>
+                        {channel.linkText ?? channel.name}
+                      </Link>
+                    )}
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        <div className="bg-componentpage rounded-xl p-8">
-          <h3 className="text-2xl font-bold text-primary mb-6 text-center">
-            Frequently Asked Questions
-          </h3>
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-card p-6 rounded-lg">
-                <h4 className="text-lg font-bold text-primary mb-2">
-                  {faq.question}
-                </h4>
-                <p className="text-secondary">
-                  {faq.answer}
-                </p>
+        <ScrollReveal>
+          <Card className="bg-componentpage border-default">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold text-primary mb-6 text-center">
+                Frequently Asked Questions
+              </h3>
+              <div className="space-y-6">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="bg-card p-6 rounded-lg">
+                    <h4 className="text-lg font-bold text-primary mb-2">
+                      {faq.question}
+                    </h4>
+                    <p className="text-secondary">
+                      {faq.answer}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="mt-6 text-center">
-            <Link
-              href="/faq"
-              className="inline-flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold"
-            >
-              View All FAQs
-              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
+              <div className="mt-6 text-center">
+                <Button asChild variant="link" className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-semibold">
+                  <Link href="/faq">
+                    View All FAQs
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </ScrollReveal>
 
-        <div className="mt-12 text-center">
-          <p className="text-secondary mb-4">Still have questions?</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/schedule"
-              className="inline-flex items-center bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Schedule a Call
-            </Link>
-            <Link
-              href="/support"
-              className="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              Contact Support
-            </Link>
+        <ScrollReveal>
+          <div className="mt-12 text-center">
+            <p className="text-secondary mb-4">Still have questions?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="xl">
+                <Link href="/schedule">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Schedule a Call
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="secondary" className="bg-blue-600 text-white hover:bg-blue-700">
+                <Link href="/support">Contact Support</Link>
+              </Button>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

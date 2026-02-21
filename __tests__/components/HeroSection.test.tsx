@@ -48,11 +48,11 @@ describe('HeroSection', () => {
     expect(button.closest('a')).toHaveAttribute('href', '#features');
   });
 
-  it('renders Watch Demo button', () => {
+  it('renders View Documentation button', () => {
     render(<HeroSection />);
-    const button = screen.getByText(/Watch Demo/i);
+    const button = screen.getByText(/View Documentation/i);
     expect(button).toBeInTheDocument();
-    expect(button.closest('a')).toHaveAttribute('href', '#demo');
+    expect(button.closest('a')).toHaveAttribute('href', '/documentation');
   });
 
   it('renders feature cards', () => {
@@ -179,11 +179,17 @@ describe('HeroSection', () => {
 
   it('renders CTA buttons with correct styling', () => {
     render(<HeroSection />);
-    const exploreBtn = screen.getByText(/Explore Features/i);
-    expect(exploreBtn.className).toContain('bg-green-600');
+    const exploreBtn = screen.getByText(/Explore Features/i).closest('a');
+    expect(exploreBtn?.className).toContain('bg-green-600');
     
-    const demoBtn = screen.getByText(/Watch Demo/i);
-    expect(demoBtn.className).toContain('border-2');
+    const docBtn = screen.getByText(/View Documentation/i).closest('a');
+    expect(docBtn?.className).toContain('border-2');
+  });
+
+  it('renders scroll-down chevron', () => {
+    const { container } = render(<HeroSection />);
+    const chevronLink = container.querySelector('a[href="#features"][aria-label="Scroll to features"]');
+    expect(chevronLink).toBeInTheDocument();
   });
 
   it('renders video source with correct Sanity URL', () => {

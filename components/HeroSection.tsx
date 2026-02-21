@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { getSanityFileUrl, type LandingPageData } from "@/lib/sanity";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChevronDown } from "lucide-react";
 
 /**
  * Default hero video asset reference for Sanity CMS.
@@ -14,7 +18,7 @@ const DEFAULT_HERO_VIDEO_ASSET: { _ref: string; _type: string } | null = {
 
 const DEFAULT_HERO_BUTTONS = [
   { text: "Explore Features", href: "#features", variant: "default" as const },
-  { text: "Watch Demo", href: "#demo", variant: "outline" as const },
+  { text: "View Documentation", href: "/documentation", variant: "outline" as const },
 ];
 
 const HERO_CARD_ICON_MAP: Record<string, React.ReactNode> = {
@@ -43,13 +47,10 @@ const DEFAULT_HERO_CARDS = [
 
 export default function HeroSection({ data }: { data?: LandingPageData | null } = {}) {
   const [videoError, setVideoError] = useState(false);
-  // Initialize as false on both server and client to avoid hydration mismatch.
-  // The actual value is read in useEffect after hydration completes.
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    // Set the real value after hydration
     setPrefersReducedMotion(mediaQuery.matches);
 
     const handleChange = (e: MediaQueryListEvent) => {
@@ -65,6 +66,8 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
     ? getSanityFileUrl(heroVideoAsset)
     : null;
 
+  const stagger = prefersReducedMotion ? 0 : 0.15;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
       <div className="absolute inset-0 z-0">
@@ -75,6 +78,7 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
             muted
             playsInline
             crossOrigin="anonymous"
+            preload="none"
             className="w-full h-full object-cover opacity-20 dark:opacity-10"
             onError={() => setVideoError(true)}
             aria-hidden="true"
@@ -87,40 +91,76 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-6">
+        <motion.h1
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: stagger * 0 }}
+        >
           {data?.heroTitle ?? "MASH: Mushroom Automation"}
-        </h1>
-        <p className="text-xl md:text-2xl text-secondary mb-8 max-w-3xl mx-auto">
+        </motion.h1>
+        <motion.p
+          className="text-xl md:text-2xl text-secondary mb-8 max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: stagger * 1 }}
+        >
           {data?.heroSubtitle ?? "Advanced automation system for professional mushroom cultivation with real-time monitoring, climate control, and intelligent growing environment management"}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        </motion.p>
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: stagger * 2 }}
+        >
           {(data?.heroButtons ?? DEFAULT_HERO_BUTTONS).map((button, index) => (
-            <a
+            <Button
               key={index}
-              href={button.href}
+              asChild
+              variant={button.variant === "outline" ? "outline" : "default"}
+              size="xl"
               className={
                 button.variant === "outline"
-                  ? "bg-surface text-green-600 dark:text-green-400 px-8 py-4 rounded-full text-lg font-semibold hover:bg-surface-hover transition-colors shadow-lg border-2 border-green-600 dark:border-green-500"
-                  : "bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg"
+                  ? "border-2 border-green-600 dark:border-green-500 text-green-600 dark:text-green-400 bg-surface hover:bg-surface-hover shadow-lg"
+                  : "bg-green-600 hover:bg-green-700 text-white shadow-lg"
               }
             >
-              {button.text}
-            </a>
+              <a href={button.href}>{button.text}</a>
+            </Button>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <motion.div
+          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: stagger * 3 }}
+        >
           {(data?.heroCards ?? DEFAULT_HERO_CARDS).map((card, index) => (
-            <div key={index} className="bg-card/90 backdrop-blur-sm p-6 rounded-xl shadow-lg">
-              <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
-                {HERO_CARD_ICON_MAP[card.icon] ?? HERO_CARD_ICON_MAP["monitoring"]}
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2">{card.title}</h3>
-              <p className="text-secondary">{card.value}</p>
-            </div>
+            <Card key={index} className="bg-card/90 backdrop-blur-sm shadow-lg border-default">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                  {HERO_CARD_ICON_MAP[card.icon] ?? HERO_CARD_ICON_MAP["monitoring"]}
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-2">{card.title}</h3>
+                <p className="text-secondary">{card.value}</p>
+              </CardContent>
+            </Card>
           ))}
-        </div>
+        </motion.div>
       </div>
+
+      {/* Scroll-down chevron */}
+      <motion.a
+        href="#features"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-secondary hover:text-primary transition-colors"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: stagger * 4 }}
+        aria-label="Scroll to features"
+      >
+        <ChevronDown className="w-8 h-8 animate-bounce" />
+      </motion.a>
     </section>
   );
 }

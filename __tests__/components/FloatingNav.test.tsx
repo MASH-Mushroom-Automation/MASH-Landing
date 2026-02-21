@@ -103,7 +103,6 @@ describe('FloatingNav', () => {
   it('renders navigation links from Sanity data', () => {
     render(<FloatingNav data={fullData} />);
     expect(screen.getAllByText('Features').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Demo').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Documentation').length).toBeGreaterThanOrEqual(1);
   });
 
@@ -115,7 +114,7 @@ describe('FloatingNav', () => {
   it('renders default links when no data provided', () => {
     render(<FloatingNav />);
     expect(screen.getAllByText('Features').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Demo').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Mobile App').length).toBeGreaterThanOrEqual(1);
   });
 
   // ========== CTA BUTTONS ==========
@@ -203,14 +202,15 @@ describe('FloatingNav', () => {
 
   // ========== ACTIVE LINK DETECTION ==========
 
-  it('marks active link with aria-current on homepage', () => {
+  it('does not mark hash links active on homepage before scroll-spy fires', () => {
     mockPathname.mockReturnValue('/');
     render(<FloatingNav data={fullData} />);
     const featureLinks = screen.getAllByText('Features');
     const hasActive = featureLinks.some(
       (el) => el.getAttribute('aria-current') === 'page'
     );
-    expect(hasActive).toBe(true);
+    // No section is observed as intersecting in jsdom, so no hash link is active
+    expect(hasActive).toBe(false);
   });
 
   it('marks documentation link active on /documentation', () => {

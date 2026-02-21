@@ -1,6 +1,42 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
+// Mock @radix-ui/react-slot
+jest.mock('@radix-ui/react-slot', () => {
+  const React = require('react')
+  const Slot = React.forwardRef((props, ref) => {
+    const { children, ...slotProps } = props
+    // Find the first valid React element among children (handles [false, <a>] etc.)
+    const childArray = React.Children.toArray(children)
+    const childElement = childArray.find(c => React.isValidElement(c))
+    if (childElement && React.isValidElement(childElement)) {
+      const childProps = { ...(childElement.props || {}) }
+      const mergedClassName = [slotProps.className, childProps.className].filter(Boolean).join(' ')
+      const merged = { ...slotProps, ...childProps, className: mergedClassName || undefined, ref }
+      // Include the other non-element children (like text, false, etc.)
+      return React.cloneElement(childElement, merged)
+    }
+    return React.createElement('span', { ...slotProps, ref }, children)
+  })
+  Slot.displayName = 'Slot'
+  return { Slot }
+})
+
+// Mock lucide-react icons
+jest.mock('lucide-react', () => {
+  const React = require('react')
+  return new Proxy({}, {
+    get: (_, name) => {
+      if (name === '__esModule') return true
+      const Icon = React.forwardRef((props, ref) =>
+        React.createElement('svg', { ...props, ref, 'data-testid': `icon-${String(name)}` })
+      )
+      Icon.displayName = String(name)
+      return Icon
+    },
+  })
+})
+
 // Mock environment variables
 process.env.NEXT_PUBLIC_CAL_USERNAME = 'test-user'
 process.env.NEXT_PUBLIC_CAL_15MIN_SLUG = '15min'

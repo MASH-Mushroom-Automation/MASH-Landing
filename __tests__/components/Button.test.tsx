@@ -112,4 +112,70 @@ describe('Button', () => {
     expect(button).toHaveAttribute('type', 'submit');
     expect(button).toHaveAttribute('name', 'submitBtn');
   });
+
+  // isLoading prop tests
+  describe('isLoading', () => {
+    it('shows loading spinner when isLoading is true', () => {
+      render(<Button isLoading>Loading</Button>);
+      const spinner = screen.getByRole('status');
+      expect(spinner).toBeInTheDocument();
+    });
+
+    it('disables button when isLoading is true', () => {
+      render(<Button isLoading>Loading</Button>);
+      expect(screen.getByRole('button')).toBeDisabled();
+    });
+
+    it('sets aria-busy when isLoading is true', () => {
+      render(<Button isLoading>Loading</Button>);
+      expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true');
+    });
+
+    it('does not show spinner when isLoading is false', () => {
+      render(<Button>No Loading</Button>);
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    });
+
+    it('does not set aria-busy when isLoading is false', () => {
+      render(<Button>No Loading</Button>);
+      expect(screen.getByRole('button')).not.toHaveAttribute('aria-busy');
+    });
+
+    it('prevents click when isLoading is true', async () => {
+      const handleClick = jest.fn();
+      const user = userEvent.setup();
+      render(<Button isLoading onClick={handleClick}>Loading</Button>);
+      await user.click(screen.getByRole('button'));
+      expect(handleClick).not.toHaveBeenCalled();
+    });
+  });
+
+  // asChild prop tests
+  describe('asChild', () => {
+    it('renders as child element when asChild is true', () => {
+      render(
+        <Button asChild>
+          <a href="/test">Link Button</a>
+        </Button>
+      );
+      const link = screen.getByRole('link');
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute('href', '/test');
+    });
+
+    it('merges className when asChild is true', () => {
+      render(
+        <Button asChild variant="default">
+          <a href="/test">Link Button</a>
+        </Button>
+      );
+      const link = screen.getByRole('link');
+      expect(link.className).toContain('bg-green-600');
+    });
+
+    it('renders as button when asChild is false', () => {
+      render(<Button>Regular Button</Button>);
+      expect(screen.getByRole('button')).toBeInTheDocument();
+    });
+  });
 });

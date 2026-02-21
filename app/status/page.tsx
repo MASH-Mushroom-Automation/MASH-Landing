@@ -73,7 +73,7 @@ export default function StatusPage() {
 
   return (
     <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-light"}`}>
+      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-gradient"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-inverse">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
@@ -124,7 +124,7 @@ export default function StatusPage() {
           {/* Uptime Chart Placeholder */}
           <div className="mb-16">
             <h2 className="text-2xl font-bold text-primary mb-6">
-              90-Day Uptime
+              90-Day Uptime <span className="text-sm font-normal text-tertiary">(Sample data)</span>
             </h2>
             <div className="bg-componentpage rounded-xl p-6">
               <div className="flex items-end justify-between h-24 gap-1">

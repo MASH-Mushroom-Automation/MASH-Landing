@@ -1,4 +1,6 @@
 import type { LandingPageData } from "@/lib/sanity";
+import { Card, CardContent } from "@/components/ui/card";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const FEATURE_ICON_MAP: Record<string, React.ReactNode> = {
   "climate-control": (
@@ -66,27 +68,30 @@ export default function FeaturesSection({ data }: { data?: LandingPageData | nul
   return (
     <section id="features" className="py-20 bg-features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            {data?.featuresTitle ?? "Powerful Features"}
-          </h2>
-          <p className="text-xl text-secondary max-w-3xl mx-auto">
-            {data?.featuresSubtitle ?? "MASH provides everything you need to automate and optimize your mushroom cultivation operation"}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+              {data?.featuresTitle ?? "Powerful Features"}
+            </h2>
+            <p className="text-xl text-secondary max-w-3xl mx-auto">
+              {data?.featuresSubtitle ?? "MASH provides everything you need to automate and optimize your mushroom cultivation operation"}
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="p-6 border border-default rounded-xl hover:shadow-lg transition-shadow bg-card"
-            >
-              <div className="w-16 h-16 bg-features rounded-lg flex items-center justify-center mb-4 text-green">
-                {FEATURE_ICON_MAP[feature.icon] ?? FEATURE_ICON_MAP["climate-control"]}
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
-              <p className="text-secondary">{feature.description}</p>
-            </div>
+            <ScrollReveal key={index} delay={index * 0.08}>
+              <Card className="h-full hover:shadow-lg transition-shadow bg-card border-default">
+                <CardContent className="p-6">
+                  <div className="w-16 h-16 bg-features rounded-lg flex items-center justify-center mb-4 text-green">
+                    {FEATURE_ICON_MAP[feature.icon] ?? FEATURE_ICON_MAP["climate-control"]}
+                  </div>
+                  <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>
+                  <p className="text-secondary">{feature.description}</p>
+                </CardContent>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>
