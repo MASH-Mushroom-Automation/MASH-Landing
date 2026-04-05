@@ -1,0 +1,756 @@
+{
+  "project": "MASH Landing Page - UI/UX Redesign & Production Polish",
+  "version": "5.0.0",
+  "lastUpdated": "2026-02-12",
+  "status": "IN_PROGRESS",
+  "previousVersions": {
+    "v4.0.0": "3D Model Integration, Parallax, Floating Nav (COMPLETED 2026-02-11)",
+    "v3.0.0": "Sanity CMS Migration + Cloudinary Removal (COMPLETED 2025-06-19)",
+    "v2.0.0": "Enhanced Landing Page + Showcase Sections (COMPLETED 2025-06-20)",
+    "v1.0.0": "Initial Sanity Schema + Client Integration (COMPLETED 2025-06-18)"
+  },
+  "rules": {
+    "noEmojis": true,
+    "noGradients": "Solid colors only for backgrounds - NO gradients (except the Download section green bg which is brand-intentional)",
+    "verifyBeforeComplete": true,
+    "ralphLoopRequired": true,
+    "coverageTarget": 100,
+    "designSystem": "Always use Button and Card components from components/ui/ - never use raw inline-styled buttons or cards",
+    "solidColorsOnly": "All backgrounds must use CSS custom properties and solid colors. No bg-gradient-to-* classes.",
+    "description": "AI agent must read this file after completing tasks to verify completion. No emojis allowed in any output or file. All tasks must pass verification checks before marking complete."
+  },
+
+  "designPrinciples": {
+    "summary": "Professional, clean, conversion-focused SaaS landing page inspired by Stripe, Linear, and Vercel aesthetics.",
+    "principles": [
+      {
+        "name": "Visual Hierarchy",
+        "rule": "Every section must have a clear primary action. Use size, weight, and color contrast to guide the eye: Headline > Subtitle > Body > Supporting text."
+      },
+      {
+        "name": "Consistent Design System",
+        "rule": "All buttons MUST use components/ui/button.tsx. All card-like elements MUST use components/ui/card.tsx. No inline-styled alternatives."
+      },
+      {
+        "name": "Progressive Disclosure",
+        "rule": "Show essential info first, reveal details on interaction. No section should show more than 6 items without a 'Show more' mechanism."
+      },
+      {
+        "name": "Scroll-Driven Storytelling",
+        "rule": "Every section must use ScrollReveal for entrance animations. Content should feel alive, not dumped onto the page."
+      },
+      {
+        "name": "Reduce, Reuse",
+        "rule": "Homepage should have 7-8 focused sections max. Consolidate overlapping content (Features + Scope into one). Remove placeholder content."
+      },
+      {
+        "name": "Mobile-First Interactions",
+        "rule": "All interactive elements must work on touch. Minimum touch targets 48x48px. Swipe gestures where expected."
+      },
+      {
+        "name": "Performance Budget",
+        "rule": "Total page weight under 3MB (excluding lazy-loaded 3D model). All images via Sanity CDN with auto-format. Draco-compress GLB."
+      },
+      {
+        "name": "Accessibility",
+        "rule": "WCAG 2.1 AA minimum. All color contrasts must pass. Reduced-motion users see no animations. Skip-to-content link on every page."
+      }
+    ]
+  },
+
+  "designTokens": {
+    "typography": {
+      "hero-headline": "text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight",
+      "section-headline": "text-3xl sm:text-4xl font-bold tracking-tight",
+      "section-subtitle": "text-lg sm:text-xl text-secondary max-w-2xl mx-auto",
+      "card-title": "text-lg font-semibold",
+      "card-description": "text-sm text-secondary",
+      "body": "text-base text-secondary leading-relaxed",
+      "caption": "text-sm text-tertiary"
+    },
+    "spacing": {
+      "section-padding": "py-20 sm:py-24 lg:py-28",
+      "section-gap": "space-y-16",
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "card-padding": "p-6 sm:p-8",
+      "nav-height": "h-16 (64px)",
+      "page-top-clearance": "pt-24 (96px)",
+      "scroll-margin": "scroll-margin-top: 5rem (80px)"
+    },
+    "borders": {
+      "card": "border border-default rounded-xl",
+      "card-hover": "hover:border-green-500/50 transition-colors duration-200",
+      "input": "border border-default rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-500/20"
+    },
+    "shadows": {
+      "card-rest": "shadow-sm",
+      "card-hover": "hover:shadow-lg transition-shadow duration-200",
+      "elevated": "shadow-xl"
+    },
+    "animations": {
+      "entrance": "ScrollReveal with direction='up', delay staggered at 0.1s intervals",
+      "hover": "transition-all duration-200",
+      "page-transition": "fade-in 200ms ease-out"
+    },
+    "colors": {
+      "primary": "green-600 (light) / green-500 (dark)",
+      "surface": "white (light) / gray-800 (dark)",
+      "background": "white (light) / gray-900 (dark)",
+      "background-alt": "gray-50 (light) / gray-800 (dark)",
+      "text-primary": "gray-900 (light) / white (dark)",
+      "text-secondary": "gray-600 (light) / gray-300 (dark)",
+      "border": "gray-200 (light) / gray-700 (dark)",
+      "accent": "Only green. No blue/purple accents on primary sections."
+    }
+  },
+
+  "siteMap": {
+    "pages": [
+      {
+        "path": "/",
+        "name": "Homepage",
+        "sections": [
+          "FloatingNav (layout-level)",
+          "HeroSection",
+          "FeaturesSection",
+          "MobileAppShowcase",
+          "IoTDeviceSection",
+          "BookingSection",
+          "DownloadSection",
+          "MiniCTA (questions bar above footer)",
+          "Footer"
+        ],
+        "notes": "Reduced from 10 to 7-8 sections. Removed: DocumentationSection (moved to /documentation), ScopeSection (merged into Features), SupportSection (moved to /support). DemoSection hidden until real videos exist."
+      },
+      { "path": "/download", "name": "Download", "wrapper": "PageLayout" },
+      { "path": "/faq", "name": "FAQ", "wrapper": "PageLayout" },
+      { "path": "/schedule", "name": "Schedule", "wrapper": "PageLayout" },
+      { "path": "/documentation", "name": "Documentation", "wrapper": "PageLayout" },
+      { "path": "/support", "name": "Support", "wrapper": "PageLayout" },
+      { "path": "/status", "name": "System Status", "wrapper": "PageLayout" },
+      { "path": "/terms", "name": "Terms of Service", "wrapper": "PageLayout" },
+      { "path": "/privacy", "name": "Privacy Policy", "wrapper": "PageLayout" },
+      { "path": "/license", "name": "License", "wrapper": "PageLayout" },
+      { "path": "not-found", "name": "404 Page", "wrapper": "PageLayout", "status": "TO_CREATE" }
+    ],
+    "removedFromHomepage": [
+      "DocumentationSection - content lives at /documentation, link in nav is sufficient",
+      "ScopeSection - overlaps heavily with FeaturesSection, merge key points into Features",
+      "SupportSection - content lives at /support, link in Footer is sufficient",
+      "DemoSection - hidden until real demo video content is available"
+    ]
+  },
+
+  "phases": [
+    {
+      "id": "phase-9",
+      "name": "Design System Enforcement & Component Cleanup",
+      "status": "NOT_STARTED",
+      "priority": "CRITICAL",
+      "description": "Refactor all sections to use the existing Button and Card UI components instead of inline-styled elements. This creates visual consistency across the entire site.",
+      "tasks": [
+        {
+          "id": "T100",
+          "title": "Refactor HeroSection to use Button component",
+          "status": "NOT_STARTED",
+          "file": "components/HeroSection.tsx",
+          "changes": [
+            "Replace raw <a> CTA links with <Button variant='default' size='lg'> and <Button variant='outline' size='lg'>",
+            "Import Button from @/components/ui/button",
+            "Wrap Buttons in Next.js Link where needed",
+            "Add staggered entrance animation: heading fades in first, then subtitle (100ms delay), then buttons (200ms), then info cards (300ms)",
+            "Add animated scroll-down chevron indicator at bottom of hero",
+            "Remove video if bandwidth cost too high (8MB+ for 10-20% opacity), or compress to WebM under 2MB"
+          ],
+          "verification": "No raw <a> or <button> tags for CTAs. Button component imported and used. Entrance animation visible on page load."
+        },
+        {
+          "id": "T101",
+          "title": "Refactor FeaturesSection to use Card component and ScrollReveal",
+          "status": "NOT_STARTED",
+          "file": "components/FeaturesSection.tsx",
+          "changes": [
+            "Replace inline card divs with Card, CardHeader, CardTitle, CardDescription from @/components/ui/card",
+            "Wrap each card row in ScrollReveal with staggered delays",
+            "Add icon rendering (currently icon field is empty string - add lucide icons)",
+            "Limit to 6 features initially, add 'Show all features' toggle for remaining 3",
+            "Merge key items from ScopeSection into this section's data"
+          ],
+          "verification": "Card component imported and used. ScrollReveal wraps cards. Icons render. 6 visible by default."
+        },
+        {
+          "id": "T102",
+          "title": "Refactor BookingSection to use Button and Card components",
+          "status": "NOT_STARTED",
+          "file": "components/BookingSection.tsx",
+          "changes": [
+            "Replace inline card divs with Card component",
+            "Replace inline CTA links with Button component",
+            "Change background from bg-accent-blue-light to bg-background-alt (keep green brand consistent)",
+            "Standardize icon colors to green only (remove blue/purple per-tier colors)",
+            "Add hover:scale-[1.02] transition to cards",
+            "Add ScrollReveal entrance animation"
+          ],
+          "verification": "Card and Button components used. Background uses design token. All icon accents are green."
+        },
+        {
+          "id": "T103",
+          "title": "Refactor DownloadSection to use Button component",
+          "status": "NOT_STARTED",
+          "file": "components/DownloadSection.tsx",
+          "changes": [
+            "Replace store card divs with proper <a> or <button> elements (not clickable divs)",
+            "Add cursor-not-allowed and opacity-60 to 'Coming Soon' store cards",
+            "Use Button component for 'View All Downloads' CTA",
+            "Add direct APK download link alongside store buttons",
+            "Add ScrollReveal entrance animation"
+          ],
+          "verification": "Store cards are accessible elements. Coming Soon cards have disabled styling. Button component used."
+        },
+        {
+          "id": "T104",
+          "title": "Refactor SupportSection inline FAQ to accordion pattern",
+          "status": "NOT_STARTED",
+          "file": "components/SupportSection.tsx",
+          "changes": [
+            "Convert static FAQ list to collapsible accordion (click to expand/collapse answers)",
+            "Show only 3 FAQs inline with 'View all FAQs' link to /faq",
+            "Replace inline card divs with Card component",
+            "Use Button component for CTAs",
+            "Standardize channel card colors to green accent only",
+            "Add ScrollReveal entrance animation"
+          ],
+          "verification": "FAQ items are collapsible. Max 3 shown inline. Card and Button components used."
+        },
+        {
+          "id": "T105",
+          "title": "Add Button loading state and asChild support",
+          "status": "NOT_STARTED",
+          "file": "components/ui/button.tsx",
+          "changes": [
+            "Add isLoading prop with spinner icon",
+            "Add asChild prop using Slot pattern from @radix-ui/react-slot (or manual implementation)",
+            "Add aria-busy='true' when loading",
+            "Disable click when loading"
+          ],
+          "verification": "Button accepts isLoading and asChild props. Spinner renders during loading."
+        }
+      ]
+    },
+    {
+      "id": "phase-10",
+      "name": "Homepage Section Consolidation",
+      "status": "NOT_STARTED",
+      "priority": "HIGH",
+      "description": "Reduce homepage from 10 sections to 7-8 focused sections. Remove redundant content, hide placeholder content, and create a tighter narrative flow.",
+      "tasks": [
+        {
+          "id": "T106",
+          "title": "Remove DemoSection from homepage (placeholder content)",
+          "status": "NOT_STARTED",
+          "file": "app/page.tsx",
+          "changes": [
+            "Comment out or conditionally render DemoSection",
+            "Only show DemoSection when real video content exists in Sanity",
+            "Update HeroSection 'Watch Demo' button to link to /documentation or remove it",
+            "Keep DemoSection.tsx file intact for future use"
+          ],
+          "verification": "DemoSection not rendered on homepage. No 'Video coming soon' visible. 'Watch Demo' button updated or removed."
+        },
+        {
+          "id": "T107",
+          "title": "Remove DocumentationSection from homepage",
+          "status": "NOT_STARTED",
+          "file": "app/page.tsx",
+          "changes": [
+            "Remove DocumentationSection import and rendering from homepage",
+            "Ensure 'Documentation' link in FloatingNav points to /documentation",
+            "Keep DocumentationSection.tsx file intact (used on /documentation page or can be reused)"
+          ],
+          "verification": "DocumentationSection not rendered on homepage. Nav link to /documentation works."
+        },
+        {
+          "id": "T108",
+          "title": "Merge ScopeSection key items into FeaturesSection",
+          "status": "NOT_STARTED",
+          "files": ["components/FeaturesSection.tsx", "app/page.tsx"],
+          "changes": [
+            "Extract the 4-6 most impactful scope items (System Architecture layers, key capabilities)",
+            "Add a 'Technical Scope' sub-section at bottom of FeaturesSection with architecture overview",
+            "Remove ScopeSection from homepage rendering",
+            "Keep ScopeSection.tsx file intact for potential standalone page use"
+          ],
+          "verification": "ScopeSection not rendered on homepage. Key scope content visible in FeaturesSection."
+        },
+        {
+          "id": "T109",
+          "title": "Remove SupportSection from homepage and add MiniCTA",
+          "status": "NOT_STARTED",
+          "file": "app/page.tsx",
+          "changes": [
+            "Remove SupportSection import and rendering from homepage",
+            "Create a compact MiniCTA component or inline section above Footer",
+            "MiniCTA content: 'Have questions? Reach out to our team or check the FAQ'",
+            "Two buttons: 'Contact Support' (link to /support) and 'View FAQ' (link to /faq)",
+            "Ensure /support is linked from Footer and accessible"
+          ],
+          "verification": "SupportSection not rendered on homepage. MiniCTA bar visible above Footer."
+        },
+        {
+          "id": "T110",
+          "title": "Update homepage section order and flow",
+          "status": "NOT_STARTED",
+          "file": "app/page.tsx",
+          "changes": [
+            "Final section order: Hero > Features > MobileAppShowcase > IoTDeviceSection > BookingSection > DownloadSection > MiniCTA > Footer",
+            "Add alternating background shades for visual rhythm (bg-background / bg-background-alt)",
+            "Verify all section ids work with FloatingNav hash links",
+            "Ensure smooth scroll between sections"
+          ],
+          "verification": "Homepage has 7-8 sections. Section order matches this task. All nav links scroll correctly."
+        }
+      ]
+    },
+    {
+      "id": "phase-11",
+      "name": "Scroll Animations & Micro-Interactions",
+      "status": "NOT_STARTED",
+      "priority": "HIGH",
+      "description": "Add scroll-driven entrance animations to every section using the existing ScrollReveal component. Add micro-interactions for hover/focus states.",
+      "tasks": [
+        {
+          "id": "T111",
+          "title": "Add ScrollReveal to all homepage sections",
+          "status": "NOT_STARTED",
+          "files": [
+            "components/FeaturesSection.tsx",
+            "components/BookingSection.tsx",
+            "components/DownloadSection.tsx",
+            "components/MobileAppShowcase.tsx",
+            "components/IoTDeviceSection.tsx"
+          ],
+          "changes": [
+            "Import ScrollReveal from @/components/ui/scroll-reveal",
+            "Wrap section headers in ScrollReveal direction='up'",
+            "Wrap card grids in ScrollReveal with staggered delays per card (0.1s intervals)",
+            "Wrap CTA buttons in ScrollReveal direction='up' with additional delay"
+          ],
+          "verification": "Every below-fold section has scroll-triggered entrance animations."
+        },
+        {
+          "id": "T112",
+          "title": "Add scroll-spy to FloatingNav",
+          "status": "NOT_STARTED",
+          "file": "components/FloatingNav.tsx",
+          "changes": [
+            "Implement IntersectionObserver-based scroll-spy",
+            "Track which section is currently in viewport (threshold 0.3-0.5)",
+            "Highlight the corresponding nav link based on scroll position (not just pathname)",
+            "Update active link underline layoutId animation to follow scroll-spy",
+            "Only apply scroll-spy on homepage (check pathname === '/')"
+          ],
+          "verification": "Nav active link changes as user scrolls through sections on homepage."
+        },
+        {
+          "id": "T113",
+          "title": "Add hover micro-interactions to cards",
+          "status": "NOT_STARTED",
+          "files": [
+            "components/FeaturesSection.tsx",
+            "components/BookingSection.tsx"
+          ],
+          "changes": [
+            "Feature cards: hover:scale-[1.02] hover:shadow-lg transition-all duration-200",
+            "Booking cards: hover:scale-[1.02] with border color transition to green",
+            "All cards: focus-visible:ring-2 focus-visible:ring-green-500 for keyboard navigation"
+          ],
+          "verification": "Cards have visible hover and focus feedback."
+        },
+        {
+          "id": "T114",
+          "title": "Add hero entrance animation",
+          "status": "NOT_STARTED",
+          "file": "components/HeroSection.tsx",
+          "changes": [
+            "Staggered fade-in + translateY animation on mount (not scroll-triggered)",
+            "Heading: delay 0ms, duration 600ms",
+            "Subtitle: delay 150ms, duration 600ms",
+            "Buttons: delay 300ms, duration 600ms",
+            "Info cards: delay 450ms, duration 600ms",
+            "Add animated scroll-down indicator (chevron bouncing at bottom of section)"
+          ],
+          "verification": "Hero content fades in sequentially on page load. Scroll indicator visible."
+        },
+        {
+          "id": "T115",
+          "title": "Add back-to-top button",
+          "status": "NOT_STARTED",
+          "file": "components/FloatingNav.tsx",
+          "changes": [
+            "Add a fixed bottom-right circle button that appears after scrolling 500px",
+            "Smooth scroll to top on click",
+            "Fade in/out with AnimatePresence",
+            "Green-600 background, white arrow-up icon, rounded-full, 48x48px",
+            "z-40 (below nav z-50)"
+          ],
+          "verification": "Back-to-top button appears when scrolled down. Clicking scrolls to top smoothly."
+        }
+      ]
+    },
+    {
+      "id": "phase-12",
+      "name": "Navigation & Accessibility",
+      "status": "NOT_STARTED",
+      "priority": "HIGH",
+      "description": "Fix navigation gaps and accessibility issues.",
+      "tasks": [
+        {
+          "id": "T116",
+          "title": "Add focus trap to mobile drawer",
+          "status": "NOT_STARTED",
+          "file": "components/FloatingNav.tsx",
+          "changes": [
+            "Implement focus trap when mobile drawer is open",
+            "Tab key cycles within drawer elements only",
+            "First focusable element receives focus when drawer opens",
+            "Focus returns to hamburger button when drawer closes"
+          ],
+          "verification": "Tab key cycles within drawer when open. Focus does not escape to content behind overlay."
+        },
+        {
+          "id": "T117",
+          "title": "Update FloatingNav links for consolidated homepage",
+          "status": "NOT_STARTED",
+          "file": "components/FloatingNav.tsx",
+          "changes": [
+            "Update DEFAULT_LINKS: Features (#features), Mobile App (#mobile-app), Hardware (#iot-hardware), Schedule (#booking), Download (#download)",
+            "Add Documentation as page link (/documentation)",
+            "Remove 'Demo' and 'Contact' labels",
+            "Verify all section ids match component implementations"
+          ],
+          "verification": "Nav links match actual homepage sections. All hash links scroll to correct sections."
+        },
+        {
+          "id": "T118",
+          "title": "Create custom 404 page",
+          "status": "NOT_STARTED",
+          "file": "app/not-found.tsx",
+          "changes": [
+            "Create branded 404 page with MASH styling",
+            "Content: '404' large heading, 'Page not found' subtitle, friendly message, homepage link",
+            "Use PageLayout wrapper for consistent nav/footer",
+            "Create __tests__/app/not-found.test.tsx with unit tests"
+          ],
+          "verification": "Non-existent routes show custom 404. Tests pass."
+        },
+        {
+          "id": "T119",
+          "title": "Add breadcrumbs to PageLayout",
+          "status": "NOT_STARTED",
+          "file": "components/layout/PageLayout.tsx",
+          "changes": [
+            "Add optional breadcrumbs prop: Array<{label: string, href?: string}>",
+            "Render <nav aria-label='Breadcrumb'> with <ol> semantic markup",
+            "Style: text-sm text-secondary, chevron separator, active item bold",
+            "Update standalone pages to pass breadcrumbs prop"
+          ],
+          "verification": "Standalone pages show breadcrumbs. Semantic HTML and ARIA used."
+        }
+      ]
+    },
+    {
+      "id": "phase-13",
+      "name": "Mobile UX & Interactive Improvements",
+      "status": "NOT_STARTED",
+      "priority": "MEDIUM",
+      "description": "Improve touch interactions, mobile optimization, and functional gaps.",
+      "tasks": [
+        {
+          "id": "T120",
+          "title": "Add swipe gestures to MobileAppShowcase",
+          "status": "NOT_STARTED",
+          "file": "components/MobileAppShowcase.tsx",
+          "changes": [
+            "Add touch swipe detection on phone mockup (framer-motion onDragEnd)",
+            "Swipe left = next screen, swipe right = previous screen",
+            "Add auto-cycling: screens advance every 5s, pause on user interaction",
+            "Add dot indicators below phone showing current screen (4 dots)"
+          ],
+          "verification": "Swipe works on phone mockup. Auto-cycling advances screens. Dots indicate current."
+        },
+        {
+          "id": "T121",
+          "title": "Optimize IoTDeviceSection for mobile",
+          "status": "NOT_STARTED",
+          "file": "components/IoTDeviceSection.tsx",
+          "changes": [
+            "Disable Three.js on mobile (< 768px) - show only CSS fallback",
+            "Add loading progress indicator for 3D model on desktop",
+            "Spec selector: horizontal scroll on mobile instead of 2x3 grid"
+          ],
+          "verification": "Mobile shows CSS model only. Desktop shows 3D with loading indicator."
+        },
+        {
+          "id": "T122",
+          "title": "Add social links and dynamic year to Footer",
+          "status": "NOT_STARTED",
+          "file": "components/Footer.tsx",
+          "changes": [
+            "Add GitHub and Facebook social icon links with target='_blank' rel='noopener noreferrer'",
+            "Make copyright year dynamic: new Date().getFullYear()",
+            "Add visual external link indicator on community/social links",
+            "Add 'Back to top' text link in footer bottom bar"
+          ],
+          "verification": "Social links render. Year is dynamic. External links indicated."
+        },
+        {
+          "id": "T123",
+          "title": "Make /support contact form functional",
+          "status": "NOT_STARTED",
+          "file": "app/support/page.tsx",
+          "changes": [
+            "Add client-side form validation (required, email format)",
+            "Wire onSubmit to mailto: link or API route app/api/contact/route.ts",
+            "Add loading state on submit button",
+            "Show success/error feedback message after submit",
+            "Add inline validation error messages"
+          ],
+          "verification": "Form validates. Submit shows loading. Success/error feedback displays."
+        }
+      ]
+    },
+    {
+      "id": "phase-14",
+      "name": "Performance Optimization",
+      "status": "NOT_STARTED",
+      "priority": "MEDIUM",
+      "description": "Optimize page load performance and Core Web Vitals.",
+      "tasks": [
+        {
+          "id": "T124",
+          "title": "Compress Chamber.glb with Draco",
+          "status": "NOT_STARTED",
+          "changes": [
+            "Install gltf-pipeline as devDependency",
+            "Create scripts/compress-model.js for Draco compression",
+            "Compress: target under 2MB from 8.2MB",
+            "Update ChamberModel3D.tsx model path",
+            "Verify 3D rendering after compression"
+          ],
+          "verification": "Compressed GLB under 2MB. 3D model renders correctly."
+        },
+        {
+          "id": "T125",
+          "title": "Optimize hero video or replace with CSS animation",
+          "status": "NOT_STARTED",
+          "changes": [
+            "If video kept: convert to WebM, add poster frame, lazy-load with fetchpriority='low'",
+            "If video removed: create subtle CSS ambient animation (floating particles, pulse glow, or geometric pattern)",
+            "Target: hero section LCP under 2.5 seconds"
+          ],
+          "verification": "Hero loads fast. LCP under 2.5s."
+        },
+        {
+          "id": "T126",
+          "title": "Add skeleton loading component",
+          "status": "NOT_STARTED",
+          "changes": [
+            "Create components/ui/skeleton.tsx with shimmer animation",
+            "Add loading.tsx files for Sanity-dependent pages",
+            "Show skeletons while Sanity data loads"
+          ],
+          "verification": "Skeleton component exists and renders shimmer. Loading states use it."
+        }
+      ]
+    },
+    {
+      "id": "phase-15",
+      "name": "Testing - Full Coverage for All Changes",
+      "status": "NOT_STARTED",
+      "priority": "HIGH",
+      "description": "Maintain 100% test pass rate. Update and create tests for all modified/new components.",
+      "tasks": [
+        {
+          "id": "T128",
+          "title": "Update tests for all modified components",
+          "status": "NOT_STARTED",
+          "changes": [
+            "Update HeroSection tests: entrance animation, Button usage, scroll indicator",
+            "Update FeaturesSection tests: Card usage, ScrollReveal, show-more toggle, icons",
+            "Update BookingSection tests: Card/Button usage, green-only accents",
+            "Update DownloadSection tests: Button usage, disabled store cards",
+            "Update SupportSection tests: accordion FAQ, reduced content",
+            "Update FloatingNav tests: scroll-spy, back-to-top, focus trap, updated links",
+            "Update Footer tests: social links, dynamic year"
+          ],
+          "verification": "All modified component tests pass. No regressions."
+        },
+        {
+          "id": "T129",
+          "title": "Create tests for new components",
+          "status": "NOT_STARTED",
+          "changes": [
+            "Create __tests__/app/not-found.test.tsx",
+            "Create tests for Skeleton component",
+            "Create tests for Button isLoading and asChild",
+            "Create tests for PageLayout breadcrumbs",
+            "Create tests for MiniCTA component",
+            "Create tests for FAQ accordion behavior"
+          ],
+          "verification": "All new components have tests. 100% test pass rate."
+        },
+        {
+          "id": "T130",
+          "title": "Ralph Loop: Full test suite + build verification",
+          "status": "NOT_STARTED",
+          "changes": [
+            "Run npx jest - fix all failures iteratively",
+            "Run npm run build - fix all build errors",
+            "Run npx jest --coverage - check coverage metrics",
+            "Target: 550+ tests, 40+ suites, 0 failures",
+            "Target: 95%+ statements, 90%+ branches"
+          ],
+          "verification": "All tests pass. Build succeeds. Coverage targets met."
+        }
+      ]
+    },
+    {
+      "id": "phase-16",
+      "name": "Standalone Page Polish",
+      "status": "NOT_STARTED",
+      "priority": "LOW",
+      "description": "Fix broken elements on standalone pages.",
+      "tasks": [
+        {
+          "id": "T131",
+          "title": "Fix /status page non-functional elements",
+          "status": "NOT_STARTED",
+          "file": "app/status/page.tsx",
+          "changes": [
+            "Label uptime chart as 'Sample data'",
+            "Remove or make email subscription form show 'Coming soon' message",
+            "Verify all StatusBadge variants render correctly"
+          ],
+          "verification": "No broken forms. Sample data labeled."
+        },
+        {
+          "id": "T132",
+          "title": "Fix /documentation dead article links",
+          "status": "NOT_STARTED",
+          "file": "app/documentation/page.tsx",
+          "changes": [
+            "Audit all article links - identify which routes 404",
+            "Change dead links to anchor tags within /documentation page",
+            "Or add 'Coming soon' badges on articles without content",
+            "Add simple search/filter bar for documentation categories"
+          ],
+          "verification": "No 404s from documentation. Missing content labeled."
+        },
+        {
+          "id": "T133",
+          "title": "Improve /download page store UX",
+          "status": "NOT_STARTED",
+          "file": "app/download/page.tsx",
+          "changes": [
+            "iOS buttons: opacity-60 cursor-not-allowed disabled styling",
+            "Android APK: make download button more prominent with version and file size",
+            "Add system requirements info"
+          ],
+          "verification": "Coming Soon buttons look disabled. APK download is prominent."
+        }
+      ]
+    }
+  ],
+
+  "completionCriteria": {
+    "allTestsPass": "npx jest exits with 0 failures (target: 550+ tests)",
+    "buildSucceeds": "npm run build exits with code 0",
+    "noEmojisInOutput": "No emoji characters in any file",
+    "noGradients": "No bg-gradient-to-* classes except intentional Download section",
+    "designSystemUsed": "All buttons use components/ui/button.tsx, all cards use components/ui/card.tsx",
+    "scrollAnimations": "Every below-fold section has scroll-triggered entrance animation",
+    "mobileResponsive": "All sections render correctly at 375px, 768px, and 1440px widths",
+    "accessibilityPass": "WCAG 2.1 AA: skip-to-content, focus visible, ARIA labels, reduced motion support",
+    "performanceBudget": "Page weight under 3MB (excluding lazy 3D model). LCP under 2.5s. CLS under 0.1",
+    "homepageSections": "7-8 sections max (down from 10)",
+    "prdReviewed": "AI agent reads prd.json after each phase to verify completion"
+  },
+
+  "currentMetrics": {
+    "testSuites": 38,
+    "testsTotal": 517,
+    "testsPassed": 517,
+    "testsFailed": 0,
+    "buildStatus": "SUCCESS",
+    "buildMode": "webpack (WASM SWC fallback due to Node.js 24)",
+    "devServerMode": "Turbopack",
+    "pagesPrerendered": 14,
+    "lastTestRun": "2026-02-12",
+    "nodeVersion": "v24.12.0",
+    "nextVersion": "16.1.1",
+    "framerMotionVersion": "12.34.0",
+    "threeVersion": "0.172.0",
+    "homepageSectionsNow": 10,
+    "homepageSectionsTarget": "7-8"
+  },
+
+  "previousPhases": {
+    "note": "Phases 1-8 fully COMPLETED. Archived to prd.v4.json for full task details.",
+    "phase-1": { "name": "Foundation - Sanity Schema and Client", "status": "COMPLETED", "completedAt": "2026-02-10" },
+    "phase-2": { "name": "Script Execution and Data Population", "status": "COMPLETED", "completedAt": "2025-06-18" },
+    "phase-3": { "name": "Component Migration - Remove Cloudinary", "status": "COMPLETED", "completedAt": "2025-06-18" },
+    "phase-4": { "name": "Testing - 100% Coverage", "status": "COMPLETED", "completedAt": "2025-06-18" },
+    "phase-5": { "name": "Cleanup - Remove Cloudinary", "status": "COMPLETED", "completedAt": "2025-06-18" },
+    "phase-6": { "name": "Video Upload, Studio Deployment, and Coverage Improvement", "status": "COMPLETED", "completedAt": "2025-06-19" },
+    "phase-7": { "name": "Enhanced Landing Page - Parallax, Smooth Scroll, and Showcase Sections", "status": "COMPLETED", "completedAt": "2025-06-20" },
+    "phase-8": { "name": "3D Model Integration, Dev Server Fix, and Build Improvements", "status": "COMPLETED", "completedAt": "2026-02-11" }
+  },
+
+  "sanityDeployment": {
+    "studioUrl": "https://ppnamias.sanity.studio/",
+    "previewUrl": "https://join.mashmarket.app/",
+    "projectId": "gerattrr",
+    "dataset": "production",
+    "heroVideoAssetRef": "file-71501ee4a175fe13f42a40a9490a3db191df2db3-mp4",
+    "heroVideoUrl": "https://cdn.sanity.io/files/gerattrr/production/71501ee4a175fe13f42a40a9490a3db191df2db3.mp4"
+  },
+
+  "uxAuditFindings": {
+    "auditDate": "2026-02-12",
+    "criticalIssues": [
+      "DemoSection shows 'Video coming soon' on all 3 items - broken user promise on homepage",
+      "Button component (components/ui/button.tsx) not used in any section - inline-styled buttons everywhere",
+      "Card component (components/ui/card.tsx) not used in any section - inline-styled cards everywhere",
+      "10 sections on homepage causes user fatigue and excessive scrolling (should be 7-8)",
+      "Contact form on /support page has no onSubmit handler - form does nothing",
+      "Documentation article links return 404 - dead links throughout /documentation"
+    ],
+    "highIssues": [
+      "No scroll-reveal animations on most sections - page feels static and flat",
+      "No scroll-spy in FloatingNav - active link does not track scroll position",
+      "No custom 404 page for missing routes",
+      "ScopeSection and FeaturesSection have heavy content overlap - redundant sections",
+      "SupportSection inline FAQ is always expanded and duplicates /faq page content",
+      "Chamber.glb is 8.2 MB with no Draco compression - slow load on desktop",
+      "Hero video is 8MB+ but only renders at 10-20% opacity - questionable bandwidth ROI",
+      "No entrance animation on hero section - above-fold content appears instantly without life"
+    ],
+    "mediumIssues": [
+      "No back-to-top button after scrolling 10+ sections",
+      "No focus trap in FloatingNav mobile drawer - tab can escape to content behind",
+      "DownloadSection store cards are divs that look clickable but are not links",
+      "BookingSection uses blue accent background breaking green brand consistency",
+      "Footer has no social links, hardcoded copyright year, no back-to-top",
+      "No loading skeletons for Sanity-fetched content - content pops in without transition",
+      "No swipe gestures on MobileAppShowcase phone mockup (only button clicks work)"
+    ],
+    "lowIssues": [
+      "No breadcrumbs on standalone pages",
+      "No search/filter on /documentation page",
+      "Feature card icons are empty strings in data - no icons render",
+      "ScopeSection architecture diagram is just 4 labeled boxes with no visual connections",
+      "Status page uptime chart uses hardcoded deterministic data, not live data",
+      "Status page email subscription form has no backend handler"
+    ]
+  }
+}

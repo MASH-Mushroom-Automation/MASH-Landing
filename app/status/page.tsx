@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
-import { CheckCircle, AlertCircle, Clock } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
+import { CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "System Status - MASH",
@@ -67,41 +68,6 @@ const recentIncidents = [
   },
 ];
 
-function StatusBadge({ status }: { status: string }) {
-  switch (status) {
-    case "operational":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success-light text-success-strong">
-          <CheckCircle className="w-4 h-4 mr-1" />
-          Operational
-        </span>
-      );
-    case "degraded":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-warning-light text-warning-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Degraded
-        </span>
-      );
-    case "outage":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-error-light text-error-strong">
-          <AlertCircle className="w-4 h-4 mr-1" />
-          Outage
-        </span>
-      );
-    case "maintenance":
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent-blue-light text-accent-blue">
-          <Clock className="w-4 h-4 mr-1" />
-          Maintenance
-        </span>
-      );
-    default:
-      return null;
-  }
-}
-
 export default function StatusPage() {
   const allOperational = services.every((s) => s.status === "operational");
 
@@ -158,7 +124,7 @@ export default function StatusPage() {
           {/* Uptime Chart Placeholder */}
           <div className="mb-16">
             <h2 className="text-2xl font-bold text-primary mb-6">
-              90-Day Uptime
+              90-Day Uptime <span className="text-sm font-normal text-tertiary">(Sample data)</span>
             </h2>
             <div className="bg-componentpage rounded-xl p-6">
               <div className="flex items-end justify-between h-24 gap-1">

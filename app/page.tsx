@@ -1,27 +1,23 @@
-import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import DemoSection from "@/components/DemoSection";
-import DocumentationSection from "@/components/DocumentationSection";
-import ScopeSection from "@/components/ScopeSection";
+import MobileAppShowcase from "@/components/MobileAppShowcase";
+import IoTDeviceSection from "@/components/IoTDeviceSection";
 import BookingSection from "@/components/BookingSection";
-import SupportSection from "@/components/SupportSection";
 import DownloadSection from "@/components/DownloadSection";
+import MiniCTA from "@/components/MiniCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <Navigation />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <FeaturesSection />
-        <DemoSection />
-        <DocumentationSection />
-        <ScopeSection />
+        <MobileAppShowcase />
+        <IoTDeviceSection />
         <BookingSection />
-        <SupportSection />
         <DownloadSection />
+        <MiniCTA />
       </main>
       <Footer />
     </div>
