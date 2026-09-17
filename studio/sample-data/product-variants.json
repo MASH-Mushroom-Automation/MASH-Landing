@@ -1,0 +1,274 @@
+{
+  "variants": [
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-oyster-mushrooms",
+      "name": "Fresh Oyster Mushrooms - Small",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-oyster-mushrooms-small"
+      },
+      "variantType": "Size",
+      "variantValue": "Small (150g)",
+      "sku": "MUSH-OYSTER-FRESH-150",
+      "price": 250,
+      "weight": 150,
+      "weightUnit": "g",
+      "stockQuantity": 60,
+      "isDefault": false,
+      "sortOrder": 1
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-oyster-mushrooms",
+      "name": "Fresh Oyster Mushrooms - Medium",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-oyster-mushrooms-medium"
+      },
+      "variantType": "Size",
+      "variantValue": "Medium (250g)",
+      "sku": "MUSH-OYSTER-FRESH-250",
+      "price": 350,
+      "weight": 250,
+      "weightUnit": "g",
+      "stockQuantity": 50,
+      "isDefault": true,
+      "sortOrder": 2
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-oyster-mushrooms",
+      "name": "Fresh Oyster Mushrooms - Large",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-oyster-mushrooms-large"
+      },
+      "variantType": "Size",
+      "variantValue": "Large (500g)",
+      "sku": "MUSH-OYSTER-FRESH-500",
+      "price": 650,
+      "weight": 500,
+      "weightUnit": "g",
+      "stockQuantity": 30,
+      "isDefault": false,
+      "sortOrder": 3
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-shiitake-mushrooms",
+      "name": "Fresh Shiitake Mushrooms - Small",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-shiitake-mushrooms-small"
+      },
+      "variantType": "Size",
+      "variantValue": "Small (100g)",
+      "sku": "MUSH-SHIITAKE-FRESH-100",
+      "price": 280,
+      "weight": 100,
+      "weightUnit": "g",
+      "stockQuantity": 40,
+      "isDefault": false,
+      "sortOrder": 1
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-shiitake-mushrooms",
+      "name": "Fresh Shiitake Mushrooms - Medium",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-shiitake-mushrooms-medium"
+      },
+      "variantType": "Size",
+      "variantValue": "Medium (200g)",
+      "sku": "MUSH-SHIITAKE-FRESH-200",
+      "price": 450,
+      "weight": 200,
+      "weightUnit": "g",
+      "stockQuantity": 35,
+      "isDefault": true,
+      "sortOrder": 2
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "fresh-shiitake-mushrooms",
+      "name": "Fresh Shiitake Mushrooms - Large",
+      "slug": {
+        "_type": "slug",
+        "current": "fresh-shiitake-mushrooms-large"
+      },
+      "variantType": "Size",
+      "variantValue": "Large (400g)",
+      "sku": "MUSH-SHIITAKE-FRESH-400",
+      "price": 850,
+      "weight": 400,
+      "weightUnit": "g",
+      "stockQuantity": 20,
+      "isDefault": false,
+      "sortOrder": 3
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "king-oyster-mushrooms",
+      "name": "King Oyster Mushrooms - Small",
+      "slug": {
+        "_type": "slug",
+        "current": "king-oyster-mushrooms-small"
+      },
+      "variantType": "Size",
+      "variantValue": "Small (150g)",
+      "sku": "MUSH-KING-OYSTER-FRESH-150",
+      "price": 320,
+      "weight": 150,
+      "weightUnit": "g",
+      "stockQuantity": 30,
+      "isDefault": false,
+      "sortOrder": 1
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "king-oyster-mushrooms",
+      "name": "King Oyster Mushrooms - Medium",
+      "slug": {
+        "_type": "slug",
+        "current": "king-oyster-mushrooms-medium"
+      },
+      "variantType": "Size",
+      "variantValue": "Medium (300g)",
+      "sku": "MUSH-KING-OYSTER-FRESH-300",
+      "price": 520,
+      "weight": 300,
+      "weightUnit": "g",
+      "stockQuantity": 25,
+      "isDefault": true,
+      "sortOrder": 2
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "king-oyster-mushrooms",
+      "name": "King Oyster Mushrooms - Large",
+      "slug": {
+        "_type": "slug",
+        "current": "king-oyster-mushrooms-large"
+      },
+      "variantType": "Size",
+      "variantValue": "Large (600g)",
+      "sku": "MUSH-KING-OYSTER-FRESH-600",
+      "price": 980,
+      "weight": 600,
+      "weightUnit": "g",
+      "stockQuantity": 15,
+      "isDefault": false,
+      "sortOrder": 3
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "white-button-mushrooms",
+      "name": "White Button Mushrooms - Small",
+      "slug": {
+        "_type": "slug",
+        "current": "white-button-mushrooms-small"
+      },
+      "variantType": "Size",
+      "variantValue": "Small (150g)",
+      "sku": "MUSH-BUTTON-FRESH-150",
+      "price": 120,
+      "weight": 150,
+      "weightUnit": "g",
+      "stockQuantity": 100,
+      "isDefault": false,
+      "sortOrder": 1
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "white-button-mushrooms",
+      "name": "White Button Mushrooms - Medium",
+      "slug": {
+        "_type": "slug",
+        "current": "white-button-mushrooms-medium"
+      },
+      "variantType": "Size",
+      "variantValue": "Medium (250g)",
+      "sku": "MUSH-BUTTON-FRESH-250",
+      "price": 180,
+      "weight": 250,
+      "weightUnit": "g",
+      "stockQuantity": 80,
+      "isDefault": true,
+      "sortOrder": 2
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "white-button-mushrooms",
+      "name": "White Button Mushrooms - Large",
+      "slug": {
+        "_type": "slug",
+        "current": "white-button-mushrooms-large"
+      },
+      "variantType": "Size",
+      "variantValue": "Large (500g)",
+      "sku": "MUSH-BUTTON-FRESH-500",
+      "price": 320,
+      "weight": 500,
+      "weightUnit": "g",
+      "stockQuantity": 50,
+      "isDefault": false,
+      "sortOrder": 3
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "dried-shiitake-mushrooms",
+      "name": "Premium Dried Shiitake - Small Pack",
+      "slug": {
+        "_type": "slug",
+        "current": "dried-shiitake-mushrooms-small"
+      },
+      "variantType": "Size",
+      "variantValue": "Small (50g)",
+      "sku": "MUSH-SHIITAKE-DRIED-50",
+      "price": 380,
+      "weight": 50,
+      "weightUnit": "g",
+      "stockQuantity": 80,
+      "isDefault": false,
+      "sortOrder": 1
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "dried-shiitake-mushrooms",
+      "name": "Premium Dried Shiitake - Medium Pack",
+      "slug": {
+        "_type": "slug",
+        "current": "dried-shiitake-mushrooms-medium"
+      },
+      "variantType": "Size",
+      "variantValue": "Medium (100g)",
+      "sku": "MUSH-SHIITAKE-DRIED-100",
+      "price": 680,
+      "weight": 100,
+      "weightUnit": "g",
+      "stockQuantity": 60,
+      "isDefault": true,
+      "sortOrder": 2
+    },
+    {
+      "_type": "productVariant",
+      "productSlug": "dried-shiitake-mushrooms",
+      "name": "Premium Dried Shiitake - Large Pack",
+      "slug": {
+        "_type": "slug",
+        "current": "dried-shiitake-mushrooms-large"
+      },
+      "variantType": "Size",
+      "variantValue": "Large (250g)",
+      "sku": "MUSH-SHIITAKE-DRIED-250",
+      "price": 1580,
+      "weight": 250,
+      "weightUnit": "g",
+      "stockQuantity": 30,
+      "isDefault": false,
+      "sortOrder": 3
+    }
+  ]
+}

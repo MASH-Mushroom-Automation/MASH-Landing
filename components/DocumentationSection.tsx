@@ -1,83 +1,92 @@
 import Link from "next/link";
+import type { LandingPageData } from "@/lib/sanity";
 
-export default function DocumentationSection() {
-  const docCategories = [
-    {
-      title: "Getting Started",
-      description: "Quick start guide and installation instructions",
-      links: [
-        "System Requirements",
-        "Hardware Setup",
-        "Software Installation",
-        "Initial Configuration",
-      ],
-    },
-    {
-      title: "User Guide",
-      description: "Comprehensive guides for system operation",
-      links: [
-        "Dashboard Overview",
-        "Climate Control",
-        "Alert Configuration",
-        "Data Analysis",
-      ],
-    },
-    {
-      title: "Mobile App",
-      description: "Mobile application documentation",
-      links: [
-        "App Installation",
-        "Remote Monitoring",
-        "Push Notifications",
-        "Offline Mode",
-      ],
-    },
-    {
-      title: "API Reference",
-      description: "Developer documentation and API guides",
-      links: [
-        "REST API",
-        "WebSocket Events",
-        "Authentication",
-        "Integration Examples",
-      ],
-    },
-    {
-      title: "Troubleshooting",
-      description: "Common issues and solutions",
-      links: [
-        "Connectivity Issues",
-        "Sensor Calibration",
-        "Error Codes",
-        "Maintenance Guide",
-      ],
-    },
-    {
-      title: "Advanced Features",
-      description: "Advanced configuration and customization",
-      links: [
-        "Custom Recipes",
-        "Automation Rules",
-        "Data Export",
-        "Multi-site Management",
-      ],
-    },
-  ];
+const DEFAULT_CATEGORIES = [
+  {
+    title: "Getting Started",
+    description: "Quick start guide and installation instructions",
+    icon: "",
+    links: [
+      { name: "System Requirements", href: "/documentation#system-requirements" },
+      { name: "Hardware Setup", href: "/documentation#hardware-setup" },
+      { name: "Software Installation", href: "/documentation#software-installation" },
+      { name: "Initial Configuration", href: "/documentation#initial-configuration" },
+    ],
+  },
+  {
+    title: "User Guide",
+    description: "Comprehensive guides for system operation",
+    icon: "",
+    links: [
+      { name: "Dashboard Overview", href: "/documentation#dashboard-overview" },
+      { name: "Climate Control", href: "/documentation#climate-control" },
+      { name: "Alert Configuration", href: "/documentation#alert-configuration" },
+      { name: "Data Analysis", href: "/documentation#data-analysis" },
+    ],
+  },
+  {
+    title: "Mobile App",
+    description: "Mobile application documentation",
+    icon: "",
+    links: [
+      { name: "App Installation", href: "/documentation#app-installation" },
+      { name: "Remote Monitoring", href: "/documentation#remote-monitoring" },
+      { name: "Push Notifications", href: "/documentation#push-notifications" },
+      { name: "Offline Mode", href: "/documentation#offline-mode" },
+    ],
+  },
+  {
+    title: "API Reference",
+    description: "Developer documentation and API guides",
+    icon: "",
+    links: [
+      { name: "REST API", href: "/documentation#rest-api" },
+      { name: "WebSocket Events", href: "/documentation#websocket-events" },
+      { name: "Authentication", href: "/documentation#authentication" },
+      { name: "Integration Examples", href: "/documentation#integration-examples" },
+    ],
+  },
+  {
+    title: "Troubleshooting",
+    description: "Common issues and solutions",
+    icon: "",
+    links: [
+      { name: "Connectivity Issues", href: "/documentation#connectivity-issues" },
+      { name: "Sensor Calibration", href: "/documentation#sensor-calibration" },
+      { name: "Error Codes", href: "/documentation#error-codes" },
+      { name: "Maintenance Guide", href: "/documentation#maintenance-guide" },
+    ],
+  },
+  {
+    title: "Advanced Features",
+    description: "Advanced configuration and customization",
+    icon: "",
+    links: [
+      { name: "Custom Recipes", href: "/documentation#custom-recipes" },
+      { name: "Automation Rules", href: "/documentation#automation-rules" },
+      { name: "Data Export", href: "/documentation#data-export" },
+      { name: "Multi-site Management", href: "/documentation#multi-site-management" },
+    ],
+  },
+];
+
+export default function DocumentationSection({ data }: { data?: LandingPageData | null } = {}) {
+  const categories = data?.documentationCategories ?? DEFAULT_CATEGORIES;
 
   return (
     <section id="documentation" className="py-20 bg-documentation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            Documentation
+            {data?.documentationTitle ?? "Documentation"}
           </h2>
           <p className="text-xl text-secondary max-w-3xl mx-auto">
-            Comprehensive guides and resources to help you get the most out of MASH
+            {data?.documentationDescription ?? "Comprehensive guides and resources to help you get the most out of MASH"}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {docCategories.map((category, index) => (
+          {categories.map((category, index) => (
             <div
               key={index}
               className="bg-componentpage p-6 rounded-xl border border-default hover:border-green-500 dark:hover:border-green-400 transition-colors"
@@ -88,7 +97,7 @@ export default function DocumentationSection() {
                 {category.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
-                      href={`/documentation#${link.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={link.href}
                       className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 flex items-center"
                     >
                       <svg
@@ -104,7 +113,7 @@ export default function DocumentationSection() {
                           d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      {link}
+                      {link.name}
                     </Link>
                   </li>
                 ))}

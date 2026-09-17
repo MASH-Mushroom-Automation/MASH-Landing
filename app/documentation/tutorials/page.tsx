@@ -80,7 +80,7 @@ const categories = ["All", "Getting Started", "Hardware", "Automation", "Mobile"
 export default function TutorialsPage() {
   return (
     <PageLayout>
-      <div className="bg-accent-gradient py-16">
+      <div className="bg-accent-purple-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-4">
             <Link href="/documentation" className="text-accent-purple hover:underline">

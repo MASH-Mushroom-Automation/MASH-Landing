@@ -1,0 +1,254 @@
+{
+  "bundles": [
+    {
+      "_type": "productBundle",
+      "name": "Mushroom Starter Kit",
+      "slug": {
+        "_type": "slug",
+        "current": "mushroom-starter-kit"
+      },
+      "description": "Perfect introduction to gourmet mushrooms. This starter kit includes our most popular fresh varieties plus a growing kit so you can experience both cooking with and cultivating mushrooms. Ideal for beginners wanting to explore mushroom cuisine and home growing. Save 25% compared to buying individually.",
+      "shortDescription": "3 popular fresh mushrooms + 1 growing kit",
+      "products": [
+        {
+          "productSlug": "fresh-oyster-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "fresh-shiitake-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "white-button-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "oyster-mushroom-growing-kit",
+          "quantity": 1
+        }
+      ],
+      "regularPrice": 1830,
+      "bundlePrice": 1380,
+      "savings": 450,
+      "savingsPercentage": 25,
+      "sku": "BUNDLE-STARTER-01",
+      "stockQuantity": 20,
+      "lowStockThreshold": 5,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": true,
+      "isNewArrival": false,
+      "tags": ["bundle", "starter", "beginner", "value", "bestseller"],
+      "seoTitle": "Mushroom Starter Kit - Fresh + Growing Kit Bundle | MASH",
+      "seoDescription": "Perfect starter bundle with 3 fresh mushroom varieties and a growing kit. Save 25%. Great for beginners.",
+      "seoKeywords": "mushroom bundle, starter kit, mushroom variety pack, growing kit bundle"
+    },
+    {
+      "_type": "productBundle",
+      "name": "Gourmet Chef Bundle",
+      "slug": {
+        "_type": "slug",
+        "current": "gourmet-chef-bundle"
+      },
+      "description": "Curated selection of premium mushrooms for serious home chefs and culinary enthusiasts. Includes exotic fresh varieties, premium dried mushrooms, and generous portions perfect for multiple dishes. Everything you need to create restaurant-quality mushroom dishes at home. Chef-approved selection with 30% savings.",
+      "shortDescription": "Premium fresh + dried mushrooms for serious cooks",
+      "products": [
+        {
+          "productSlug": "fresh-shiitake-mushrooms",
+          "quantity": 2
+        },
+        {
+          "productSlug": "king-oyster-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "portobello-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "dried-shiitake-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "dried-porcini-mushrooms",
+          "quantity": 1
+        }
+      ],
+      "regularPrice": 3500,
+      "bundlePrice": 2450,
+      "savings": 1050,
+      "savingsPercentage": 30,
+      "sku": "BUNDLE-GOURMET-01",
+      "stockQuantity": 12,
+      "lowStockThreshold": 3,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": true,
+      "isNewArrival": false,
+      "tags": ["bundle", "gourmet", "chef", "premium", "value"],
+      "seoTitle": "Gourmet Chef Mushroom Bundle - Premium Selection | MASH",
+      "seoDescription": "Chef-curated premium mushroom bundle. Fresh and dried varieties. Save 30% on gourmet mushrooms.",
+      "seoKeywords": "gourmet mushroom bundle, chef selection, premium mushrooms, mushroom variety"
+    },
+    {
+      "_type": "productBundle",
+      "name": "Asian Cuisine Essentials",
+      "slug": {
+        "_type": "slug",
+        "current": "asian-cuisine-essentials"
+      },
+      "description": "Complete mushroom collection for authentic Asian cooking. Includes essential varieties used in Chinese, Japanese, Korean, and Southeast Asian cuisines. Fresh enoki for hot pots, dried shiitake for broths, wood ear for stir-fries, and fresh shiitake for general cooking. Everything you need for authentic Asian dishes. Save 28%.",
+      "shortDescription": "Essential mushrooms for Asian cooking",
+      "products": [
+        {
+          "productSlug": "fresh-enoki-mushrooms",
+          "quantity": 2
+        },
+        {
+          "productSlug": "fresh-shiitake-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "dried-shiitake-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "dried-wood-ear-mushrooms",
+          "quantity": 1
+        }
+      ],
+      "regularPrice": 1790,
+      "bundlePrice": 1290,
+      "savings": 500,
+      "savingsPercentage": 28,
+      "sku": "BUNDLE-ASIAN-01",
+      "stockQuantity": 25,
+      "lowStockThreshold": 8,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": true,
+      "isNewArrival": false,
+      "tags": ["bundle", "asian", "cuisine", "authentic", "value"],
+      "seoTitle": "Asian Cuisine Mushroom Bundle - Authentic Ingredients | MASH",
+      "seoDescription": "Complete mushroom set for Asian cooking. Fresh and dried varieties. Perfect for hot pots, soups, stir-fries.",
+      "seoKeywords": "asian mushroom bundle, hot pot mushrooms, chinese cooking, japanese cuisine"
+    },
+    {
+      "_type": "productBundle",
+      "name": "Urban Farmer Bundle",
+      "slug": {
+        "_type": "slug",
+        "current": "urban-farmer-bundle"
+      },
+      "description": "Complete home mushroom cultivation experience. Three different growing kits from beginner to advanced levels. Grow oyster, lion's mane, and pink oyster mushrooms at home. Perfect for urban farming enthusiasts, educational purposes, or sustainable living. Includes comprehensive growing guides and tips. Save 20% on this bundle.",
+      "shortDescription": "3 mushroom growing kits for home cultivation",
+      "products": [
+        {
+          "productSlug": "oyster-mushroom-growing-kit",
+          "quantity": 1
+        },
+        {
+          "productSlug": "lions-mane-mushroom-growing-kit",
+          "quantity": 1
+        },
+        {
+          "productSlug": "pink-oyster-mushroom-growing-kit",
+          "quantity": 1
+        }
+      ],
+      "regularPrice": 3050,
+      "bundlePrice": 2440,
+      "savings": 610,
+      "savingsPercentage": 20,
+      "sku": "BUNDLE-URBAN-FARMER-01",
+      "stockQuantity": 8,
+      "lowStockThreshold": 3,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": false,
+      "isNewArrival": true,
+      "tags": ["bundle", "growing-kits", "urban-farming", "educational", "sustainable"],
+      "seoTitle": "Urban Farmer Growing Kit Bundle - 3 Mushroom Varieties | MASH",
+      "seoDescription": "Grow 3 different mushroom types at home. Complete growing kit bundle. Perfect for urban farming enthusiasts.",
+      "seoKeywords": "mushroom growing kit bundle, urban farming, home cultivation, grow mushrooms"
+    },
+    {
+      "_type": "productBundle",
+      "name": "Family Meal Prep Pack",
+      "slug": {
+        "_type": "slug",
+        "current": "family-meal-prep-pack"
+      },
+      "description": "Large quantity mushroom bundle perfect for family meal prep and batch cooking. Includes versatile varieties in generous portions. Mix of button, oyster, and shiitake mushrooms - the most popular cooking varieties. Perfect for weekly meal prep, large gatherings, or bulk cooking. Best value for families. Save 22%.",
+      "shortDescription": "Large portions of popular cooking mushrooms",
+      "products": [
+        {
+          "productSlug": "white-button-mushrooms",
+          "quantity": 3
+        },
+        {
+          "productSlug": "fresh-oyster-mushrooms",
+          "quantity": 2
+        },
+        {
+          "productSlug": "fresh-shiitake-mushrooms",
+          "quantity": 2
+        }
+      ],
+      "regularPrice": 1440,
+      "bundlePrice": 1120,
+      "savings": 320,
+      "savingsPercentage": 22,
+      "sku": "BUNDLE-FAMILY-01",
+      "stockQuantity": 15,
+      "lowStockThreshold": 5,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": true,
+      "isNewArrival": false,
+      "tags": ["bundle", "family", "meal-prep", "bulk", "value"],
+      "seoTitle": "Family Meal Prep Mushroom Pack - Bulk Bundle | MASH",
+      "seoDescription": "Large mushroom bundle for family cooking. Popular varieties in bulk. Save 22% on meal prep.",
+      "seoKeywords": "bulk mushroom bundle, family pack, meal prep mushrooms, mushroom bulk buy"
+    },
+    {
+      "_type": "productBundle",
+      "name": "Dried Mushroom Collection",
+      "slug": {
+        "_type": "slug",
+        "current": "dried-mushroom-collection"
+      },
+      "description": "Complete pantry staple collection of premium dried mushrooms. Long shelf life makes this perfect for occasional use or emergency prep. Includes shiitake for umami, porcini for depth, and wood ear for texture. Essential for authentic Asian and European cuisines. All varieties rehydrate beautifully. Save 18%.",
+      "shortDescription": "Complete dried mushroom pantry staples",
+      "products": [
+        {
+          "productSlug": "dried-shiitake-mushrooms",
+          "quantity": 2
+        },
+        {
+          "productSlug": "dried-wood-ear-mushrooms",
+          "quantity": 1
+        },
+        {
+          "productSlug": "dried-porcini-mushrooms",
+          "quantity": 1
+        }
+      ],
+      "regularPrice": 2390,
+      "bundlePrice": 1960,
+      "savings": 430,
+      "savingsPercentage": 18,
+      "sku": "BUNDLE-DRIED-01",
+      "stockQuantity": 30,
+      "lowStockThreshold": 10,
+      "trackInventory": true,
+      "stockStatus": "in-stock",
+      "isFeatured": false,
+      "isNewArrival": false,
+      "tags": ["bundle", "dried", "pantry", "long-shelf-life", "gourmet"],
+      "seoTitle": "Dried Mushroom Collection - Premium Pantry Bundle | MASH",
+      "seoDescription": "Complete dried mushroom collection. Shiitake, porcini, wood ear. Long shelf life. Perfect pantry staples.",
+      "seoKeywords": "dried mushroom bundle, pantry mushrooms, dried mushroom collection"
+    }
+  ]
+}
