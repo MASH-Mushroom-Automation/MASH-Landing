@@ -10,7 +10,7 @@ import { createImageUrlBuilder } from '@sanity/image-url';
 
 // Sanity client configuration
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-11-26';
 const useCdn = process.env.NEXT_PUBLIC_SANITY_USE_CDN === 'true';
 const token = process.env.SANITY_API_READ_TOKEN;
@@ -44,11 +44,17 @@ export interface SanityImageOptions {
   fit?: 'clip' | 'crop' | 'fill' | 'fillmax' | 'max' | 'scale' | 'min';
 }
 
+export interface SanityAssetRef {
+  _ref: string;
+  _type?: string;
+  [key: string]: unknown;
+}
+
 /**
  * Get optimized image URL from Sanity
  */
 export function getSanityImageUrl(
-  source: any,
+  source: Parameters<typeof builder.image>[0],
   options: SanityImageOptions = {}
 ): string {
   if (!source) {
@@ -70,7 +76,7 @@ export function getSanityImageUrl(
 /**
  * Get file URL from Sanity (for videos, PDFs, APKs, GLB, etc.)
  */
-export function getSanityFileUrl(asset: any): string {
+export function getSanityFileUrl(asset: SanityAssetRef | null | undefined): string {
   if (!asset || !asset._ref) {
     throw new Error('Invalid asset reference');
   }
@@ -89,14 +95,14 @@ export function getSanityFileUrl(asset: any): string {
 /**
  * Get video URL from Sanity
  */
-export function getSanityVideoUrl(asset: any): string {
+export function getSanityVideoUrl(asset: SanityAssetRef | null | undefined): string {
   return getSanityFileUrl(asset);
 }
 
 /**
  * Get 3D model URL from Sanity (for GLB/GLTF files)
  */
-export function getSanity3DModelUrl(asset: any): string {
+export function getSanity3DModelUrl(asset: SanityAssetRef | null | undefined): string {
   return getSanityFileUrl(asset);
 }
 
@@ -151,11 +157,6 @@ export async function getLandingPageDataCached(
 // ============================================================
 // Type definitions for landing page data
 // ============================================================
-
-export interface SanityAssetRef {
-  _ref: string;
-  _type: string;
-}
 
 export interface LandingPageData {
   _id: string;
@@ -347,7 +348,7 @@ export interface LandingPageData {
   // SEO
   seoTitle?: string;
   seoDescription?: string;
-  seoImage?: any;
+  seoImage?: SanityAssetRef | null;
   seoImageUrl?: string;
 }
 

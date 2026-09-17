@@ -8,16 +8,10 @@ import { cn } from "@/lib/utils";
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
-  const [localTheme, setLocalTheme] = React.useState("light");
 
   React.useEffect(() => {
     setMounted(true);
-    console.log("ThemeToggle mounted, current theme:", theme);
   }, []);
-
-  React.useEffect(() => {
-    console.log("Theme changed to:", theme);
-  }, [theme]);
 
   const handleToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";

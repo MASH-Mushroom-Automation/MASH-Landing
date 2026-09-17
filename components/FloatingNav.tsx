@@ -19,14 +19,29 @@ const DEFAULT_LINKS = [
 /** Section IDs for scroll-spy (must match hash links above) */
 const SECTION_IDS = ["features", "mobile-app", "iot-device", "booking", "download"];
 
-export default function FloatingNav({ data }: { data?: any }) {
+import type { LandingPageData } from "@/lib/sanity";
+
+interface NavLinkItem {
+  label: string;
+  href: string;
+}
+
+interface NavCtaButton {
+  text: string;
+  href: string;
+  variant?: string;
+}
+
+export default function FloatingNav({ data }: { data?: LandingPageData | null }) {
   const nav = data?.floatingNav;
   const links = data?.navigationLinks?.length ? data.navigationLinks : DEFAULT_LINKS;
   const [scrolled, setScrolled] = useState(false);
   const [showTopBtn, setShowTopBtn] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
   const pathname = usePathname();
   const drawerRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -37,7 +52,6 @@ export default function FloatingNav({ data }: { data?: any }) {
   // Check reduced motion preference
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
@@ -195,7 +209,7 @@ export default function FloatingNav({ data }: { data?: any }) {
 
             {/* Desktop navigation */}
             <nav className="hidden md:flex items-center gap-1" aria-label="Desktop navigation">
-              {links.map((link: any) => {
+              {links.map((link: NavLinkItem) => {
                 const active = isActive(link.href);
                 return (
                   <Link
@@ -229,7 +243,7 @@ export default function FloatingNav({ data }: { data?: any }) {
             {/* Desktop right side */}
             <div className="hidden md:flex items-center gap-3">
               {showThemeToggle && <ThemeToggle />}
-              {ctaButtons.map((btn: any) => (
+              {ctaButtons.map((btn: NavCtaButton) => (
                 <Link
                   key={btn.href + btn.text}
                   href={btn.href}
@@ -315,7 +329,7 @@ export default function FloatingNav({ data }: { data?: any }) {
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
                 <div className="flex flex-col gap-1">
-                  {links.map((link: any) => {
+                  {links.map((link: NavLinkItem) => {
                     const active = isActive(link.href);
                     return (
                       <Link
@@ -340,7 +354,7 @@ export default function FloatingNav({ data }: { data?: any }) {
                   })}
                 </div>
                 <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 flex flex-col gap-2">
-                  {ctaButtons.map((btn: any) => (
+                  {ctaButtons.map((btn: NavCtaButton) => (
                     <Link
                       key={btn.href + btn.text}
                       href={btn.href}

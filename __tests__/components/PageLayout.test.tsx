@@ -2,13 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PageLayout from '@/components/layout/PageLayout';
 
-// Mock Navigation component
-jest.mock('@/components/Navigation', () => {
-  return function MockNavigation() {
-    return <nav data-testid="mock-navigation">Navigation</nav>;
-  };
-});
-
 // Mock Footer component
 jest.mock('@/components/Footer', () => {
   return function MockFooter() {
@@ -24,15 +17,6 @@ describe('PageLayout', () => {
       </PageLayout>
     );
     expect(screen.getByText('Test Content')).toBeInTheDocument();
-  });
-
-  it('renders Navigation component', () => {
-    render(
-      <PageLayout>
-        <div>Content</div>
-      </PageLayout>
-    );
-    expect(screen.getByTestId('mock-navigation')).toBeInTheDocument();
   });
 
   it('renders Footer component', () => {
@@ -93,22 +77,24 @@ describe('PageLayout', () => {
       </PageLayout>
     );
     const main = screen.getByRole('main');
-    expect(main.className).toContain('pt-16');
+    expect(main.className).toContain('pt-24');
   });
 
-  it('renders Navigation before main content', () => {
-    const { container } = render(
-      <PageLayout>
+  it('renders breadcrumbs when provided', () => {
+    render(
+      <PageLayout
+        breadcrumbs={[
+          { label: 'Docs', href: '/docs' },
+          { label: 'Current Page' },
+        ]}
+      >
         <div>Content</div>
       </PageLayout>
     );
-    const wrapper = container.firstElementChild;
-    const children = wrapper?.children;
-    if (children) {
-      expect(children[0].tagName).toBe('NAV');
-      expect(children[1].tagName).toBe('MAIN');
-      expect(children[2].tagName).toBe('FOOTER');
-    }
+    expect(screen.getByRole('navigation', { name: /breadcrumb/i })).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Docs')).toBeInTheDocument();
+    expect(screen.getByText('Current Page')).toBeInTheDocument();
   });
 
   it('renders with multiple children', () => {

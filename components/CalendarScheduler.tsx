@@ -1,46 +1,55 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { getCalLink, type EventTypeKey } from '@/lib/cal-config';
+import { cn } from '@/lib/utils';
 
 interface CalendarSchedulerProps {
   eventType?: EventTypeKey;
+  className?: string;
   theme?: 'light' | 'dark' | 'auto';
   hideEventTypeDetails?: boolean;
   layout?: 'month_view' | 'week_view' | 'column_view';
 }
 
+function subscribeToDocumentTheme(callback: () => void) {
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.attributeName === 'class') {
+        callback();
+        break;
+      }
+    }
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+  return () => observer.disconnect();
+}
+
+function getDocumentThemeSnapshot(): 'light' | 'dark' {
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+}
+
+function getDocumentThemeServerSnapshot(): 'light' | 'dark' {
+  return 'dark';
+}
+
 export default function CalendarScheduler({ 
   eventType = '30min',
+  className = '',
   theme = 'auto',
   hideEventTypeDetails = false,
   layout = 'month_view',
 }: CalendarSchedulerProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('dark');
 
-  // Detect theme
-  useEffect(() => {
-    if (theme === 'auto') {
-      const isDark = document.documentElement.classList.contains('dark');
-      setCurrentTheme(isDark ? 'dark' : 'light');
-      
-      // Watch for theme changes
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.attributeName === 'class') {
-            const isDark = document.documentElement.classList.contains('dark');
-            setCurrentTheme(isDark ? 'dark' : 'light');
-          }
-        });
-      });
-      
-      observer.observe(document.documentElement, { attributes: true });
-      return () => observer.disconnect();
-    } else {
-      setCurrentTheme(theme);
-    }
-  }, [theme]);
+  const detectedTheme = useSyncExternalStore(
+    subscribeToDocumentTheme,
+    getDocumentThemeSnapshot,
+    getDocumentThemeServerSnapshot
+  );
+
+  const currentTheme = theme === 'auto' ? detectedTheme : theme;
 
   const calLink = getCalLink(eventType);
   
@@ -54,7 +63,7 @@ export default function CalendarScheduler({
   }
 
   return (
-    <div className="cal-embed-container w-full min-h-[600px] relative">
+    <div className={cn("cal-embed-container w-full min-h-[600px] relative", className)}>
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-componentpage z-10">
           <div className="text-center">
