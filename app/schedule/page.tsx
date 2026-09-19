@@ -24,7 +24,7 @@ function ScheduleContent() {
   const selectedEvent = calConfig.eventTypes[meetingType];
 
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={[{ label: "Schedule" }]}>
       {/* Hero Section */}
       <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,10 +53,10 @@ function ScheduleContent() {
                   <button
                     key={key}
                     onClick={() => setMeetingType(key)}
-                    className={`p-6 rounded-xl text-center transition-all ${
+                    className={`p-6 rounded-xl text-center transition-all focus-visible:ring-2 focus-visible:ring-green focus-visible:outline-none border ${
                       meetingType === key
-                        ? 'bg-brand text-inverse shadow-lg scale-105'
-                        : 'bg-componentpage hover:shadow-md'
+                        ? 'bg-brand text-inverse shadow-lg scale-105 border-brand'
+                        : 'bg-card border-default hover:shadow-md hover:border-green'
                     }`}
                   >
                     <div className={`text-3xl font-bold mb-2 ${
@@ -82,7 +82,7 @@ function ScheduleContent() {
 
           {/* Calendar Embed */}
           <div className="max-w-5xl mx-auto">
-            <div className="bg-componentpage rounded-xl p-8 shadow-lg">
+            <div className="bg-card rounded-xl p-8 shadow-lg border border-default">
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-primary mb-2">
                   {selectedEvent.name}

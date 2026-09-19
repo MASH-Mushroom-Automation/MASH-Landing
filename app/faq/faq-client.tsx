@@ -4,6 +4,7 @@ import { useState } from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
 import { ChevronDown, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { LandingPageData } from "@/lib/sanity";
 
 const DEFAULT_FAQ_CATEGORIES = [
@@ -101,7 +102,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="border-b border-default">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-4 text-left"
+        className="w-full flex items-center justify-between py-4 text-left focus-visible:ring-2 focus-visible:ring-green focus-visible:outline-none rounded-md"
       >
         <span className="text-lg font-medium text-primary pr-4">
           {question}
@@ -140,7 +141,7 @@ export default function FAQPageClient({ data }: { data?: LandingPageData | null 
   })).filter(category => category.faqs.length > 0);
 
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={[{ label: "FAQ" }]}>
       <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -180,7 +181,7 @@ export default function FAQPageClient({ data }: { data?: LandingPageData | null 
                 <h2 className="text-2xl font-bold text-primary mb-6">
                   {category.name}
                 </h2>
-                <div className="bg-componentpage rounded-xl p-6">
+                <div className="bg-card rounded-xl p-6 border border-default">
                   {category.faqs.map((faq, index) => (
                     <FAQItem key={index} question={faq.question} answer={faq.answer} />
                   ))}
@@ -190,17 +191,16 @@ export default function FAQPageClient({ data }: { data?: LandingPageData | null 
           )}
 
           {/* CTA */}
-          <div className="mt-12 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">{ctaTitle}</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-12 bg-card border border-default rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-primary mb-4">{ctaTitle}</h2>
+            <p className="mb-6 text-secondary">
               {ctaDescription}
             </p>
-            <Link
-              href="/support"
-              className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
-            >
-              Contact Support
-            </Link>
+            <Button asChild size="xl" variant="default">
+              <Link href="/support">
+                Contact Support
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

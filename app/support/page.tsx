@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
 import { Mail, MessageCircle, BookOpen, Clock, MapPin, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Support - MASH",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SupportPage() {
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={[{ label: "Support" }]}>
       <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -28,76 +29,74 @@ export default function SupportPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Support Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div className="bg-success-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-inverse" />
+            <div className="bg-card border border-default p-8 rounded-xl text-center">
+              <div className="w-16 h-16 bg-surface-hover rounded-full flex items-center justify-center mx-auto mb-4 border border-border">
+                <Calendar className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Schedule a Meeting</h3>
               <p className="text-secondary mb-4">
                 Book a video call with our team
               </p>
-              <Link
-                href="/schedule"
-                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
-              >
-                Book a Call
-              </Link>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/schedule">
+                  Book a Call
+                </Link>
+              </Button>
             </div>
 
-            <div className="bg-success-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-brand rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="w-8 h-8 text-inverse" />
+            <div className="bg-card border border-default p-8 rounded-xl text-center">
+              <div className="w-16 h-16 bg-surface-hover rounded-full flex items-center justify-center mx-auto mb-4 border border-border">
+                <BookOpen className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Documentation</h3>
               <p className="text-secondary mb-4">
                 Browse our comprehensive guides and tutorials
               </p>
-              <Link
-                href="/documentation"
-                className="inline-flex items-center text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200 font-semibold"
-              >
-                View Documentation
-              </Link>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/documentation">
+                  View Documentation
+                </Link>
+              </Button>
             </div>
 
-            <div className="bg-accent-blue-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-accent-blue rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="w-8 h-8 text-inverse" />
+            <div className="bg-card border border-default p-8 rounded-xl text-center">
+              <div className="w-16 h-16 bg-surface-hover rounded-full flex items-center justify-center mx-auto mb-4 border border-border">
+                <MessageCircle className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Community Forum</h3>
               <p className="text-secondary mb-4">
                 Connect with other MASH users
               </p>
-              <a
-                href="https://www.facebook.com/groups/mashmushrooom"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-800 dark:text-blue-300 hover:text-blue-900 dark:hover:text-blue-200 font-semibold"
-              >
-                Join Community
-              </a>
+              <Button asChild variant="outline" size="sm">
+                <a
+                  href="https://www.facebook.com/groups/mashmushrooom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join Community
+                </a>
+              </Button>
             </div>
 
-            <div className="bg-accent-purple-light p-8 rounded-xl text-center">
-              <div className="w-16 h-16 bg-accent-purple rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-inverse" />
+            <div className="bg-card border border-default p-8 rounded-xl text-center">
+              <div className="w-16 h-16 bg-surface-hover rounded-full flex items-center justify-center mx-auto mb-4 border border-border">
+                <Mail className="w-8 h-8 text-green" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Email Support</h3>
               <p className="text-secondary mb-4">
                 Get personalized help from our team
               </p>
-              <a
-                href="mailto:mash.mushroom.automation@gmail.com"
-                className="inline-flex items-center text-purple-800 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 font-semibold"
-              >
-                Send Email
-              </a>
+              <Button asChild variant="outline" size="sm">
+                <a href="mailto:mash.mushroom.automation@gmail.com">
+                  Send Email
+                </a>
+              </Button>
             </div>
           </div>
 
           {/* Contact Form Section */}
           <div id="contact" className="max-w-3xl mx-auto">
-            <div className="bg-componentpage rounded-xl p-8">
+            <div className="bg-card rounded-xl p-8 border border-default">
               <h2 className="text-2xl font-bold text-primary mb-6 text-center">
                 Contact Support
               </h2>
@@ -160,12 +159,9 @@ export default function SupportPage() {
                   />
                 </div>
                 <div className="text-center">
-                  <button
-                    type="submit"
-                    className="inline-flex items-center px-8 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors font-semibold"
-                  >
+                  <Button type="submit" size="xl" variant="default">
                     Send Message
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
@@ -174,8 +170,8 @@ export default function SupportPage() {
           {/* Contact Info */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-6 h-6 text-secondary" />
+              <div className="w-12 h-12 bg-surface-hover border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-6 h-6 text-green" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Email</h3>
               <a href="mailto:mash.mushroom.automation@gmail.com" className="text-secondary hover:text-green">
@@ -183,8 +179,8 @@ export default function SupportPage() {
               </a>
             </div>
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-6 h-6 text-secondary" />
+              <div className="w-12 h-12 bg-surface-hover border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-6 h-6 text-green" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Response Time</h3>
               <p className="text-secondary">
@@ -192,8 +188,8 @@ export default function SupportPage() {
               </p>
             </div>
             <div>
-              <div className="w-12 h-12 bg-componentpage rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-6 h-6 text-secondary" />
+              <div className="w-12 h-12 bg-surface-hover border border-border rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-6 h-6 text-green" />
               </div>
               <h3 className="text-lg font-semibold text-primary mb-2">Location</h3>
               <p className="text-secondary">

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "System Status - MASH",
@@ -72,11 +73,11 @@ export default function StatusPage() {
   const allOperational = services.every((s) => s.status === "operational");
 
   return (
-    <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-componentpage" : "bg-warning-light"}`}>
+    <PageLayout breadcrumbs={[{ label: "Status" }]}>
+      <div className={`py-16 ${allOperational ? "bg-hero" : "bg-warning-light"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${allOperational ? "bg-green-600/10 text-green-600 dark:text-green-400" : "bg-warning-light text-warning"}`}>
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 border border-border ${allOperational ? "bg-success-light text-green" : "bg-warning-light text-warning"}`}>
               <CheckCircle className="w-8 h-8" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -96,7 +97,7 @@ export default function StatusPage() {
             <h2 className="text-2xl font-bold text-primary mb-6">
               Service Status
             </h2>
-            <div className="bg-componentpage rounded-xl divide-y divide-default">
+            <div className="bg-card rounded-xl border border-default divide-y divide-default">
               {services.map((service) => (
                 <div
                   key={service.name}
@@ -126,7 +127,7 @@ export default function StatusPage() {
             <h2 className="text-2xl font-bold text-primary mb-6">
               90-Day Uptime <span className="text-sm font-normal text-tertiary">(Sample data)</span>
             </h2>
-            <div className="bg-componentpage rounded-xl p-6">
+            <div className="bg-card rounded-xl p-6 border border-default">
               <div className="flex items-end justify-between h-24 gap-1">
                 {Array.from({ length: 90 }).map((_, i) => {
                   // Use deterministic pseudo-random based on index for consistent rendering
@@ -157,13 +158,13 @@ export default function StatusPage() {
               {recentIncidents.map((incident, index) => (
                 <div
                   key={index}
-                  className="bg-componentpage rounded-xl p-6"
+                  className="bg-card rounded-xl p-6 border border-default"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-lg font-semibold text-primary">
                       {incident.title}
                     </h3>
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success-light text-success-strong">
+                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-success-light text-green">
                       Resolved
                     </span>
                   </div>
@@ -177,20 +178,20 @@ export default function StatusPage() {
           </div>
 
           {/* Subscribe to Updates */}
-          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">Get Status Updates</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-16 bg-card border border-default rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-primary mb-4">Get Status Updates</h2>
+            <p className="mb-6 text-secondary">
               Subscribe to receive notifications about system status changes.
             </p>
             <div className="flex max-w-md mx-auto gap-3">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-primary focus:ring-2 focus:ring-green"
+                className="flex-1 px-4 py-3 rounded-lg border-default bg-background text-primary focus:ring-2 focus:ring-green focus:border-transparent"
               />
-              <button className="px-6 py-3 bg-background text-green rounded-lg hover:bg-surface-hover transition-colors font-semibold">
+              <Button type="button" size="lg" variant="default">
                 Subscribe
-              </button>
+              </Button>
             </div>
           </div>
         </div>

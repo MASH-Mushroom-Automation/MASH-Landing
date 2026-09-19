@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <PageLayout>
-      <div className="bg-page-header py-16">
+    <PageLayout breadcrumbs={[{ label: "Terms of Service" }]}>
+      <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -174,10 +174,10 @@ export default function TermsPage() {
             <p className="text-secondary mb-6">
               If you have any questions about these Terms, please contact us at:
             </p>
-            <div className="bg-componentpage p-6 rounded-lg">
+            <div className="bg-card border border-default p-6 rounded-lg">
               <p className="text-secondary">
                 <strong>Email:</strong> mash.mushroom.automation@gmail.com<br />
-                <strong>Website:</strong> https://mash-landing.vercel.app
+                <strong>Website:</strong> https://join.mashmarket.app
               </p>
             </div>
           </div>

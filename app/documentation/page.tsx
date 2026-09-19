@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
 import { BookOpen, Code, Smartphone, Settings, AlertCircle, Rocket, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Documentation - MASH",
@@ -85,7 +86,7 @@ const docCategories = [
 
 export default function DocumentationPage() {
   return (
-    <PageLayout>
+    <PageLayout breadcrumbs={[{ label: "Documentation" }]}>
       <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -104,20 +105,18 @@ export default function DocumentationPage() {
           {/* Quick Links */}
           <div className="mb-12">
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/documentation/tutorials"
-                className="inline-flex items-center px-6 py-3 bg-brand text-inverse rounded-full hover:bg-brand-hover transition-colors"
-              >
-                <BookOpen className="w-5 h-5 mr-2" />
-                Browse Tutorials
-              </Link>
-              <Link
-                href="#api-reference"
-                className="inline-flex items-center px-6 py-3 bg-componentpage text-primary rounded-full hover:bg-surface-hover transition-colors"
-              >
-                <Code className="w-5 h-5 mr-2" />
-                API Reference
-              </Link>
+              <Button asChild size="xl">
+                <Link href="/documentation/tutorials">
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Browse Tutorials
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline">
+                <Link href="#api-reference">
+                  <Code className="w-5 h-5 mr-2" />
+                  API Reference
+                </Link>
+              </Button>
             </div>
           </div>
 
@@ -129,7 +128,7 @@ export default function DocumentationPage() {
                 <div
                   key={category.id}
                   id={category.id}
-                  className="bg-componentpage rounded-xl p-6 border-default hover:border-green transition-colors"
+                  className="bg-card rounded-xl p-6 border border-default hover:border-green transition-colors"
                 >
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 bg-success-light rounded-lg flex items-center justify-center mr-4">
@@ -163,26 +162,26 @@ export default function DocumentationPage() {
           </div>
 
           {/* Need Help Section */}
-          <div className="mt-16 bg-download rounded-xl p-8 text-center text-inverse">
-            <h2 className="text-2xl font-bold mb-4">Need More Help?</h2>
-            <p className="mb-6 text-brand-light">
+          <div className="mt-16 bg-card border border-default rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-primary mb-4">Need More Help?</h2>
+            <p className="mb-6 text-secondary">
               Can&apos;t find what you&apos;re looking for? Our support team is here to help.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/support"
-                className="inline-flex items-center px-6 py-3 bg-background text-green rounded-full hover:bg-surface-hover transition-colors font-semibold"
-              >
-                Contact Support
-              </Link>
-              <a
-                href="https://www.facebook.com/groups/mashmushrooom"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-primary text-inverse rounded-full hover:bg-primary-hover transition-colors font-semibold"
-              >
-                Join Community
-              </a>
+              <Button asChild size="xl" variant="default">
+                <Link href="/support">
+                  Contact Support
+                </Link>
+              </Button>
+              <Button asChild size="xl" variant="outline">
+                <a
+                  href="https://www.facebook.com/groups/mashmushrooom"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join Community
+                </a>
+              </Button>
             </div>
           </div>
         </div>

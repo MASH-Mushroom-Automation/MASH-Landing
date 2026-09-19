@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
 import { Clock, Tag, ChevronRight, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Tutorials - MASH Documentation",
@@ -79,18 +80,23 @@ const categories = ["All", "Getting Started", "Hardware", "Automation", "Mobile"
 
 export default function TutorialsPage() {
   return (
-    <PageLayout>
-      <div className="bg-accent-purple-light py-16">
+    <PageLayout
+      breadcrumbs={[
+        { label: "Documentation", href: "/documentation" },
+        { label: "Tutorials" },
+      ]}
+    >
+      <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-4">
-            <Link href="/documentation" className="text-accent-purple hover:underline">
+            <Link href="/documentation" className="text-green hover:underline">
               Documentation
             </Link>
             <ChevronRight className="w-4 h-4 mx-2 text-tertiary" />
             <span className="text-secondary">Tutorials</span>
           </div>
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-accent-purple rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand rounded-full mb-4">
               <BookOpen className="w-8 h-8 text-inverse" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -112,8 +118,8 @@ export default function TutorialsPage() {
                 key={category}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   category === "All"
-                    ? "bg-accent-purple text-inverse"
-                    : "bg-componentpage text-secondary hover:bg-surface-hover"
+                    ? "bg-brand text-inverse"
+                    : "bg-card border border-default text-secondary hover:bg-surface-hover"
                 }`}
               >
                 {category}
@@ -126,19 +132,19 @@ export default function TutorialsPage() {
             {tutorials.map((tutorial) => (
               <article
                 key={tutorial.id}
-                className="bg-componentpage rounded-xl p-6 border-default hover:shadow-lg dark:hover:shadow-gray-800/50 transition-shadow"
+                className="bg-card rounded-xl p-6 border border-default hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-accent-purple-light text-accent-purple">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-success-light text-green">
                     <Tag className="w-3 h-3 mr-1" />
                     {tutorial.category}
                   </span>
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                     tutorial.difficulty === "Beginner"
-                      ? "bg-success-light text-success-strong"
+                      ? "bg-success-light text-green"
                       : tutorial.difficulty === "Intermediate"
-                      ? "bg-warning-light text-warning-strong"
-                      : "bg-error-light text-error-strong"
+                      ? "bg-warning-light text-warning"
+                      : "bg-error-light text-error"
                   }`}>
                     {tutorial.difficulty}
                   </span>
@@ -156,7 +162,7 @@ export default function TutorialsPage() {
                   </span>
                   <Link
                     href={`/documentation/tutorials/${tutorial.id}`}
-                    className="inline-flex items-center text-accent-purple hover:text-accent-purple-hover font-medium"
+                    className="inline-flex items-center text-green hover:text-green-700 dark:hover:text-green-300 font-medium"
                   >
                     Read Tutorial
                     <ChevronRight className="w-4 h-4 ml-1" />
@@ -171,14 +177,15 @@ export default function TutorialsPage() {
             <p className="text-secondary mb-4">
               Want to contribute a tutorial?
             </p>
-            <a
-              href="https://github.com/MASH-Mushroom-Automation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-primary text-inverse rounded-full hover:bg-primary-hover transition-colors font-semibold"
-            >
-              Contribute on GitHub
-            </a>
+            <Button asChild size="xl">
+              <a
+                href="https://github.com/MASH-Mushroom-Automation"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contribute on GitHub
+              </a>
+            </Button>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import PageLayout from "@/components/layout/PageLayout";
 import Link from "next/link";
 import { Scale, FileText, Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "License - MASH",
@@ -10,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function LicensePage() {
   return (
-    <PageLayout>
-      <div className="bg-page-header py-16">
+    <PageLayout breadcrumbs={[{ label: "License" }]}>
+      <div className="bg-hero py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-brand rounded-full mb-4">
-              <Scale className="w-8 h-8 text-inverse" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-surface-hover border border-border rounded-full mb-4">
+              <Scale className="w-8 h-8 text-green" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               License
@@ -41,22 +42,22 @@ export default function LicensePage() {
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-success-light p-6 rounded-xl">
-                <h3 className="text-lg font-semibold text-success-strong mb-3">
-                  ✓ Permitted
+              <div className="bg-card border border-default p-6 rounded-xl">
+                <h3 className="text-lg font-semibold text-green mb-3">
+                  Permitted
                 </h3>
-                <ul className="text-success-strong space-y-2">
+                <ul className="text-secondary space-y-2">
                   <li>• Commercial use</li>
                   <li>• Modification</li>
                   <li>• Distribution</li>
                   <li>• Private use</li>
                 </ul>
               </div>
-              <div className="bg-warning-light p-6 rounded-xl">
-                <h3 className="text-lg font-semibold text-warning-strong mb-3">
-                  ⚠ Conditions
+              <div className="bg-card border border-default p-6 rounded-xl">
+                <h3 className="text-lg font-semibold text-warning mb-3">
+                  Conditions
                 </h3>
-                <ul className="text-warning-strong space-y-2">
+                <ul className="text-secondary space-y-2">
                   <li>• Include copyright notice</li>
                   <li>• Include license text</li>
                 </ul>
@@ -69,7 +70,7 @@ export default function LicensePage() {
             <h2 className="text-2xl font-bold text-primary mb-6">
               Full License Text
             </h2>
-            <div className="bg-componentpage p-6 rounded-xl font-mono text-sm text-secondary whitespace-pre-wrap">
+            <div className="bg-card border border-default p-6 rounded-xl font-mono text-sm text-secondary whitespace-pre-wrap">
 {`MIT License
 
 Copyright (c) 2026 MASH: Mushroom Automation
@@ -113,7 +114,7 @@ SOFTWARE.`}
               ].map((lib) => (
                 <div 
                   key={lib.name}
-                  className="flex items-center justify-between p-4 bg-componentpage rounded-lg"
+                  className="flex items-center justify-between p-4 bg-card border border-default rounded-lg"
                 >
                   <div>
                     <h4 className="font-semibold text-primary">{lib.name}</h4>
@@ -133,21 +134,22 @@ SOFTWARE.`}
           </div>
 
           {/* Source Code */}
-          <div className="bg-gray-900 dark:bg-gray-800 rounded-xl p-8 text-center text-inverse">
-            <Github className="w-12 h-12 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-4">View Source Code</h2>
-            <p className="mb-6 text-secondary">
+          <div className="dark bg-footer rounded-xl p-8 text-center text-secondary border border-border">
+            <Github className="w-12 h-12 mx-auto mb-4 text-primary" />
+            <h2 className="text-2xl font-bold text-primary mb-4">View Source Code</h2>
+            <p className="mb-6 text-tertiary">
               MASH is open source. Explore the code, report issues, or contribute on GitHub.
             </p>
-            <a
-              href="https://github.com/MASH-Mushroom-Automation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-background text-primary rounded-full hover:bg-surface-hover transition-colors font-semibold"
-            >
-              <Github className="w-5 h-5 mr-2" />
-              View on GitHub
-            </a>
+            <Button asChild variant="outline" size="xl">
+              <a
+                href="https://github.com/MASH-Mushroom-Automation"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="w-5 h-5 mr-2" />
+                View on GitHub
+              </a>
+            </Button>
           </div>
 
           {/* Related Pages */}
