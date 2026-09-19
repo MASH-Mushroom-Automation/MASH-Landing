@@ -12,10 +12,12 @@ jest.mock('lucide-react', () => ({
 // We need to control the useTheme mock per test
 const mockSetTheme = jest.fn();
 let mockTheme = 'dark';
+let mockResolvedTheme: string | undefined = undefined;
 
 jest.mock('next-themes', () => ({
   useTheme: () => ({
     theme: mockTheme,
+    resolvedTheme: mockResolvedTheme,
     setTheme: mockSetTheme,
     themes: ['light', 'dark'],
   }),
@@ -24,6 +26,7 @@ jest.mock('next-themes', () => ({
 describe('ThemeToggle', () => {
   beforeEach(() => {
     mockTheme = 'dark';
+    mockResolvedTheme = undefined;
     mockSetTheme.mockClear();
   });
 
@@ -97,5 +100,29 @@ describe('ThemeToggle', () => {
     render(<ThemeToggle />);
     const button = screen.getByRole('button');
     expect(button.className).toContain('p-2');
+  });
+
+  it('handles system theme resolved to dark', async () => {
+    mockTheme = 'system';
+    mockResolvedTheme = 'dark';
+    const user = userEvent.setup();
+    render(<ThemeToggle />);
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-label', 'Switch to light mode');
+    expect(screen.getByTestId('sun-icon')).toBeInTheDocument();
+    await user.click(button);
+    expect(mockSetTheme).toHaveBeenCalledWith('light');
+  });
+
+  it('handles system theme resolved to light', async () => {
+    mockTheme = 'system';
+    mockResolvedTheme = 'light';
+    const user = userEvent.setup();
+    render(<ThemeToggle />);
+    const button = screen.getByRole('button');
+    expect(button).toHaveAttribute('aria-label', 'Switch to dark mode');
+    expect(screen.getByTestId('moon-icon')).toBeInTheDocument();
+    await user.click(button);
+    expect(mockSetTheme).toHaveBeenCalledWith('dark');
   });
 });

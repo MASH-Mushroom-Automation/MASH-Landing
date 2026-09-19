@@ -248,7 +248,7 @@ export default function MobileAppShowcase() {
                 onClick={() => handleUserInteraction(screen.id)}
                 className={`w-full text-left p-5 rounded-xl transition-all duration-300 ${
                   activeScreen === screen.id
-                    ? "bg-green-600 text-white shadow-lg shadow-green-600/25 scale-[1.02]"
+                    ? "bg-green-600 dark:bg-green-500 text-white shadow-lg shadow-green-600/25 scale-[1.02]"
                     : "bg-card hover:bg-surface-hover border border-border"
                 }`}
               >

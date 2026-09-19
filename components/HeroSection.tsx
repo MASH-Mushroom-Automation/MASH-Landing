@@ -122,7 +122,7 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
               className={
                 button.variant === "outline"
                   ? "border-2 border-green-600 dark:border-green-500 text-green-600 dark:text-green-400 bg-surface hover:bg-surface-hover shadow-lg"
-                  : "bg-green-600 hover:bg-green-700 text-white shadow-lg"
+                  : "bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white shadow-lg"
               }
             >
               <a href={button.href}>{button.text}</a>
@@ -137,9 +137,9 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
           transition={{ duration: 0.6, delay: stagger * 3 }}
         >
           {(data?.heroCards ?? DEFAULT_HERO_CARDS).map((card, index) => (
-            <Card key={index} className="bg-card shadow-md border-default hover:border-green-600/50 transition-colors">
+            <Card key={index} className="bg-card shadow-md border-default hover:border-green-600/50 dark:hover:border-green-400/50 transition-colors">
               <CardContent className="p-6">
-                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                <div className="w-12 h-12 bg-green-600 dark:bg-green-500 rounded-xl flex items-center justify-center mb-4 text-white shadow-sm">
                   {HERO_CARD_ICON_MAP[card.icon] ?? HERO_CARD_ICON_MAP["monitoring"]}
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-2">{card.title}</h3>

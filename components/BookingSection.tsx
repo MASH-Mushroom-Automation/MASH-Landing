@@ -24,9 +24,9 @@ export default function BookingSection({ data }: { data?: LandingPageData | null
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* 15 Minute Quick Call */}
           <ScrollReveal delay={0}>
-            <Card className="bg-componentpage hover:shadow-lg transition-shadow h-full border-default">
+            <Card className="bg-card hover:shadow-lg transition-shadow h-full border-default">
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-600 dark:bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-sm">
                   <Clock className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-primary mb-2">{calConfig.eventTypes['15min'].duration}</h3>
@@ -42,7 +42,7 @@ export default function BookingSection({ data }: { data?: LandingPageData | null
           <ScrollReveal delay={0.1}>
             <Card className="bg-card hover:shadow-lg transition-shadow h-full border-default">
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-600 dark:bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-sm">
                   <Video className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-primary mb-2">{calConfig.eventTypes['30min'].duration}</h3>
@@ -58,7 +58,7 @@ export default function BookingSection({ data }: { data?: LandingPageData | null
           <ScrollReveal delay={0.2}>
             <Card className="bg-card hover:shadow-lg transition-shadow h-full border-default">
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-600 dark:bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-sm">
                   <Calendar className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-primary mb-2">{calConfig.eventTypes['1-hour-meeting'].duration}</h3>

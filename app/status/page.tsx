@@ -73,16 +73,16 @@ export default function StatusPage() {
 
   return (
     <PageLayout>
-      <div className={`py-16 ${allOperational ? "bg-download" : "bg-warning-gradient"}`}>
+      <div className={`py-16 ${allOperational ? "bg-componentpage" : "bg-warning-light"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-inverse">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
+          <div className="text-center">
+            <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${allOperational ? "bg-green-600/10 text-green-600 dark:text-green-400" : "bg-warning-light text-warning"}`}>
               <CheckCircle className="w-8 h-8" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
               {allOperational ? "All Systems Operational" : "Some Systems Affected"}
             </h1>
-            <p className="text-xl opacity-90">
+            <p className="text-xl text-secondary">
               Last updated: {new Date().toLocaleString()}
             </p>
           </div>

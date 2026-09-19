@@ -6,16 +6,17 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
+  const currentTheme = resolvedTheme || theme;
+
   const handleToggle = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    console.log("Toggling from", theme, "to", newTheme);
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
     setTheme(newTheme);
   };
 
@@ -40,9 +41,9 @@ export function ThemeToggle() {
         "text-gray-700 dark:text-gray-300",
         "hover:bg-gray-100 dark:hover:bg-gray-800"
       )}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-label={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
     >
-      {theme === "dark" ? (
+      {currentTheme === "dark" ? (
         <Sun className="h-5 w-5" />
       ) : (
         <Moon className="h-5 w-5" />

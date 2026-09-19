@@ -97,9 +97,9 @@ export default function ScopeSection({ data }: { data?: LandingPageData | null }
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {scopeItems.map((scope, index) => (
-            <div key={index} className="bg-card p-6 rounded-xl shadow-lg">
+            <div key={index} className="bg-card p-6 rounded-xl border border-border shadow-sm">
               <h3 className="text-2xl font-bold text-primary mb-4 flex items-center">
-                <span className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm mr-3">
+                <span className="w-8 h-8 bg-green-600 dark:bg-green-500 text-white rounded-full flex items-center justify-center text-sm mr-3 font-semibold">
                   {index + 1}
                 </span>
                 {scope.title}
@@ -128,13 +128,13 @@ export default function ScopeSection({ data }: { data?: LandingPageData | null }
           ))}
         </div>
 
-        <div className="mt-12 bg-card p-8 rounded-xl shadow-lg">
+        <div className="mt-12 bg-card p-8 rounded-xl border border-border shadow-sm">
           <h3 className="text-2xl font-bold text-primary mb-4 text-center">
             {data?.scopeArchitectureTitle ?? "System Architecture"}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
             {layers.map((layer, index) => (
-              <div key={index} className="p-4 border-2 border-green-200 dark:border-green-800 rounded-lg">
+              <div key={index} className="p-4 border border-border rounded-lg bg-surface hover:bg-surface-hover transition-colors">
                 <div className="text-green-600 dark:text-green-400 font-bold text-lg mb-2">Layer {index + 1}</div>
                 <div className="text-secondary">{layer.name}</div>
               </div>

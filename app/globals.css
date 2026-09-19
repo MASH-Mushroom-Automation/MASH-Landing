@@ -46,18 +46,15 @@
     --color-background-component: 241 245 249; /* slate-100 */
     
     /* Component-specific backgrounds */
-    --color-background-hero-start: 240 253 244;     /* green-50 */
-    --color-background-hero-end: 236 253 245;       /* green-50 lighter */
-    --color-background-features: 255 255 255;       /* white */
-    --color-background-demo: 248 250 252;           /* slate-50 */
-    --color-background-scope-start: 240 253 244;    /* green-50 */
-    --color-background-scope-end: 236 253 245;      /* green-50 lighter */
-    --color-background-documentation: 255 255 255;  /* white */
-    --color-background-download-start: 22 163 74;   /* green-600 */
-    --color-background-download-end: 22 101 52;     /* green-800 */
-    --color-background-support: 255 255 255;        /* white */
-    --color-background-navigation: 255 255 255;     /* white */
-    --color-background-footer: 15 23 42;            /* slate-900 */
+    --color-background-hero: 255 255 255;          /* white */
+    --color-background-features: 248 250 252;      /* slate-50 */
+    --color-background-demo: 248 250 252;          /* slate-50 */
+    --color-background-scope: 248 250 252;         /* slate-50 */
+    --color-background-documentation: 255 255 255; /* white */
+    --color-background-download: 248 250 252;      /* slate-50 */
+    --color-background-support: 255 255 255;       /* white */
+    --color-background-navigation: 255 255 255;    /* white */
+    --color-background-footer: 15 23 42;           /* slate-900 */
     
     /* Surface Colors */
     --color-surface: 255 255 255;         /* white */
@@ -120,18 +117,15 @@
     --color-background-component: 51 65 85; /* slate-700 */
     
     /* Component-specific backgrounds */
-    --color-background-hero-start: 15 23 42;        /* slate-900 */
-    --color-background-hero-end: 30 41 59;          /* slate-800 */
-    --color-background-features: 15 23 42;          /* slate-900 */
-    --color-background-demo: 30 41 59;              /* slate-800 */
-    --color-background-scope-start: 30 41 59;       /* slate-800 */
-    --color-background-scope-end: 15 23 42;         /* slate-900 */
-    --color-background-documentation: 15 23 42;     /* slate-900 */
-    --color-background-download-start: 22 163 74;   /* green-600 */
-    --color-background-download-end: 22 101 52;     /* green-800 */
-    --color-background-support: 15 23 42;           /* slate-900 */
-    --color-background-navigation: 15 23 42;        /* slate-900 */
-    --color-background-footer: 2 6 23;              /* slate-950 */
+    --color-background-hero: 15 23 42;             /* slate-900 */
+    --color-background-features: 15 23 42;         /* slate-900 */
+    --color-background-demo: 30 41 59;             /* slate-800 */
+    --color-background-scope: 30 41 59;            /* slate-800 */
+    --color-background-documentation: 15 23 42;    /* slate-900 */
+    --color-background-download: 30 41 59;         /* slate-800 */
+    --color-background-support: 15 23 42;          /* slate-900 */
+    --color-background-navigation: 15 23 42;       /* slate-900 */
+    --color-background-footer: 2 6 23;             /* slate-950 */
     
     /* Surface Colors */
     --color-surface: 30 41 59;            /* slate-800 */
@@ -207,7 +201,7 @@
 
   /* Component-specific backgrounds */
   .bg-hero {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-hero-start)), rgb(var(--color-background-hero-end)));
+    background-color: rgb(var(--color-background-hero));
   }
 
   .bg-features {
@@ -219,7 +213,7 @@
   }
 
   .bg-scope {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-scope-start)), rgb(var(--color-background-scope-end)));
+    background-color: rgb(var(--color-background-scope));
   }
 
   .bg-documentation {
@@ -227,7 +221,7 @@
   }
 
   .bg-download {
-    background: linear-gradient(to bottom right, rgb(var(--color-background-download-start)), rgb(var(--color-background-download-end)));
+    background-color: rgb(var(--color-background-download));
   }
 
   .bg-support {

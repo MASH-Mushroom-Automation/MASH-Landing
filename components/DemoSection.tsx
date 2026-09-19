@@ -72,8 +72,8 @@ export default function DemoSection({ data }: { data?: LandingPageData | null } 
                 onClick={() => setActiveVideo(video.id)}
                 className={`w-full text-left p-4 rounded-lg transition-all ${
                   activeVideo === video.id
-                    ? "bg-green-600 text-white shadow-lg"
-                    : "bg-card hover:bg-surface-hover"
+                    ? "bg-green-600 dark:bg-green-500 text-white shadow-lg"
+                    : "bg-card hover:bg-surface-hover border border-border"
                 }`}
               >
                 <h3 className="font-bold text-lg mb-1">{video.title}</h3>
@@ -87,7 +87,7 @@ export default function DemoSection({ data }: { data?: LandingPageData | null } 
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {stats.map((stat, index) => (
-            <div key={index} className="bg-card p-6 rounded-xl shadow-md">
+            <div key={index} className="bg-card p-6 rounded-xl border border-border shadow-sm">
               <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">{stat.value}</div>
               <div className="text-secondary">{stat.label}</div>
             </div>

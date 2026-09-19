@@ -84,7 +84,7 @@ export default function FeaturesSection({ data }: { data?: LandingPageData | nul
             <ScrollReveal key={index} delay={index * 0.08}>
               <Card className="h-full hover:shadow-lg transition-shadow bg-card border-default">
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-features rounded-lg flex items-center justify-center mb-4 text-green">
+                  <div className="w-14 h-14 bg-surface-hover rounded-xl border border-border flex items-center justify-center mb-5 text-green-600 dark:text-green-400">
                     {FEATURE_ICON_MAP[feature.icon] ?? FEATURE_ICON_MAP["climate-control"]}
                   </div>
                   <h3 className="text-xl font-bold text-primary mb-2">{feature.title}</h3>

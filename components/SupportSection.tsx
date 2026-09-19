@@ -29,10 +29,10 @@ const CHANNEL_ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 const CHANNEL_STYLE_MAP: Record<string, { bg: string; iconBg: string; textColor: string }> = {
-  calendar: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
-  email: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
-  community: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
-  knowledge: { bg: "bg-card", iconBg: "bg-green-600", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  calendar: { bg: "bg-card", iconBg: "bg-green-600 dark:bg-green-500", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  email: { bg: "bg-card", iconBg: "bg-green-600 dark:bg-green-500", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  community: { bg: "bg-card", iconBg: "bg-green-600 dark:bg-green-500", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
+  knowledge: { bg: "bg-card", iconBg: "bg-green-600 dark:bg-green-500", textColor: "text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" },
 };
 
 const DEFAULT_CHANNELS = [
@@ -89,9 +89,9 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
             const isMailto = channel.link.startsWith("mailto:");
             return (
               <ScrollReveal key={index} delay={index * 0.08}>
-                <Card className={`${style.bg} h-full border-0`}>
+                <Card className={`${style.bg} h-full border-default hover:shadow-lg transition-shadow`}>
                   <CardContent className="p-8 text-center">
-                    <div className={`w-16 h-16 ${style.iconBg} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <div className={`w-16 h-16 ${style.iconBg} rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-sm`}>
                       {CHANNEL_ICON_MAP[channel.icon] ?? CHANNEL_ICON_MAP["calendar"]}
                     </div>
                     <h3 className="text-xl font-bold text-primary mb-2">{channel.name}</h3>
@@ -124,7 +124,7 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
               </h3>
               <div className="space-y-6">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="bg-card p-6 rounded-lg">
+                  <div key={index} className="bg-card p-6 rounded-lg border border-border">
                     <h4 className="text-lg font-bold text-primary mb-2">
                       {faq.question}
                     </h4>
@@ -160,7 +160,7 @@ export default function SupportSection({ data }: { data?: LandingPageData | null
                   Schedule a Call
                 </Link>
               </Button>
-              <Button asChild size="xl" variant="secondary" className="bg-blue-600 text-white hover:bg-blue-700">
+              <Button asChild size="xl" variant="outline">
                 <Link href="/support">Contact Support</Link>
               </Button>
             </div>

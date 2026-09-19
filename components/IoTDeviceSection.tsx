@@ -253,7 +253,7 @@ export default function IoTDeviceSection({ modelUrl, data }: IoTDeviceSectionPro
                   onClick={() => setActiveSpec(spec.id)}
                   className={`p-3 rounded-lg text-left transition-all duration-200 ${
                     activeSpec === spec.id
-                      ? "bg-green-600 text-white shadow-lg"
+                      ? "bg-green-600 dark:bg-green-500 text-white shadow-lg"
                       : "bg-card hover:bg-surface-hover border border-border"
                   }`}
                 >
@@ -271,15 +271,15 @@ export default function IoTDeviceSection({ modelUrl, data }: IoTDeviceSectionPro
 
             {/* Technical highlights */}
             <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-              <div className="bg-card p-4 rounded-xl">
+              <div className="bg-card p-4 rounded-xl border border-border shadow-sm">
                 <div className="text-2xl font-bold text-green-600 dark:text-green-400">6</div>
                 <div className="text-xs text-secondary mt-1">Sensor Types</div>
               </div>
-              <div className="bg-card p-4 rounded-xl">
+              <div className="bg-card p-4 rounded-xl border border-border shadow-sm">
                 <div className="text-2xl font-bold text-green-600 dark:text-green-400">4</div>
                 <div className="text-xs text-secondary mt-1">Relay Channels</div>
               </div>
-              <div className="bg-card p-4 rounded-xl">
+              <div className="bg-card p-4 rounded-xl border border-border shadow-sm">
                 <div className="text-2xl font-bold text-green-600 dark:text-green-400">IP65</div>
                 <div className="text-xs text-secondary mt-1">Protection</div>
               </div>
