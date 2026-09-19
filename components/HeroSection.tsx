@@ -137,7 +137,7 @@ export default function HeroSection({ data }: { data?: LandingPageData | null } 
           transition={{ duration: 0.6, delay: stagger * 3 }}
         >
           {(data?.heroCards ?? DEFAULT_HERO_CARDS).map((card, index) => (
-            <Card key={index} className="bg-card/90 backdrop-blur-sm shadow-lg border-default">
+            <Card key={index} className="bg-card shadow-md border-default hover:border-green-600/50 transition-colors">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
                   {HERO_CARD_ICON_MAP[card.icon] ?? HERO_CARD_ICON_MAP["monitoring"]}

@@ -40,12 +40,7 @@ export default function BookingSection({ data }: { data?: LandingPageData | null
 
           {/* 30 Minute Standard */}
           <ScrollReveal delay={0.1}>
-            <Card className="relative bg-card hover:shadow-lg transition-shadow h-full border-2 border-brand">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-brand text-inverse px-4 py-1 rounded-full text-sm font-semibold">
-                  Popular
-                </span>
-              </div>
+            <Card className="bg-card hover:shadow-lg transition-shadow h-full border-default">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Video className="w-8 h-8 text-white" />

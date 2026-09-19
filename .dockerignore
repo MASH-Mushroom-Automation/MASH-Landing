@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.github
+*.log
+.env.local
+.env*.local
+README.md
+docs
+__tests__
+__mocks__
+*.tsbuildinfo

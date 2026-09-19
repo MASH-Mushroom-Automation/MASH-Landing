@@ -216,8 +216,6 @@ export default function IoTDeviceSection({ modelUrl, data }: IoTDeviceSectionPro
             className="flex justify-center"
           >
             <div className="relative">
-              {/* Glow effect behind device */}
-              <div className="absolute inset-0 bg-green-500/10 blur-3xl rounded-full scale-150" />
               <Suspense fallback={<DeviceModel3D rotateX={mousePos.y} rotateY={mousePos.x} />}>
                 <ChamberModel3D
                   height="420px"

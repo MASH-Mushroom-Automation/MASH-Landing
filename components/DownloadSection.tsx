@@ -33,7 +33,7 @@ export default function DownloadSection({ data }: { data?: LandingPageData | nul
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
           <ScrollReveal delay={0}>
-            <Card className="border border-white/20 text-white bg-transparent hover:shadow-2xl transition-all transform hover:scale-105 h-full">
+            <Card className="border border-white/20 text-white bg-transparent hover:border-white/50 hover:shadow-xl transition-all h-full">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   <svg className="w-12 h-12 mr-4" viewBox="0 0 24 24" fill="currentColor">
@@ -52,7 +52,7 @@ export default function DownloadSection({ data }: { data?: LandingPageData | nul
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <Card className="border border-white/20 text-white bg-transparent hover:shadow-2xl transition-all transform hover:scale-105 h-full">
+            <Card className="border border-white/20 text-white bg-transparent hover:border-white/50 hover:shadow-xl transition-all h-full">
               <CardContent className="p-8">
                 <div className="flex items-center mb-4">
                   <svg className="w-12 h-12 mr-4" viewBox="0 0 24 24" fill="currentColor">
